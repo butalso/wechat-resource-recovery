@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+  <!--配置spring mvc-->
+  <!--1、开启spring mvc注解模式-->
+  <!--简化配置：
+      1、自动注册DefaultAnnotationHandlerMapping
+          AnnotationMethodHandlerAdapter
+      2、提供了一系列功能：数据绑定、数字和日期的format@NumberFormat @DateTimeFormat
+      3、xml 和json默认读写支持-->
+  <mvc:annotation-driven />
+
+  <!--servlet mapping -->
+  <!--静态资源配置 默认servlet配置
+  1:加入对静态资源的处理 js gif png
+  2:允许使用“/”做整体映射 -->
+  <mvc:default-servlet-handler/>
+
+  <!--配置jsp viewResolver-->
+  <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+    <property name="prefix" value="/WEB-INF/html/" />
+    <property name="suffix" value=".html" />
+  </bean>
+
+  <import resource="classpath:dubbo-consumer.xml" />
+
+  <dubbo:annotation package="controller" />
+
+  <context:component-scan base-package="controller" />
+
+</beans>
