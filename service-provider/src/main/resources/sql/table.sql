@@ -5,7 +5,7 @@ USE resource_recovery;
 -- 省数据表
 CREATE TABLE province(
   id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的自增id',
-  province_id VARCHAR(50) NOT NULL COMMENT '国家分配的省编号',
+  province_id VARCHAR(50) NOT NULL COMMENT '国家分配的行政代码编号',
   province VARCHAR(50) NOT NULL COMMENT '省份的名称',
 
   PRIMARY KEY (id),
@@ -16,9 +16,9 @@ CREATE TABLE province(
 -- 市数据表
 CREATE TABLE city(
   id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的自增id',
-  city_id VARCHAR(50) NOT NULL COMMENT '国家分配的市编号',
+  city_id VARCHAR(50) NOT NULL COMMENT '国家分配的行政编号',
   city VARCHAR(50) NOT NULL COMMENT '市的名称',
-  province_id VARCHAR(50) NOT NULL COMMENT '该市所属的省份编号',
+  province_id VARCHAR(50) NOT NULL COMMENT '该市所属的省份行政编号',
 
   PRIMARY KEY (id),
   KEY idx_city_id(city_id)
@@ -28,9 +28,9 @@ CREATE TABLE city(
 -- 区数据表
 CREATE TABLE area(
   id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的自增id',
-  area_id VARCHAR(50) NOT NULL COMMENT '国家分配的区编号',
+  area_id VARCHAR(50) NOT NULL COMMENT '国家分配的行政编号',
   area VARCHAR(20) NOT NULL COMMENT '区的名称',
-  city_id VARCHAR(10) NOT NULL COMMENT '该区所属的市编号',
+  city_id VARCHAR(10) NOT NULL COMMENT '该区所属的区行政编号',
 
   PRIMARY KEY (id),
   KEY idx_area_id(area_id)
