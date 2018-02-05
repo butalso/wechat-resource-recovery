@@ -12,6 +12,7 @@
         <module>service-api</module>
         <module>service-provider</module>
         <module>web-consumer</module>
+        <module>service-provider</module>
     </modules>
 
     <dependencies>

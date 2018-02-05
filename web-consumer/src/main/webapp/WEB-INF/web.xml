@@ -10,10 +10,7 @@
   <servlet>
     <servlet-name>app-dispatcher</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <!--springMVC
-      spring-dao..xml  spring-service.xml spring-web.xml
-      Mybatis -> spring -> springMVC
-    -->
+
     <init-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>/WEB-INF/applicationContext.xml</param-value>
