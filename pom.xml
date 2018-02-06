@@ -12,7 +12,6 @@
         <module>service-api</module>
         <module>service-provider</module>
         <module>web-consumer</module>
-        <module>service-provider</module>
     </modules>
 
     <dependencies>
@@ -34,7 +33,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo</artifactId>
-            <version>2.5.7</version>
+            <version>2.5.6</version>
         </dependency>
 
         <!--zookeeper依赖-->

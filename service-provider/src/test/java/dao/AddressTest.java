@@ -8,8 +8,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 // junit 运行时加载spring-ioc容器
 @RunWith(SpringJUnit4ClassRunner.class)
 // spring配置文件

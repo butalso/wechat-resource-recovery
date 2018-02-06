@@ -26,7 +26,7 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.9.1" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.9.1" />
-          <element id="library" level="project" name="Maven: com.alibaba:dubbo:2.5.7" />
+          <element id="library" level="project" name="Maven: com.alibaba:dubbo:2.5.6" />
           <element id="library" level="project" name="Maven: org.javassist:javassist:3.20.0-GA" />
           <element id="library" level="project" name="Maven: org.jboss.netty:netty:3.2.5.Final" />
           <element id="library" level="project" name="Maven: org.apache.zookeeper:zookeeper:3.4.11" />
