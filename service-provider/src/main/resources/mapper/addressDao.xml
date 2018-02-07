@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.AddressDao">
+
+    <select id="getProvinces" resultType="String">
+        SELECT province FROM province;
+    </select>
+
+    <select id="getCities" resultType="String">
+        SELECT c.city FROM city c INNER JOIN province p
+        ON c.province_id = p.province_id WHERE p.province = #{province}
+    </select>
+
+    <select id="getAreas" resultType="String">
+        SELECT a.area FROM area a INNER JOIN city c
+        ON a.city_id = c.city_id WHERE c.city = #{city}
+    </select>
+
+    <select id="getHousingEstates" resultType="String">
+        SELECT h.housing_estate FROM housing_estate h INNER JOIN area a
+        ON h.area_id = a.area_id AND a.area = #{area}
+    </select>
+
+    <select id="gethousingEstateAddress" resultType="entity.Address">
+        SELECT h.housing_estate, a.area, c.city, p.province
+        FROM ((housing_estate h INNER JOIN area a
+        ON h.area_id = a.area_id) INNER JOIN city c
+        ON a.city_id = c.city_id) INNER JOIN province p
+        ON c.province_id = p.province_id
+        WHERE h.housing_estate_id = #{housing_estate_id}
+    </select>
+
+    <select id="getAreaAddress" resultType="entity.Address">
+        SELECT a.area, c.city, p.province
+        FROM (area a INNER JOIN city c
+        ON a.city_id = c.city_id) INNER JOIN province p
+        ON c.province_id = p.province_id
+        WHERE a.area_id = #{area_id}
+    </select>
+
+</mapper>
