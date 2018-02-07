@@ -60,27 +60,28 @@ CREATE TABLE account(
   COMMENT ='账户资金数据表';
 
 -- 普通用户数据表
-CREATE TABLE user(
-  user_id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的用户id',
+CREATE TABLE customer(
+  customer_id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的用户id',
   name VARCHAR(50) NOT NULL COMMENT '用户名',
-  nick_name VARCHAR(50) NOT NULL COMMENT '用户昵称名',
+  password VARCHAR(20) NOT NULL COMMENT '用户密码',
   gender VARCHAR(1) NOT NULL COMMENT '用户性别，M代表男性，F代表女性',
   phone VARCHAR(11) NOT NULL COMMENT '用户电话号码',
-  credits INT DEFAULT 500 COMMENT '用户信誉值',
+  credit INT DEFAULT 500 COMMENT '用户信誉值',
   housing_estate_id INT NOT NULL COMMENT '用户所在小区编号',
 
-  PRIMARY KEY (user_id)
+  PRIMARY KEY (customer_id)
 ) DEFAULT CHARSET = utf8
-  COMMENT ='账户资金数据表';
+  COMMENT ='普通用户数据表';
 
 -- 回收员数据表
 CREATE TABLE collector(
   collector_id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的回收员id',
   name VARCHAR(30) NOT NULL COMMENT '回收员姓名',
+  password VARCHAR(20) NOT NULL COMMENT '回收员密码',
   IDCardNo VARCHAR(18) NOT NULL COMMENT '回收员身份证号码',
   gender VARCHAR(1) NOT NULL COMMENT '回收员性别，M代表男性，F代表女性',
   phone VARCHAR(11) NOT NULL COMMENT '回收员电话号码',
-  credits INT DEFAULT 500 COMMENT '回收员信誉值',
+  credit INT DEFAULT 500 COMMENT '回收员信誉值',
   housing_estate_id INT NOT NULL COMMENT '回收员所在小区编号',
 
   PRIMARY KEY (collector_id)
@@ -152,7 +153,7 @@ CREATE TABLE company(
   company_id INT NOT NULL AUTO_INCREMENT COMMENT '企业id',
   company_name VARCHAR(50) NOT NULL COMMENT '企业名称',
   area_id VARCHAR(50) COMMENT '企业所在的区编号',
-  address VARCHAR(255) COMMENT '企业所在具体地址',
+  addr_detail VARCHAR(255) COMMENT '企业所在具体地址',
   authentication INT DEFAULT 0 COMMENT '企业认证状态，0代表未认证，1代表已认证',
 
   PRIMARY KEY (company_id)

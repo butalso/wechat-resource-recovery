@@ -3,10 +3,12 @@ package serviceImpl;
 import dao.AddressDao;
 import entity.Address;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import service.AddressLinkage;
 
 import java.util.List;
 
+@Service
 @com.alibaba.dubbo.config.annotation.Service
 public class AddressLinkageImpl implements AddressLinkage {
     @Autowired

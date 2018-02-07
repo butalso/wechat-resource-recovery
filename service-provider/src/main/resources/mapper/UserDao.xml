@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.UserDao">
+
+    <insert id="addCustomer" keyProperty="c.id" parameterType="entity.Customer">
+        INSERT INTO customer (name, password, gender, phone, housing_estate_id)
+        VALUE (#{c.name}, #{c.password}, #{c.gender}, #{c.phone}, #{c.housingEstateId});
+    </insert>
+
+    <select id="getCustomer" resultType="entity.Customer">
+        SELECT customer_id as id,
+        name, password, gender, phone, credit, housing_estate_id
+        FROM customer WHERE customer_id = #{customerId}
+    </select>
+
+    <update id="updateCustomer" parameterType="entity.Customer">
+        UPDATE customer SET
+        name = #{c.name}, password = #{c.password}, gender = #{c.gender},
+        phone = #{c.phone}, housing_estate_id = #{c.housingEstateId}
+        WHERE customer_id = #{c.id}
+    </update>
+
+    <delete id="deleteCustomer">
+        DELETE FROM customer WHERE customer_id = #{customerId}
+    </delete>
+
+    <insert id="addCollector" keyProperty="c.id" parameterType="entity.Collector">
+        INSERT INTO collector (name, password, IDCardNo, gender, phone, housing_estate_id)
+        VALUE (#{c.name}, #{c.password}, #{c.IDCardNo}, #{c.gender}, #{c.phone}, #{c.housingEstateId})
+    </insert>
+
+    <select id="getCollector" resultType="entity.Collector">
+        SELECT collector_id as id, IDCardNo,
+        name, password, gender, phone, credit, housing_estate_id
+        FROM collector WHERE collector_id = #{collectorId}
+    </select>
+
+    <update id="updateCollector" parameterType="entity.Collector">
+        UPDATE collector SET
+        name = #{c.name}, password = #{c.password}, IDCardNo = #{c.IDCardNo},
+        gender = #{c.gender}, phone = #{c.phone}, housing_estate_id = #{c.housingEstateId}
+        WHERE collector_id = #{c.id}
+    </update>
+
+    <delete id="deleteCollector">
+        DELETE FROM collector WHERE collector_id = #{collectorId}
+    </delete>
+</mapper>

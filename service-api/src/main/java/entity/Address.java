@@ -1,5 +1,8 @@
 package entity;
 
+/**
+ * 省市区生活小区四级地址实体
+ */
 public class Address {
     private String province;
     private String city;

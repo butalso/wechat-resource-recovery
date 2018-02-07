@@ -14,7 +14,7 @@ public class Home {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
-        System.out.println(addressLinkage.getProvinces());
+//        System.out.println(addressLinkage.getProvinces());
         return "index";
     }
 }
