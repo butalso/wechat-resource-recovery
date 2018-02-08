@@ -28,6 +28,8 @@
   2:允许使用“/”做整体映射 -->
   <mvc:default-servlet-handler/>
 
+
+
   <!--配置html viewResolver-->
   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView" />

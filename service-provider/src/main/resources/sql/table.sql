@@ -54,8 +54,10 @@ CREATE TABLE account(
   owner_id INT NOT NULL COMMENT '所属用户的id',
   owner_kind INT NOT NULL COMMENT '所属用户的类型, 0代表普通用户，1代表回收员，2代表企业',
   balance BIGINT DEFAULT 0 COMMENT '账户余额',
+  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-  PRIMARY KEY (account_id)
+  PRIMARY KEY (wechat_id, owner_id, owner_kind),
+  KEY idx_account_id(account_id)
 ) DEFAULT CHARSET = utf8
   COMMENT ='账户资金数据表';
 
@@ -68,9 +70,11 @@ CREATE TABLE customer(
   phone VARCHAR(11) NOT NULL COMMENT '用户电话号码',
   credit INT DEFAULT 500 COMMENT '用户信誉值',
   housing_estate_id INT NOT NULL COMMENT '用户所在小区编号',
+  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY (customer_id)
 ) DEFAULT CHARSET = utf8
+  AUTO_INCREMENT = 10000
   COMMENT ='普通用户数据表';
 
 -- 回收员数据表
@@ -83,9 +87,11 @@ CREATE TABLE collector(
   phone VARCHAR(11) NOT NULL COMMENT '回收员电话号码',
   credit INT DEFAULT 500 COMMENT '回收员信誉值',
   housing_estate_id INT NOT NULL COMMENT '回收员所在小区编号',
+  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY (collector_id)
 ) DEFAULT CHARSET = utf8
+  AUTO_INCREMENT = 10000
   COMMENT ='回收员数据表';
 
 -- 回收员回收小区范围数据表
@@ -151,13 +157,16 @@ CREATE TABLE order_detail(
 -- 企业数据表
 CREATE TABLE company(
   company_id INT NOT NULL AUTO_INCREMENT COMMENT '企业id',
-  company_name VARCHAR(50) NOT NULL COMMENT '企业名称',
+  name VARCHAR(50) NOT NULL COMMENT '企业名称',
+  password VARCHAR(20) NOT NULL COMMENT '企业密码',
+  phone VARCHAR(11) NOT NULL COMMENT '企业电话号码',
   area_id VARCHAR(50) COMMENT '企业所在的区编号',
   addr_detail VARCHAR(255) COMMENT '企业所在具体地址',
-  authentication INT DEFAULT 0 COMMENT '企业认证状态，0代表未认证，1代表已认证',
+  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY (company_id)
 ) DEFAULT CHARSET = utf8
+  AUTO_INCREMENT = 10000
   COMMENT ='企业数据表';
 
 

@@ -12,7 +12,7 @@
 
     <select id="getCustomer" resultType="entity.Customer">
         SELECT customer_id as id,
-        name, password, gender, phone, credit, housing_estate_id
+        name, password, gender, phone, credit, housing_estate_id, create_time
         FROM customer WHERE customer_id = #{customerId}
     </select>
 
@@ -34,7 +34,7 @@
 
     <select id="getCollector" resultType="entity.Collector">
         SELECT collector_id as id, IDCardNo,
-        name, password, gender, phone, credit, housing_estate_id
+        name, password, gender, phone, credit, housing_estate_id, create_time
         FROM collector WHERE collector_id = #{collectorId}
     </select>
 
@@ -48,4 +48,29 @@
     <delete id="deleteCollector">
         DELETE FROM collector WHERE collector_id = #{collectorId}
     </delete>
+
+    <insert id="addCompany" keyProperty="c.id" parameterType="entity.Company">
+        INSERT INTO company (name, password, phone, area_id, area_detail)
+        VALUE (#{c.name}, #{c.password}, #{c.phone},
+        #{c.areaId}, #{c.areaDetail})
+    </insert>
+
+    <select id="getCompany" resultType="entity.Company">
+        SELECT company_id as id,
+        name, password, phone, area_id, area_detail, create_time
+        FROM company WHERE company_id = #{companyId}
+    </select>
+
+    <update id="updateCompany" parameterType="entity.Company">
+        UPDATE company SET
+        name = #{c.name}, password = #{c.password}, phone = #{c.phone},
+        area_id = #{c.areaId}, area_detail = #{areaDetail}
+        WHERE company_id = #{c.id}
+    </update>
+
+    <delete id="deleteCompany">
+        DELETE FROM company WHERE company_id = #{companyId}
+    </delete>
+
+
 </mapper>

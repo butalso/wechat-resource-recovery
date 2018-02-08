@@ -12,7 +12,7 @@ public class Home {
     @Reference
     AddressLinkage addressLinkage;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String home() {
 //        System.out.println(addressLinkage.getProvinces());
         return "index";

@@ -1,6 +1,7 @@
 package dao;
 
 import entity.Collector;
+import entity.Company;
 import entity.Customer;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,22 +20,20 @@ public class UserDaoTest {
 
     Customer customer;
     Collector collector;
+    Company company;
 
     @Before
     public void setUp() throws Exception {
-        customer = new Customer();
-        customer.setName("杰克");
-        customer.setPassword("123456");
-        customer.setGender("M");
-        customer.setPhone("15325678899");
-        customer.setHousingEstateId(2);
+        customer = new Customer("杰克", "123456",
+                "15325678899", "M", 2);
 
-        collector = new Collector();
-        collector.setName("铁柱");
-        collector.setPassword("123456");
-        collector.setIDCardNo("440882199808092213");
-        collector.setGender("M");
-        collector.setPhone("13425809981");
+        collector = new Collector("铁柱", "123456",
+                "13425809981", "440882199808092213",
+                "M", 2);
+
+        company = new Company("回收哥", "123456",
+                "15824568897", "440882", "西湖大道7号");
+
     }
 
     @Test
@@ -92,5 +91,31 @@ public class UserDaoTest {
         System.out.println("删除id=1的回收员前：" + userDao.getCollector(1));
         userDao.deleteCollector(1);
         System.out.println("删除id=1的回收员后：" + userDao.getCollector(1));
+    }
+
+    @Test
+    public void addCompany() {
+        userDao.addCompany(company);
+        System.out.println(company.getId());
+    }
+
+    @Test
+    public void getCompany() {
+        System.out.println("id=1的公司信息：" + userDao.getCompany(1));
+    }
+
+    @Test
+    public void updateCompany() {
+        System.out.println("修改前id=1的公司信息：" + userDao.getCompany(1));
+        company.setAddrDetail("新城大道8号");
+        userDao.updateCompany(company);
+        System.out.println("修改后id=1的公司信息：" + userDao.getCompany(1));
+    }
+
+    @Test
+    public void deleteCompany() {
+        System.out.println("删除前id=1的公司信息是：" + userDao.getCompany(1));
+        userDao.deleteCompany(1);
+        System.out.println("删除后id=1的公司信息是：" + userDao.getCompany(1));
     }
 }

@@ -1,16 +1,25 @@
 package entity;
 
+import java.util.Date;
+
 /**
- * 系统的使用者，Customer和Collector的父类
+ * 系统的使用者，Customer和Collector和Company的父类
  */
 public class User {
     private int id;
     private String name;
     private String password;
-    private String gender;
     private String phone;
-    private int credit;
-    private int housingEstateId;
+    private Date createTime;
+
+    public User() {
+    }
+
+    public User(String name, String password, String phone) {
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+    }
 
     public int getId() {
         return id;
@@ -36,14 +45,6 @@ public class User {
         this.password = password;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -52,20 +53,12 @@ public class User {
         this.phone = phone;
     }
 
-    public int getCredit() {
-        return credit;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCredit(int credit) {
-        this.credit = credit;
-    }
-
-    public int getHousingEstateId() {
-        return housingEstateId;
-    }
-
-    public void setHousingEstateId(int housingEstateId) {
-        this.housingEstateId = housingEstateId;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     @Override
@@ -74,10 +67,8 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
-                ", gender='" + gender + '\'' +
                 ", phone='" + phone + '\'' +
-                ", credit=" + credit +
-                ", housingEstateId=" + housingEstateId +
+                ", createTime=" + createTime +
                 '}';
     }
 }
