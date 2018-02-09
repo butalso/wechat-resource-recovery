@@ -1,6 +1,7 @@
 package dao;
 
 import entity.Address;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -30,6 +31,13 @@ public interface AddressDao {
     List<String> getAreas(String city);
 
     /**
+     * 查询区的行政代号
+     * @param area
+     * @return
+     */
+    String getAreaId(String area);
+
+    /**
      * 查询参数中县级市中所有小区
      * @param area
      * @return
@@ -38,16 +46,22 @@ public interface AddressDao {
 
     /**
      * 根据小区号查询该小区完整地址
-     * @param housing_estate_id
+     * @param housingEstateId
      * @return
      */
-    Address gethousingEstateAddress(int housing_estate_id);
+    Address gethousingEstateAddress(int housingEstateId);
 
     /**
      * 根据县级市行政编号查询该县级市完整地址
-     * @param area_id
+     * @param areaId
      * @return
      */
-    Address getAreaAddress(String area_id);
+    Address getAreaAddress(String areaId);
+
+    void addHousingEstate(@Param("name") String name, @Param("areaId") String areaId);
+
+    void delHousingEstate(@Param("name") String name, @Param("areaId") String areaId);
+
+    int getHousingEstateId(@Param("name") String name, @Param("areaId") String areaId);
 
 }

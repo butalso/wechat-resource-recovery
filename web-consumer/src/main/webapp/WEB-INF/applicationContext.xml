@@ -37,7 +37,7 @@
     <property name="suffix" value=".html" />
   </bean>
 
-  <import resource="classpath:dubbo-consumer.xml" />
+  <import resource="classpath:dubbo/dubbo-consumer.xml" />
 
   <dubbo:annotation package="controller" />
 

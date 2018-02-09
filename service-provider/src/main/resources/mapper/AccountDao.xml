@@ -10,23 +10,18 @@
         VALUE (#{wechatId}, #{ownerId}, #{ownerKind})
     </insert>
 
-    <select id="getAccountId" resultType="int">
-        SELECT account_id FROM account
-        WHERE wechat_id = #{wechatId} AND owner_id = #{ownerId}
-        AND owner_kind = #{ownerKind}
-    </select>
-
-    <select id="getBalance">
-        SELECT balance FROM account WHERE account_id = #{accountId}
+    <select id="getBalance" resultType="double">
+        SELECT balance FROM account WHERE
+        owner_id = #{ownerId} AND owner_kind = #{ownerKind}
     </select>
 
     <update id="updateBalance">
         UPDATE account SET balance = balance + #{value}
-        WHERE account_id = #{accountId} AND balance + #{value} >= 0
+        WHERE owner_id = #{ownerId} AND owner_kind = #{ownerKind} AND balance + #{value} >= 0
     </update>
 
     <delete id="deleteAccount">
-        DELETE FROM account WHERE account_id = #{accountId}
+        DELETE FROM account WHERE owner_id = #{ownerId} AND owner_kind = #{ownerKind}
     </delete>
 
 </mapper>

@@ -18,9 +18,12 @@
     <dubbo:protocol name="dubbo" port="20880"/>
 
     <!-- service implementation, as same as regular local bean -->
-    <bean id="pcaLinkage" class="serviceImpl.AddressLinkageImpl"/>
+    <bean id="pcaLinkage" class="serviceImpl.AddressHandlerImpl"/>
 
     <!-- declare the service interface to be exported -->
-    <dubbo:service interface="service.AddressLinkage" ref="pcaLinkage"/>
+    <dubbo:service interface="service.AddressHandler" ref="pcaLinkage"/>
+
+    <bean id="userHandler" class="serviceImpl.UserHandlerImpl" />
+    <dubbo:service interface="service.UserHandler" ref="userHandler" />
 
 </beans>

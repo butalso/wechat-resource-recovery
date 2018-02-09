@@ -1,11 +1,13 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 系统的使用者，Customer和Collector和Company的父类
  */
-public class User {
+public class User implements Serializable {
+
     private int id;
     private String name;
     private String password;
@@ -19,6 +21,10 @@ public class User {
         this.name = name;
         this.password = password;
         this.phone = phone;
+    }
+
+    public int getUserKind() {
+        return 0;
     }
 
     public int getId() {

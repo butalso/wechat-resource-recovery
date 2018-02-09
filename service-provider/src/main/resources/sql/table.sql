@@ -4,67 +4,66 @@ USE resource_recovery;
 
 -- 省数据表
 CREATE TABLE province(
-  id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的自增id',
-  province_id VARCHAR(50) NOT NULL COMMENT '国家分配的行政代码编号',
-  province VARCHAR(50) NOT NULL COMMENT '省份的名称',
+  id VARCHAR(50) NOT NULL COMMENT '国家分配的行政代码编号',
+  name VARCHAR(50) NOT NULL COMMENT '省份的名称',
 
-  PRIMARY KEY (id),
-  KEY idx_province_id(province_id)
+  PRIMARY KEY (id)
 ) DEFAULT CHARSET = utf8
   COMMENT ='省份数据表';
 
 -- 市数据表
 CREATE TABLE city(
-  id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的自增id',
-  city_id VARCHAR(50) NOT NULL COMMENT '国家分配的行政编号',
-  city VARCHAR(50) NOT NULL COMMENT '市的名称',
+  id VARCHAR(50) NOT NULL COMMENT '国家分配的行政编号',
+  name VARCHAR(50) NOT NULL COMMENT '市的名称',
   province_id VARCHAR(50) NOT NULL COMMENT '该市所属的省份行政编号',
 
   PRIMARY KEY (id),
-  KEY idx_city_id(city_id)
+  FOREIGN KEY (province_id) REFERENCES province(id)
 ) DEFAULT CHARSET = utf8
   COMMENT ='市数据表';
 
 -- 区数据表
 CREATE TABLE area(
-  id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的自增id',
-  area_id VARCHAR(50) NOT NULL COMMENT '国家分配的行政编号',
-  area VARCHAR(20) NOT NULL COMMENT '区的名称',
+  id VARCHAR(50) NOT NULL COMMENT '国家分配的行政编号',
+  name VARCHAR(20) NOT NULL COMMENT '区的名称',
   city_id VARCHAR(10) NOT NULL COMMENT '该区所属的区行政编号',
 
   PRIMARY KEY (id),
-  KEY idx_area_id(area_id)
+  FOREIGN KEY (city_id) REFERENCES city(id)
 ) DEFAULT CHARSET = utf8
   COMMENT ='区数据表';
 
 -- 小区数据表
 CREATE TABLE housing_estate(
-  housing_estate_id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的小区id',
-  housing_estate VARCHAR(50) NOT NULL COMMENT '小区的名称',
+  id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的小区id',
+  name VARCHAR(50) NOT NULL COMMENT '小区的名称',
   area_id VARCHAR(10) NOT NULL COMMENT '该小区所属的区编号',
 
-  PRIMARY KEY (housing_estate_id)
+  PRIMARY KEY (name, area_id),
+  FOREIGN KEY (area_id) REFERENCES area(id),
+  KEY idx_id(id)
 ) DEFAULT CHARSET = utf8
   COMMENT ='小区数据表';
 
 -- 账户数据表
 CREATE TABLE account(
-  account_id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的账户id',
-  wechat_id VARCHAR(30) NOT NULL COMMENT '提现用的微信号',
+  id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的账户id',
+  wechat_id VARCHAR(30) COMMENT '提现用的微信号',
   owner_id INT NOT NULL COMMENT '所属用户的id',
   owner_kind INT NOT NULL COMMENT '所属用户的类型, 0代表普通用户，1代表回收员，2代表企业',
   balance BIGINT DEFAULT 0 COMMENT '账户余额',
   create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-  PRIMARY KEY (wechat_id, owner_id, owner_kind),
-  KEY idx_account_id(account_id)
+  PRIMARY KEY (owner_id, owner_kind),
+  KEY idx_id(id)
 ) DEFAULT CHARSET = utf8
   COMMENT ='账户资金数据表';
 
 -- 普通用户数据表
 CREATE TABLE customer(
-  customer_id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的用户id',
-  name VARCHAR(50) NOT NULL COMMENT '用户名',
+  id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的用户id',
+  name VARCHAR(50) NOT NULL COMMENT '用户姓名',
+  nick_name VARCHAR(30) NOT NULL COMMENT '用户昵称名',
   password VARCHAR(20) NOT NULL COMMENT '用户密码',
   gender VARCHAR(1) NOT NULL COMMENT '用户性别，M代表男性，F代表女性',
   phone VARCHAR(11) NOT NULL COMMENT '用户电话号码',
@@ -72,15 +71,16 @@ CREATE TABLE customer(
   housing_estate_id INT NOT NULL COMMENT '用户所在小区编号',
   create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-  PRIMARY KEY (customer_id)
+  PRIMARY KEY(nick_name),
+  KEY idx_id(id)
 ) DEFAULT CHARSET = utf8
-  AUTO_INCREMENT = 10000
   COMMENT ='普通用户数据表';
 
 -- 回收员数据表
 CREATE TABLE collector(
-  collector_id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的回收员id',
+  id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的回收员id',
   name VARCHAR(30) NOT NULL COMMENT '回收员姓名',
+  nick_name VARCHAR(30) NOT NULL COMMENT '回收员昵称名',
   password VARCHAR(20) NOT NULL COMMENT '回收员密码',
   IDCardNo VARCHAR(18) NOT NULL COMMENT '回收员身份证号码',
   gender VARCHAR(1) NOT NULL COMMENT '回收员性别，M代表男性，F代表女性',
@@ -89,9 +89,10 @@ CREATE TABLE collector(
   housing_estate_id INT NOT NULL COMMENT '回收员所在小区编号',
   create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-  PRIMARY KEY (collector_id)
+  PRIMARY KEY (nick_name),
+  KEY idx_id(id)
+
 ) DEFAULT CHARSET = utf8
-  AUTO_INCREMENT = 10000
   COMMENT ='回收员数据表';
 
 -- 回收员回收小区范围数据表
@@ -109,7 +110,7 @@ CREATE TABLE collect_range(
 -- 废品种类数据表
 CREATE TABLE garbage_type(
   id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的废品种类id',
-  type_name VARCHAR(20) NOT NULL COMMENT '废品种类的名称',
+  name VARCHAR(20) NOT NULL COMMENT '废品种类的名称',
 
   PRIMARY KEY (id)
 ) DEFAULT CHARSET = utf8
@@ -119,7 +120,7 @@ CREATE TABLE garbage_type(
 CREATE TABLE garbage(
   id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的用户id',
   type_name VARCHAR(20) NOT NULL COMMENT '废品种类的名称',
-  garbage_name VARCHAR(30) NOT NULL COMMENT '废品名称',
+  name VARCHAR(30) NOT NULL COMMENT '废品名称',
   price DOUBLE NOT NULL COMMENT '废品单价/kg',
 
   PRIMARY KEY (id),
@@ -129,7 +130,7 @@ CREATE TABLE garbage(
 
 -- 订单数据表
 CREATE TABLE order_item(
-  order_id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的订单id',
+  id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的订单id',
   create_time TIMESTAMP NOT NULL COMMENT '创建时间',
   finish_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '完成时间',
   state INT NOT NULL DEFAULT 0
@@ -140,7 +141,7 @@ CREATE TABLE order_item(
   user_grade INT DEFAULT 5 COMMENT '用户对本订单评分',
   collector_grade INT DEFAULT 5 COMMENT '回收员对本订单评分',
 
-  PRIMARY KEY (order_id)
+  PRIMARY KEY (id)
 ) DEFAULT CHARSET = utf8
   COMMENT ='订单数据表';
 
@@ -156,7 +157,7 @@ CREATE TABLE order_detail(
 
 -- 企业数据表
 CREATE TABLE company(
-  company_id INT NOT NULL AUTO_INCREMENT COMMENT '企业id',
+  id INT NOT NULL AUTO_INCREMENT COMMENT '企业id',
   name VARCHAR(50) NOT NULL COMMENT '企业名称',
   password VARCHAR(20) NOT NULL COMMENT '企业密码',
   phone VARCHAR(11) NOT NULL COMMENT '企业电话号码',
@@ -164,9 +165,9 @@ CREATE TABLE company(
   addr_detail VARCHAR(255) COMMENT '企业所在具体地址',
   create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-  PRIMARY KEY (company_id)
+  PRIMARY KEY (name),
+  KEY idx_id(id)
 ) DEFAULT CHARSET = utf8
-  AUTO_INCREMENT = 10000
   COMMENT ='企业数据表';
 
 

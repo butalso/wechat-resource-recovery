@@ -6,70 +6,64 @@
 <mapper namespace="dao.UserDao">
 
     <insert id="addCustomer" keyProperty="c.id" parameterType="entity.Customer">
-        INSERT INTO customer (name, password, gender, phone, housing_estate_id)
-        VALUE (#{c.name}, #{c.password}, #{c.gender}, #{c.phone}, #{c.housingEstateId});
+        INSERT INTO customer (name, nick_name, password, gender, phone, housing_estate_id)
+        VALUE (#{c.name}, #{c.nickName}, #{c.password}, #{c.gender}, #{c.phone}, #{c.housingEstateId});
     </insert>
 
     <select id="getCustomer" resultType="entity.Customer">
-        SELECT customer_id as id,
-        name, password, gender, phone, credit, housing_estate_id, create_time
-        FROM customer WHERE customer_id = #{customerId}
+        SELECT * FROM customer WHERE nick_name = #{nickName}
     </select>
 
     <update id="updateCustomer" parameterType="entity.Customer">
         UPDATE customer SET
         name = #{c.name}, password = #{c.password}, gender = #{c.gender},
         phone = #{c.phone}, housing_estate_id = #{c.housingEstateId}
-        WHERE customer_id = #{c.id}
+        WHERE nick_name = #{c.nickName}
     </update>
 
     <delete id="deleteCustomer">
-        DELETE FROM customer WHERE customer_id = #{customerId}
+        DELETE FROM customer WHERE nick_name = #{nickName}
     </delete>
 
     <insert id="addCollector" keyProperty="c.id" parameterType="entity.Collector">
-        INSERT INTO collector (name, password, IDCardNo, gender, phone, housing_estate_id)
-        VALUE (#{c.name}, #{c.password}, #{c.IDCardNo}, #{c.gender}, #{c.phone}, #{c.housingEstateId})
+        INSERT INTO collector (name, nick_name, password, IDCardNo, gender, phone, housing_estate_id)
+        VALUE (#{c.name}, #{c.nickName}, #{c.password}, #{c.IDCardNo}, #{c.gender}, #{c.phone}, #{c.housingEstateId})
     </insert>
 
     <select id="getCollector" resultType="entity.Collector">
-        SELECT collector_id as id, IDCardNo,
-        name, password, gender, phone, credit, housing_estate_id, create_time
-        FROM collector WHERE collector_id = #{collectorId}
+        SELECT * FROM collector WHERE nick_name = #{nickName}
     </select>
 
     <update id="updateCollector" parameterType="entity.Collector">
         UPDATE collector SET
         name = #{c.name}, password = #{c.password}, IDCardNo = #{c.IDCardNo},
         gender = #{c.gender}, phone = #{c.phone}, housing_estate_id = #{c.housingEstateId}
-        WHERE collector_id = #{c.id}
+        WHERE nick_name = #{c.nickName}
     </update>
 
     <delete id="deleteCollector">
-        DELETE FROM collector WHERE collector_id = #{collectorId}
+        DELETE FROM collector WHERE nick_name = #{nickName}
     </delete>
 
     <insert id="addCompany" keyProperty="c.id" parameterType="entity.Company">
-        INSERT INTO company (name, password, phone, area_id, area_detail)
+        INSERT INTO company (name, password, phone, area_id, addr_detail)
         VALUE (#{c.name}, #{c.password}, #{c.phone},
-        #{c.areaId}, #{c.areaDetail})
+        #{c.areaId}, #{c.addrDetail})
     </insert>
 
     <select id="getCompany" resultType="entity.Company">
-        SELECT company_id as id,
-        name, password, phone, area_id, area_detail, create_time
-        FROM company WHERE company_id = #{companyId}
+        SELECT * FROM company WHERE name = #{name}
     </select>
 
     <update id="updateCompany" parameterType="entity.Company">
         UPDATE company SET
         name = #{c.name}, password = #{c.password}, phone = #{c.phone},
-        area_id = #{c.areaId}, area_detail = #{areaDetail}
-        WHERE company_id = #{c.id}
+        area_id = #{c.areaId}, addr_detail = #{c.addrDetail}
+        WHERE name = #{c.name}
     </update>
 
     <delete id="deleteCompany">
-        DELETE FROM company WHERE company_id = #{companyId}
+        DELETE FROM company WHERE name = #{name}
     </delete>
 
 

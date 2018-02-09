@@ -4,13 +4,13 @@ import dao.AddressDao;
 import entity.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import service.AddressLinkage;
+import service.AddressHandler;
 
 import java.util.List;
 
 @Service
 @com.alibaba.dubbo.config.annotation.Service
-public class AddressLinkageImpl implements AddressLinkage {
+public class AddressHandlerImpl implements AddressHandler {
     @Autowired
     AddressDao addressDao;
 
@@ -27,5 +27,24 @@ public class AddressLinkageImpl implements AddressLinkage {
             result = addressDao.getProvinces();
         }
         return result;
+    }
+
+    @Override
+    public void addHousingEstate(Address address) {
+        String name = address.getHousingEstate();
+        String areaId = addressDao.getAreaId(address.getArea());
+        addressDao.addHousingEstate(name, areaId);
+    }
+
+    @Override
+    public void delHousingEstate(Address address) {
+        String name = address.getHousingEstate();
+        String areaId = addressDao.getAreaId(address.getArea());
+        addressDao.delHousingEstate(name, areaId);
+    }
+
+    @Override
+    public List<String> getHousingEstates(String area) {
+        return addressDao.getHousingEstates(area);
     }
 }

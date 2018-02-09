@@ -25,10 +25,10 @@ public class UserDaoTest {
     @Before
     public void setUp() throws Exception {
         customer = new Customer("杰克", "123456",
-                "15325678899", "M", 2);
+                "15325678899", "jack", "M", 2);
 
         collector = new Collector("铁柱", "123456",
-                "13425809981", "440882199808092213",
+                "13425809981", "tiezhu", "440882199808092213",
                 "M", 2);
 
         company = new Company("回收哥", "123456",
@@ -44,25 +44,24 @@ public class UserDaoTest {
 
     @Test
     public void getCustomer() {
-        System.out.println(userDao.getCustomer(2));
+        System.out.println(userDao.getCustomer("jack"));
     }
 
     @Test
     public void updateCustomer() {
-        System.out.println("修改前：" + userDao.getCustomer(2));
+        System.out.println("修改前：" + userDao.getCustomer("jack"));
 
-        customer.setId(2);
         customer.setHousingEstateId(1);
         userDao.updateCustomer(customer);
 
-        System.out.println("修改后：" + userDao.getCustomer(2));
+        System.out.println("修改后：" + userDao.getCustomer("jack"));
     }
 
     @Test
     public void deleteCustomer() {
-        System.out.println("删除前id=2的用户： " + userDao.getCustomer(2));
-        userDao.deleteCustomer(2);
-        System.out.println("删除后id=2的用户： " + userDao.getCustomer(2));
+        System.out.println("删除前的jack： " + userDao.getCustomer("jack"));
+        userDao.deleteCustomer("jack");
+        System.out.println("删除后jack： " + userDao.getCustomer("jack"));
     }
 
     @Test
@@ -73,24 +72,24 @@ public class UserDaoTest {
 
     @Test
     public void getCollector() {
-        System.out.println(userDao.getCollector(1));
+        System.out.println(userDao.getCollector("tiezhu"));
     }
 
     @Test
     public void updateCollector() {
-        System.out.println("修改id=1的回收员前：" + userDao.getCollector(1));
+        System.out.println("修改前的tiezhu：" + userDao.getCollector("tiezhu"));
 
         collector.setGender("F");
         userDao.updateCollector(collector);
 
-        System.out.println("修改id=1的回收员后：" + userDao.getCollector(1));
+        System.out.println("修改后的tiezhu：" + userDao.getCollector("tiezhu"));
     }
 
     @Test
     public void deleteCollector() {
-        System.out.println("删除id=1的回收员前：" + userDao.getCollector(1));
-        userDao.deleteCollector(1);
-        System.out.println("删除id=1的回收员后：" + userDao.getCollector(1));
+        System.out.println("删除前的tiezhu：" + userDao.getCollector("tiezhu"));
+        userDao.deleteCollector("tiezhu");
+        System.out.println("删除后的tiezhu：" + userDao.getCollector("tiezhu"));
     }
 
     @Test
@@ -101,21 +100,21 @@ public class UserDaoTest {
 
     @Test
     public void getCompany() {
-        System.out.println("id=1的公司信息：" + userDao.getCompany(1));
+        System.out.println("公司回收哥：" + userDao.getCompany("回收哥"));
     }
 
     @Test
     public void updateCompany() {
-        System.out.println("修改前id=1的公司信息：" + userDao.getCompany(1));
+        System.out.println("修改前回收哥：" + userDao.getCompany("回收哥"));
         company.setAddrDetail("新城大道8号");
         userDao.updateCompany(company);
-        System.out.println("修改后id=1的公司信息：" + userDao.getCompany(1));
+        System.out.println("修改后回收哥：" + userDao.getCompany("回收哥"));
     }
 
     @Test
     public void deleteCompany() {
-        System.out.println("删除前id=1的公司信息是：" + userDao.getCompany(1));
-        userDao.deleteCompany(1);
-        System.out.println("删除后id=1的公司信息是：" + userDao.getCompany(1));
+        System.out.println("删除前回收哥：" + userDao.getCompany("回收哥"));
+        userDao.deleteCompany("回收哥");
+        System.out.println("删除后回收哥：" + userDao.getCompany("回收哥"));
     }
 }

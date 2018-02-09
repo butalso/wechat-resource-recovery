@@ -36,12 +36,6 @@ public class AddressDaoTest {
     }
 
     @Test
-    public void getHousingEstates() {
-        System.out.println("雷州市所有的小区：");
-        System.out.println(addressDao.getHousingEstates("雷州市"));
-    }
-
-    @Test
     public void gethousingEstateAddress() {
         System.out.println("福泉小区地址：");
         System.out.println(addressDao.gethousingEstateAddress(2));
@@ -51,5 +45,32 @@ public class AddressDaoTest {
     public void getAreaAddress() {
         System.out.println("雷州市地址：");
         System.out.println(addressDao.getAreaAddress("440882"));
+    }
+
+    @Test
+    public void getAreaId() {
+        System.out.println("雷州市行政代码：");
+        System.out.println(addressDao.getAreaId("雷州市"));
+    }
+
+    @Test
+    public void addHousingEstate() {
+        addressDao.addHousingEstate("金利小区", "440882");
+        addressDao.addHousingEstate("福泉小区", "440882");
+        addressDao.addHousingEstate("金易小区", "440882");
+        System.out.println("雷州市所有的小区：");
+        System.out.println(addressDao.getHousingEstates("雷州市"));
+    }
+
+    @Test
+    public void delHousingEstate() {
+        addressDao.delHousingEstate("金易小区", "440882");
+        System.out.println("雷州市所有的小区：");
+        System.out.println(addressDao.getHousingEstates("雷州市"));
+    }
+
+    @Test
+    public void getHousingEstateId() {
+        System.out.println(addressDao.getHousingEstateId("金利小区", "440882"));
     }
 }

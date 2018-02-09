@@ -5,6 +5,7 @@ package entity;
  */
 public class Collector extends User {
     private final int userKind = 1;
+    private String nickName;
     private String IDCardNo;
     private String gender;
     private int credit;
@@ -13,12 +14,21 @@ public class Collector extends User {
     public Collector() {
     }
 
-    public Collector(String name, String password, String phone,
+    public Collector(String name, String password, String phone, String nickName,
                      String IDCardNo, String gender, int housingEstateId) {
         super(name, password, phone);
+        this.nickName = nickName;
         this.IDCardNo = IDCardNo;
         this.gender = gender;
         this.housingEstateId = housingEstateId;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getIDCardNo() {

@@ -17,23 +17,23 @@ public interface UserDao {
     void addCustomer(@Param("c") Customer customer);
 
     /**
-     * 根据id查询业主实体（卖废品的用户）
-     * @param customerId
+     * 根据用户昵称名查询业主实体（卖废品的用户）
+     * @param nickName
      * @return
      */
-    Customer getCustomer(int customerId);
+    Customer getCustomer(String nickName);
 
     /**
-     * 根据参数中业主实体id修改业主实体（卖废品的用户）
+     * 根据参数中业主实体昵称名修改业主实体（卖废品的用户）
      * @param customer
      */
     void updateCustomer(@Param("c") Customer customer);
 
     /**
-     * 删除给定id的业主实体（卖废品的用户）
-     * @param customerId
+     * 删除给定呢称名的业主实体（卖废品的用户）
+     * @param nickName
      */
-    void deleteCustomer(int customerId);
+    void deleteCustomer(String nickName);
 
     /**
      * 增加回收员
@@ -42,23 +42,23 @@ public interface UserDao {
     void addCollector(@Param("c") Collector collector);
 
     /**
-     * 根据形参id查询回收员信息
-     * @param collectorId
+     * 根据昵称名查询回收员信息
+     * @param nick_name
      * @return
      */
-    Collector getCollector(int collectorId);
+    Collector getCollector(String nick_name);
 
     /**
-     * 根据参数中回收员实体id修改回收员信息
+     * 根据参数中回收员实体昵称修改回收员信息
      * @param collector
      */
     void updateCollector(@Param("c") Collector collector);
 
     /**
      * 删除参数中回收员信息
-     * @param collectorId
+     * @param nickName
      */
-    void deleteCollector(int collectorId);
+    void deleteCollector(String nickName);
 
     /**
      * 添加企业
@@ -67,21 +67,21 @@ public interface UserDao {
     void addCompany(@Param("c") Company company);
 
     /**
-     * 根据形参id查询企业信息
-     * @param companyId
+     * 根据企业名查询企业信息
+     * @param name
      * @return
      */
-    Company getCompany(int companyId);
+    Company getCompany(String name);
 
     /**
-     * 根据参数中企业实体id修改回收员信息
+     * 根据参数中企业实体名称修改回收员信息
      * @param company
      */
     void updateCompany(@Param("c") Company company);
 
     /**
      * 删除参数中企业信息
-     * @param companyId
+     * @param name
      */
-    void deleteCompany(int companyId);
+    void deleteCompany(String name);
 }

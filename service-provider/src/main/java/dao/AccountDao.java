@@ -11,36 +11,31 @@ public interface AccountDao {
      * @param ownerKind
      */
     void addAccount(@Param("wechatId") String wechatId,
-                    @Param("ownerId") int ownerId, int ownerKind);
+                    @Param("ownerId") int ownerId, @Param("ownerKind") int ownerKind);
 
     /**
-     * 查询用户给定微信号的账户编号
-     * @param wechatId
+     * 查询账户余额
      * @param ownerId
      * @param ownerKind
      * @return
      */
-    int getAccountId(@Param("wechatId") String wechatId,
-                     @Param("ownerId") int ownerId, int ownerKind);
+    double getBalance(@Param("ownerId") int ownerId, @Param("ownerKind") int ownerKind);
 
     /**
-     * 查询账户余额
-     * @param accountId
-     * @return
-     */
-    double getBalance(@Param("accountId") int accountId);
-
-    /**
-     * 更改账户accountId中的余额
-     * @param accountId
+     * 更改用户账户中的余额
+     * @param ownerId
+     * @param ownerKind
      * @param value
      */
-    void updateBalance(@Param("accountId") int accountId,
+    int updateBalance(@Param("ownerId") int ownerId,
+                       @Param("ownerKind") int ownerKind,
                        @Param("value") double value);
 
     /**
      * 删除账户
-     * @param accountId
+     * @param ownerId
+     * @param ownerKind
      */
-    void deleteAccount(@Param("accountId") int accountId);
+    int deleteAccount(@Param("ownerId") int ownerId,
+                       @Param("ownerKind") int ownerKind);
 }

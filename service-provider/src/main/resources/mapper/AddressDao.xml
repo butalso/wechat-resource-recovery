@@ -6,39 +6,56 @@
 <mapper namespace="dao.AddressDao">
 
     <select id="getProvinces" resultType="String">
-        SELECT province FROM province;
+        SELECT name FROM province;
     </select>
 
     <select id="getCities" resultType="String">
-        SELECT c.city FROM city c INNER JOIN province p
-        ON c.province_id = p.province_id WHERE p.province = #{province}
+        SELECT c.name FROM city c INNER JOIN province p
+        ON c.province_id = p.id WHERE p.name = #{province}
     </select>
 
     <select id="getAreas" resultType="String">
-        SELECT a.area FROM area a INNER JOIN city c
-        ON a.city_id = c.city_id WHERE c.city = #{city}
+        SELECT a.name FROM area a INNER JOIN city c
+        ON a.city_id = c.id WHERE c.name = #{city}
+    </select>
+
+    <select id="getAreaId" resultType="String">
+        SELECT id FROM area WHERE name = #{area}
     </select>
 
     <select id="getHousingEstates" resultType="String">
-        SELECT h.housing_estate FROM housing_estate h INNER JOIN area a
-        ON h.area_id = a.area_id AND a.area = #{area}
+        SELECT h.name FROM housing_estate h INNER JOIN area a
+        ON h.area_id = a.id AND a.name = #{area}
     </select>
 
     <select id="gethousingEstateAddress" resultType="entity.Address">
-        SELECT h.housing_estate, a.area, c.city, p.province
+        SELECT h.name as housingEstate, a.name as area, c.name as city, p.name as province
         FROM ((housing_estate h INNER JOIN area a
-        ON h.area_id = a.area_id) INNER JOIN city c
-        ON a.city_id = c.city_id) INNER JOIN province p
-        ON c.province_id = p.province_id
-        WHERE h.housing_estate_id = #{housing_estate_id}
+        ON h.area_id = a.id) INNER JOIN city c
+        ON a.city_id = c.id) INNER JOIN province p
+        ON c.province_id = p.id
+        WHERE h.id = #{housingEstateId}
     </select>
 
     <select id="getAreaAddress" resultType="entity.Address">
-        SELECT a.area, c.city, p.province
+        SELECT a.name as area, c.name as city, p.name as province
         FROM (area a INNER JOIN city c
-        ON a.city_id = c.city_id) INNER JOIN province p
-        ON c.province_id = p.province_id
-        WHERE a.area_id = #{area_id}
+        ON a.city_id = c.id) INNER JOIN province p
+        ON c.province_id = p.id
+        WHERE a.id = #{areaId}
+    </select>
+
+    <insert id="addHousingEstate">
+        INSERT IGNORE INTO housing_estate (name, area_id)
+        VALUE (#{name}, #{areaId})
+    </insert>
+
+    <delete id="delHousingEstate">
+        DELETE FROM housing_estate WHERE name = #{name} AND area_id = #{areaId}
+    </delete>
+
+    <select id="getHousingEstateId" resultType="int">
+        SELECT id FROM housing_estate WHERE name = #{name} AND area_id = #{areaId}
     </select>
 
 </mapper>
