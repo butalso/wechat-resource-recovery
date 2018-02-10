@@ -28,14 +28,22 @@
   2:允许使用“/”做整体映射 -->
   <mvc:default-servlet-handler/>
 
-
-
   <!--配置html viewResolver-->
   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView" />
     <property name="prefix" value="/WEB-INF/html/" />
     <property name="suffix" value=".html" />
   </bean>
+
+  <!--配置登录状态拦截器-->
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <!--对个人信息路径拦截-->
+      <mvc:mapping path="/personal/**"/>
+
+      <bean id="loginInterceptor" class="interceptor.Login"></bean>
+    </mvc:interceptor>
+  </mvc:interceptors>
 
   <import resource="classpath:dubbo/dubbo-consumer.xml" />
 

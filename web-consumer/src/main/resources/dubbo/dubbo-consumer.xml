@@ -16,7 +16,9 @@
 
     <!-- generate proxy for the remote service, then demoService can be used in the same way as the
     local regular interface -->
-    <dubbo:reference id="pcaLinkage" check="false" interface="service.AddressHandler"/>
+    <dubbo:reference id="addressHandler" check="false" interface="service.AddressHandler"/>
 
     <dubbo:reference id="userHandler" interface="service.UserHandler" />
+
+    <dubbo:reference id="accountHandler" interface="service.AccountHandler" />
 </beans>

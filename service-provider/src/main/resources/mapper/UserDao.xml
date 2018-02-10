@@ -26,8 +26,11 @@
     </delete>
 
     <insert id="addCollector" keyProperty="c.id" parameterType="entity.Collector">
-        INSERT INTO collector (name, nick_name, password, IDCardNo, gender, phone, housing_estate_id)
-        VALUE (#{c.name}, #{c.nickName}, #{c.password}, #{c.IDCardNo}, #{c.gender}, #{c.phone}, #{c.housingEstateId})
+        INSERT INTO collector (name, nick_name, company_name, password,
+        IDCardNo, gender, phone, housing_estate_id)
+        VALUE (#{c.name}, #{c.nickName}, #{c.companyName},
+        #{c.password}, #{c.IDCardNo}, #{c.gender}, #{c.phone},
+        #{c.housingEstateId})
     </insert>
 
     <select id="getCollector" resultType="entity.Collector">

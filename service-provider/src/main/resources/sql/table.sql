@@ -51,7 +51,8 @@ CREATE TABLE account(
   wechat_id VARCHAR(30) COMMENT '提现用的微信号',
   owner_id INT NOT NULL COMMENT '所属用户的id',
   owner_kind INT NOT NULL COMMENT '所属用户的类型, 0代表普通用户，1代表回收员，2代表企业',
-  balance BIGINT DEFAULT 0 COMMENT '账户余额',
+  password VARCHAR(32) NOT NULL COMMENT '转账，提现密码，6位数字md5加密值',
+  balance DOUBLE DEFAULT 0 COMMENT '账户余额',
   create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY (owner_id, owner_kind),
@@ -81,6 +82,7 @@ CREATE TABLE collector(
   id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的回收员id',
   name VARCHAR(30) NOT NULL COMMENT '回收员姓名',
   nick_name VARCHAR(30) NOT NULL COMMENT '回收员昵称名',
+  company_name VARCHAR(50) NOT NULL COMMENT '回收员所属企业',
   password VARCHAR(20) NOT NULL COMMENT '回收员密码',
   IDCardNo VARCHAR(18) NOT NULL COMMENT '回收员身份证号码',
   gender VARCHAR(1) NOT NULL COMMENT '回收员性别，M代表男性，F代表女性',
@@ -94,6 +96,21 @@ CREATE TABLE collector(
 
 ) DEFAULT CHARSET = utf8
   COMMENT ='回收员数据表';
+
+-- 企业数据表
+CREATE TABLE company(
+  id INT NOT NULL AUTO_INCREMENT COMMENT '企业id',
+  name VARCHAR(50) NOT NULL COMMENT '企业名称',
+  password VARCHAR(20) NOT NULL COMMENT '企业密码',
+  phone VARCHAR(11) NOT NULL COMMENT '企业电话号码',
+  area_id VARCHAR(50) COMMENT '企业所在的区编号',
+  addr_detail VARCHAR(255) COMMENT '企业所在具体地址',
+  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (name),
+  KEY idx_id(id)
+) DEFAULT CHARSET = utf8
+  COMMENT ='企业数据表';
 
 -- 回收员回收小区范围数据表
 CREATE TABLE collect_range(
@@ -155,20 +172,6 @@ CREATE TABLE order_detail(
 ) DEFAULT CHARSET = utf8
   COMMENT ='订单详情具体某项废品数据表';
 
--- 企业数据表
-CREATE TABLE company(
-  id INT NOT NULL AUTO_INCREMENT COMMENT '企业id',
-  name VARCHAR(50) NOT NULL COMMENT '企业名称',
-  password VARCHAR(20) NOT NULL COMMENT '企业密码',
-  phone VARCHAR(11) NOT NULL COMMENT '企业电话号码',
-  area_id VARCHAR(50) COMMENT '企业所在的区编号',
-  addr_detail VARCHAR(255) COMMENT '企业所在具体地址',
-  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-  PRIMARY KEY (name),
-  KEY idx_id(id)
-) DEFAULT CHARSET = utf8
-  COMMENT ='企业数据表';
 
 
 
