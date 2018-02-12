@@ -1,5 +1,7 @@
 package entity;
 
+import dto.Address;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,6 +15,8 @@ public class User implements Serializable {
     private String password;
     private String phone;
     private Date createTime;
+    /* 传递给web时将地址id转化为地址 */
+    private Address address;
 
     public User() {
     }
@@ -21,6 +25,14 @@ public class User implements Serializable {
         this.name = name;
         this.password = password;
         this.phone = phone;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public int getUserKind() {
@@ -75,6 +87,7 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 ", createTime=" + createTime +
+                ", address=" + address +
                 '}';
     }
 }

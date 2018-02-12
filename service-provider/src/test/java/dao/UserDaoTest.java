@@ -117,4 +117,24 @@ public class UserDaoTest {
         userDao.deleteCompany("回收哥");
         System.out.println("删除后回收哥：" + userDao.getCompany("回收哥"));
     }
+
+    @Test
+    public void getCustomerById() {
+        System.out.println(userDao.getCustomerById(1));
+    }
+
+    @Test
+    public void getCollectorById() {
+        System.out.println(userDao.getCollectorById(1));
+    }
+
+    @Test
+    public void getCompanyById() {
+        System.out.println(userDao.getCompanyById(1));
+    }
+
+    @Test
+    public void getCustomersId() {
+        System.out.println(userDao.getCustomersId(2));
+    }
 }

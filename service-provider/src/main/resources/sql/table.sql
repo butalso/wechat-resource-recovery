@@ -129,7 +129,8 @@ CREATE TABLE garbage_type(
   id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的废品种类id',
   name VARCHAR(20) NOT NULL COMMENT '废品种类的名称',
 
-  PRIMARY KEY (id)
+  PRIMARY KEY (name),
+  KEY idx_id(id)
 ) DEFAULT CHARSET = utf8
   COMMENT ='废品种类数据表';
 
@@ -140,23 +141,23 @@ CREATE TABLE garbage(
   name VARCHAR(30) NOT NULL COMMENT '废品名称',
   price DOUBLE NOT NULL COMMENT '废品单价/kg',
 
-  PRIMARY KEY (id),
-  KEY idx_type_name(type_name)
+  PRIMARY KEY (name),
+  KEY idx_id(id)
 ) DEFAULT CHARSET = utf8
   COMMENT ='具体废品数据表';
 
 -- 订单数据表
 CREATE TABLE order_item(
   id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的订单id',
-  create_time TIMESTAMP NOT NULL COMMENT '创建时间',
+  create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   finish_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '完成时间',
   state INT NOT NULL DEFAULT 0
     COMMENT '订单状态，0代表回收员未接单，1代表回收员已接单未回收,2代表回收员已回收未交接，3代表回收员已交接，订单完成',
   user_id INT NOT NULL COMMENT '创建订单的用户id',
   collector_id INT COMMENT '接单的回收员id',
   company_id INT COMMENT '回收员接单时所属企业的id',
-  user_grade INT DEFAULT 5 COMMENT '用户对本订单评分',
-  collector_grade INT DEFAULT 5 COMMENT '回收员对本订单评分',
+  user_grade INT DEFAULT 0 COMMENT '用户对本订单评分',
+  collector_grade INT DEFAULT 0 COMMENT '回收员对本订单评分',
 
   PRIMARY KEY (id)
 ) DEFAULT CHARSET = utf8
@@ -165,10 +166,11 @@ CREATE TABLE order_item(
 -- 订单详情数据表
 CREATE TABLE order_detail(
   order_id INT NOT NULL COMMENT '订单id',
-  garbage_id INT NOT NULL COMMENT '废品id',
+  garbage_name VARCHAR(50) NOT NULL COMMENT '废品名称',
   weight DOUBLE NOT NULL COMMENT '该废品详情的重量',
+  price DOUBLE NOT NULL COMMENT '交易时废品单价',
 
-  PRIMARY KEY (order_id, garbage_id)
+  PRIMARY KEY (order_id, garbage_name)
 ) DEFAULT CHARSET = utf8
   COMMENT ='订单详情具体某项废品数据表';
 

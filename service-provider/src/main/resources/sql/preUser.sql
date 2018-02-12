@@ -17,3 +17,14 @@ INSERT INTO company(name, password, phone, area_id, addr_detail)
 VALUES
 ('回收哥', '789', '13825672120', '440882', '西湖大道8号'),
 ('废品大叔', '789', '18326768829', '440882', '新城大道10号');
+
+
+-- 预置生活小区
+INSERT INTO housing_estate(name, area_id) VALUES
+('王者峡谷', '440882'), ('召唤森林', '440882'), ('天辉阵营', '440882'),
+('夜魇阵营', '440882'), ('青青草原', '440882'), ('哈拉沙漠', '440882');
+
+-- 预置回收员回收范围
+INSERT INTO collect_range(housing_estate_id, collector_id) VALUES
+(1, 1), (2, 1), (3, 2), (4, 1), (5, 2), (6, 3);
+

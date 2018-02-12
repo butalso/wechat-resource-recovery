@@ -1,7 +1,7 @@
 package serviceImpl;
 
 import dao.AddressDao;
-import entity.Address;
+import dto.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.AddressHandler;
@@ -43,8 +43,4 @@ public class AddressHandlerImpl implements AddressHandler {
         addressDao.delHousingEstate(name, areaId);
     }
 
-    @Override
-    public List<String> getHousingEstates(String area) {
-        return addressDao.getHousingEstates(area);
-    }
 }

@@ -5,10 +5,19 @@ import entity.Company;
 import entity.Customer;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 系统使用者（业主、回收员、企业）信息的增删改查
  */
 public interface UserDao {
+
+    /**
+     * 获取某一小区内所有业主的id
+     * @param housingEstateId
+     * @return
+     */
+    List<Integer> getCustomersId(@Param("hId") int housingEstateId);
 
     /**
      * 增加业主实体（卖废品的用户）
@@ -84,4 +93,25 @@ public interface UserDao {
      * @param name
      */
     void deleteCompany(String name);
+
+    /**
+     * 根据用户id获取业主实体
+     * @param id
+     * @return
+     */
+    Customer getCustomerById(int id);
+
+    /**
+     * 根据id获取回收员实体
+     * @param id
+     * @return
+     */
+    Collector getCollectorById(int id);
+
+    /**
+     * 根据id获取公司实体
+     * @param id
+     * @return
+     */
+    Company getCompanyById(int id);
 }

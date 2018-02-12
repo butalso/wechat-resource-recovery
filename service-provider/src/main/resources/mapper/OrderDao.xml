@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.OrderDao">
+
+    <insert id="createOrder" keyProperty="orderItem.id">
+        INSERT INTO order_item (user_id) VALUES (#{userId})
+    </insert>
+
+    <update id="receiveOrder">
+        UPDATE order_item SET
+        state = 1, collector_id = #{cId},
+        company_id = #{comId}
+        WHERE id = #{oId}
+    </update>
+
+    <update id="updateOrderState">
+        UPDATE order_item SET
+        state = 2, user_grade = #{uGrade}, collector_grade = #{cGrade}
+        WHERE id = #{oId}
+    </update>
+
+    <insert id="addOrderDetail">
+        INSERT INTO order_detail (order_id, garbage_name, weight, price)
+        VALUE (#{oId}, #{gName}, #{weight}, #{price})
+    </insert>
+
+    <update id="updateOrderDetail">
+        UPDATE order_detail SET weight = #{weight}
+        WHERE order_id = #{oId} AND garbage_name = #{gName}
+    </update>
+
+    <delete id="delOrder">
+        DELETE FROM order_item WHERE id = #{orderId}
+    </delete>
+
+    <delete id="delOrderDetails">
+        DELETE FROM order_detail WHERE order_id = #{orderId}
+    </delete>
+
+    <select id="getOrderDetails" resultType="entity.OrderDetail">
+        SELECT * FROM order_detail WHERE order_id = #{orderId}
+    </select>
+
+    <select id="getOrderItem" resultType="entity.OrderItem">
+        SELECT * FROM order_item WHERE id = #{orderID}
+    </select>
+
+    <select id="getNewOrdersId" resultType="Integer">
+        SELECT id FROM order_item WHERE state = 0;
+    </select>
+
+    <select id="customerOrderItems" resultType="Integer">
+        SELECT id FROM order_item WHERE user_id = #{customerId}
+    </select>
+
+    <select id="collectorOrderItems" resultType="Integer">
+        SELECT id FROM order_item WHERE collector_id = #{collectorId}
+    </select>
+
+    <select id="companyOrderItems" resultType="Integer">
+        SELECT id FROM order_item WHERE company_id = #{companyId}
+    </select>
+
+</mapper>

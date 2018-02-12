@@ -37,7 +37,6 @@ public class AddressDaoTest {
 
     @Test
     public void gethousingEstateAddress() {
-        System.out.println("福泉小区地址：");
         System.out.println(addressDao.gethousingEstateAddress(2));
     }
 

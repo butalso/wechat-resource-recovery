@@ -5,6 +5,10 @@
 
 <mapper namespace="dao.UserDao">
 
+    <select id="getCustomersId" resultType="Integer">
+        SELECT id FROM customer WHERE housing_estate_id = #{hId}
+    </select>
+
     <insert id="addCustomer" keyProperty="c.id" parameterType="entity.Customer">
         INSERT INTO customer (name, nick_name, password, gender, phone, housing_estate_id)
         VALUE (#{c.name}, #{c.nickName}, #{c.password}, #{c.gender}, #{c.phone}, #{c.housingEstateId});
@@ -16,9 +20,9 @@
 
     <update id="updateCustomer" parameterType="entity.Customer">
         UPDATE customer SET
-        name = #{c.name}, password = #{c.password}, gender = #{c.gender},
+        name = #{c.name}, nick_name = #{c.nickName}, password = #{c.password}, gender = #{c.gender},
         phone = #{c.phone}, housing_estate_id = #{c.housingEstateId}
-        WHERE nick_name = #{c.nickName}
+        WHERE id = #{c.id}
     </update>
 
     <delete id="deleteCustomer">
@@ -39,9 +43,9 @@
 
     <update id="updateCollector" parameterType="entity.Collector">
         UPDATE collector SET
-        name = #{c.name}, password = #{c.password}, IDCardNo = #{c.IDCardNo},
+        name = #{c.name}, nick_name = #{c.nickName}, password = #{c.password}, IDCardNo = #{c.IDCardNo},
         gender = #{c.gender}, phone = #{c.phone}, housing_estate_id = #{c.housingEstateId}
-        WHERE nick_name = #{c.nickName}
+        WHERE id = #{c.id}
     </update>
 
     <delete id="deleteCollector">
@@ -62,12 +66,24 @@
         UPDATE company SET
         name = #{c.name}, password = #{c.password}, phone = #{c.phone},
         area_id = #{c.areaId}, addr_detail = #{c.addrDetail}
-        WHERE name = #{c.name}
+        WHERE id = #{c.id}
     </update>
 
     <delete id="deleteCompany">
         DELETE FROM company WHERE name = #{name}
     </delete>
+    
+    <select id="getCustomerById" resultType="entity.Customer">
+        SELECT * FROM customer WHERE id = #{id}
+    </select>
+
+    <select id="getCollectorById" resultType="entity.Collector">
+        SELECT * FROM collector WHERE id = #{id}
+    </select>
+
+    <select id="getCompanyById" resultType="entity.Company">
+        SELECT * FROM company WHERE id = #{id}
+    </select>
 
 
 </mapper>

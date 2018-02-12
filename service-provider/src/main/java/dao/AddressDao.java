@@ -1,6 +1,6 @@
 package dao;
 
-import entity.Address;
+import dto.Address;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

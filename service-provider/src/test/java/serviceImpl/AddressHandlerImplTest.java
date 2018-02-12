@@ -1,6 +1,6 @@
 package serviceImpl;
 
-import entity.Address;
+import dto.Address;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +37,10 @@ public class AddressHandlerImplTest {
         addressHandler.addHousingEstate(address);
     }
 
-    @Test
-    public void getHousingEstates() {
-        System.out.println(addressHandler.getHousingEstates("雷州市"));
-    }
+//    @Test
+//    public void getHousingEstates() {
+//        System.out.println(addressHandler.getHousingEstates("雷州市"));
+//    }
 
     @Test
     public void delHousingEstate() {

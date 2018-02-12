@@ -1,16 +1,33 @@
 package entity;
 
 public class OrderDetail {
-    private String garbage;
-    private double price;
+    private int orderId;
+    private String garbageName;
     private double weight;
+    private double price;
 
-    public String getGarbage() {
-        return garbage;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setGarbage(String garbage) {
-        this.garbage = garbage;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getGarbageName() {
+        return garbageName;
+    }
+
+    public void setGarbageName(String garbageName) {
+        this.garbageName = garbageName;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
     public double getPrice() {
@@ -21,11 +38,13 @@ public class OrderDetail {
         this.price = price;
     }
 
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
+    @Override
+    public String toString() {
+        return "OrderDetail{" +
+                "orderId=" + orderId +
+                ", garbageName='" + garbageName + '\'' +
+                ", weight=" + weight +
+                ", price=" + price +
+                '}';
     }
 }

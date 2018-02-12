@@ -1,4 +1,4 @@
-package entity;
+package dto;
 
 /**
  * 省市区生活小区四级地址实体

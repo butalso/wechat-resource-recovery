@@ -28,7 +28,7 @@
         ON h.area_id = a.id AND a.name = #{area}
     </select>
 
-    <select id="gethousingEstateAddress" resultType="entity.Address">
+    <select id="gethousingEstateAddress" resultType="dto.Address">
         SELECT h.name as housingEstate, a.name as area, c.name as city, p.name as province
         FROM ((housing_estate h INNER JOIN area a
         ON h.area_id = a.id) INNER JOIN city c
@@ -37,7 +37,7 @@
         WHERE h.id = #{housingEstateId}
     </select>
 
-    <select id="getAreaAddress" resultType="entity.Address">
+    <select id="getAreaAddress" resultType="dto.Address">
         SELECT a.name as area, c.name as city, p.name as province
         FROM (area a INNER JOIN city c
         ON a.city_id = c.id) INNER JOIN province p

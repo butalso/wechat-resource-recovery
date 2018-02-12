@@ -1,8 +1,10 @@
 package serviceImpl;
 
+import dto.Address;
 import entity.Collector;
 import entity.Company;
 import entity.Customer;
+import entity.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,18 +56,32 @@ public class UserHandlerImplTest {
 
     @Test
     public void updateUser() {
-//        customer.setPassword("789");
-        collector.setPassword("789");
-//        company.setPassword("789");
-//        userHandler.updateUser(customer);
-        userHandler.updateUser(collector);
-//        userHandler.updateUser(company);
+        Address address = new Address();
+        address.setProvince("广东省");
+        address.setCity("湛江市");
+        address.setArea("雷州市");
+        address.setHousingEstate("青青草原");
+
+        User c1 = userHandler.getUser("影魔", 0);
+        User c2 = userHandler.getUser("恐怖利刃", 1);
+        User c3 = userHandler.getUser("回收哥", 2);
+
+        c1.setAddress(address);
+        c2.setAddress(address);
+        c3.setAddress(address);
+
+        c1.setPassword("1234");
+        c2.setPassword("1234");
+        c3.setPassword("1234");
+        userHandler.updateUser(c1);
+        userHandler.updateUser(c2);
+        userHandler.updateUser(c3);
     }
 
     @Test
     public void getUser() {
-        System.out.println("customer: " + userHandler.getUser("jack", 0));
-        System.out.println("collector: " + userHandler.getUser("tiezhu", 1));
-        System.out.println("company: " + userHandler.getUser("回收哥", 2));
+        System.out.println(userHandler.getUser("狙击手", 0));
+        System.out.println(userHandler.getUser("巫医", 1));
+        System.out.println(userHandler.getUser("回收哥", 2));
     }
 }
