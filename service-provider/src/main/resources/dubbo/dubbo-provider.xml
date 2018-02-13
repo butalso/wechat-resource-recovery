@@ -17,14 +17,20 @@
     <!-- use dubbo protocol to export service on port 20880 -->
     <dubbo:protocol name="dubbo" port="20880"/>
 
-    <!-- service implementation, as same as regular local bean -->
+    <bean id="accountHandler" class="serviceImpl.AccountHandlerImpl" />
+    <dubbo:service interface="service.AccountHandler" ref="accountHandler" />
+
     <bean id="addressHandler" class="serviceImpl.AddressHandlerImpl"/>
     <dubbo:service interface="service.AddressHandler" ref="addressHandler"/>
+
+    <bean id="orderHandler" class="serviceImpl.OrderHandlerImpl" />
+    <dubbo:service interface="service.OrderHandler" ref="orderHandler" />
+
+    <bean id="transactionHandler" class="serviceImpl.TransactionHandlerImpl" />
+    <dubbo:service interface="service.TransactionHandler" ref="transactionHandler" />
 
     <bean id="userHandler" class="serviceImpl.UserHandlerImpl" />
     <dubbo:service interface="service.UserHandler" ref="userHandler" />
 
-    <bean id="accountHandler" class="serviceImpl.AccountHandlerImpl" />
-    <dubbo:service interface="service.AccountHandler" ref="accountHandler" />
 
 </beans>

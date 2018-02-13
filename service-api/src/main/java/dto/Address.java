@@ -1,9 +1,11 @@
 package dto;
 
+import java.io.Serializable;
+
 /**
  * 省市区生活小区四级地址实体
  */
-public class Address {
+public class Address implements Serializable {
     private String province;
     private String city;
     private String area;

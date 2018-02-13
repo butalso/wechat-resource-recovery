@@ -4,6 +4,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
@@ -11,7 +12,7 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         http://code.alibabatech.com/schema/dubbo
-        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
   <!--配置spring mvc-->
   <!--1、开启spring mvc注解模式-->
@@ -20,7 +21,25 @@
           AnnotationMethodHandlerAdapter
       2、提供了一系列功能：数据绑定、数字和日期的format@NumberFormat @DateTimeFormat
       3、xml 和json默认读写支持-->
-  <mvc:annotation-driven />
+  <mvc:annotation-driven>
+    <mvc:message-converters>
+      <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="objectMapper">
+          <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+            <property name="dateFormat">
+              <bean class="java.text.SimpleDateFormat">
+                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
+              </bean>
+            </property>
+
+            <property name="serializationInclusion">
+                <util:constant static-field="com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL" />
+            </property>
+          </bean>
+        </property>
+      </bean>
+    </mvc:message-converters>
+  </mvc:annotation-driven>
 
   <!--servlet mapping -->
   <!--静态资源配置 默认servlet配置
@@ -39,11 +58,13 @@
   <mvc:interceptors>
     <mvc:interceptor>
       <!--对个人信息路径拦截-->
-      <mvc:mapping path="/personal/**"/>
+      <mvc:mapping path="/**/personal/**"/>
 
       <bean id="loginInterceptor" class="interceptor.Login"></bean>
     </mvc:interceptor>
   </mvc:interceptors>
+
+
 
   <import resource="classpath:dubbo/dubbo-consumer.xml" />
 

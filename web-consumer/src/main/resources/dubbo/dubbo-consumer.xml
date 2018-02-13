@@ -16,9 +16,15 @@
 
     <!-- generate proxy for the remote service, then demoService can be used in the same way as the
     local regular interface -->
+
+    <dubbo:reference id="accountHandler" interface="service.AccountHandler" />
+
     <dubbo:reference id="addressHandler" interface="service.AddressHandler"/>
+
+    <dubbo:reference id="orderHandler" interface="service.OrderHandler" />
+
+    <dubbo:reference id="transactionHandler" interface="service.TransactionHandler" />
 
     <dubbo:reference id="userHandler" interface="service.UserHandler" />
 
-    <dubbo:reference id="accountHandler" interface="service.AccountHandler" />
 </beans>

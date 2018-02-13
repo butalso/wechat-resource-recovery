@@ -1,5 +1,6 @@
 package entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import dto.Address;
 
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.util.Date;
 /**
  * 系统的使用者，Customer和Collector和Company的父类
  */
+
 public class User implements Serializable {
 
     private int id;

@@ -147,6 +147,7 @@ public class OrderHandlerImpl implements OrderHandler {
 
     @Override
     public void createOrder(int customerId, Map<String, Double> garbages) {
+        // TODO 用户创建订单成功后通知回收员
         OrderItem orderItem = new OrderItem();
         orderDao.createOrder(customerId, orderItem);
         int orderId = orderItem.getId();

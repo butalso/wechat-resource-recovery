@@ -70,7 +70,9 @@ public class UserHandlerImpl implements UserHandler {
             case 2: result = userDao.getCompany(nickName);
                 break;
         }
-        constructAddress(result);
+        if (result != null) {
+            constructAddress(result);
+        }
         return result;
     }
 

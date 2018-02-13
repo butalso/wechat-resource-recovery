@@ -2,10 +2,11 @@ package dto;
 
 import entity.Garbage;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
-public class Order {
+public class Order implements Serializable {
 
     private int id;
     private Address address;

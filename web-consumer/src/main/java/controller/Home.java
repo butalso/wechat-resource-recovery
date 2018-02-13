@@ -2,6 +2,7 @@ package controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import entity.User;
+import enums.UserKind;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -32,11 +33,11 @@ public class Home {
         produces = "text/plain;charset=utf-8")
     public ResponseEntity<String> login(@RequestParam("userName") String userName,
                                         @RequestParam("password") String password,
-                                        @RequestParam("userKind") Integer userKind,
+                                        @RequestParam("userKind") String userKind,
                                         HttpSession session, ModelMap modelMap) {
         ResponseEntity<String> result = null;
 
-        User user = userHandler.getUser(userName, userKind);
+        User user = userHandler.getUser(userName, UserKind.getKind(userKind));
 
         if (user == null) {
             /* 用户不存在 */
