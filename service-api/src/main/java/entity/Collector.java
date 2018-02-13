@@ -1,8 +1,11 @@
 package entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * 回收员实体
  */
+@JsonIgnoreProperties(value = {"id", "password", "housingEstateId"})
 public class Collector extends User {
     private final int userKind = 1;
     private String nickName;

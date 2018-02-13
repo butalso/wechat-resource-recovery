@@ -6,7 +6,7 @@ import enums.UserKind;
 /**
  * 业主实体（卖废品的用户）
  */
-@JsonIgnoreProperties(value = {"id", "password", "userKind", "housingEstateId"})
+@JsonIgnoreProperties(value = {"id", "password", "housingEstateId"})
 public class Customer extends User {
     private final int userKind = 0;
     private String nickName;

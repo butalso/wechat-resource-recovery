@@ -1,8 +1,11 @@
 package entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * 企业实体
  */
+@JsonIgnoreProperties(value = {"id", "password", "areaId"})
 public class Company extends User {
     private final int userKind = 2;
     private String areaId;
