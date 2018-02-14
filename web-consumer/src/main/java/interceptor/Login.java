@@ -20,11 +20,7 @@ public class Login implements HandlerInterceptor {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             /* 用户未登录 */
-            response.setCharacterEncoding("utf-8");
-            response.setStatus(332);
-            Writer writer = response.getWriter();
-            writer.write("用户未登录");
-            writer.close();
+            response.sendRedirect(request.getContextPath()+"/login");
 
             return false;
         }

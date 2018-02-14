@@ -28,6 +28,11 @@ public class Home {
         return "index";
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST,
         produces = "text/plain;charset=utf-8")
     public ResponseEntity<String> login(@RequestParam("userName") String userName,

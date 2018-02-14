@@ -38,7 +38,10 @@ get请求 <br>
 结果：返回index.html <br>
 
 ##### 2、/login: <br>
-post请求 <br>
+get请求 <br>
+结果： 返回login.html
+
+(ajax)post请求 <br>
 参数例子：userName:狙击手,
         password:123456,
         userKind:0(还有1或2)<br>
@@ -51,10 +54,66 @@ post请求 <br>
 get 请求 <br>
 结果： 重定向到index.html <br>
 
+##### 4、/register
+get 请求 <br>
+结果： 注册页面 <br>
+
+(ajax)post 请求 <br>
+结果： 添加用户，返回注册成功
+
 ###### 4、/user/info
 
 get请求  <br>
-结果例子（还没有页面，先返回json，有需要再商量）：<br>
+结果： 返回 customer.html或collector.html或company.html <br>
+
+(ajax)post请求 <br>
+业主：
+{
+    "name": "小华仔",
+    "phone": "15867620882",
+    "address": {
+        "province": "广东省",
+        "city": "湛江市",
+        "area": "雷州市",
+        "housingEstate": "召唤森林"
+    },
+    "userKind": 0,
+    "nickName": "狙击手",
+    "gender": "F"
+} <br>
+
+回收员：
+{
+    "name": "问自己",
+    "phone": "13822105068",
+    "address": {
+        "province": "广东省",
+        "city": "湛江市",
+        "area": "雷州市",
+        "housingEstate": "青青草原"
+    },
+    "userKind": 1,
+    "nickName": "巫医",
+    "companyName": "回收哥",
+    "gender": "M",
+    "idcardNo": "130682199005066998"
+} <br>
+
+企业：
+{
+    "name": "回收哥哥",
+    "phone": "13825672120",
+    "address": {
+        "province": "广东省",
+        "city": "湛江市",
+        "area": "遂溪县"
+    },
+    "addrDetail": "西湖大道18号"
+} <br>
+
+##### 5、/user/info/detail
+(ajax)get 请求 <br> 
+结果：
 业主：
 {
     "name": "小华",
@@ -105,58 +164,9 @@ get请求  <br>
     "addrDetail": "西湖大道8号"
 } <br>
 
-post请求 <br>
-业主：
-{
-    "name": "小华仔",
-    "phone": "15867620882",
-    "address": {
-        "province": "广东省",
-        "city": "湛江市",
-        "area": "雷州市",
-        "housingEstate": "召唤森林"
-    },
-    "userKind": 0,
-    "nickName": "狙击手",
-    "gender": "F"
-} <br>
-
-回收员：
-{
-    "name": "问自己",
-    "phone": "13822105068",
-    "address": {
-        "province": "广东省",
-        "city": "湛江市",
-        "area": "雷州市",
-        "housingEstate": "青青草原"
-    },
-    "userKind": 1,
-    "nickName": "巫医",
-    "companyName": "回收哥",
-    "gender": "M",
-    "idcardNo": "130682199005066998"
-} <br>
-
-企业：
-{
-    "name": "回收哥哥",
-    "phone": "13825672120",
-    "address": {
-        "province": "广东省",
-        "city": "湛江市",
-        "area": "遂溪县"
-    },
-    "addrDetail": "西湖大道18号"
-} <br>
-
-
-
-
-
 # 拦截器：
 ## 1、Login
-未登录状态拦截，返回 “用户未登录”：
+未登录状态拦截，重定向到login页面：
 ### 匹配路径
 /user/info <br>
 

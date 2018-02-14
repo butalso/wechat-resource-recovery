@@ -9,6 +9,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import service.AccountHandler;
 import service.UserHandler;
 
@@ -26,10 +27,18 @@ public class UserController {
     @Reference
     AccountHandler accountHandler;
 
-    @RequestMapping(value = "/info", method = RequestMethod.GET,
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    public String getUserDetail(@ModelAttribute("user") User user) {
+        switch (user.getUserKind()) {
+            case 0: return "customer";
+            case 1: return "collector";
+            default: return "company";
+        }
+    }
+
+    @RequestMapping(value = "/info/detail", method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
-    @ResponseBody
-    public User getUserDetail(@ModelAttribute("user") User user) {
+    public User ajsxGetUserDetail(@ModelAttribute("user") User user) {
         return user;
     }
 
@@ -67,6 +76,13 @@ public class UserController {
         return "修改成功";
     }
 
+    @RequestMapping(value = "/register", method = RequestMethod.GET,
+            consumes = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String addUser() {
+        return "register";
+    }
+
     @RequestMapping(value = "/register", method = RequestMethod.POST,
             consumes = "application/json;charset=UTF-8")
     @ResponseBody
@@ -74,9 +90,5 @@ public class UserController {
         userHandler.addUser(newUser);
         return "注册成功";
     }
-
-
-
-
 
 }
