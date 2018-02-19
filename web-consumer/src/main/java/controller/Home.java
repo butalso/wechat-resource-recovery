@@ -28,18 +28,18 @@ public class Home {
         return "index/index";
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "index/login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
-        return "login";
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register() {
+        return "index/register";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST,
-        produces = "text/plain;charset=utf-8")
+            produces = "text/plain;charset=utf-8")
     public ResponseEntity<String> login(@RequestParam("userName") String userName,
                                         @RequestParam("password") String password,
                                         @RequestParam("userKind") int userKind,
