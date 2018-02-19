@@ -639,7 +639,7 @@ span.checkbox2 {
     cursor: pointer;
     margin: 0.5em 0 0 27.5%;
 }
-.sign-in-form input[type="submit"]:hover {
+.sign-in-form input[type="button"]:hover {
 	 background:#f3c500;
 	 transition: 0.5s all;
   -webkit-transition: 0.5s all;
@@ -716,7 +716,7 @@ p.creating{
 	color:#F44336;
 	font-size: 20px;
 	}
-.sign-up input[type="submit"]{
+.sign-up input[type="button"]{
 	outline: none;
     border: none;
     background: #01a185;
@@ -731,7 +731,7 @@ p.creating{
     -o-transition: .5s all;
     -ms-transition: .5s all;
 	}
-.sign-up input[type="submit"]:hover{
+.sign-up input[type="button"]:hover{
 	background:#f3c500;
 	color:#fff;
 	}
