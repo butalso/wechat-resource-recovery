@@ -622,7 +622,7 @@ span.checkbox2 {
 .log-input .checkbox input:checked + i:after {
 	opacity: 1;
 }
-.sign-in-form input[type="submit"] {
+.sign-in-form input[type="button"] {
 	font-size: 17px;
     color: #fff;
     background: #01a185;

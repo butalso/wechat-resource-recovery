@@ -25,7 +25,12 @@ public class Home {
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String home() {
-        return "index";
+        return "index/index";
+    }
+
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String login() {
+        return "index/login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST,
@@ -55,6 +60,6 @@ public class Home {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(SessionStatus sessionStatus) {
         sessionStatus.setComplete();
-        return "redirect:index";
+        return "redirect:index/index";
     }
 }
