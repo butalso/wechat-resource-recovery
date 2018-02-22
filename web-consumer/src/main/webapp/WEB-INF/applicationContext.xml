@@ -60,6 +60,7 @@
     <mvc:interceptor>
       <!--对个人信息路径拦截-->
       <mvc:mapping path="/user/info"/>
+      <mvc:mapping path="/order"/>
 
       <bean id="loginInterceptor" class="interceptor.Login"></bean>
     </mvc:interceptor>

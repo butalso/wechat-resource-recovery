@@ -11,12 +11,15 @@ import enums.OrderState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.OrderHandler;
+import service.TransactionHandler;
 
 import java.util.*;
 
 @Service
 @com.alibaba.dubbo.config.annotation.Service
 public class OrderHandlerImpl implements OrderHandler {
+    private final double drawPercentage = 0.05;
+
     @Autowired
     OrderDao orderDao;
 
@@ -31,6 +34,9 @@ public class OrderHandlerImpl implements OrderHandler {
 
     @Autowired
     AddressDao addressDao;
+
+    @Autowired
+    TransactionHandler transactionHandler;
 
     /**
      * 用户获取所有相关订单
@@ -162,11 +168,9 @@ public class OrderHandlerImpl implements OrderHandler {
     }
 
     @Override
-    public void updateOrderDetails(int orderId, Map<String, Double> garbages) {
-        double weight;
-        for (Map.Entry<String, Double> entry : garbages.entrySet()) {
-            weight = entry.getValue();
-            orderDao.updateOrderDetail(orderId, entry.getKey(), weight);
+    public void updateOrderDetails(Integer orderId, Map<String, String> garbages) {
+        for (Map.Entry<String, String> entry : garbages.entrySet()) {
+            orderDao.updateOrderDetail(orderId, entry.getKey(), Double.parseDouble(entry.getValue()));
         }
     }
 
@@ -180,20 +184,54 @@ public class OrderHandlerImpl implements OrderHandler {
     @Override
     public void confirmOrderFinish(User user, int orderId, int grade) {
         int userKind = user.getUserKind();
+        User customer = userDao.getCustomerById(
+                orderDao.getOrderItem(orderId).getId());
+        User collector = userDao.getCollectorById(
+                orderDao.getOrderItem(orderId).getId());
+        User company = userDao.getCompanyById(
+                orderDao.getOrderItem(orderId).getId());
+
         if (userKind == 0) {
-            if(user.getId() != orderDao.getOrderItem(orderId).getUserId()) {
+            if(user.getId() != customer.getId()) {
                 /* 不是订单创建者确认 */
                 return;
             }
             int cGrade = orderDao.getOrderItem(orderId).getCollectorGrade();
             orderDao.updateOrderState(orderId, grade, cGrade);
         } else if (userKind == 1) {
-            if(user.getId() != orderDao.getOrderItem(orderId).getCollectorId()) {
+            if(user.getId() != collector.getId()) {
                 /* 不是订单回收者确认 */
                 return;
             }
             int uGrade = orderDao.getOrderItem(orderId).getUserGrade();
-            orderDao.updateOrderState(orderId, uGrade, grade);
+
+            try {
+                /* 公司向用户转账 */
+                transactionHandler.transfer(company, customer, getOrderValue(orderId));
+                orderDao.updateOrderState(orderId, uGrade, grade);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            /* 公司向回收员转账 */
+            try {
+                transactionHandler.transfer(company, customer, getOrderValue(orderId) * drawPercentage);
+                orderDao.finishOrder(orderId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
+
+    private Double getOrderValue(int orderId) {
+        Double value = 0d;
+        /* 转账业务 */
+        List<OrderDetail> orderDetails = orderDao.getOrderDetails(orderId);
+        for (int i = 0; i < orderDetails.size(); i++) {
+            OrderDetail orderDetail = orderDetails.get(i);
+            value += orderDetail.getWeight() * orderDetail.getPrice();
+        }
+        return value;
+    }
+
 }

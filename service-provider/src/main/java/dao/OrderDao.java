@@ -25,6 +25,12 @@ public interface OrderDao {
                       @Param("comId") int companyId);
 
     /**
+     * 企业确认订单完成
+     * @param orderId
+     */
+    void finishOrder(@Param("oId") int orderId);
+
+    /**
      * 回收员回收订单结束，更新订单状态
      * @param userGarde
      * @param collectorGarde

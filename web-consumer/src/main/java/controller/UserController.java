@@ -1,21 +1,15 @@
 package controller;
 
-import com.alibaba.dubbo.common.json.JSONObject;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entity.*;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import service.AccountHandler;
 import service.UserHandler;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -38,7 +32,8 @@ public class UserController {
 
     @RequestMapping(value = "/info/detail", method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
-    public User ajsxGetUserDetail(@ModelAttribute("user") User user) {
+    @ResponseBody
+    public User ajaxGetUserDetail(@ModelAttribute("user") User user) {
         return user;
     }
 
@@ -76,9 +71,7 @@ public class UserController {
         return "修改成功";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET,
-            consumes = "application/json;charset=UTF-8")
-    @ResponseBody
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String addUser() {
         return "register";
     }
@@ -86,9 +79,38 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST,
             consumes = "application/json;charset=UTF-8")
     @ResponseBody
-    public String addUser(@RequestBody User newUser) {
-        userHandler.addUser(newUser);
+    public String addUser(@RequestBody Map userInfo) {
+        User newUser = null;
+        try {
+            newUser = mapToUser(userInfo);
+            newUser.setPassword((String) userInfo.get("password"));
+            userHandler.addUser(newUser);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "注册失败";
+        }
         return "注册成功";
+    }
+
+    private User mapToUser(Map userInfo) throws IOException {
+        User newUser = null;
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(userInfo);
+        Integer userKind = (Integer) userInfo.get("userKind");
+
+        switch (userKind) {
+            /* 解析json字符串到实体 */
+            case 0:
+                newUser = mapper.readValue(json, Customer.class);
+                break;
+            case 1:
+                newUser = mapper.readValue(json, Collector.class);
+                break;
+            default:
+                newUser = mapper.readValue(json, Company.class);
+        }
+
+        return newUser;
     }
 
 }

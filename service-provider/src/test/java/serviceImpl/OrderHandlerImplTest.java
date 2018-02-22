@@ -46,9 +46,9 @@ public class OrderHandlerImplTest {
 
     @Test
     public void updateOrderDetails() {
-        Map<String, Double> map = new HashMap<>();
-        map.put("废书纸", 12.5);
-        map.put("废纸箱", 13.5);
+        Map<String, String> map = new HashMap<>();
+        map.put("废书纸", "12");
+        map.put("废报纸", "13");
         orderHandler.updateOrderDetails(10, map);
     }
 

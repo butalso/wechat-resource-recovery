@@ -30,7 +30,7 @@ public class TransactionHandlerImplTest {
     }
 
     @Test
-    public void transfer() {
+    public void transfer() throws Exception{
         transactionHandler.transfer(collector, customer, 150);
     }
 

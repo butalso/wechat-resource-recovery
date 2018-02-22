@@ -49,5 +49,5 @@ public interface OrderHandler {
      * @param orderId
      * @param garbages
      */
-    void updateOrderDetails(int orderId, Map<String, Double> garbages);
+    void updateOrderDetails(Integer orderId, Map<String, String> garbages);
 }

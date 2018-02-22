@@ -15,7 +15,7 @@ public class TransactionHandlerImpl implements TransactionHandler {
 
     @Override
     @Transactional
-    public boolean transfer(User from, User to, double value) {
+    public boolean transfer(User from, User to, double value) throws Exception {
         int updateCount;
         try {
             // 减转账人余额
@@ -29,7 +29,7 @@ public class TransactionHandlerImpl implements TransactionHandler {
             updateCount = accountDao.updateBalance(to.getId(), to.getUserKind(), value);
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            throw e;
         }
         return true;
     }

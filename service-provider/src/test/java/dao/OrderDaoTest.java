@@ -67,7 +67,7 @@ public class OrderDaoTest {
 
     @Test
     public void getOrderDetails() {
-        System.out.println(orderDao.getOrderDetails(1));
+        System.out.println(orderDao.getOrderDetails(10));
     }
 
     @Test
@@ -92,5 +92,10 @@ public class OrderDaoTest {
     @Test
     public void getNewOrdersId() {
         System.out.println(orderDao.getNewOrdersId(1));
+    }
+
+    @Test
+    public void finishOrder() {
+        orderDao.finishOrder(5);
     }
 }

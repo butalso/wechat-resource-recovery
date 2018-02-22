@@ -22,6 +22,10 @@
         WHERE id = #{oId}
     </update>
 
+    <update id="finishOrder">
+        UPDATE order_item SET state = 3 WHERE id = #{oId}
+    </update>
+
     <insert id="addOrderDetail">
         INSERT INTO order_detail (order_id, garbage_name, weight, price)
         VALUE (#{oId}, #{gName}, #{weight}, #{price})

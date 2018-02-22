@@ -59,6 +59,8 @@ get 请求 <br>
 结果： 注册页面 <br>
 
 (ajax)post 请求 <br>
+请求体：
+
 结果： 添加用户，返回注册成功
 
 ###### 4、/user/info
@@ -67,6 +69,8 @@ get请求  <br>
 结果： 返回 customer.html或collector.html或company.html <br>
 
 (ajax)post请求 <br>
+请求头：Content-Type:application/json
+请求体：
 业主：
 {
     "name": "小华仔",
@@ -163,6 +167,147 @@ get请求  <br>
     "userKind": 2,
     "addrDetail": "西湖大道8号"
 } <br>
+
+##### 5、/user/register
+get 请求 <br>
+返回 register.html <br>
+
+post请求 <br>
+请求头：Content-Type:application/json <br>
+
+业主：
+{
+       "name": "小圣",
+       "phone": "15867620882",
+       "password": "123456",
+       "address": {
+           "province": "广东省",
+           "city": "湛江市",
+           "area": "雷州市",
+           "housingEstate": "召唤森林"
+       },
+       "userKind": 0,
+       "nickName": "圣坛刺客",
+       "gender": "F"
+}<br>
+
+回收员：
+{
+    "name": "问月",
+    "phone": "13822105068",
+    "password": "123456",
+    "address": {
+        "province": "广东省",
+        "city": "湛江市",
+        "area": "雷州市",
+        "housingEstate": "天辉阵营"
+    },
+    "userKind": 1,
+    "nickName": "巫妖",
+    "companyName": "回收哥",
+    "gender": "M",
+    "idcardNo": "130682199005066998"
+} <br>
+
+企业：
+{
+    "name": "回收弟",
+    "phone": "13825672120",
+    "password": "123456",
+    "address": {
+        "province": "广东省",
+        "city": "湛江市",
+        "area": "雷州市"
+    },
+    "userKind": 2,
+    "addrDetail": "雷南大道8号"
+} <br>
+
+##### 6、/order/info
+get 请求 <br>
+结果：
+[
+    {
+            "id": 10,
+            "address": {
+                "province": "广东省",
+                "city": "湛江市",
+                "area": "雷州市",
+                "housingEstate": "召唤森林"
+            },
+            "createTime": "2018-02-12 21:24:37",
+            "finishTime": "2018-02-12 21:24:37",
+            "stateInfo": "回收员已接单",
+            "customerName": "狙击手",
+            "collectorName": "恐怖利刃",
+            "companyName": "回收哥",
+            "userGrade": 0,
+            "collectorGrade": 0,
+            "map": {
+                "Garbage{id=1, typeName='废纸', name='废报纸', price=0.8}": 4.5,
+                "Garbage{id=2, typeName='废纸', name='废纸箱', price=0.5}": 13.5,
+                "Garbage{id=3, typeName='废纸', name='废书纸', price=0.6}": 12.5
+            }
+        },
+        ...
+] <br>
+
+
+##### 7、/order/create
+post 请求 <br>
+请求头：Content-Type:application/json
+{
+	"废书纸": 5.5,
+	"废报纸": 10
+}
+
+##### 8、/order/receive
+post 请求 <br>
+"orderId": 5
+
+##### 9、/order/new
+get 请求 <br>
+[
+        {
+            "id": 11,
+            "address": {
+                "province": "广东省",
+                "city": "湛江市",
+                "area": "雷州市",
+                "housingEstate": "召唤森林"
+            },
+            "createTime": "2018-02-22 19:17:54",
+            "finishTime": "2018-02-22 19:17:54",
+            "stateInfo": "订单已创建",
+            "customerName": "狙击手",
+            "userGrade": 0,
+            "collectorGrade": 0,
+            "map": {
+                "Garbage{id=3, typeName='废纸', name='废书纸', price=0.6}": 5.5,
+                "Garbage{id=1, typeName='废纸', name='废报纸', price=0.8}": 10
+            }
+        },
+        ...
+]
+
+##### 10、/order/update
+post 请求 <br>
+请求头：Content-Type:application/json
+{
+	"orderId": 10,
+	"garbages": {
+		"废书纸": "15.5",
+		"废报纸": "100"
+	}
+}
+
+##### 10、/order/confirm
+post 请求 <br>
+请求头：Content-Type:application/json
+{
+	"orderId": 5,
+	"grade": 3
+}
 
 # 拦截器：
 ## 1、Login

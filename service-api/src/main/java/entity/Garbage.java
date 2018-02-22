@@ -1,6 +1,9 @@
 package entity;
 
-public class Garbage {
+import java.io.Serializable;
+
+public class Garbage implements Serializable {
+
     private int id;
     private String typeName;
     private String name;
