@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import service.UserHandler;
 
 import static org.junit.Assert.*;
@@ -84,4 +85,5 @@ public class UserHandlerImplTest {
         System.out.println(userHandler.getUser("巫医", 1));
         System.out.println(userHandler.getUser("回收哥", 2));
     }
+
 }

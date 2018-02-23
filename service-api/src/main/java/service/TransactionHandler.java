@@ -18,5 +18,5 @@ public interface TransactionHandler {
      * @param value 正值提现，负值充值
      * @return true操作成功，false操作失败
      */
-    boolean withdraw(User user, double value);
+    boolean withdraw(User user, double value) throws Exception;
 }

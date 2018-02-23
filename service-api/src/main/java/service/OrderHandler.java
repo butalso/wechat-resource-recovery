@@ -35,7 +35,7 @@ public interface OrderHandler {
      * @param user
      * @param grade
      */
-    void confirmOrderFinish(User user, int orderId, int grade);
+    void confirmOrderFinish(User user, int orderId, int grade) throws Exception ;
 
     /**
      * 用户创建订单

@@ -68,7 +68,7 @@ public class AccountHandlerImplTest {
     @Test
     public void getAccount() {
         Collector c = new Collector();
-        c.setId(0);
+        c.setId(4);
         System.out.println(accountHandler.getAccount(c));
     }
 }

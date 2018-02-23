@@ -25,7 +25,7 @@ public class TransactionHandlerImplTest {
 
     @Before
     public void setUp() throws Exception {
-        customer = userHandler.getUser("jack", 0);
+        customer = userHandler.getUser("影魔", 0);
         collector = userHandler.getUser("tiezhu", 1);
     }
 
@@ -35,7 +35,7 @@ public class TransactionHandlerImplTest {
     }
 
     @Test
-    public void withdraw() {
-        transactionHandler.withdraw(collector, -100);
+    public void withdraw() throws Exception {
+        transactionHandler.withdraw(customer, 100);
     }
 }

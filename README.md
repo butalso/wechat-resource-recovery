@@ -309,6 +309,61 @@ post 请求 <br>
 	"grade": 3
 }
 
+##### 11、 /account/info
+get 请求 <br>
+返回 空字符串 或 
+{
+    "wechatId": "听妈妈的话",
+    "balance": 0
+}
+
+##### 12、 /account/create
+请求头：Content-Type:application/x-www-form-urlencoded <br>
+post 请求
+password:123456、
+wechatId:听妈妈的话 <br>
+
+结果 返回 "添加账户成功"或"账户已存在"
+
+##### 13、 /account/update
+请求头：Content-Type:application/x-www-form-urlencoded <br>
+post 请求
+wechatId:听爸爸的话 <br>
+
+结果 返回 "修改账户成功"。
+
+##### 13、 /account/password
+请求头：Content-Type:application/x-www-form-urlencoded <br>
+post 请求
+oldPass:123456、
+newPass:123456 <br>
+
+结果 返回 "密码修改成功"或"旧密码不正确" <br>
+
+##### 14、 /account/withdraw
+
+请求头：Content-Type:application/x-www-form-urlencoded <br>
+post 请求
+value: 200 <br>
+结果 返回 "充值提现成功"或"充值提现失败"
+
+##### 15、 /address/linkage
+get 请求（可选参数）
+province:广东省、
+city:湛江市、
+area:雷州市 <br>
+
+结果 字符串数组
+
+##### 16、 /address/housingEstate
+post 请求
+{
+	"province": "广东省",
+	"city": "湛江市",
+	"area": "雷州市",
+	"housingEstate": "天庭"
+}
+
 # 拦截器：
 ## 1、Login
 未登录状态拦截，重定向到login页面：

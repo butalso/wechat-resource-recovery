@@ -28,24 +28,4 @@ public interface AddressHandler {
      */
     void delHousingEstate(Address address);
 
-//    /**
-//     * 获取某个区全部小区
-//     * @param area
-//     * @return
-//     */
-//    List<String> getHousingEstates(String area);
-//
-//    /**
-//     * 获取小区地址
-//     * @param hid
-//     * @return
-//     */
-//    Address gethousingEstateAddress(int hid);
-//
-//    /**
-//     * 获取区地址
-//     * @param areaId
-//     * @return
-//     */
-//    Address getAreaAddress(String areaId);
 }

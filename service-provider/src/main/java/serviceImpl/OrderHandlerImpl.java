@@ -182,14 +182,14 @@ public class OrderHandlerImpl implements OrderHandler {
     }
 
     @Override
-    public void confirmOrderFinish(User user, int orderId, int grade) {
+    public void confirmOrderFinish(User user, int orderId, int grade) throws Exception {
         int userKind = user.getUserKind();
         User customer = userDao.getCustomerById(
-                orderDao.getOrderItem(orderId).getId());
+                orderDao.getOrderItem(orderId).getUserId());
         User collector = userDao.getCollectorById(
-                orderDao.getOrderItem(orderId).getId());
+                orderDao.getOrderItem(orderId).getCollectorId());
         User company = userDao.getCompanyById(
-                orderDao.getOrderItem(orderId).getId());
+                orderDao.getOrderItem(orderId).getCompanyId());
 
         if (userKind == 0) {
             if(user.getId() != customer.getId()) {
@@ -211,11 +211,12 @@ public class OrderHandlerImpl implements OrderHandler {
                 orderDao.updateOrderState(orderId, uGrade, grade);
             } catch (Exception e) {
                 e.printStackTrace();
+                throw e;
             }
         } else {
             /* 公司向回收员转账 */
             try {
-                transactionHandler.transfer(company, customer, getOrderValue(orderId) * drawPercentage);
+                transactionHandler.transfer(company, collector, getOrderValue(orderId) * drawPercentage);
                 orderDao.finishOrder(orderId);
             } catch (Exception e) {
                 e.printStackTrace();

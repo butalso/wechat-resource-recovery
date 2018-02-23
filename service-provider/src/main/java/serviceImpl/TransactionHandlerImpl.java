@@ -1,6 +1,7 @@
 package serviceImpl;
 
 import dao.AccountDao;
+import entity.Account;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,13 @@ public class TransactionHandlerImpl implements TransactionHandler {
     @Override
     @Transactional
     public boolean transfer(User from, User to, double value) throws Exception {
+        Account fromAccount = accountDao.getAccount(from.getId(), from.getUserKind());
+        Account toAccount = accountDao.getAccount(to.getId(), to.getUserKind());
+        if (fromAccount == null || toAccount == null) {
+            /*转账或被转栈账户不存在*/
+            throw new RuntimeException("转账或被转栈账户不存在");
+        }
+
         int updateCount;
         try {
             // 减转账人余额
@@ -35,17 +43,19 @@ public class TransactionHandlerImpl implements TransactionHandler {
     }
 
     @Override
-    public boolean withdraw(User user, double value) {
+    public boolean withdraw(User user, double value) throws Exception{
         int userKind = user.getUserKind();
         int userId = user.getId();
         // TODO（提现和转账操作）
 
         /* 修改账户余额 */
         try {
-            accountDao.updateBalance(userId, userKind, value);
+            int update = accountDao.updateBalance(userId, userKind, -value);
+            if (update <= 0)
+                throw new RuntimeException("提现失败");
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            throw e;
         }
         return true;
     }

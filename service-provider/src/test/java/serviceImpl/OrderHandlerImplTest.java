@@ -58,7 +58,7 @@ public class OrderHandlerImplTest {
     }
 
     @Test
-    public void confirmOrderFinish() {
+    public void confirmOrderFinish() throws Exception {
         Customer customer = new Customer();
         customer.setId(1);
         orderHandler.confirmOrderFinish(customer, 9, 3);
