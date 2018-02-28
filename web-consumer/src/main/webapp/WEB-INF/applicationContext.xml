@@ -42,6 +42,18 @@
     </mvc:message-converters>
   </mvc:annotation-driven>
 
+  <!--配置登录状态拦截器-->
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <!--进行拦截-->
+      <mvc:mapping path="/user/**" />
+      <mvc:mapping path="/order/**" />
+      <mvc:mapping path="/account/**" />
+
+      <bean id="loginInterceptor" class="interceptor.Login"></bean>
+    </mvc:interceptor>
+  </mvc:interceptors>
+
   <!--servlet mapping -->
   <!--静态资源配置 默认servlet配置
   1:加入对静态资源的处理 js gif png
@@ -51,20 +63,11 @@
   <!--配置html viewResolver-->
   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView" />
-    <property name="prefix" value="/WEB-INF/html/" />
+    <property name="prefix" value="/static/html/" />
     <property name="suffix" value=".html" />
   </bean>
 
-  <!--配置登录状态拦截器-->
-  <mvc:interceptors>
-    <mvc:interceptor>
-      <!--对个人信息路径拦截-->
-      <mvc:mapping path="/user/info"/>
-      <mvc:mapping path="/order"/>
 
-      <bean id="loginInterceptor" class="interceptor.Login"></bean>
-    </mvc:interceptor>
-  </mvc:interceptors>
 
 
 
@@ -73,5 +76,6 @@
   <dubbo:annotation package="controller" />
 
   <context:component-scan base-package="controller" />
+  <context:component-scan base-package="swagger" />
 
 </beans>

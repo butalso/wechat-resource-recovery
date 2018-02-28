@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import dto.Order;
 import entity.User;
 
+import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import service.OrderHandler;
@@ -15,6 +16,7 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/order")
 @SessionAttributes("user")
+@Api(tags = "订单信息控制")
 public class OrderController {
 
     @Reference

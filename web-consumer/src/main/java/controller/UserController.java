@@ -3,6 +3,7 @@ package controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entity.*;
+import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/user")
 @SessionAttributes("user")
+@Api(tags = "用户信息控制")
 public class UserController {
     @Reference
     UserHandler userHandler;

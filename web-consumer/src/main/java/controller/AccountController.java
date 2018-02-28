@@ -3,6 +3,7 @@ package controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import entity.Account;
 import entity.User;
+import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import service.AccountHandler;
@@ -11,6 +12,7 @@ import service.TransactionHandler;
 @Controller
 @RequestMapping(value = "/account")
 @SessionAttributes("user")
+@Api(tags = "用户余额账户")
 public class AccountController {
 
     @Reference

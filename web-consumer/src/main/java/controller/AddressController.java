@@ -2,6 +2,7 @@ package controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import dto.Address;
+import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import service.AddressHandler;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/address")
+@Api(tags = "地址信息管理")
 public class AddressController {
     @Reference
     AddressHandler addressHandler;

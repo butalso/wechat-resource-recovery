@@ -17,6 +17,7 @@ public class Login implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             /* 用户未登录 */
