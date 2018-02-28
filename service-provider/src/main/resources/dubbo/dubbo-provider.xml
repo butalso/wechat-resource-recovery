@@ -23,6 +23,9 @@
     <bean id="addressHandler" class="serviceImpl.AddressHandlerImpl"/>
     <dubbo:service interface="service.AddressHandler" ref="addressHandler"/>
 
+    <bean id="garbageHandler" class="serviceImpl.GarbageHandlerImpl" />
+    <dubbo:service interface="service.GarbageHandler" ref="garbageHandler" />
+
     <bean id="orderHandler" class="serviceImpl.OrderHandlerImpl" />
     <dubbo:service interface="service.OrderHandler" ref="orderHandler" />
 

@@ -2,7 +2,7 @@ package entity;
 
 public class OrderDetail {
     private int orderId;
-    private String garbageName;
+    private String name;
     private double weight;
     private double price;
 
@@ -14,12 +14,12 @@ public class OrderDetail {
         this.orderId = orderId;
     }
 
-    public String getGarbageName() {
-        return garbageName;
+    public String getName() {
+        return name;
     }
 
-    public void setGarbageName(String garbageName) {
-        this.garbageName = garbageName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getWeight() {
@@ -42,7 +42,7 @@ public class OrderDetail {
     public String toString() {
         return "OrderDetail{" +
                 "orderId=" + orderId +
-                ", garbageName='" + garbageName + '\'' +
+                ", name='" + name + '\'' +
                 ", weight=" + weight +
                 ", price=" + price +
                 '}';

@@ -246,8 +246,14 @@ get 请求 <br>
 post 请求 <br>
 请求头：Content-Type:application/json
 {
-	"废书纸": 5.5,
-	"废报纸": 10
+"废纸":[
+{"name": "废书纸",
+"weight": "0.5"
+},
+{"name": "废报纸",
+"weight" : "0.7"
+}
+]
 }
 
 ##### 8、/order/receive

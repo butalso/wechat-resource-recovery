@@ -2,6 +2,8 @@ package controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import dto.Order;
+import entity.Garbage;
+import entity.OrderDetail;
 import entity.User;
 
 import io.swagger.annotations.Api;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import service.OrderHandler;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +56,14 @@ public class OrderController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public String createOrder(@ModelAttribute("user") User user,
-                              @RequestBody Map<String, Double> garbages) {
+                              @RequestBody Map<String, Map<String, String>[]> orderDetails) {
+        Map<String, Double> garbages = new HashMap<>();
+        for (Map.Entry<String, Map<String, String>[]> entry : orderDetails.entrySet()) {
+            for (Map<String, String> orderDetail: entry.getValue()) {
+                garbages.put(orderDetail.get("name"), Double.parseDouble(orderDetail.get("weight")));
+            }
+        }
+
         try {
             orderHandler.createOrder(user.getId(), garbages);
         } catch (Exception e) {

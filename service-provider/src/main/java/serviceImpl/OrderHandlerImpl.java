@@ -117,7 +117,7 @@ public class OrderHandlerImpl implements OrderHandler {
         Map<Garbage, Double> garbages = new HashMap<>();
         Garbage garbage;
         for (OrderDetail orderDetail : orderDetails) {
-            garbage = garbageDao.getGarbage(orderDetail.getGarbageName());
+            garbage = garbageDao.getGarbage(orderDetail.getName());
             garbages.put(garbage, orderDetail.getWeight());
         }
         result.setMap(garbages);
