@@ -2133,7 +2133,16 @@ form.submit {
     padding:0 15px;
 	position:relative;
 }
-.item-price:before {
+.item-price .btn{
+	margin: 5px;
+	background-color: #01a185;
+	color: #fff;
+}
+.item-price .btn:hover {
+	margin: 5px;
+	background-color: #f3c500;
+}
+/*.item-price:before {
 	    content: '';
     position: absolute;
     z-index: 1;
@@ -2145,7 +2154,7 @@ form.submit {
     width: 0;
     top: -3px;
     border-right-width: 80px;
-}
+}*/
 p.p-price {
     float: left;
     width: 50%;
@@ -2170,6 +2179,9 @@ h3.rate {
 .condition p,.itemtype p {
     margin: 0;
 	margin-left: 20px;
+}
+.condition input {
+    width: 100px;
 }
 .product-price {
     padding: 20px 0;
@@ -2711,7 +2723,7 @@ span.adprice {
     font-size: 14px;
     display: block;
     width: 100%;
-    margin: 15px 0 5px 0;
+    margin: 15px 0;
     color: #404040;
     font-weight: 400;
 }
@@ -3671,7 +3683,7 @@ label {
 	.item-price {
 		margin-left: 0;
 		padding: 0 15px;
-		margin-top: 15%;
+		/*margin-top: 15%;*/
 	}
 	.item-price:before {
 		left: 33.5%;

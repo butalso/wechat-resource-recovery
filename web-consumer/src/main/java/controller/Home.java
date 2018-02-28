@@ -81,4 +81,19 @@ public class Home {
         sessionStatus.setComplete();
         return "redirect:index/index";
     }
+
+    @RequestMapping(value = "/categories", method = RequestMethod.GET)
+    public String categories() {
+        return "index/categories";
+    }
+
+    @RequestMapping(value = "/garbage", method = RequestMethod.GET)
+    public String garbage() {
+        return "index/garbage";
+    }
+
+    @RequestMapping(value = "/shoppingCar", method = RequestMethod.GET)
+    public String shoppingCart() {
+        return "index/shoppingCar";
+    }
 }

@@ -13,10 +13,10 @@
 
     <!--2、数据库连接池-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="driverClass" value="${driverClass}"/>
-        <property name="jdbcUrl" value="${url}"/>
-        <property name="user" value="${user}"/>
-        <property name="password" value="${password}"/>
+        <property name="driverClass" value="${jdbc.driverClass}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
 
         <property name="maxPoolSize" value="30"/>
         <property name="minPoolSize" value="10"/>
