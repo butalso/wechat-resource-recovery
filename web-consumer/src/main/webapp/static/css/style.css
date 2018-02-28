@@ -1296,6 +1296,9 @@ span.total strong {
     color: #01A185;
     font-size: 20px;
 }
+.state span {
+	float: right;
+}
 .main-grid-border{
     border-bottom: 3px solid #F4F4F4;
 }
@@ -3488,6 +3491,12 @@ label {
 		font-size: 33px;
 		margin: 33px 0;
 	}
+	.head .logout {
+		float: right;
+		color: #666;
+		font-size: 16px;
+		margin-top: 20px;
+	}
 	.product-view h2 {
 		font-size: 25px;
 	}
@@ -4168,6 +4177,12 @@ label {
 		font-size: 28px;
 		margin: 25px 0;
 	}
+	.head .logout {
+		float: right;
+		color: #666;
+		font-size: 16px;
+		margin-top: 20px;
+	}
 	.state h3 {
 		font-size: 19px;
 	}
@@ -4484,7 +4499,7 @@ label {
 		margin-bottom: 5%;
 	}
 	.sun-regions ul li {
-		width: 49%;
+		width: 30%;
 	}
 	.item-price:before {
 		left: 27.5%;
