@@ -30,6 +30,7 @@ function initList() {
 
 function getPay() {
     var data = JSON.parse(sessionStorage.getItem("shoppingCar"));
+    console.log(data);
     $.ajax({
         type: 'post',
         url: "http://localhost:8080/web-consumer/order/create",
@@ -44,4 +45,5 @@ function getPay() {
             console.log(err);
         }
     });
+    sessionStorage.removeItem("shoppingCar");
 }
