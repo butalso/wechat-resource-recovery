@@ -29,8 +29,15 @@ public class UserHandlerImplTest {
 
     @Before
     public void setUp() throws Exception {
+        Address address = new Address();
+        address.setProvince("广东省");
+        address.setCity("湛江市");
+        address.setArea("雷州市");
+        address.setHousingEstate("青青草原");
+
         customer = new Customer("杰克", "123456",
-                "15325678899", "jack", "M", 2);
+                "15325678899", "狙击手", "M", 2);
+        customer.setAddress(address);
 
         collector = new Collector("铁柱", "123456",
                 "13425809981", "tiezhu", "回收哥","440882199808092213",
@@ -42,9 +49,9 @@ public class UserHandlerImplTest {
     }
 
     @Test
-    public void addUser() {
-//        userHandler.addUser(customer);
-        userHandler.addUser(collector);
+    public void addUser() throws Exception {
+        userHandler.addUser(customer);
+//        userHandler.addUser(collector);
 //        userHandler.addUser(company);
     }
 

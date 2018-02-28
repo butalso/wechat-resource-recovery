@@ -25,7 +25,7 @@ public class UserDaoTest {
     @Before
     public void setUp() throws Exception {
         customer = new Customer("杰克", "123456",
-                "15325678899", "jack", "M", 2);
+                "15325678899", "狙击", "M", 2);
 
         collector = new Collector("铁柱", "123456",
                 "13425809981", "tiezhu", "回收哥","440882199808092213",

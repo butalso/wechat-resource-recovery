@@ -12,7 +12,7 @@ import service.TransactionHandler;
 @Controller
 @RequestMapping(value = "/account")
 @SessionAttributes("user")
-@Api(tags = "用户余额账户")
+@Api(value = "Account", tags = "用户余额账户")
 public class AccountController {
 
     @Reference

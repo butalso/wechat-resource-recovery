@@ -1,6 +1,8 @@
 package service;
 
 import entity.User;
+import exception.FormatErrorException;
+import exception.UserNameExistException;
 
 /**
  * 用户（业主、回收员、企业）的增删改查
@@ -10,7 +12,7 @@ public interface UserHandler {
      * 添加用户
      * @param user
      */
-    void addUser(User user);
+    void addUser(User user) throws UserNameExistException, FormatErrorException;
 
     /**
      * 删除用户，公司nickName=name
