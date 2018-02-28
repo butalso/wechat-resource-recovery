@@ -91,4 +91,9 @@ public class Home {
     public String garbage() {
         return "index/garbage";
     }
+
+    @RequestMapping(value = "/shoppingCar", method = RequestMethod.GET)
+    public String shoppingCart() {
+        return "index/shoppingCar";
+    }
 }
