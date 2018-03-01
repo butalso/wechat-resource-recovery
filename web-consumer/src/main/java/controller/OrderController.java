@@ -56,12 +56,10 @@ public class OrderController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public String createOrder(@ModelAttribute("user") User user,
-                              @RequestBody Map<String, Map<String, String>[]> orderDetails) {
+                              @RequestBody OrderDetail[] orderDetails) {
         Map<String, Double> garbages = new HashMap<>();
-        for (Map.Entry<String, Map<String, String>[]> entry : orderDetails.entrySet()) {
-            for (Map<String, String> orderDetail: entry.getValue()) {
-                garbages.put(orderDetail.get("name"), Double.parseDouble(orderDetail.get("weight")));
-            }
+        for (OrderDetail orderDetail : orderDetails) {
+            garbages.put(orderDetail.getName(), orderDetail.getWeight());
         }
 
         try {
