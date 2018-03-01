@@ -29,21 +29,25 @@ function initList() {
 }
 
 function getPay() {
-    var data = JSON.parse(sessionStorage.getItem("shoppingCar"));
+    var data = sessionStorage.getItem("shoppingCar");
     console.log(data);
     $.ajax({
         type: 'post',
         url: "http://localhost:8080/web-consumer/order/create",
         dataType: 'json',
+        headers: {
+            "Accept" : "text/plain; charset=utf-8",
+            "Content-Type": "application/json; charset=utf-8"
+        },
         data: data,
         complete: function (XMLHttpRequest, textStatus) {
         },
         success: function (data) {
+            sessionStorage.removeItem("shoppingCar");
             console.log(data);
         },
         error: function (err) {
             console.log(err);
         }
     });
-    sessionStorage.removeItem("shoppingCar");
 }
