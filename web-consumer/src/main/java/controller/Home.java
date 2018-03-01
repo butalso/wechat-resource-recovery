@@ -79,20 +79,23 @@ public class Home {
     @ApiOperation(value = "登出，重定向到首页")
     public String logout(SessionStatus sessionStatus) {
         sessionStatus.setComplete();
-        return "redirect:index/index";
+        return "redirect:index";
     }
 
     @RequestMapping(value = "/categories", method = RequestMethod.GET)
+    @ApiOperation(value = "获取废品分类页面")
     public String categories() {
         return "index/categories";
     }
 
     @RequestMapping(value = "/garbage", method = RequestMethod.GET)
+    @ApiOperation(value = "获取废品下单页面")
     public String garbage() {
         return "index/garbage";
     }
 
     @RequestMapping(value = "/shoppingCar", method = RequestMethod.GET)
+    @ApiOperation(value = "获取废品筐页面")
     public String shoppingCart() {
         return "index/shoppingCar";
     }
