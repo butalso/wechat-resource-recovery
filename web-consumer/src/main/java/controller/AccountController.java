@@ -4,15 +4,17 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import entity.Account;
 import entity.User;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import service.AccountHandler;
 import service.TransactionHandler;
+import springfox.documentation.annotations.ApiIgnore;
 
 @Controller
 @RequestMapping(value = "/account")
 @SessionAttributes("user")
-@Api(value = "Account", tags = "用户余额账户")
+@Api(tags = "用户余额账户管理")
 public class AccountController {
 
     @Reference
@@ -23,7 +25,8 @@ public class AccountController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public String addAccount(@ModelAttribute("user") User user,
+    @ApiOperation(value = "给系统当前登录者创建余额账户")
+    public String addAccount(@ApiIgnore @ModelAttribute("user") User user,
                              @RequestParam("wechatId") String wechatId,
                              @RequestParam("password") String password) {
         if (accountHandler.getAccount(user) != null) {
@@ -39,7 +42,8 @@ public class AccountController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
-    public String changeWechatId(@ModelAttribute("user") User user,
+    @ApiOperation(value = "修改余额账户用于提现充值的微信号")
+    public String changeWechatId(@ApiIgnore @ModelAttribute("user") User user,
                              @RequestParam("wechatId") String wechatId) {
         if (accountHandler.getAccount(user) == null) {
             return "账户不存在";
@@ -52,13 +56,15 @@ public class AccountController {
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ResponseBody
-    public Account getAccount(@ModelAttribute("user") User user) {
+    @ApiOperation(value = "返回余额账户信息")
+    public Account getAccount(@ApiIgnore @ModelAttribute("user") User user) {
         return accountHandler.getAccount(user);
     }
 
     @RequestMapping(value = "/password", method = RequestMethod.POST)
     @ResponseBody
-    public String changePassword(@ModelAttribute("user") User user,
+    @ApiOperation(value = "修改余额账户交易密码")
+    public String changePassword(@ApiIgnore @ModelAttribute("user") User user,
                                 @RequestParam("oldPass") String oldPass,
                                  @RequestParam("newPass") String newPass) {
         if (!accountHandler.verifyPassword(user, oldPass)) {
@@ -72,7 +78,8 @@ public class AccountController {
 
     @RequestMapping(value = "/withdraw", method = RequestMethod.POST)
     @ResponseBody
-    public String withdraw(@ModelAttribute("user") User user,
+    @ApiOperation(value = "余额账户提现或者充值")
+    public String withdraw(@ApiIgnore @ModelAttribute("user") User user,
                                  @RequestParam("value") Double value) {
         try {
             if (value < 0) {

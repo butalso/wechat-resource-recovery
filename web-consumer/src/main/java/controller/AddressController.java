@@ -32,8 +32,8 @@ public class AddressController {
 
     @RequestMapping(value = "/housingEstate", method = RequestMethod.POST,
         produces = "text/plain;charset=UTF-8")
-    @ApiOperation(value = "根据地址县和小区名称，添加小区")
     @ResponseBody
+    @ApiOperation(value = "根据地址县和小区名称，添加小区")
     public String addHousingEstate(@RequestBody Address address) {
         addressHandler.addHousingEstate(address);
         return "添加成功";
