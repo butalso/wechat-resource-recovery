@@ -1,4 +1,5 @@
 var sessionStorage = sessionStorage;
+var LOCALHOST = "http://localhost:8080/web-consumer";
 
 $(function () {
     forMobileApps();
