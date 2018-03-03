@@ -44,4 +44,8 @@ public class Md5Util {
         return strBuilder.toString();
     }
 
+    public static void main(String[] args) {
+        System.out.println(Md5Util.getMD5("123"));
+    }
+
 }

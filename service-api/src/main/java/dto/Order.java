@@ -2,9 +2,11 @@ package dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import entity.Garbage;
+import entity.OrderDetail;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -21,7 +23,7 @@ public class Order implements Serializable {
     private int userGrade;
     private int collectorGrade;
     /* 订单详情，废品到重量的映射 */
-    private Map<Garbage, Double> map;
+    private List<OrderDetail> orderDetails;
 
     public Order() {
     }
@@ -106,12 +108,12 @@ public class Order implements Serializable {
         this.collectorGrade = collectorGrade;
     }
 
-    public Map<Garbage, Double> getMap() {
-        return map;
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
     }
 
-    public void setMap(Map<Garbage, Double> map) {
-        this.map = map;
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 
     @Override
@@ -127,7 +129,7 @@ public class Order implements Serializable {
                 ", companyName='" + companyName + '\'' +
                 ", userGrade=" + userGrade +
                 ", collectorGrade=" + collectorGrade +
-                ", map=" + map +
+                ", list=" + orderDetails +
                 '}';
     }
 }

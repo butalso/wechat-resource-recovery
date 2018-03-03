@@ -117,14 +117,7 @@ public class OrderHandlerImpl implements OrderHandler {
 
         result.setUserGrade(orderItem.getUserGrade());
         result.setCollectorGrade(orderItem.getCollectorGrade());
-
-        Map<Garbage, Double> garbages = new HashMap<>();
-        Garbage garbage;
-        for (OrderDetail orderDetail : orderDetails) {
-            garbage = garbageDao.getGarbage(orderDetail.getName());
-            garbages.put(garbage, orderDetail.getWeight());
-        }
-        result.setMap(garbages);
+        result.setOrderDetails(orderDetails);
 
         return result;
     }

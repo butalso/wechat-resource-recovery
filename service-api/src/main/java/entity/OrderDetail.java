@@ -1,6 +1,8 @@
 package entity;
 
-public class OrderDetail {
+import java.io.Serializable;
+
+public class OrderDetail implements Serializable {
     private int orderId;
     private String name;
     private double weight;
