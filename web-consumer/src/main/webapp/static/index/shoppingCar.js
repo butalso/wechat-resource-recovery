@@ -1,3 +1,5 @@
+var $list;
+
 $(function () {
     initList();
     $(".btn").click(function () {
@@ -7,7 +9,7 @@ $(function () {
 
 function initList() {
     var node;
-    var $list = $(".list");
+    $list = $(".list");
     $list.empty();
     if (sessionStorage.getItem("shoppingCar")) {
         var shoppingCar = JSON.parse(sessionStorage.getItem("shoppingCar"));
@@ -25,6 +27,8 @@ function initList() {
                 </li>';
             $list.append(node);
         })
+    } else {
+        cleanList();
     }
 }
 
@@ -33,21 +37,31 @@ function getPay() {
     console.log(data);
     $.ajax({
         type: 'post',
-        url: "http://localhost:8080/web-consumer/order/create",
-        dataType: 'json',
+        url: LOCALHOST + "/order/create",
+        // dataType: 'json',
         headers: {
-            "Accept" : "text/plain; charset=utf-8",
+            "Accept": "text/plain; charset=utf-8",
             "Content-Type": "application/json; charset=utf-8"
         },
         data: data,
         complete: function (XMLHttpRequest, textStatus) {
         },
         success: function (data) {
-            sessionStorage.removeItem("shoppingCar");
             console.log(data);
+            if (data == "创建成功") {
+                sessionStorage.removeItem("shoppingCar");
+                Toast("订单已提交", 2000);
+                cleanList();
+            }
         },
         error: function (err) {
             console.log(err);
         }
     });
+}
+
+function cleanList() {
+    var node = '<span>你还没有添加任何废品哦～</span>';
+    $list.empty().append(node);
+    $(".btn").hide();
 }

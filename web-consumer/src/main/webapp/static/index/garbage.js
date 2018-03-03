@@ -1,3 +1,7 @@
+var categories;
+var name;
+var price;
+
 $(function () {
     init();
     $(".btn").click(function () {
@@ -6,37 +10,40 @@ $(function () {
 });
 
 function init() {
-    var categories = getQueryString("categories");
-    var name = getQueryString("name");
+    categories = getQueryString("categories");
+    name = getQueryString("name");
+    getPrice({name: categories});
     $(".secDirect").text(categories);
     $(".itemtype h4").text(name);
-    $(".rate").text(getPrice(name) + "yuan/kg");
-
 }
 
-function getPrice(str) {
-    var price = 100;
+function getPrice(data) {
     $.ajax({
-        type: 'post',
-        url: "http://localhost:8080/web-consumer/XXXXXX",
+        type: 'GET',
+        url: LOCALHOST + "/garbage/price",
         dataType: 'json',
-        data: str,
+        data: data,
         complete: function (XMLHttpRequest, textStatus) {
         },
         success: function (data) {
             console.log(data);
+            $.each(data, function (index, element) {
+                if (element.name == name) {
+                    price = element.price;
+                }
+            })
         },
         error: function (err) {
             console.log(err);
         }
+    }).done(function () {
+        $(".rate").text(price + "元/千克");
     });
-    return price;
 }
 
 function addShopoingCart() {
-    var name = getQueryString("name");
     var weight = $(".condition input").val();
-    var price = getPrice(name);
+    console.log(name, price, weight);
     if (sessionStorage.getItem("shoppingCar")) {
         var shoppingCar = JSON.parse(sessionStorage.getItem("shoppingCar"));
         var data = {

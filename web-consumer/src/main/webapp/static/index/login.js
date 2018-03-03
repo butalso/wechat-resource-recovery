@@ -1,5 +1,5 @@
-$(function() {
-    $("#loginBtn").click(function() {
+$(function () {
+    $("#loginBtn").click(function () {
         login();
     });
 
@@ -9,7 +9,7 @@ function login() {
     var loginData = {};
 
     var t = $("#loginForm").serializeArray();
-    $.each(t, function() {
+    $.each(t, function () {
         loginData[this.name] = this.value;
     });
 
@@ -17,16 +17,17 @@ function login() {
 
     $.ajax({
         type: 'post',
-        url: "http://localhost:8080/web-consumer/login",
+        url: LOCALHOST + "/login",
         // dataType: 'json',
         data: loginData,
-        complete: function(XMLHttpRequest, textStatus) {},
-        success: function(data) {
+        complete: function (XMLHttpRequest, textStatus) {
+        },
+        success: function (data) {
             if (data == "登录成功") {
-                window.location = "http://localhost:8080/web-consumer/user/info";
+                window.location = LOCALHOST + "/user/info";
             }
         },
-        error: function(err) {
+        error: function (err) {
             console.log(err);
         }
     });

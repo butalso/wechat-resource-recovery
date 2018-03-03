@@ -8,7 +8,7 @@ $(function () {
 function init() {
     $.ajax({
         type: 'GET',
-        url: "http://localhost:8080/web-consumer/user/info/detail",
+        url: LOCALHOST + "/user/info/detail",
         dataType: 'json',
         // data: data,
         complete: function (XMLHttpRequest, textStatus) {
@@ -26,7 +26,7 @@ function init() {
 function getMoreOrder() {
     $.ajax({
         type: 'GET',
-        url: "http://localhost:8080/web-consumer/order/info",
+        url: LOCALHOST + "/order/info",
         dataType: 'json',
         // data: data,
         complete: function (XMLHttpRequest, textStatus) {
