@@ -1,11 +1,13 @@
 package dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import entity.Garbage;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Order implements Serializable {
 
     private int id;

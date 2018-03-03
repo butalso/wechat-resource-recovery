@@ -45,7 +45,7 @@
     </delete>
 
     <select id="getOrderDetails" resultType="entity.OrderDetail">
-        SELECT * FROM order_detail WHERE order_id = #{orderId}
+        SELECT order_id, garbage_name as name, weight, price FROM order_detail WHERE order_id = #{orderId}
     </select>
 
     <select id="getOrderItem" resultType="entity.OrderItem">

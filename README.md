@@ -288,13 +288,14 @@ get 请求 <br>
 ##### 10、/order/update
 post 请求 <br>
 请求头：Content-Type:application/json
-{
-	"orderId": 10,
-	"garbages": {
-		"废书纸": "15.5",
-		"废报纸": "100"
-	}
-}
+[
+    {
+    "orderId": 22,
+    "name": "废纸箱",
+    "weight": 22.5
+    },
+    ...
+]
 
 ##### 10、/order/confirm
 post 请求 <br>

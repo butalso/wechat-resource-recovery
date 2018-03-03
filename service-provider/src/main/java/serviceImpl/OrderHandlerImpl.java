@@ -105,10 +105,14 @@ public class OrderHandlerImpl implements OrderHandler {
                 userDao.getCustomerById(orderItem.getUserId()).getNickName());
         if (orderItem.getState() > 0) {
             /* 回收员已接单 */
-            result.setCollectorName(
-                    userDao.getCollectorById(orderItem.getCollectorId()).getNickName());
-            result.setCompanyName(
-                    userDao.getCompanyById(orderItem.getCompanyId()).getName());
+            if(userDao.getCollectorById(orderItem.getCollectorId()) != null) {
+                result.setCollectorName(
+                        userDao.getCollectorById(orderItem.getCollectorId()).getNickName());
+            }
+            if (userDao.getCompanyById(orderItem.getCompanyId()) != null) {
+                result.setCompanyName(
+                        userDao.getCompanyById(orderItem.getCompanyId()).getName());
+            }
         }
 
         result.setUserGrade(orderItem.getUserGrade());
