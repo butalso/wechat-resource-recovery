@@ -54,7 +54,7 @@ public class Home {
                                             @RequestParam("userName") String userName,
                                         @ApiParam(value = "密码", required = true)
                                             @RequestParam("password") String password,
-                                        @ApiParam(value = "用户类型,0代表业主，1代表回收员，2代表企业", required = true)
+                                        @ApiParam(value = "用户类型,0代表业主，1代表回收员，2代表企业, 3代表管理员", required = true)
                                             @RequestParam("userKind") int userKind,
                                         @ApiIgnore HttpSession session, @ApiIgnore ModelMap modelMap) {
         ResponseEntity<String> result = null;

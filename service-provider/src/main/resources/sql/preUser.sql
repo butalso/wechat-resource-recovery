@@ -18,6 +18,9 @@ VALUES
 ('回收哥', '789', '13825672120', '440882', '西湖大道8号'),
 ('废品大叔', '789', '18326768829', '440882', '新城大道10号');
 
+INSERT INTO manager(nick_name, password, phone) VALUES
+('陈先生', '123456', '15824258876'),
+('周先生', '123456', '13488562469');
 
 -- 预置生活小区
 INSERT INTO housing_estate(name, area_id) VALUES
