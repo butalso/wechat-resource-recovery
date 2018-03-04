@@ -78,8 +78,9 @@ public class UserHandlerImpl implements UserHandler {
                 break;
             case 2: result = userDao.getCompany(nickName);
                 break;
+            case 3: result = userDao.getManager(nickName);
         }
-        if (result != null) {
+        if (result != null && userKind != 3) {
             constructAddress(result);
         }
         return result;

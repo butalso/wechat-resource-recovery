@@ -137,4 +137,9 @@ public class UserDaoTest {
     public void getCustomersId() {
         System.out.println(userDao.getCustomersId(2));
     }
+
+    @Test
+    public void getManager() {
+        System.out.println(userDao.getManager("陈先生"));
+    }
 }

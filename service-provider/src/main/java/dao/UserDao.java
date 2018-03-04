@@ -3,6 +3,7 @@ package dao;
 import entity.Collector;
 import entity.Company;
 import entity.Customer;
+import entity.Manager;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -114,4 +115,6 @@ public interface UserDao {
      * @return
      */
     Company getCompanyById(int id);
+
+    Manager getManager(String nickName);
 }

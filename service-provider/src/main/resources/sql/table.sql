@@ -175,6 +175,19 @@ CREATE TABLE order_detail(
   COMMENT ='订单详情具体某项废品数据表';
 
 
+-- 管理员数据表
+CREATE TABLE manager(
+  id INT NOT NULL AUTO_INCREMENT COMMENT '管理员id',
+  nick_name VARCHAR(50) NOT NULL COMMENT '管理员昵称',
+  password VARCHAR(20) NOT NULL COMMENT '管理员密码',
+  phone VARCHAR(11) NOT NULL COMMENT '管理员电话号码',
+  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (nick_name),
+  KEY idx_id(id)
+) DEFAULT CHARSET = utf8
+  COMMENT ='管理员数据表';
+
 
 
 

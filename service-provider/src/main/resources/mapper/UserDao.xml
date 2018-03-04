@@ -85,5 +85,10 @@
         SELECT * FROM company WHERE id = #{id}
     </select>
 
+    <select id="getManager" resultType="entity.Manager">
+        SELECT nick_name as name, password, phone, create_time
+        FROM manager WHERE nick_name = #{nickName};
+    </select>
+
 
 </mapper>

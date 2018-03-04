@@ -34,7 +34,8 @@ public class UserController {
         switch (user.getUserKind()) {
             case 0: return "index/customer";
             case 1: return "index/collector";
-            default: return "index/company";
+            case 2: return "index/company";
+            default: return "manager/manager";
         }
     }
 
