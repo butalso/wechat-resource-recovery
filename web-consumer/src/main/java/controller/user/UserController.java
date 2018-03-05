@@ -1,4 +1,4 @@
-package controller;
+package controller.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.fasterxml.jackson.databind.ObjectMapper;

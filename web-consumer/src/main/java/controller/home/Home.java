@@ -1,4 +1,4 @@
-package controller;
+package controller.home;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import entity.User;
@@ -28,8 +28,14 @@ public class Home {
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     @ApiOperation(value = "获取首页")
-    public String home() {
-        return "index/index";
+    public String userHome() {
+        return "user/index";
+    }
+
+    @RequestMapping(value = "/manager", method = RequestMethod.GET)
+    @ApiOperation(value = "获取管理员登录页面")
+    public String managerHome() {
+        return "manager/index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -37,6 +43,7 @@ public class Home {
     public String login() {
         return "index/login";
     }
+
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     @ApiOperation(value = "获取注册页面")
@@ -69,6 +76,7 @@ public class Home {
             result = new ResponseEntity<>("密码错误", HttpStatus.UNAUTHORIZED);
         } else {
             /* 密码正确，设置用户登录状态 */
+            // TODO 用户账号状态
             modelMap.addAttribute("user", user);
             result = new ResponseEntity<>("登录成功", HttpStatus.OK);
         }
