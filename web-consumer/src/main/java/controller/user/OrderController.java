@@ -1,4 +1,4 @@
-package controller;
+package controller.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import dto.Order;
@@ -114,7 +114,7 @@ public class OrderController {
             produces = "text/plain;charset=utf-8"
     )
     @ResponseBody
-    @ApiOperation(value = "用户确认订单完成，并给该次交易评分")
+    @ApiOperation(value = "用户，回收员确认订单完成，并给该次交易评分")
     public ResponseEntity<String> confirmOrder(@ApiIgnore @ModelAttribute("user") User user,
                                        @RequestParam("orderId") Integer orderId,
                                        @RequestParam("grade") Integer grade ) {
