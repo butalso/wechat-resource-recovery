@@ -197,7 +197,7 @@ CREATE TABLE message(
   receiver VARCHAR(50) NOT NULL COMMENT '接收方昵称',
   receiver_kind INT NOT NULL COMMENT '接收方用户类型',
   content VARCHAR(255) COMMENT '消息内容',
-  state INT DEFAULT 0 COMMENT '消息状态，0代表已读，1代表未读'
+  state INT DEFAULT 0 COMMENT '消息状态，0代表已读，1代表未读',
   create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '消息创建时间',
 
   PRIMARY KEY (id)
@@ -209,11 +209,24 @@ CREATE TABLE gift(
   id INT NOT NULL AUTO_INCREMENT COMMENT '礼品id',
   name VARCHAR(50) NOT NULL COMMENT '礼品名称',
   value INT NOT NULL COMMENT '礼品兑换积分值',
-  inventory INT NOT NULL DEFAULT 0 COMMENT '礼品库存量'
+  inventory INT NOT NULL DEFAULT 0 COMMENT '礼品库存量',
 
   PRIMARY KEY (id)
 ) DEFAULT CHARSET = utf8
   COMMENT ='礼品数据表';
+
+-- 礼品快递信息数据表
+CREATE TABLE express(
+  id INT NOT NULL AUTO_INCREMENT COMMENT '快递id',
+  gift_id VARCHAR(50) NOT NULL COMMENT '礼品id',
+  customer_id INT NOT NULL COMMENT '用户id',
+  address VARCHAR(255) NOT NULL COMMENT '收件人地址',
+  phone VARCHAR(11) COMMENT '收件人电话',
+  name VARCHAR(20) COMMENT '收件人姓名',
+
+  PRIMARY KEY (id)
+) DEFAULT CHARSET = utf8
+COMMENT ='礼品快递信息数据表';
 
 
 
