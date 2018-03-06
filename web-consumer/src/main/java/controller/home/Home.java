@@ -1,16 +1,14 @@
 package controller.home;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import entity.Manager;
 import entity.User;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import service.UserHandler;
 import springfox.documentation.annotations.ApiIgnore;
@@ -33,8 +31,12 @@ public class Home {
     }
 
     @RequestMapping(value = "/manager", method = RequestMethod.GET)
-    @ApiOperation(value = "获取管理员登录页面")
-    public String managerHome() {
+    @ApiOperation(value = "获取管理员首页，未登录返回登录页面")
+    public String managerHome(HttpSession session) {
+        if (session.getAttribute("user") == null ||
+                ((User)session.getAttribute("user")).getUserKind() != 4) {
+            return "manager/login";
+        }
         return "manager/index";
     }
 
