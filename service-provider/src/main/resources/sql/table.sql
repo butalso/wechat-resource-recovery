@@ -69,6 +69,7 @@ CREATE TABLE customer(
   gender VARCHAR(1) NOT NULL COMMENT '用户性别，M代表男性，F代表女性',
   phone VARCHAR(11) NOT NULL COMMENT '用户电话号码',
   credit INT DEFAULT 500 COMMENT '用户信誉值',
+  value INT DEFAULT 0 COMMENT '用户积分值,可用于兑换礼品',
   housing_estate_id INT NOT NULL COMMENT '用户所在小区编号',
   create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
@@ -188,6 +189,31 @@ CREATE TABLE manager(
 ) DEFAULT CHARSET = utf8
   COMMENT ='管理员数据表';
 
+-- 消息表
+CREATE TABLE message(
+  id INT NOT NULL AUTO_INCREMENT COMMENT '消息id',
+  sender VARCHAR(50) NOT NULL COMMENT '发送方昵称',
+  sender_kind INT NOT NULL COMMENT '发送方用户类型',
+  receiver VARCHAR(50) NOT NULL COMMENT '接收方昵称',
+  receiver_kind INT NOT NULL COMMENT '接收方用户类型',
+  content VARCHAR(255) COMMENT '消息内容',
+  state INT DEFAULT 0 COMMENT '消息状态，0代表已读，1代表未读'
+  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '消息创建时间',
+
+  PRIMARY KEY (id)
+) DEFAULT CHARSET = utf8
+  COMMENT ='消息数据表';
+
+-- 礼品表
+CREATE TABLE gift(
+  id INT NOT NULL AUTO_INCREMENT COMMENT '礼品id',
+  name VARCHAR(50) NOT NULL COMMENT '礼品名称',
+  value INT NOT NULL COMMENT '礼品兑换积分值',
+  inventory INT NOT NULL DEFAULT 0 COMMENT '礼品库存量'
+
+  PRIMARY KEY (id)
+) DEFAULT CHARSET = utf8
+  COMMENT ='礼品数据表';
 
 
 
