@@ -13,8 +13,6 @@ import service.AccountHandler;
 import service.UserHandler;
 import springfox.documentation.annotations.ApiIgnore;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
@@ -35,7 +33,7 @@ public class UserController {
             case 0: return "index/customer";
             case 1: return "index/collector";
             case 2: return "index/company";
-            default: return "manager/manager";
+            default: return "manager/index";
         }
     }
 
