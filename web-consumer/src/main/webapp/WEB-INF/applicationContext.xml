@@ -60,16 +60,47 @@
   2:允许使用“/”做整体映射 -->
   <mvc:default-servlet-handler/>
 
-  <!--配置html viewResolver-->
-  <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    <property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView" />
-    <property name="prefix" value="/static/html/" />
-    <property name="suffix" value=".html" />
+  <!--这里是 Freemarker配置-->
+  <bean id="freemarkerConfig"
+        class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+    <property name="templateLoaderPath" value="/static/html/" />
+    <property name="freemarkerSettings">
+      <props>
+        <prop key="date_format">yyyy-MM-dd</prop>
+        <prop key="time_format">HH:mm:ss</prop>
+        <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+        <prop key="number_format">0.######</prop>
+        <prop key="defaultEncoding">UTF-8</prop>
+        <prop key="url_escaping_charset">UTF-8</prop>
+        <prop key="locale">zh_CN</prop>
+        <prop key="template_update_delay">0</prop>
+      </props>
+    </property>
+    <property name="freemarkerVariables">
+      <map>
+        <entry key="xml_escape" value-ref="fmXmlEscape" />
+        <!--下面四个是在下面定义的-->
+        <entry key="extends" value-ref="extendsDirective"/>
+        <entry key="override" value-ref="overrideDirective"/>
+        <entry key="block" value-ref="blockDirective"/>
+        <entry key="super" value-ref="superDirective"/>
+      </map>
+    </property>
   </bean>
 
+  <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
+  <bean id="extendsDirective" class="cn.org.rapid_framework.freemarker.directive.ExtendsDirective" />
+  <bean id="overrideDirective" class="cn.org.rapid_framework.freemarker.directive.OverrideDirective" />
+  <bean id="blockDirective" class="cn.org.rapid_framework.freemarker.directive.BlockDirective" />
+  <bean id="superDirective" class="cn.org.rapid_framework.freemarker.directive.SuperDirective" />
 
-
-
+  <bean id="viewResolver"
+        class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+    <property name="exposeSpringMacroHelpers" value="true" />
+    <property name="requestContextAttribute" value="rc" />
+    <property name="suffix" value=".ftl" />
+    <property name="contentType" value="text/html;charset=UTF-8"></property>
+  </bean>
 
   <import resource="classpath:dubbo/dubbo-consumer.xml" />
 

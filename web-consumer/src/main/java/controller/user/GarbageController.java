@@ -25,4 +25,22 @@ public class GarbageController {
     List<Garbage> getGarbages(@RequestParam(value = "name") String garbageType) {
         return garbageHandler.getGarbages(garbageType);
     }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @ApiOperation(value = "获取废品分类页面")
+    public String categories() {
+        return "user/categories";
+    }
+
+    @RequestMapping(value = "/details", method = RequestMethod.GET)
+    @ApiOperation(value = "获取废品下单页面")
+    public String garbage() {
+        return "user/garbage";
+    }
+
+    @RequestMapping(value = "/shoppingCar", method = RequestMethod.GET)
+    @ApiOperation(value = "获取废品筐页面")
+    public String shoppingCart() {
+        return "user/shoppingCar";
+    }
 }

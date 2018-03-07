@@ -30,9 +30,9 @@ public class UserController {
     @ApiOperation(value = "返回用户个人中心页面")
     public String getUserDetail(@ApiIgnore @ModelAttribute("user") User user) {
         switch (user.getUserKind()) {
-            case 0: return "index/customer";
-            case 1: return "index/collector";
-            case 2: return "index/company";
+            case 0: return "user/customer";
+            case 1: return "user/collector";
+            case 2: return "user/company";
             default: return "manager/index";
         }
     }
