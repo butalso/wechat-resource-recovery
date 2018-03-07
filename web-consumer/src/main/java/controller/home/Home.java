@@ -43,14 +43,14 @@ public class Home {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     @ApiOperation(value = "获取登录页面")
     public String login() {
-        return "index/login";
+        return "user/login";
     }
 
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     @ApiOperation(value = "获取注册页面")
     public String register() {
-        return "index/register";
+        return "user/register";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST,
@@ -92,21 +92,4 @@ public class Home {
         return "redirect:index";
     }
 
-    @RequestMapping(value = "/categories", method = RequestMethod.GET)
-    @ApiOperation(value = "获取废品分类页面")
-    public String categories() {
-        return "index/categories";
-    }
-
-    @RequestMapping(value = "/garbage", method = RequestMethod.GET)
-    @ApiOperation(value = "获取废品下单页面")
-    public String garbage() {
-        return "index/garbage";
-    }
-
-    @RequestMapping(value = "/shoppingCar", method = RequestMethod.GET)
-    @ApiOperation(value = "获取废品筐页面")
-    public String shoppingCart() {
-        return "index/shoppingCar";
-    }
 }

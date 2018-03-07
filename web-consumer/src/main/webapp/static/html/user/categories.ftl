@@ -1,38 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Home</title>
-    <link rel="stylesheet" href="/web-consumer/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/web-consumer/static/css/bootstrap-select.css">
-    <link href="/web-consumer/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <link rel="stylesheet" href="/web-consumer/static/css/flexslider.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="/web-consumer/static/css/font-awesome.min.css" />
-    <link href="/web-consumer/static/css/jquery.uls.css" rel="stylesheet" />
-    <link href="/web-consumer/static/css/jquery.uls.grid.css" rel="stylesheet" />
-    <link href="/web-consumer/static/css/jquery.uls.lcd.css" rel="stylesheet" />
-    <link href="/web-consumer/static/css/easy-responsive-tabs.css" rel="stylesheet" />
-
-    <!-- for-mobile-apps -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Resale Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
-</head>
-
-<body>
-    <div class="header">
-        <div class="container">
-            <div class="logo">
-                <a href="/web-consumer"><span>Waste</span>Recycling</a>
-            </div>
-            <div class="header-right">
-                <a class="account" href="/web-consumer/shoppingCar">废品筐</a>
-                <a class="account" href="#">回收小知识</a>
-                <a class="account" href="/web-consumer/user/info">个人中心</a>
-            </div>
-        </div>
-    </div>
+<@override name="content">
     <!-- Categories -->
     <!--Vertical Tab-->
     <div class="categories-section main-grid-border">
@@ -67,9 +33,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <div class="sub-categories">
                                 <ul>
-                                    <li><a href="/web-consumer/garbage?categories=废纸&name=废报纸">废报纸</a></li>
-                                    <li><a href="/web-consumer/garbage?categories=废纸&name=废纸箱">废纸箱</a></li>
-                                    <li><a href="/web-consumer/garbage?categories=废纸&name=废书纸">废书纸</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废纸&name=废报纸">废报纸</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废纸&name=废纸箱">废纸箱</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废纸&name=废书纸">废书纸</a></li>
                                     <div class="clearfix"></div>
                                 </ul>
                             </div>
@@ -88,11 +54,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <div class="sub-categories">
                                 <ul>
-                                    <li><a href="/web-consumer/garbage?categories=废塑料&name=塑料瓶">塑料瓶</a></li>
-                                    <li><a href="/web-consumer/garbage?categories=废塑料&name=薄膜保鲜袋">薄膜/保鲜袋</a></li>
-                                    <li><a href="/web-consumer/garbage?categories=废塑料&name=塑料玩具">塑料玩具</a></li>
-                                    <li><a href="/web-consumer/garbage?categories=废塑料&name=塑料容器">塑料容器</a></li>
-                                    <li><a href="/web-consumer/garbage?categories=废塑料&name=其他塑料制品">其他塑料制品</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废塑料&name=塑料瓶">塑料瓶</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废塑料&name=薄膜保鲜袋">薄膜/保鲜袋</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废塑料&name=塑料玩具">塑料玩具</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废塑料&name=塑料容器">塑料容器</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废塑料&name=其他塑料制品">其他塑料制品</a></li>
                                     <div class="clearfix"></div>
                                 </ul>
                             </div>
@@ -253,94 +219,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                 </div>
             </div>
-            <!--footer section start-->
-            <footer>
-                <div class="footer-top">
-                    <div class="container">
-                        <div class="foo-grids">
-                            <div class="col-md-3 footer-grid">
-                                <h4 class="footer-head">我们是谁</h4>
-                                <p>既然你诚信诚意地发问了</p>
-                                <p>我就大发慈悲地告诉你</p>
-                                <p>我们就是穿越银河的火箭队</p>
-                                <p>绿色的明天在等着我们</p>
-                                <p>就是这样，喵～</p>
-                            </div>
-                            <div class="col-md-3 footer-grid">
-                                <h4 class="footer-head">帮助</h4>
-                                <ul>
-                                    <li><a href="#">啥玩意儿啊</a></li>
-                                    <li><a href="#">咋回事儿啊</a></li>
-                                    <li><a href="#">这可咋整啊</a></li>
-                                    <li><a href="#">大兄弟帮帮忙啊</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-md-3 footer-grid">
-                                <h4 class="footer-head">信息门户</h4>
-                                <ul>
-                                    <li><a href="#">地点地图</a></li>
-                                    <li><a href="#">使用条款</a></li>
-                                    <li><a href="#">热门搜索</a></li>
-                                    <li><a href="#">隐私政策</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-md-3 footer-grid">
-                                <h4 class="footer-head">联系我们</h4>
-                                <span class="hq">我们的老巢</span>
-                                <address>
-								<ul class="location">
-									<li><span class="glyphicon glyphicon-map-marker"></span></li>
-									<li>江苏省南京市江宁区佛城西路8号河（jun）海（yuan）大学</li>
-									<div class="clearfix"></div>
-								</ul>
-								<ul class="location">
-									<li><span class="glyphicon glyphicon-earphone"></span></li>
-									<li>15850680971</li>
-									<div class="clearfix"></div>
-								</ul>
-								<ul class="location">
-									<li><span class="glyphicon glyphicon-envelope"></span></li>
-									<li><a href="mailto:lan_xiao163@163.com">lan_xiao163@163.com</a></li>
-									<div class="clearfix"></div>
-								</ul>
-							</address>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-bottom text-center">
-                    <div class="container">
-                        <div class="footer-logo">
-                            <a href="index.html"><span>Waste</span>Recycling</a>
-                        </div>
-                        <div class="footer-social-icons">
-                            <ul>
-                                <li><a class="facebook" href="#"><span>Facebook</span></a></li>
-                                <li><a class="twitter" href="#"><span>Twitter</span></a></li>
-                                <li><a class="flickr" href="#"><span>Flickr</span></a></li>
-                                <li><a class="googleplus" href="#"><span>Google+</span></a></li>
-                                <li><a class="dribbble" href="#"><span>Dribbble</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </footer>
-            <!--footer section end-->
-</body>
+</@override>
 
-<script type="text/javascript" src="/web-consumer/static/js/jquery.min.js"></script>
-<script type="text/javascript" src="/web-consumer/static/js/jquery.flexisel.js"></script>
-<script src="/web-consumer/static/js/bootstrap.min.js"></script>
-<script src="/web-consumer/static/js/bootstrap-select.js"></script>
-<script src="/web-consumer/static/js/easyResponsiveTabs.js"></script>
-<script src="/web-consumer/static/index/common.js"></script>
+<@override name="js">
 <script src="/web-consumer/static/index/categories.js"></script>
 
 <!--Plug-in Initialisation-->
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         //Vertical Tab
         $('#parentVerticalTab').easyResponsiveTabs({
@@ -349,7 +235,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             fit: true, // 100% fit in a container
             closed: 'false', // Start closed if in accordion view
             tabidentify: 'hor_1', // The tab groups identifier
-            activate: function(event) { // Callback function if tab is switched
+            activate: function (event) { // Callback function if tab is switched
                 var $tab = $(this);
                 var $info = $('#nested-tabInfo2');
                 var $name = $('span', $info);
@@ -360,5 +246,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     });
 </script>
 <!-- //Categories -->
-
-</html>
+</@override>
+<@extends name="layout.ftl"/>
