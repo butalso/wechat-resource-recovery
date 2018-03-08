@@ -7,26 +7,21 @@
 
     <!-- basic styles -->
 
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/web-consumer/static/css/bootstrapone.min.css" />
+    <link rel="stylesheet" href="/web-consumer/static/css/font-awesomeone.min.css" />
 
     <!--[if IE 7]>
-    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+    <link rel="stylesheet" href="/web-consumer/static/css/font-awesome-ie7.min.css" />
     <![endif]-->
 
     <!-- page specific plugin styles -->
 
-    <!-- fonts -->
-
-    <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />-->
 
     <!-- ace styles -->
-
-    <link rel="stylesheet" href="assets/css/ace.min.css" />
-    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
-
+    <link rel="stylesheet" href="/web-consumer/static/css/ace.min.css" />
+    <link rel="stylesheet" href="/web-consumer/static/css/rtl.min.css" />
     <!--[if lte IE 8]>
-    <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+    <link rel="stylesheet" href="/web-consumer/static/css/ace-ie.min.css" />
     <![endif]-->
 
     <!-- inline styles related to this page -->
@@ -34,8 +29,8 @@
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
     <!--[if lt IE 9]>
-    <script src="assets/js/html5shiv.js"></script>
-    <script src="assets/js/respond.min.js"></script>
+    <!--<script src="assets/js/html5shiv.js"></script>-->
+    <!--<script src="assets/js/respond.min.js"></script>-->
     <![endif]-->
 </head>
 
@@ -61,25 +56,31 @@
                             <div class="widget-body">
                                 <div class="widget-main">
                                     <h4 class="header blue lighter bigger">
-                                        <i class="icon-coffee green"></i>
-                                        Please Enter Your Information
+                                        <i class="icon-pencil green"></i>
+                                        请输入你的信息
                                     </h4>
 
                                     <div class="space-6"></div>
 
-                                    <form>
+                                    <form id="loginForm">
                                         <fieldset>
                                             <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Username" />
+														<span class="block input-icon ">
 															<i class="icon-user"></i>
+															<input type="text" class="form-control" placeholder="账户" name="userName" />
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Password" />
+														<span class="block input-icon ">
 															<i class="icon-lock"></i>
+															<input type="password" class="form-control" placeholder="密码" name="password" />
+														</span>
+                                            </label>
+
+                                            <label class="block clearfix">
+														<span class="block input-icon ">
+															<input type="hidden" class="form-control"  name="userKind" value=3 />
 														</span>
                                             </label>
 
@@ -91,7 +92,7 @@
                                                     <span class="lbl">记住密码</span>
                                                 </label>
 
-                                                <button type="button" class="width-35 pull-right btn btn-sm btn-primary">
+                                                <button type="button" class="width-35 pull-right btn btn-sm btn-primary" id="loginBtn">
                                                     <i class="icon-key"></i>
                                                     登录
                                                 </button>
@@ -102,36 +103,36 @@
                                     </form>
 
                                     <div class="social-or-login center">
-                                        <span class="bigger-110">Or Login Using</span>
+                                        <span class="bigger-110">使用第三方登录</span>
                                     </div>
 
                                     <div class="social-login center">
-                                        <a  class="btn btn-success">
+                                        <a  class="btn btn-info" href="otherLogin.html">
                                             <i class="icon-qq"></i>
                                         </a>
 
-                                        <a class="btn btn-info">
-                                            <i class="icon-twitter"></i>
+                                        <a class="btn btn-success">
+                                            <i class="icon-wechat"></i>
                                         </a>
 
-                                        <a class="btn btn-danger">
-                                            <i class="icon-google-plus"></i>
+                                        <a class="btn btn-warning">
+                                            <i class="icon-weibo"></i>
                                         </a>
                                     </div>
                                 </div><!-- /widget-main -->
 
                                 <div class="toolbar clearfix">
                                     <div>
-                                        <a href="#" onclick="show_box('forgot-box'); return false;" class="forgot-password-link">
-                                            <i class="icon-arrow-left"></i>
+                                        <a href="#"  class="forgot-password-link">
+                                            <i class="icon-reply"></i>
                                             忘记密码
                                         </a>
                                     </div>
 
                                     <div>
-                                        <a href="#" onclick="show_box('signup-box'); return false;" class="user-signup-link">
+                                        <a href="#" class="user-signup-link">
                                             注册账号
-                                            <i class="icon-arrow-right"></i>
+                                            <i class="icon-only icon-share-alt"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -143,7 +144,7 @@
                                 <div class="widget-main">
                                     <h4 class="header red lighter bigger">
                                         <i class="icon-key"></i>
-                                        Retrieve Password
+                                        忘记密码
                                     </h4>
 
                                     <div class="space-6"></div>
@@ -171,9 +172,9 @@
                                 </div><!-- /widget-main -->
 
                                 <div class="toolbar center">
-                                    <a href="#" onclick="show_box('login-box'); return false;" class="back-to-login-link">
-                                        Back to login
-                                        <i class="icon-arrow-right"></i>
+                                    <a href="#" class="back-to-login-link">
+                                        返回登录界面
+                                        <i class="icon-only icon-share-alt"></i>
                                     </a>
                                 </div>
                             </div><!-- /widget-body -->
@@ -238,7 +239,7 @@
 
                                                 <button type="button" class="width-65 pull-right btn btn-sm btn-success">
                                                     Register
-                                                    <i class="icon-arrow-right icon-on-right"></i>
+                                                    <i class="icon-only icon-share-alt"></i>
                                                 </button>
                                             </div>
                                         </fieldset>
@@ -246,9 +247,9 @@
                                 </div>
 
                                 <div class="toolbar center">
-                                    <a href="#" onclick="show_box('login-box'); return false;" class="back-to-login-link">
-                                        <i class="icon-arrow-left"></i>
-                                        Back to login
+                                    <a href="#" class="back-to-login-link">
+                                        <i class="icon-only icon-share-alt"></i>
+                                        返回登录界面
                                     </a>
                                 </div>
                             </div><!-- /widget-body -->
@@ -259,45 +260,37 @@
         </div><!-- /.row -->
     </div>
 </div><!-- /.main-container -->
-
 <!-- basic scripts -->
 
 <!--[if !IE]> -->
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/web-consumer/static/manager/jquery-2.0.3.min.js"></script>
 
 <!-- <![endif]-->
 
 <!--[if IE]>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="/web-consumer/static/manager/jquery-1.10.2.min.js"></script>
 <![endif]-->
 
 <!--[if !IE]> -->
 
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+    window.jQuery || document.write("<script src='/web-consumer/static/manager/jquery-2.0.3.min.js'>"+"<"+"script>");
 </script>
 
 <!-- <![endif]-->
 
 <!--[if IE]>
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+    window.jQuery || document.write("<script src='/web-consumer/static/manager/jquery-1.10.2.min.js'>"+"<"+"script>");
 </script>
 <![endif]-->
 
 <script type="text/javascript">
-    if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    if("ontouchend" in document) document.write("<script src='/web-consumer/static/manager/jquery.mobile.custom.min.js'>"+"<"+"script>");
 </script>
 
-<!-- inline scripts related to this page -->
-
-<script type="text/javascript">
-    function show_box(id) {
-        jQuery('.widget-box.visible').removeClass('visible');
-        jQuery('#'+id).addClass('visible');
-    }
-</script>
+<script type="text/javascript" src="/web-consumer/static/manager/project/login.js"></script>
 
 </body>
 </html>
