@@ -1,40 +1,36 @@
 package entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import enums.UserKind;
+import dto.Address;
 
 /**
  * 业主实体（卖废品的用户）
  */
-@JsonIgnoreProperties(value = {"id", "password", "housingEstateId"})
 public class Customer extends User {
-    private final int userKind = 0;
-    private String nickName;
+    private final Integer userKind = 0;
     private String gender;
-    private int credit;
-    private int housingEstateId;
+    private Integer credit;
+    private Integer point;
+    private Integer experience;
 
     public Customer() {
     }
 
-    public Customer(String name, String password, String phone,
-                    String nickName, String gender, int housingEstateId) {
-        super(name, password, phone);
-        this.nickName = nickName;
+    public Customer(String name) {
+        super(name);
+    }
+
+    public Customer(String name, String password, String phone, String gender, Address address) {
+        super(name, password, phone, address);
         this.gender = gender;
-        this.housingEstateId = housingEstateId;
     }
 
-    public int getUserKind() {
+    public Customer(Customer customer) {
+        this(customer.getName(), null, customer.getPhone(), customer.gender, null);
+    }
+
+    @Override
+    public Integer getUserKind() {
         return userKind;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
     }
 
     public String getGender() {
@@ -45,30 +41,38 @@ public class Customer extends User {
         this.gender = gender;
     }
 
-    public int getCredit() {
+    public Integer getCredit() {
         return credit;
     }
 
-    public void setCredit(int credit) {
+    public void setCredit(Integer credit) {
         this.credit = credit;
     }
 
-    public int getHousingEstateId() {
-        return housingEstateId;
+    public Integer getPoint() {
+        return point;
     }
 
-    public void setHousingEstateId(int housingEstateId) {
-        this.housingEstateId = housingEstateId;
+    public void setPoint(Integer point) {
+        this.point = point;
+    }
+
+    public Integer getExperience() {
+        return experience;
+    }
+
+    public void setExperience(Integer experience) {
+        this.experience = experience;
     }
 
     @Override
     public String toString() {
         return "Customer{" +
-                super.toString() +
-                "userKind=" + UserKind.getKindInfo(userKind) +
+                "userKind=" + userKind +
                 ", gender='" + gender + '\'' +
                 ", credit=" + credit +
-                ", housingEstateId=" + housingEstateId +
+                ", point=" + point +
+                ", experience=" + experience +
                 '}';
     }
 }

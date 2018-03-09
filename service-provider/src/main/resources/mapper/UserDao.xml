@@ -6,16 +6,16 @@
 <mapper namespace="dao.UserDao">
 
     <select id="getCustomersId" resultType="Integer">
-        SELECT id FROM customer WHERE housing_estate_id = #{hId}
+        SELECT id FROM customer WHERE addr_detail_id = #{addrDetailId}
     </select>
 
     <insert id="addCustomer" keyProperty="c.id" parameterType="entity.Customer">
-        INSERT INTO customer (name, nick_name, password, gender, phone, housing_estate_id)
+        INSERT INTO customer (name, password, gender, phone, housing_estate_id)
         VALUE (#{c.name}, #{c.nickName}, #{c.password}, #{c.gender}, #{c.phone}, #{c.housingEstateId});
     </insert>
 
     <select id="getCustomer" resultType="entity.Customer">
-        SELECT * FROM customer WHERE nick_name = #{nickName}
+        SELECT * FROM customer WHERE name = #{name}
     </select>
 
     <update id="updateCustomer" parameterType="entity.Customer">

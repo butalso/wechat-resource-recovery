@@ -3,19 +3,17 @@ package entity;
 import java.io.Serializable;
 
 public class OrderDetail implements Serializable {
-    private int orderId;
+    private Integer id;
     private String name;
     private double weight;
     private double price;
 
-    public int getOrderId() {
-        return orderId;
+    public Integer getId() {
+        return id;
     }
-
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setId(Integer id) {
+        this.id = id;
     }
-
     public String getName() {
         return name;
     }
@@ -43,7 +41,7 @@ public class OrderDetail implements Serializable {
     @Override
     public String toString() {
         return "OrderDetail{" +
-                "orderId=" + orderId +
+                ", id=" + id +
                 ", name='" + name + '\'' +
                 ", weight=" + weight +
                 ", price=" + price +

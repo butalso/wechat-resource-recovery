@@ -32,7 +32,7 @@ public class AddressHandlerImplTest {
     public void addHousingEstate() {
         Address address = new Address();
         address.setArea("雷州市");
-        address.setHousingEstate("天河小区");
+//        address.setHousingEstate("天河小区");
 
         addressHandler.addHousingEstate(address);
     }
@@ -46,7 +46,7 @@ public class AddressHandlerImplTest {
     public void delHousingEstate() {
         Address address = new Address();
         address.setArea("雷州市");
-        address.setHousingEstate("天河小区");
+//        address.setHousingEstate("天河小区");
 
         addressHandler.delHousingEstate(address);
     }

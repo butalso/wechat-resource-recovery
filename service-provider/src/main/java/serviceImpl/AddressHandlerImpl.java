@@ -31,16 +31,16 @@ public class AddressHandlerImpl implements AddressHandler {
 
     @Override
     public void addHousingEstate(Address address) {
-        String name = address.getHousingEstate();
-        String areaId = addressDao.getAreaId(address.getArea());
-        addressDao.addHousingEstate(name, areaId);
+//        String name = address.getHousingEstate();
+//        String areaId = addressDao.getAreaId(address.getArea());
+//        addressDao.addHousingEstate(name, areaId);
     }
 
     @Override
     public void delHousingEstate(Address address) {
-        String name = address.getHousingEstate();
-        String areaId = addressDao.getAreaId(address.getArea());
-        addressDao.delHousingEstate(name, areaId);
+//        String name = address.getHousingEstate();
+//        String areaId = addressDao.getAreaId(address.getArea());
+//        addressDao.delHousingEstate(name, areaId);
     }
 
 }

@@ -1,40 +1,38 @@
 package entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import dto.Address;
 
 /**
  * 回收员实体
  */
-@JsonIgnoreProperties(value = {"id", "password", "housingEstateId"})
 public class Collector extends User {
-    private final int userKind = 1;
-    private String nickName;
+    private final Integer userKind = 1;
     private String companyName;
     private String IDCardNo;
     private String gender;
-    private int credit;
-    private int housingEstateId;
+    private Integer credit;
+    private Integer point;
+    private Integer experience;
 
     public Collector() {
     }
 
+    public Collector(String name) {
+        super(name);
+    }
+
     public Collector(String name, String password, String phone,
-                     String nickName, String companyName, String IDCardNo,
-                     String gender, int housingEstateId) {
-        super(name, password, phone);
-        this.nickName = nickName;
+                     String companyName, String IDCardNo,
+                     String gender, Address address) {
+        super(name, password, phone, address);
         this.companyName = companyName;
         this.IDCardNo = IDCardNo;
         this.gender = gender;
-        this.housingEstateId = housingEstateId;
     }
 
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    @Override
+    public Integer getUserKind() {
+        return userKind;
     }
 
     public String getCompanyName() {
@@ -53,10 +51,6 @@ public class Collector extends User {
         this.IDCardNo = IDCardNo;
     }
 
-    public int getUserKind() {
-        return userKind;
-    }
-
     public String getGender() {
         return gender;
     }
@@ -65,33 +59,40 @@ public class Collector extends User {
         this.gender = gender;
     }
 
-    public int getCredit() {
+    public Integer getCredit() {
         return credit;
     }
 
-    public void setCredit(int credit) {
+    public void setCredit(Integer credit) {
         this.credit = credit;
     }
 
-    public int getHousingEstateId() {
-        return housingEstateId;
+    public Integer getPoint() {
+        return point;
     }
 
-    public void setHousingEstateId(int housingEstateId) {
-        this.housingEstateId = housingEstateId;
+    public void setPoint(Integer point) {
+        this.point = point;
+    }
+
+    public Integer getExperience() {
+        return experience;
+    }
+
+    public void setExperience(Integer experience) {
+        this.experience = experience;
     }
 
     @Override
     public String toString() {
         return "Collector{" +
-                super.toString() +
                 "userKind=" + userKind +
-                ", nickName='" + nickName + '\'' +
                 ", companyName='" + companyName + '\'' +
                 ", IDCardNo='" + IDCardNo + '\'' +
                 ", gender='" + gender + '\'' +
                 ", credit=" + credit +
-                ", housingEstateId=" + housingEstateId +
+                ", point=" + point +
+                ", experience=" + experience +
                 '}';
     }
 }

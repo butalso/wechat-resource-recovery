@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Order implements Serializable {
 
     private int id;

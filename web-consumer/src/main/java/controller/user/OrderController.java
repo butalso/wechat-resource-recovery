@@ -83,32 +83,32 @@ public class OrderController {
         return new ResponseEntity<>("创建成功", HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST,
-            produces = "text/plain;charset=utf-8")
-    @ResponseBody
-    @ApiOperation(value = "回收员修正某订单的具体信息")
-    public ResponseEntity<String> updateOrder(@RequestBody OrderDetail[] orderDetails) {
-        // TODO 向业主发送消息确认
-        try {
-            Map<Integer, Map<String, String>> infos = new HashMap<>();
-            for (OrderDetail orderDetail : orderDetails) {
-                Map<String, String> map = infos.get(orderDetail.getOrderId());
-                if (map == null) {
-                    map = new HashMap<>();
-                    infos.put(orderDetail.getOrderId(), map);
-                }
-                map.put(orderDetail.getName(), String.valueOf(orderDetail.getWeight()));
-            }
-            for (Map.Entry<Integer, Map<String, String>> info : infos.entrySet()) {
-                orderHandler.updateOrderDetails(info.getKey(), info.getValue());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            // TODO 异常处理
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
-        }
-        return new ResponseEntity<>("修改成功", HttpStatus.CREATED);
-    }
+//    @RequestMapping(value = "/update", method = RequestMethod.POST,
+//            produces = "text/plain;charset=utf-8")
+//    @ResponseBody
+//    @ApiOperation(value = "回收员修正某订单的具体信息")
+//    public ResponseEntity<String> updateOrder(@RequestBody OrderDetail[] orderDetails) {
+//        // TODO 向业主发送消息确认
+//        try {
+//            Map<Integer, Map<String, String>> infos = new HashMap<>();
+//            for (OrderDetail orderDetail : orderDetails) {
+//                Map<String, String> map = infos.get(orderDetail.getOrderId());
+//                if (map == null) {
+//                    map = new HashMap<>();
+//                    infos.put(orderDetail.getOrderId(), map);
+//                }
+//                map.put(orderDetail.getName(), String.valueOf(orderDetail.getWeight()));
+//            }
+//            for (Map.Entry<Integer, Map<String, String>> info : infos.entrySet()) {
+//                orderHandler.updateOrderDetails(info.getKey(), info.getValue());
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            // TODO 异常处理
+//            return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
+//        }
+//        return new ResponseEntity<>("修改成功", HttpStatus.CREATED);
+//    }
 
     @RequestMapping(value = "/confirm", method = RequestMethod.POST,
             produces = "text/plain;charset=utf-8"

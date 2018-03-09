@@ -1,6 +1,5 @@
 package entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import dto.Address;
 
 import java.io.Serializable;
@@ -12,40 +11,37 @@ import java.util.Date;
 
 public class User implements Serializable {
 
-    private int id;
+    private Integer id;
     private String name;
     private String password;
+    private String image_url;
     private String phone;
-    private Date createTime;
-    /* 传递给web时将地址id转化为地址 */
+    private Float balance;
     private Address address;
 
     public User() {
     }
 
-    public User(String name, String password, String phone) {
+    public User(String name) {
+        this.name = name;
+    }
+
+    public User(String name, String password, String phone, Address address) {
         this.name = name;
         this.password = password;
         this.phone = phone;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
         this.address = address;
     }
 
-    public int getUserKind() {
+    public Integer getUserKind() {
         return 0;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -65,6 +61,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -73,12 +77,20 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Float getBalance() {
+        return balance;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setBalance(Float balance) {
+        this.balance = balance;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
@@ -87,8 +99,9 @@ public class User implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", image_url='" + image_url + '\'' +
                 ", phone='" + phone + '\'' +
-                ", createTime=" + createTime +
+                ", balance=" + balance +
                 ", address=" + address +
                 '}';
     }

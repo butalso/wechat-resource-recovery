@@ -78,10 +78,10 @@ public class OrderHandlerImpl implements OrderHandler {
             orderDetails = orderDao.getOrderDetails(id);
             order = constructOrder(orderItem, orderDetails);
 
-            hId = userDao.getCustomerById(
-                    orderItem.getUserId()).getHousingEstateId();
-            address = addressDao.gethousingEstateAddress(hId);
-            order.setAddress(address);
+//            hId = userDao.getCustomerById(
+//                    orderItem.getUserId()).getHousingEstateId();
+//            address = addressDao.gethousingEstateAddress(hId);
+//            order.setAddress(address);
             result.add(order);
         }
         return result;
@@ -101,18 +101,18 @@ public class OrderHandlerImpl implements OrderHandler {
         result.setFinishTime(orderItem.getFinishTime());
         result.setStateInfo(
                 OrderState.stateOf(orderItem.getState()).getStateInfo());
-        result.setCustomerName(
-                userDao.getCustomerById(orderItem.getUserId()).getNickName());
+//        result.setCustomerName(
+//                userDao.getCustomerById(orderItem.getUserId()).getNickName());
         if (orderItem.getState() > 0) {
             /* 回收员已接单 */
-            if(userDao.getCollectorById(orderItem.getCollectorId()) != null) {
-                result.setCollectorName(
-                        userDao.getCollectorById(orderItem.getCollectorId()).getNickName());
-            }
-            if (userDao.getCompanyById(orderItem.getCompanyId()) != null) {
-                result.setCompanyName(
-                        userDao.getCompanyById(orderItem.getCompanyId()).getName());
-            }
+//            if(userDao.getCollectorById(orderItem.getCollectorId()) != null) {
+//                result.setCollectorName(
+//                        userDao.getCollectorById(orderItem.getCollectorId()).getNickName());
+//            }
+//            if (userDao.getCompanyById(orderItem.getCompanyId()) != null) {
+//                result.setCompanyName(
+//                        userDao.getCompanyById(orderItem.getCompanyId()).getName());
+//            }
         }
 
         result.setUserGrade(orderItem.getUserGrade());

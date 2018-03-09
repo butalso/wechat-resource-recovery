@@ -15,10 +15,10 @@ public interface UserDao {
 
     /**
      * 获取某一小区内所有业主的id
-     * @param housingEstateId
+     * @param addrDetailId
      * @return
      */
-    List<Integer> getCustomersId(@Param("hId") int housingEstateId);
+    List<Integer> getCustomersId(@Param("addrDetailId") int addrDetailId);
 
     /**
      * 增加业主实体（卖废品的用户）
@@ -28,10 +28,10 @@ public interface UserDao {
 
     /**
      * 根据用户昵称名查询业主实体（卖废品的用户）
-     * @param nickName
+     * @param name
      * @return
      */
-    Customer getCustomer(String nickName);
+    Customer getCustomer(String name);
 
     /**
      * 根据参数中业主实体昵称名修改业主实体（卖废品的用户）

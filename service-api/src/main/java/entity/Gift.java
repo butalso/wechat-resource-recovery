@@ -2,12 +2,11 @@ package entity;
 
 import java.io.Serializable;
 
-public class Garbage implements Serializable {
-
+public class Gift implements Serializable {
     private int id;
-    private String typeName;
     private String name;
-    private double price;
+    private int value;
+    private int inventory;
 
     public int getId() {
         return id;
@@ -15,14 +14,6 @@ public class Garbage implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getTypeName() {
-        return typeName;
-    }
-
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
     }
 
     public String getName() {
@@ -33,21 +24,29 @@ public class Garbage implements Serializable {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
+    public int getValue() {
+        return value;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public int getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(int inventory) {
+        this.inventory = inventory;
     }
 
     @Override
     public String toString() {
-        return "Garbage{" +
+        return "Gift{" +
                 "id=" + id +
-                ", typeName='" + typeName + '\'' +
                 ", name='" + name + '\'' +
-                ", price=" + price +
+                ", value=" + value +
+                ", inventory=" + inventory +
                 '}';
     }
 }

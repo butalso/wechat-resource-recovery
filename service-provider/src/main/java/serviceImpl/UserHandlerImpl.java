@@ -25,7 +25,6 @@ public class UserHandlerImpl implements UserHandler {
     @Override
     public void addUser(User user) throws UserNameExistException, FormatErrorException {
         int userKind = user.getUserKind();
-        parseAddress(user);
         try {
             switch (userKind) {
                 case 0: userDao.addCustomer((Customer) user);
@@ -57,7 +56,6 @@ public class UserHandlerImpl implements UserHandler {
     @Override
     public void updateUser(User user) {
         int userKind = user.getUserKind();
-        parseAddress(user);
         switch (userKind) {
             case 0: userDao.updateCustomer((Customer) user);
                 break;
@@ -80,53 +78,10 @@ public class UserHandlerImpl implements UserHandler {
                 break;
             case 3: result = userDao.getManager(nickName);
         }
-        if (result != null && userKind != 3) {
-            constructAddress(result);
-        }
+//        if (result != null && userKind != 3) {
+//            constructAddress(result);
+//        }
         return result;
     }
 
-    /**
-     * 根据address获取该地址小区号或者是该区行政编号
-     * @param user
-     * @return
-     */
-    private void parseAddress(User user) {
-        Address address = user.getAddress();
-        int hid = 0;
-        String areaId;
-        areaId = addressDao.getAreaId(address.getArea());
-        if (address.getHousingEstate() != null) {
-            hid = addressDao.getHousingEstateId(
-                    address.getHousingEstate(), areaId);
-        }
-
-        switch (user.getUserKind()) {
-            case 0: ((Customer) user).setHousingEstateId(hid);
-                    break;
-            case 1: ((Collector) user).setHousingEstateId(hid);
-                    break;
-            default:((Company) user).setAreaId(areaId);
-        }
-        return;
-    }
-
-    /**
-     * 根据用户小区编号，县行政代号构造地址
-     * @param user
-     */
-    private void constructAddress(User user) {
-        Address address;
-        switch (user.getUserKind()) {
-            case 0: address = addressDao.gethousingEstateAddress(
-                    ((Customer) user).getHousingEstateId());
-                    break;
-            case 1: address = addressDao.gethousingEstateAddress(
-                    ((Collector) user).getHousingEstateId());
-                    break;
-            default: address = addressDao.getAreaAddress(
-                    ((Company) user).getAreaId());
-        }
-        user.setAddress(address);
-    }
 }

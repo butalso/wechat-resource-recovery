@@ -1,44 +1,27 @@
 package entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import dto.Address;
 
 /**
  * 企业实体
  */
-@JsonIgnoreProperties(value = {"id", "password", "areaId"})
 public class Company extends User {
     private final int userKind = 2;
-    private String areaId;
-    private String addrDetail;
 
     public Company() {
     }
 
+    public Company(String name) {
+        super(name);
+    }
+
     public Company(String name, String password,
-                   String phone, String areaId, String addrDetail) {
-        super(name, password, phone);
-        this.areaId = areaId;
-        this.addrDetail = addrDetail;
+                   String phone, Address address) {
+        super(name, password, phone, address);
     }
 
-    public int getUserKind() {
+    public Integer getUserKind() {
         return userKind;
-    }
-
-    public String getAreaId() {
-        return areaId;
-    }
-
-    public void setAreaId(String areaId) {
-        this.areaId = areaId;
-    }
-
-    public String getAddrDetail() {
-        return addrDetail;
-    }
-
-    public void setAddrDetail(String addrDetail) {
-        this.addrDetail = addrDetail;
     }
 
     @Override
@@ -46,8 +29,6 @@ public class Company extends User {
         return "Company{" +
                 super.toString() +
                 "userKind=" + userKind +
-                ", areaId='" + areaId + '\'' +
-                ", addrDetail='" + addrDetail + '\'' +
                 '}';
     }
 }

@@ -3,14 +3,14 @@ package dto;
 import java.io.Serializable;
 
 /**
- * 省市区生活小区四级地址实体
+ * 省市区地址详情四级地址实体
  */
 public class Address implements Serializable {
 
     private String province;
     private String city;
     private String area;
-    private String housingEstate;
+    private String detail;
 
     public String getProvince() {
         return province;
@@ -36,21 +36,11 @@ public class Address implements Serializable {
         this.area = area;
     }
 
-    public String getHousingEstate() {
-        return housingEstate;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setHousingEstate(String housingEstate) {
-        this.housingEstate = housingEstate;
-    }
-
-    @Override
-    public String toString() {
-        return "Address{" +
-                "province='" + province + '\'' +
-                ", city='" + city + '\'' +
-                ", area='" + area + '\'' +
-                ", housingEstate='" + housingEstate + '\'' +
-                '}';
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 }
