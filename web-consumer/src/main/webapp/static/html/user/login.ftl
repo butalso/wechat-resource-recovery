@@ -35,11 +35,6 @@
                                     <input type="radio" name="userKind" value=2>我是企业
                                 </label>
                             </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="userKind" value=3>我是管理员
-                                </label>
-                            </div>
                             <input type="button" id="loginBtn" value="登录">
                         </form>
                     </div>

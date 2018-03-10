@@ -6,7 +6,7 @@
         <div class="region-block">
             <div class="container">
                 <div class="state col-md-3">
-                    <h3>废品订单<span class="more moreOrder">全部订单>></span></h3>
+                    <h3>废品订单<span class="more moreOrder">展示>></span></h3>
                 </div>
                 <div class="sun-regions col-md-9">
                     <ul>

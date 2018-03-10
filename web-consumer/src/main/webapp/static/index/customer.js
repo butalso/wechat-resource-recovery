@@ -35,6 +35,7 @@ function getMoreOrder() {
         },
         success: function (data) {
             $orderList = $(".orderList");
+            $orderList.empty();
             var node = '';
             var garbageNode = '';
             $.each(data, function (index, element) {
@@ -47,7 +48,6 @@ function getMoreOrder() {
                             <td>' + element.stateInfo + '</td>\
                             ' + garbageNode + '\
                         </tr>';
-                console.log(node);
                 $orderList.append(node);
             });
             console.log(data);

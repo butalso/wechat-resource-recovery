@@ -21,6 +21,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 
 <body>
+<@block name="header">
 <div class="header">
     <div class="container">
         <div class="logo">
@@ -33,6 +34,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 </div>
+</@block>
 <@block name="content">
 
 </@block>
@@ -123,8 +125,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="/web-consumer/static/js/bootstrap-select.js"></script>
 <script src="/web-consumer/static/js/easyResponsiveTabs.js"></script>
 <script src="/web-consumer/static/index/common.js"></script>
-<@block name="js">
+    <@block name="js">
 
-</@block>
+    </@block>
 
 </html>
