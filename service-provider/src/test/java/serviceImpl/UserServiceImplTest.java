@@ -27,7 +27,7 @@ public class UserServiceImplTest {
     Collector collector;
     Company company;
     Manager manager;
-    Address address = new Address("江苏省", "南京市", "江宁区", "佛城西路八号");
+    Address address = new Address("江苏省", "南京市", "江宁区", "江南老年城");
 
     @Before
     public void setUp() {
@@ -41,7 +41,7 @@ public class UserServiceImplTest {
 
     @Test
     public void addUser() {
-        customer.setName("熊大2");
+        customer.setName("熊大");
         userService.addUser(customer);
 //        userService.addUser(collector);
 //        userService.addUser(company);
