@@ -15,7 +15,8 @@ public class ECPUser extends User {
     }
 
     public ECPUser(Integer id, String name) {
-        super(id, name);
+        this.setId(id);
+        this.setName(name);
     }
 
     public ECPUser(String name, String password) {

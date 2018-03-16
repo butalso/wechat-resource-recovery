@@ -56,4 +56,12 @@
         WHERE ad.id = #{addrDetailId}
     </select>
 
+    <select id="getAddresses" resultType="dto.Address">
+        SELECT ad.name as detail, a.name as area, c.name as city, p.name as province
+        FROM ((addr_detail ad INNER JOIN
+        area a ON ad.area_id = a.id)
+        INNER JOIN city c ON a.city_id = c.id)
+        INNER JOIN province p ON c.province_id = p.id
+    </select>
+
 </mapper>

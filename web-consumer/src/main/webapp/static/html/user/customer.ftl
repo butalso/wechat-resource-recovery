@@ -1,3 +1,7 @@
+<div>
+    <p>添加${user}</p>
+</div>
+
 <@override name="content">
     <div class="regions main-grid-border">
         <div class="container">

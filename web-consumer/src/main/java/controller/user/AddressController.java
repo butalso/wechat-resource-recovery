@@ -35,7 +35,7 @@ public class AddressController {
     @ResponseBody
     @ApiOperation(value = "根据地址县和小区名称，添加小区")
     public String addHousingEstate(@RequestBody Address address) {
-        addressService.addAddressDetail(address);
+//        addressService.addAddressDetail(address);
         return "添加成功";
     }
 }

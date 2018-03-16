@@ -18,13 +18,15 @@ public class User implements Serializable {
     private String phone;
     private Address address;
     private Date createTime;
+    private int userKind;
 
     public User() {
     }
 
-    public User(Integer id, String name) {
+    public User(Integer id, String name, Integer userKind) {
         this.id = id;
         this.name = name;
+        this.userKind = userKind;
     }
 
     public User(String name, String password) {
@@ -32,8 +34,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Integer getUserKind() {
-        return 0;
+    public int getUserKind() {
+        return userKind;
+    }
+
+    public void setUserKind(int userKind) {
+        this.userKind = userKind;
     }
 
     public Integer getId() {
@@ -104,4 +110,5 @@ public class User implements Serializable {
                 ", createTime=" + createTime +
                 '}';
     }
+
 }

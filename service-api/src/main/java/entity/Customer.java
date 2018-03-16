@@ -6,13 +6,9 @@ import dto.Address;
  * 业主实体（卖废品的用户）
  */
 public class Customer extends ECPUser {
-    private final Integer userKind = 0;
+    private final int userKind = 0;
 
     public Customer() {
-    }
-
-    public Customer(Integer id, String name) {
-        super(id, name);
     }
 
     public Customer(String name, String password) {
@@ -28,7 +24,7 @@ public class Customer extends ECPUser {
     }
 
     @Override
-    public Integer getUserKind() {
+    public int getUserKind() {
         return userKind;
     }
 
@@ -39,4 +35,5 @@ public class Customer extends ECPUser {
                 "userKind=" + userKind +
                 '}';
     }
+
 }

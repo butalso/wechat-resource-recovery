@@ -13,7 +13,8 @@ public class Company extends User {
     }
 
     public Company(Integer id, String name) {
-        super(id, name);
+        this.setId(id);
+        this.setName(name);
     }
 
     public Company(String name, String password) {
@@ -27,7 +28,7 @@ public class Company extends User {
         this.setAddress(address);
     }
 
-    public Integer getUserKind() {
+    public int getUserKind() {
         return userKind;
     }
 

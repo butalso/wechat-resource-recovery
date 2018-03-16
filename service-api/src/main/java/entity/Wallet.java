@@ -1,6 +1,8 @@
 package entity;
 
-public class Wallet {
+import java.io.Serializable;
+
+public class Wallet implements Serializable {
     private Integer id;
     private Integer userId;
     private Integer userKind;

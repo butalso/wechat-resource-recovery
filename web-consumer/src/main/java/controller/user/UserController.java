@@ -22,8 +22,6 @@ import java.util.Map;
 public class UserController {
     @Reference
     UserService userService;
-    @Reference
-    AccountHandler accountHandler;
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ApiOperation(value = "返回用户个人中心页面")

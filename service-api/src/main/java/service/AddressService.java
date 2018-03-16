@@ -16,6 +16,12 @@ public interface AddressService {
     List<String> linkage(Address address);
 
     /**
+     * 获取所有的地址
+     * @return
+     */
+    List<Address> getAddresss();
+
+    /**
      * 添加地址详情
      * @param address
      */

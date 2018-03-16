@@ -32,8 +32,9 @@ public class OrderController {
     @ResponseBody
     @ApiOperation(value = "返回与用户相关订单集合")
     public List<Order> getOrders(@ApiIgnore @ModelAttribute("user") User user) {
-        List<Order> result = orderService.getOrders(user.getId(), user.getUserKind());
-        return result;
+//        List<Order> result = orderService.getOrders(user.getId(), user.getUserKind());
+//        return result;
+        return null;
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET,
@@ -41,7 +42,8 @@ public class OrderController {
     @ResponseBody
     @ApiOperation(value = "给回收员返回回收范围内用户新建订单集合")
     public List<Order> getNewOrder(@ApiIgnore @ModelAttribute("user") User user) {
-        return orderService.getNewOrders(user.getId());
+//        return orderService.getNewOrders(user.getId());
+        return null;
     }
 
     @RequestMapping(value = "/receive", method = RequestMethod.POST,
@@ -51,7 +53,7 @@ public class OrderController {
     public ResponseEntity<String> receiveOrder(@ApiIgnore @ModelAttribute("user") User user,
                                     @RequestParam("orderId") Integer orderId) {
         try {
-            orderService.receiveOrder(user.getId(), orderId);
+//            orderService.receiveOrder(user.getId(), orderId);
         } catch (Exception e) {
             e.printStackTrace();
             // TODO 异常处理
@@ -72,7 +74,7 @@ public class OrderController {
         }
 
         try {
-            orderService.createOrder(user.getId(), garbages);
+//            orderService.createOrder(user.getId(), garbages);
         } catch (Exception e) {
             e.printStackTrace();
             // TODO 异常处理
@@ -117,7 +119,7 @@ public class OrderController {
                                        @RequestParam("orderId") Integer orderId,
                                        @RequestParam("grade") Integer grade ) {
         try {
-            orderService.confirmOrderFinish(user, orderId, grade);
+//            orderService.confirmOrderFinish(user, orderId, grade);
         } catch (Exception e) {
             e.printStackTrace();
             // TODO 异常处理
