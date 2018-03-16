@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/web-consumer/static/css/font-awesomeone.min.css" />
 
     <!--[if IE 7]>
-    <link rel="stylesheet" href="/web-consumer/static/css/font-awesome-ie7.min.css" />
+	<link rel="stylesheet" href="/web-consumer/static/css/font-awesome-ie7.min.css" />
     <![endif]-->
 
     <!-- page specific plugin styles -->
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/web-consumer/static/css/ace.min.css" />
     <link rel="stylesheet" href="/web-consumer/static/css/rtl.min.css" />
     <!--[if lte IE 8]>
-    <link rel="stylesheet" href="/web-consumer/static/css/ace-ie.min.css" />
+	<link rel="stylesheet" href="/web-consumer/static/css/ace-ie.min.css" />
     <![endif]-->
 
     <!-- inline styles related to this page -->
@@ -282,7 +282,7 @@
 
 <!--[if IE]>
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='/web-consumer/static/manager/jquery-1.10.2.min.js'>"+"<"+"script>");
+	window.jQuery || document.write("<script src='/web-consumer/static/manager/jquery-1.10.2.min.js'>"+"<"+"script>");
 </script>
 <![endif]-->
 

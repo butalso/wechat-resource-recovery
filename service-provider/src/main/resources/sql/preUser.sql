@@ -1,33 +1,28 @@
+-- 预置地址
+INSERT INTO addr_detail(name, area_id, kind) VALUES
+ ('江南青年城', '320115', 0),
+ ('佛城西路八号', '320115', 1);
+
 -- 预置用户
+INSERT INTO customer(name, password, gender, phone, addr_detail_id) VALUES
+('狙击手', '123456', 'M', '15867620882', 0),
+('影魔', '123456', 'M', '13425278856', 1);
 
-INSERT INTO customer(name, nick_name, password, gender, phone,
- housing_estate_id) VALUES
-('小华', '狙击手', '123456', 'M', '15867620882', 2),
-('小明', '影魔', '123456', 'M', '13425278856', 3),
-('小红', '魅惑魔女', '123456', 'F', '13898726666', 1),
-('小雪', '风行者', '123456', 'F', '18322456762', 2);
+INSERT INTO collector(name, company_id, password,
+IDCardNo, gender, phone, addr_detail_id) VALUES
+('null', 0, 'null', 'null', 'M', 'null', 0),
+('恐怖利刃', 2, '123456', '411401198804044175', 'M', '13422345689', 0);
 
-INSERT INTO collector(name, nick_name, company_name, password,
-IDCardNo, gender, phone, housing_estate_id) VALUES
-('问天', '恐怖利刃', '回收哥', '123456', '411401198804044175', 'M', '13422345689', 2),
-('问地', '撼地者', '废品大叔', '123456', '130601197910109196', 'M', '15867832259', 1),
-('问自己', '巫医', '回收哥', '123456', '130682199005066998', 'M', '13822105068', 3);
-
-INSERT INTO company(name, password, phone, area_id, addr_detail)
+INSERT INTO company(name, password, phone, addr_detail_id)
 VALUES
-('回收哥', '789', '13825672120', '440882', '西湖大道8号'),
-('废品大叔', '789', '18326768829', '440882', '新城大道10号');
+('null', 'null', 'null', 0),
+('回收哥', '123456', '13825672120', 1);
 
 INSERT INTO manager(nick_name, password, phone) VALUES
 ('陈先生', '123456', '15824258876'),
 ('周先生', '123456', '13488562469');
 
--- 预置生活小区
-INSERT INTO housing_estate(name, area_id) VALUES
-('王者峡谷', '440882'), ('召唤森林', '440882'), ('天辉阵营', '440882'),
-('夜魇阵营', '440882'), ('青青草原', '440882'), ('哈拉沙漠', '440882');
-
 -- 预置回收员回收范围
-INSERT INTO collect_range(housing_estate_id, collector_id) VALUES
+INSERT INTO collect_range(addr_detail_id, collector_id) VALUES
 (1, 1), (2, 1), (3, 2), (4, 1), (5, 2), (6, 3);
 

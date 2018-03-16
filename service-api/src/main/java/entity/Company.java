@@ -1,44 +1,42 @@
 package entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import dto.Address;
 
 /**
  * 企业实体
  */
-@JsonIgnoreProperties(value = {"id", "password", "areaId"})
 public class Company extends User {
     private final int userKind = 2;
-    private String areaId;
-    private String addrDetail;
+    private Wallet wallet;
 
     public Company() {
     }
 
-    public Company(String name, String password,
-                   String phone, String areaId, String addrDetail) {
-        super(name, password, phone);
-        this.areaId = areaId;
-        this.addrDetail = addrDetail;
+    public Company(Integer id, String name) {
+        super(id, name);
     }
 
-    public int getUserKind() {
+    public Company(String name, String password) {
+        super(name, password);
+    }
+
+    public Company(String name, String password,
+                   String phone, Address address) {
+        super(name, password);
+        this.setPhone(phone);
+        this.setAddress(address);
+    }
+
+    public Integer getUserKind() {
         return userKind;
     }
 
-    public String getAreaId() {
-        return areaId;
+    public Wallet getWallet() {
+        return wallet;
     }
 
-    public void setAreaId(String areaId) {
-        this.areaId = areaId;
-    }
-
-    public String getAddrDetail() {
-        return addrDetail;
-    }
-
-    public void setAddrDetail(String addrDetail) {
-        this.addrDetail = addrDetail;
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 
     @Override
@@ -46,8 +44,7 @@ public class Company extends User {
         return "Company{" +
                 super.toString() +
                 "userKind=" + userKind +
-                ", areaId='" + areaId + '\'' +
-                ", addrDetail='" + addrDetail + '\'' +
+                ", wallet=" + wallet +
                 '}';
     }
 }

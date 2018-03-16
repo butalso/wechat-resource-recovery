@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.UserActivationDao">
+
+    <insert id="addActivation">
+        INSERT INTO user_activation(date, user_id, user_kind)
+        VALUE (current_date(), #{userId}, #{userKind})
+    </insert>
+
+    <update id="updateActivation">
+        UPDATE user_activation SET duration = #{userActivation.duration},
+        last_login_time = #{userActivation.lastLoginTime}
+        WHERE user_id = #{userActivation.userId} AND user_kind = #{userActivation.userKind}
+    </update>
+
+    <select id="getUserDateActivation" resultType="entity.UserActivation">
+        SELECT id, date, duration, last_login_time, user_id, user_kind
+        FROM  user_activation WHERE user_id = #{userId} AND user_kind = #{userKind} AND
+        date = #{date}
+    </select>
+
+    <select id="getUserActivations" resultType="entity.UserActivation">
+        SELECT id, date, duration, last_login_time, user_id, user_kind
+        FROM  user_activation WHERE user_id = #{userId} AND user_kind = #{userKind}
+    </select>
+
+    <select id="getDateActivations" resultType="entity.UserActivation">
+        SELECT id, date, duration, last_login_time, user_id, user_kind
+        FROM  user_activation WHERE date = #{date}
+    </select>
+
+</mapper>

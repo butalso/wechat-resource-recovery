@@ -19,14 +19,14 @@
 
     <dubbo:reference id="accountHandler" interface="service.AccountHandler" />
 
-    <dubbo:reference id="addressHandler" interface="service.AddressHandler"/>
+    <dubbo:reference id="addressHandler" interface="service.AddressService"/>
 
-    <dubbo:reference id="garbageHandler" interface="service.GarbageHandler" />
+    <dubbo:reference id="garbageHandler" interface="service.GarbageService" />
 
-    <dubbo:reference id="orderHandler" interface="service.OrderHandler" />
+    <dubbo:reference id="orderHandler" interface="service.OrderService" />
 
     <dubbo:reference id="transactionHandler" interface="service.TransactionHandler" />
 
-    <dubbo:reference id="userHandler" interface="service.UserHandler" />
+    <dubbo:reference id="userHandler" interface="service.UserService" />
 
 </beans>

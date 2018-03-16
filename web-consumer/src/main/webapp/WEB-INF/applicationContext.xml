@@ -14,6 +14,9 @@
         http://code.alibabatech.com/schema/dubbo
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
+  <!--1、配置文件相关参数-->
+  <context:property-placeholder location="classpath:fileupload.properties" />
+
   <!--配置spring mvc-->
   <!--1、开启spring mvc注解模式-->
   <!--简化配置：
@@ -93,6 +96,17 @@
   <bean id="overrideDirective" class="cn.org.rapid_framework.freemarker.directive.OverrideDirective" />
   <bean id="blockDirective" class="cn.org.rapid_framework.freemarker.directive.BlockDirective" />
   <bean id="superDirective" class="cn.org.rapid_framework.freemarker.directive.SuperDirective" />
+
+  <!-- springMVC上传文件时，需要配置MultipartResolver处理器 -->
+  <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <property name="defaultEncoding" value="utf-8"></property>
+    <!--2M 1024*1024*2-->
+    <property name="maxUploadSize" value="${maxUploadSize}"></property>
+    <property name="maxInMemorySize" value="${maxInMemorySize}"></property>
+    <!--resolveLazily属性启用是为了推迟文件解析，以便在UploadAction 中捕获文件大小异常-->
+    <property name="resolveLazily" value="true"/>
+  </bean>
 
   <bean id="viewResolver"
         class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">

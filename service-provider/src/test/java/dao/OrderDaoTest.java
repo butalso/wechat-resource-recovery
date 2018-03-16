@@ -1,101 +1,125 @@
 package dao;
 
-import dto.Order;
+import dto.Address;
+import entity.OrderDetail;
 import entity.OrderItem;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 // junit 运行时加载spring-ioc容器
 @RunWith(SpringJUnit4ClassRunner.class)
 // spring配置文件
 @ContextConfiguration("classpath:spring/spring-dao.xml")
 public class OrderDaoTest {
+
     @Autowired
     OrderDao orderDao;
 
-    @Test
-    public void createOrder() {
-        OrderItem orderItem = new OrderItem();
-        orderDao.createOrder(1, orderItem);
-        orderDao.createOrder(1, orderItem);
-        orderDao.createOrder(2, orderItem);
+    OrderItem orderItem;
+    List<OrderDetail> orderDetails;
 
+    @Before
+    public void setUp() throws Exception {
+        orderItem = new OrderItem("约翰",
+                new Address("江苏省", "南京市", "江宁区", "佛城西路八号"),
+                new Date(), new Date());
+
+        orderDetails = new ArrayList<>();
+        orderDetails.add(new OrderDetail("废报纸", 10.2));
+        orderDetails.add(new OrderDetail("废纸箱", 10.3));
+    }
+
+    @Test
+    public void addOrderItem() {
+        orderDao.addOrderItem(orderItem);
         System.out.println(orderItem.getId());
     }
 
     @Test
-    public void addOrderDetail() {
-//        orderDao.addOrderDetail(1, "废书纸", 2.5);
-//        orderDao.addOrderDetail(1, "废报纸", 2.2);
-//        orderDao.addOrderDetail(1, "废纸箱", 2.1);
+    public void addOrderDetails() {
+        orderDao.addOrderDetails(1, orderDetails);
     }
 
     @Test
-    public void updateOrderDetail() {
-        orderDao.updateOrderDetail(1, "废书纸", 3.2);
+    public void deleteOrderItem() {
+        System.out.println(orderDao.deleteOrderItem(6, "乔治"));
+        System.out.println(orderDao.deleteOrderItem(6, "约翰"));
+        System.out.println(orderDao.deleteOrderItem(5, "乔治"));
+        System.out.println(orderDao.deleteOrderItem(5, "约翰"));
     }
 
     @Test
-    public void delOrder() {
-        orderDao.delOrder(2);
+    public void deleteOrderDetails() {
+        orderDao.deleteOrderDetails(1);
+    }
+
+
+    @Test
+    public void getCustomerOrderItems() {
+        System.out.println(orderDao.getCustomerOrderItems("约翰"));
     }
 
     @Test
-    public void delOrderDetails() {
-        orderDao.delOrderDetails(3);
+    public void getCollectorOrderItems() {
+        System.out.println(orderDao.getCollectorOrderItems("恐怖利刃"));
     }
 
     @Test
-    public void customerOrderItems() {
-        System.out.println(orderDao.customerOrderItems(1));
-    }
-
-    @Test
-    public void collectorOrderItems() {
-        System.out.println(orderDao.collectorOrderItems(2));
-    }
-
-    @Test
-    public void companyOrderItems() {
-        System.out.println(orderDao.companyOrderItems(2));
+    public void getCompanyOrderItems() {
+        System.out.println(orderDao.getCompanyOrderItems("回收哥"));
     }
 
     @Test
     public void getOrderDetails() {
-        System.out.println(orderDao.getOrderDetails(10));
+        System.out.println(orderDao.getOrderDetails(8));
     }
 
     @Test
-    public void getOrderItem() {
-        OrderItem orderItem = orderDao.getOrderItem(1);
-        System.out.println(orderItem);
+    public void getNewOrderItems() {
+        System.out.println(orderDao.getNewOrderItems("恐怖利刃"));
     }
 
     @Test
-    public void updateOrder() {
-        OrderItem orderItem = new OrderItem();
-        orderItem.setId(1);
-        orderItem.setState(2);
-        orderItem.setCollectorId(1);
-        orderItem.setCompanyId(2);
-        orderItem.setFinishTime(new Date());
-        orderItem.setUserGrade(3);
-        orderItem.setCollectorGrade(5);
-
+    public void receiveOrder() {
+        System.out.println(orderDao.receiveOrder(7, "恐怖利刃"));
     }
 
     @Test
-    public void getNewOrdersId() {
-        System.out.println(orderDao.getNewOrdersId(1));
+    public void collectorConfirmReceive() {
+//        orderDao.collectorConfirmReceive(2, "www");
+        orderDao.collectorConfirmReceive(5, "恐怖利刃");
+    }
+
+    @Test
+    public void customerGradeOrder() {
+        orderDao.customerGradeOrder(2, 3, "乔治");
+        orderDao.customerGradeOrder(2, 3, "约翰");
+    }
+
+    @Test
+    public void collectorGradeOrder() {
+        orderDao.collectorGradeOrder(2, 4, "恐怖");
+        orderDao.collectorGradeOrder(2, 4, "恐怖利刃");
     }
 
     @Test
     public void finishOrder() {
-        orderDao.finishOrder(5);
+        orderDao.finishOrder(2, "回收");
+        orderDao.finishOrder(2, "回收哥");
+    }
+
+    @Test
+    public void getOrderItem() {
+        System.out.println(orderDao.getOrderItem(7));
     }
 }

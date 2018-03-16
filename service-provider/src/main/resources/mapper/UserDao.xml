@@ -5,90 +5,168 @@
 
 <mapper namespace="dao.UserDao">
 
-    <select id="getCustomersId" resultType="Integer">
-        SELECT id FROM customer WHERE housing_estate_id = #{hId}
-    </select>
+    <resultMap id="customer" type="entity.Customer" autoMapping="true">
+        <association property="wallet" javaType="entity.Wallet" resultMap="dao.WalletDao.wallet" />
+        <association property="address" javaType="dto.Address" resultMap="dao.AddressDao.address" />
+    </resultMap>
+
+    <resultMap id="collector" type="entity.Collector" autoMapping="true">
+        <association property="wallet" javaType="entity.Wallet" resultMap="dao.WalletDao.wallet" />
+        <association property="address" javaType="dto.Address" resultMap="dao.AddressDao.address" />
+    </resultMap>
+
+    <resultMap id="company" type="entity.Company" autoMapping="true">
+        <association property="wallet" javaType="entity.Wallet" resultMap="dao.WalletDao.wallet" />
+        <association property="address" javaType="dto.Address" resultMap="dao.AddressDao.address" />
+    </resultMap>
+
+    <resultMap id="manager" type="entity.Manager" autoMapping="true">
+        <association property="address" javaType="dto.Address" resultMap="dao.AddressDao.address" />
+    </resultMap>
 
     <insert id="addCustomer" keyProperty="c.id" parameterType="entity.Customer">
-        INSERT INTO customer (name, nick_name, password, gender, phone, housing_estate_id)
-        VALUE (#{c.name}, #{c.nickName}, #{c.password}, #{c.gender}, #{c.phone}, #{c.housingEstateId});
+        INSERT INTO customer (name, password, gender, phone, addr_detail_id)
+        VALUE (#{c.name}, #{c.password}, #{c.gender}, #{c.phone},
+        (select id from addr_detail
+        where name=#{c.address.detail} AND area_id=((SELECT id FROM area WHERE name=#{c.address.area}))));
     </insert>
 
-    <select id="getCustomer" resultType="entity.Customer">
-        SELECT * FROM customer WHERE nick_name = #{nickName}
+    <select id="getCustomer" resultMap="customer">
+        SELECT c.id, c.name, c.password, c.image_url, c.gender,
+        c.phone, c.credit, c.point, c.experience, w.balance as w_balance,
+        c.create_time, a.name as address_detail,
+        area.name as address_area, city.name as address_city,
+        province.name as address_province
+        FROM ((((customer c INNER JOIN wallet w ON c.id = w.user_id AND w.user_kind = 0)
+        INNER JOIN addr_detail a ON c.addr_detail_id = a.id)
+        INNER JOIN area ON a.area_id = area.id)
+        INNER JOIN city ON area.city_id = city.id)
+        INNER JOIN province ON city.province_id = province.id
+        WHERE c.name = #{name}
     </select>
 
     <update id="updateCustomer" parameterType="entity.Customer">
         UPDATE customer SET
-        name = #{c.name}, nick_name = #{c.nickName}, password = #{c.password}, gender = #{c.gender},
-        phone = #{c.phone}, housing_estate_id = #{c.housingEstateId}
+        name = #{c.name}, password = #{c.password}, image_url = #{c.imageUrl},
+        gender = #{c.gender}, phone = #{c.phone}, credit = #{c.credit},
+        point = #{c.point}, experience = #{c.experience},
+        addr_detail_id = (SELECT id FROM addr_detail
+        WHERE name = #{c.address.detail}
+        AND area_id = (SELECT id FROM area WHERE name = #{c.address.area}))
         WHERE id = #{c.id}
     </update>
 
     <delete id="deleteCustomer">
-        DELETE FROM customer WHERE nick_name = #{nickName}
+        DELETE FROM customer WHERE name = #{name}
     </delete>
 
     <insert id="addCollector" keyProperty="c.id" parameterType="entity.Collector">
-        INSERT INTO collector (name, nick_name, company_name, password,
-        IDCardNo, gender, phone, housing_estate_id)
-        VALUE (#{c.name}, #{c.nickName}, #{c.companyName},
+        INSERT INTO collector (name, company_id, password,
+        IDCardNo, gender, phone, addr_detail_id)
+        VALUE (#{c.name},
+        (SELECT id FROM company WHERE name = #{c.companyName}),
         #{c.password}, #{c.IDCardNo}, #{c.gender}, #{c.phone},
-        #{c.housingEstateId})
+        ((select id from addr_detail
+        where name=#{c.address.detail} AND
+        area_id=((SELECT id FROM area WHERE name=#{c.address.area})))))
     </insert>
 
-    <select id="getCollector" resultType="entity.Collector">
-        SELECT * FROM collector WHERE nick_name = #{nickName}
+    <select id="getCollector" resultMap="collector">
+        SELECT c1.id, c1.name, c2.name as company_name,
+        c1.password, c1.image_url, c1.IDCardNo, c1.gender,
+        c1.phone, c1.credit, c1.point, c1.experience, w.balance as w_balance,
+        c1.create_time, a1.name as address_detail,
+        a2.name as address_area, c3.name as address_city,
+        p.name as address_province
+        FROM (((((collector c1 INNER JOIN wallet w ON w.user_id = c1.id AND w.user_kind = 1)
+        INNER JOIN company c2 ON c1.company_id = c2.id)
+        INNER JOIN addr_detail a1 ON c1.addr_detail_id = a1.id)
+        INNER JOIN area a2 ON a1.area_id = a2.id)
+        INNER JOIN city c3 ON a2.city_id = c3.id)
+        INNER JOIN province p ON c3.province_id = p.id
+        WHERE c1.name = #{name}
     </select>
 
     <update id="updateCollector" parameterType="entity.Collector">
         UPDATE collector SET
-        name = #{c.name}, nick_name = #{c.nickName}, password = #{c.password}, IDCardNo = #{c.IDCardNo},
-        gender = #{c.gender}, phone = #{c.phone}, housing_estate_id = #{c.housingEstateId}
+        name = #{c.name}, company_id = (SELECT id from company WHERE name = #{c.companyName}),
+        password = #{c.password}, image_url = #{c.imageUrl},
+        IDCardNo = #{c.IDCardNo}, gender = #{c.gender}, phone = #{c.phone},
+        credit = #{c.credit}, point = #{c.point}, experience = #{c.experience},
+        addr_detail_id = (SELECT id FROM addr_detail
+        WHERE name = #{c.address.detail}
+        AND area_id = (SELECT id FROM area WHERE name = #{c.address.area}))
         WHERE id = #{c.id}
     </update>
 
     <delete id="deleteCollector">
-        DELETE FROM collector WHERE nick_name = #{nickName}
+        DELETE FROM collector WHERE name = #{name}
     </delete>
 
     <insert id="addCompany" keyProperty="c.id" parameterType="entity.Company">
-        INSERT INTO company (name, password, phone, area_id, addr_detail)
+        INSERT INTO company (name, password, phone, addr_detail_id)
         VALUE (#{c.name}, #{c.password}, #{c.phone},
-        #{c.areaId}, #{c.addrDetail})
+        (select id from addr_detail
+        where name=#{c.address.detail}
+        AND area_id=((SELECT id FROM area WHERE name=#{c.address.area}))))
     </insert>
 
-    <select id="getCompany" resultType="entity.Company">
-        SELECT * FROM company WHERE name = #{name}
+    <select id="getCompany" resultMap="company">
+        SELECT c1.id, c1.name, c1.password, c1.image_url,
+        c1.phone, w.balance as w_balance, c1.create_time,
+        a1.name as address_detail,
+        a2.name as address_area, c2.name as address_city,
+        p.name as address_province
+        FROM ((((company c1 INNER JOIN wallet w ON c1.id = w.user_id AND w.user_kind = 2)
+        INNER JOIN addr_detail a1 ON c1.addr_detail_id = a1.id)
+        INNER JOIN area a2 ON a1.area_id = a2.id)
+        INNER JOIN city c2 ON a2.city_id = c2.id)
+        INNER JOIN province p ON c2.province_id = p.id
+        WHERE c1.name = #{name}
     </select>
 
     <update id="updateCompany" parameterType="entity.Company">
         UPDATE company SET
-        name = #{c.name}, password = #{c.password}, phone = #{c.phone},
-        area_id = #{c.areaId}, addr_detail = #{c.addrDetail}
+        name = #{c.name}, password = #{c.password}, image_url = #{c.imageUrl},
+        phone = #{c.phone},
+        addr_detail_id = (select id from addr_detail
+        where name=#{c.address.detail}
+        AND area_id=((SELECT id FROM area WHERE name=#{c.address.area})))
         WHERE id = #{c.id}
     </update>
 
     <delete id="deleteCompany">
         DELETE FROM company WHERE name = #{name}
     </delete>
-    
-    <select id="getCustomerById" resultType="entity.Customer">
-        SELECT * FROM customer WHERE id = #{id}
+
+    <insert id="addManager" parameterType="entity.Manager">
+        INSERT INTO manager(name, password, gender, phone, area_id)
+        VALUE (#{m.name}, #{m.password}, #{m.gender}, #{m.phone},
+        (SELECT id FROM area WHERE name = #{m.address.area}))
+    </insert>
+
+    <select id="getManager" resultMap="manager">
+        SELECT m.id, m.name, m.password, m.gender, m.image_url,
+        m.phone, m.create_time,
+        a.name as address_area, c.name as address_city,
+        p.name as address_province
+        FROM ((manager m
+        INNER JOIN area a ON m.area_id = a.id)
+        INNER JOIN city c ON a.city_id = c.id)
+        INNER JOIN province p ON c.province_id = p.id
+        WHERE m.name = #{name};
     </select>
 
-    <select id="getCollectorById" resultType="entity.Collector">
-        SELECT * FROM collector WHERE id = #{id}
-    </select>
+    <update id="updateManager" parameterType="entity.Manager">
+        UPDATE manager SET
+        name = #{m.name}, password = #{m.password}, gender = #{m.gender},
+        image_url = #{m.imageUrl}, phone = #{m.phone},
+        area_id = (SELECT id FROM area WHERE name = #{m.address.area})
+    </update>
 
-    <select id="getCompanyById" resultType="entity.Company">
-        SELECT * FROM company WHERE id = #{id}
-    </select>
-
-    <select id="getManager" resultType="entity.Manager">
-        SELECT nick_name as name, password, phone, create_time
-        FROM manager WHERE nick_name = #{nickName};
-    </select>
+    <delete id="deleteManager">
+        DELETE FROM manager WHERE name = #{name}
+    </delete>
 
 
 </mapper>
