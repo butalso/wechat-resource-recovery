@@ -5,12 +5,33 @@
 
 <mapper namespace="dao.GarbageDao">
 
+    <insert id="addGarbageType">
+        INSERT IGNORE INTO garbage_type(name) VALUE (#{name})
+    </insert>
+
+    <insert id="addGarbage">
+        INSERT IGNORE INTO garbage(type_name, name, price) VALUE
+        (#{g.typeName}, #{g.name}, #{g.price})
+    </insert>
+
+    <delete id="delteGarbageType">
+        DELETE FROM garbage_type WHERE name = #{name}
+    </delete>
+
+    <delete id="deleteGarbage">
+        DELETE FROM garbage WHERE type_name = #{g.typeName} AND name = #{g.name}
+    </delete>
+
     <select id="getGarbage" resultType="entity.Garbage">
         SELECT * FROM garbage WHERE name = #{name}
     </select>
 
     <select id="getGarbages" resultType="entity.Garbage">
         SELECT * FROM garbage WHERE type_name = #{typeName}
+    </select>
+
+    <select id="getGarbageTypes" resultType="String">
+        SELECT name FROM garbage_type;
     </select>
 
 </mapper>

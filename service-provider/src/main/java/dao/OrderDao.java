@@ -1,5 +1,6 @@
 package dao;
 
+import dto.Address;
 import dto.Order;
 import entity.OrderDetail;
 import entity.OrderItem;
@@ -10,94 +11,105 @@ import java.util.List;
 public interface OrderDao {
 
     /**
-     * 用户创建订单
-     * @param userId 创建者id
-     * @return 订单编号
+     * 增添订单条目
+     * @param orderItem
+     * @return
      */
-    int createOrder(@Param("userId") int userId, @Param("orderItem") OrderItem orderItem);
+    int addOrderItem(@Param("orderItem") OrderItem orderItem);
+
+    /**
+     * 增添订单条目的相关订单详情
+     * @param orderItemId
+     * @param orderDetails
+     * @return
+     */
+    int addOrderDetails(@Param("orderItemId") Integer orderItemId, @Param("orderDetails") List<OrderDetail> orderDetails);
+
+    /**
+     * 删除未转账订单
+     * @param orderItemId
+     */
+    int deleteOrderItem(@Param("orderItemId") Integer orderItemId, @Param("cName") String customerName);
+
+    /**
+     * 删除订单详情
+     * @param orderItemId
+     */
+    void deleteOrderDetails(@Param("orderItemId") Integer orderItemId);
+
+    /**
+     * 获取业主订单项集合
+     * @param name
+     * @return
+     */
+    List<OrderItem> getCustomerOrderItems(@Param("name") String name);
+
+    /**
+     * 获取回收员订单项集合
+     * @param name
+     * @return
+     */
+    List<OrderItem> getCollectorOrderItems(@Param("name") String name);
+
+    /**
+     * 获取回收企业订单项集合
+     * @param name
+     * @return
+     */
+    List<OrderItem> getCompanyOrderItems(@Param("name") String name);
+
+    /**
+     * 根据订单id获取订单项
+     * @param orderItemId
+     * @return
+     */
+    OrderItem  getOrderItem(Integer orderItemId);
+
+    /**
+     * 获取订单项订单详情
+     * @param orderItemId
+     * @return
+     */
+    List<OrderDetail> getOrderDetails(Integer orderItemId);
+
+    /**
+     * 回收员获取回收范围内业主新建状态订单项
+     * @param name
+     * @return
+     */
+    List<OrderItem> getNewOrderItems(@Param("name") String name);
 
     /**
      * 回收员确认接单，更新订单状态
-     * @param orderId
-     * @param collectorId
+     * @param orderItemId
+     * @param collectorName
      */
-    void receiveOrder(@Param("oId") int orderId, @Param("cId") int collectorId,
-                      @Param("comId") int companyId);
+    int receiveOrder(@Param("oId") Integer orderItemId, @Param("cName") String collectorName);
+
+    /**
+     * 回收员确认回收到废品
+     * @param orderItemId
+     * @param collectorName
+     */
+    void collectorConfirmReceive(@Param("oId") Integer orderItemId, @Param("cName") String collectorName);
+
+    /**
+     * 业主对订单评分
+     * @param orderItemId
+     * @param grade
+     */
+    void customerGradeOrder(@Param("oId") Integer orderItemId, @Param("grade") Integer grade, @Param("cName") String customerName);
+
+    /**
+     * 回收员对订单评分
+     * @param orderItemId
+     * @param grade
+     */
+    void collectorGradeOrder(@Param("oId") Integer orderItemId, @Param("grade") Integer grade, @Param("cName") String collectorName);
 
     /**
      * 企业确认订单完成
-     * @param orderId
+     * @param orderItemId
      */
-    void finishOrder(@Param("oId") int orderId);
-
-    /**
-     * 回收员回收订单结束，更新订单状态
-     * @param userGarde
-     * @param collectorGarde
-     */
-    void updateOrderState(@Param("oId") int orderId, @Param("uGrade") int userGarde,
-                          @Param("cGrade") int collectorGarde);
-
-    /**
-     * 增加订单详情
-     * @param orderId 订单编号
-     * @param garbageName 废品名称
-     * @param weight 废品重量
-     * @param price 交易时废品单价
-     * @return
-     */
-    int addOrderDetail(@Param("oId") int orderId, @Param("gName") String garbageName,
-                        @Param("weight") double weight, @Param("price") double price);
-
-    /**
-     * 修正订单详情
-     * @param orderId 订单编号
-     * @param garbageName 废品名称
-     * @param weight 废品重量
-     * @return
-     */
-    int updateOrderDetail(@Param("oId") int orderId, @Param("gName") String garbageName,
-                          @Param("weight") double weight);
-
-    /**
-     * 用户取消订单
-     * @param orderId
-     * @return 删除订单行数
-     */
-    int delOrder(int orderId);
-
-    /**
-     * 取消订单时，删除订单详情
-     * @param orderId
-     * @return
-     */
-    int delOrderDetails(int orderId);
-
-    /**
-     * 获取订单详情信息
-     * @param orderId
-     * @return
-     */
-    List<OrderDetail> getOrderDetails(int orderId);
-
-    /**
-     * 获取订单项信息
-     * @param orderId
-     * @return
-     */
-    OrderItem getOrderItem(int orderId);
-
-    /**
-     * 获取业主新建状态订单
-     * @param customerId
-     * @return
-     */
-    List<Integer> getNewOrdersId(int customerId);
-
-    List<Integer> customerOrderItems(int customerId);
-
-    List<Integer> collectorOrderItems(int collectorId);
-
-    List<Integer> companyOrderItems(int companyId);
-
+    void finishOrder(@Param("oId") int orderItemId, @Param("cName") String name);
 }

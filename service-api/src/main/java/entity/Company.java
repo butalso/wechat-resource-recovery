@@ -7,21 +7,36 @@ import dto.Address;
  */
 public class Company extends User {
     private final int userKind = 2;
+    private Wallet wallet;
 
     public Company() {
     }
 
-    public Company(String name) {
-        super(name);
+    public Company(Integer id, String name) {
+        super(id, name);
+    }
+
+    public Company(String name, String password) {
+        super(name, password);
     }
 
     public Company(String name, String password,
                    String phone, Address address) {
-        super(name, password, phone, address);
+        super(name, password);
+        this.setPhone(phone);
+        this.setAddress(address);
     }
 
     public Integer getUserKind() {
         return userKind;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 
     @Override
@@ -29,6 +44,7 @@ public class Company extends User {
         return "Company{" +
                 super.toString() +
                 "userKind=" + userKind +
+                ", wallet=" + wallet +
                 '}';
     }
 }

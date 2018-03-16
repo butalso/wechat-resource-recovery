@@ -2,7 +2,6 @@ package controller.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import dto.Order;
-import entity.Garbage;
 import entity.OrderDetail;
 import entity.User;
 
@@ -12,10 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import service.OrderHandler;
+import service.OrderService;
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,14 +25,14 @@ import java.util.Map;
 public class OrderController {
 
     @Reference
-    OrderHandler orderHandler;
+    OrderService orderService;
 
     @RequestMapping(value = "/info", method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
     @ResponseBody
     @ApiOperation(value = "返回与用户相关订单集合")
     public List<Order> getOrders(@ApiIgnore @ModelAttribute("user") User user) {
-        List<Order> result = orderHandler.getOrders(user.getId(), user.getUserKind());
+        List<Order> result = orderService.getOrders(user.getId(), user.getUserKind());
         return result;
     }
 
@@ -43,7 +41,7 @@ public class OrderController {
     @ResponseBody
     @ApiOperation(value = "给回收员返回回收范围内用户新建订单集合")
     public List<Order> getNewOrder(@ApiIgnore @ModelAttribute("user") User user) {
-        return orderHandler.getNewOrders(user.getId());
+        return orderService.getNewOrders(user.getId());
     }
 
     @RequestMapping(value = "/receive", method = RequestMethod.POST,
@@ -53,7 +51,7 @@ public class OrderController {
     public ResponseEntity<String> receiveOrder(@ApiIgnore @ModelAttribute("user") User user,
                                     @RequestParam("orderId") Integer orderId) {
         try {
-            orderHandler.receiveOrder(user.getId(), orderId);
+            orderService.receiveOrder(user.getId(), orderId);
         } catch (Exception e) {
             e.printStackTrace();
             // TODO 异常处理
@@ -74,7 +72,7 @@ public class OrderController {
         }
 
         try {
-            orderHandler.createOrder(user.getId(), garbages);
+            orderService.createOrder(user.getId(), garbages);
         } catch (Exception e) {
             e.printStackTrace();
             // TODO 异常处理
@@ -100,7 +98,7 @@ public class OrderController {
 //                map.put(orderDetail.getName(), String.valueOf(orderDetail.getWeight()));
 //            }
 //            for (Map.Entry<Integer, Map<String, String>> info : infos.entrySet()) {
-//                orderHandler.updateOrderDetails(info.getKey(), info.getValue());
+//                orderService.updateOrderDetails(info.getKey(), info.getValue());
 //            }
 //        } catch (Exception e) {
 //            e.printStackTrace();
@@ -119,7 +117,7 @@ public class OrderController {
                                        @RequestParam("orderId") Integer orderId,
                                        @RequestParam("grade") Integer grade ) {
         try {
-            orderHandler.confirmOrderFinish(user, orderId, grade);
+            orderService.confirmOrderFinish(user, orderId, grade);
         } catch (Exception e) {
             e.printStackTrace();
             // TODO 异常处理

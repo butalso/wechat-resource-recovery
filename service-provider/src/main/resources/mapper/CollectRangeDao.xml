@@ -6,9 +6,28 @@
 <mapper namespace="dao.CollectRangeDao">
 
     <select id="getCollectRangesId" resultType="Integer">
-        SELECT housing_estate_id FROM collect_range
-        WHERE collector_id = #{collectorId}
+        SELECT addr_detail_id FROM collect_range
+        WHERE collector_id = (SELECT id from collector WHERE name = #{name})
     </select>
 
+    <insert id="addCollectRange">
+        INSERT IGNORE INTO collect_range(addr_detail_id, collector_id) VALUE
+        ((SELECT id FROM addr_detail WHERE name = #{address.detail} AND
+        area_id = (SELECT id FROM area WHERE name = #{address.area})),
+        (SELECT id FROM collector WHERE name = #{name}))
+    </insert>
+
+    <delete id="deleteCollectRange">
+        DELETE FROM collect_range WHERE collector_id =
+        (SELECT id FROM collector WHERE name = #{name}) AND
+        addr_detail_id = (SELECT id FROM addr_detail WHERE name = #{address.detail} AND
+        area_id = (SELECT id FROM area WHERE name = #{address.area}))
+    </delete>
+
+    <delete id="deleteCollectRange2">
+        DELETE FROM collect_range WHERE
+        addr_detail_id = (SELECT id FROM addr_detail WHERE name = #{address.detail} AND
+        area_id = (SELECT id FROM area WHERE name = #{address.area}))
+    </delete>
 
 </mapper>

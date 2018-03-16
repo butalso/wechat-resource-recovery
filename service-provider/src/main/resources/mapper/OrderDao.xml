@@ -5,67 +5,120 @@
 
 <mapper namespace="dao.OrderDao">
 
-    <insert id="createOrder" keyProperty="orderItem.id">
-        INSERT INTO order_item (user_id) VALUES (#{userId})
+    <resultMap id="orderItem" type="entity.OrderItem" autoMapping="true">
+        <association property="address" resultMap="dao.AddressDao.address" />
+    </resultMap>
+    
+    <sql id="orderItemsql">
+        SELECT oi.id, oi.create_time, oi.finish_time,
+        oi.collect_from_time, oi.collect_end_time,
+        oi.customer_grade, oi.collector_grade,
+        ose.state_info as state,
+        c1.name as customerName, c2.name as collectorName, c3.name as companyName,
+        a1.name as address_detail, a2.name as address_area, c4.name as address_city,
+        p.name as address_province
+        FROM (((((((order_item oi INNER JOIN order_state_enum ose ON oi.state = ose.state)
+        INNER JOIN customer c1 ON oi.customer_id = c1.id)
+        INNER JOIN collector c2 ON oi.collector_id = c2.id)
+        INNER JOIN company c3 ON oi.company_id = c3.id)
+        INNER JOIN addr_detail a1 ON oi.addr_detail_id = a1.id)
+        INNER JOIN area a2 ON a1.area_id = a2.id)
+        INNER JOIN city c4 ON a2.city_id = c4.id)
+        INNER JOIN province p ON c4.province_id = p.id
+    </sql>
+
+    <insert id="addOrderItem" keyProperty="orderItem.id">
+        INSERT INTO order_item (customer_id, addr_detail_id, collect_from_time, collect_end_time) VALUES
+        ((SELECT id FROM customer WHERE name = #{orderItem.customerName}), (SELECT id FROM addr_detail WHERE name=#{orderItem.address.detail}
+        AND area_id = (SELECT id FROM area WHERE name = #{orderItem.address.area})),
+        #{orderItem.collectFromTime}, #{orderItem.collectEndTime})
     </insert>
+
+    <insert id="addOrderDetails">
+        INSERT INTO order_detail(order_item_id, name, weight, price) VALUES 
+        <foreach collection="orderDetails" item="orderDetail" separator=",">
+            (#{orderItemId}, #{orderDetail.name}, #{orderDetail.weight},
+            (SELECT price FROM garbage WHERE name = #{orderDetail.name}))
+        </foreach>
+    </insert>
+
+    <delete id="deleteOrderItem">
+        DELETE FROM order_item WHERE id = #{orderItemId} AND state &lt; 2
+        AND customer_id = (SELECT id FROM customer WHERE name = #{cName})
+    </delete>
+
+    <delete id="deleteOrderDetails">
+        DELETE FROM order_detail WHERE order_item_id = #{orderItemId}
+    </delete>
+
+    <select id="getCustomerOrderItems" resultMap="orderItem">
+        <include refid="orderItemsql"></include>
+        WHERE c1.name = #{name}
+    </select>
+
+    <select id="getCollectorOrderItems" resultMap="orderItem">
+        <include refid="orderItemsql"></include>
+        WHERE c2.name = #{name}
+    </select>
+
+    <select id="getCompanyOrderItems" resultMap="orderItem">
+        <include refid="orderItemsql"></include>
+        WHERE c3.name = #{name}
+    </select>
+
+    <select id="getNewOrderItems" resultMap="orderItem">
+        SELECT oi.id, oi.create_time, oi.collect_from_time, oi.collect_end_time,
+        c1.name as customerName,
+        a1.name as address_detail, a2.name as address_area, c2.name as address_city,
+        p.name as address_province
+        FROM ((((order_item oi INNER JOIN customer c1 ON oi.customer_id = c1.id)
+        INNER JOIN addr_detail a1 ON oi.addr_detail_id = a1.id)
+        INNER JOIN area a2 ON a1.area_id = a2.id)
+        INNER JOIN city c2 ON a2.city_id = c2.id)
+        INNER JOIN province p ON c2.province_id = p.id
+        WHERE oi.addr_detail_id IN
+        (SELECT addr_detail_id FROM collect_range WHERE collector_id =
+        (SELECT id FROM collector WHERE name = #{name})) AND oi.state = 0
+    </select>
+
+    <select id="getOrderItem" resultMap="orderItem">
+        <include refid="orderItemsql"></include>
+        WHERE oi.id = #{getOrderItem}
+    </select>
+
+    <select id="getOrderDetails" resultType="entity.OrderDetail">
+        select name, weight , price
+        from order_detail
+        WHERE order_item_id = #{orderItemId}
+    </select>
 
     <update id="receiveOrder">
         UPDATE order_item SET
-        state = 1, collector_id = #{cId},
-        company_id = #{comId}
-        WHERE id = #{oId}
+        collector_id = (SELECT id from collector WHERE name = #{cName}),
+        company_id = (SELECT id from company WHERE id =
+        (SELECT company_id from collector WHERE name = #{cName})),
+        state = 1
+        WHERE id = #{oId} AND state = 0
     </update>
 
-    <update id="updateOrderState">
-        UPDATE order_item SET
-        state = 2, user_grade = #{uGrade}, collector_grade = #{cGrade}
-        WHERE id = #{oId}
+    <update id="collectorConfirmReceive">
+        UPDATE order_item SET state = 2, finish_time = now() WHERE id = #{oId}
+        AND collector_id = (SELECT id FROM collector WHERE name = #{cName})
+    </update>
+
+    <update id="customerGradeOrder">
+        UPDATE order_item SET customer_grade = #{grade} WHERE id = #{oId}
+        AND customer_id = (SELECT id FROM customer WHERE name = #{cName})
+    </update>
+
+    <update id="collectorGradeOrder">
+        UPDATE order_item SET collector_grade = #{grade} WHERE id = #{oId}
+        AND collector_id = (SELECT id FROM collector WHERE name = #{cName})
     </update>
 
     <update id="finishOrder">
         UPDATE order_item SET state = 3 WHERE id = #{oId}
+        AND company_id = (SELECT id FROM company WHERE name = #{cName})
     </update>
-
-    <insert id="addOrderDetail">
-        INSERT INTO order_detail (order_id, garbage_name, weight, price)
-        VALUE (#{oId}, #{gName}, #{weight}, #{price})
-    </insert>
-
-    <update id="updateOrderDetail">
-        UPDATE order_detail SET weight = #{weight}
-        WHERE order_id = #{oId} AND garbage_name = #{gName}
-    </update>
-
-    <delete id="delOrder">
-        DELETE FROM order_item WHERE id = #{orderId}
-    </delete>
-
-    <delete id="delOrderDetails">
-        DELETE FROM order_detail WHERE order_id = #{orderId}
-    </delete>
-
-    <select id="getOrderDetails" resultType="entity.OrderDetail">
-        SELECT order_id, garbage_name as name, weight, price FROM order_detail WHERE order_id = #{orderId}
-    </select>
-
-    <select id="getOrderItem" resultType="entity.OrderItem">
-        SELECT * FROM order_item WHERE id = #{orderID}
-    </select>
-
-    <select id="getNewOrdersId" resultType="Integer">
-        SELECT id FROM order_item WHERE state = 0;
-    </select>
-
-    <select id="customerOrderItems" resultType="Integer">
-        SELECT id FROM order_item WHERE user_id = #{customerId}
-    </select>
-
-    <select id="collectorOrderItems" resultType="Integer">
-        SELECT id FROM order_item WHERE collector_id = #{collectorId}
-    </select>
-
-    <select id="companyOrderItems" resultType="Integer">
-        SELECT id FROM order_item WHERE company_id = #{companyId}
-    </select>
 
 </mapper>

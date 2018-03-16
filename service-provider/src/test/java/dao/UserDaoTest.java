@@ -1,8 +1,10 @@
 package dao;
 
+import dto.Address;
 import entity.Collector;
 import entity.Company;
 import entity.Customer;
+import entity.Manager;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,125 +23,112 @@ public class UserDaoTest {
     Customer customer;
     Collector collector;
     Company company;
+    Manager manager;
 
     @Before
     public void setUp() throws Exception {
-//        customer = new Customer("杰克", "123456",
-//                "15325678899", "狙击", "M", 2);
-//
-//        collector = new Collector("铁柱", "123456",
-//                "13425809981", "tiezhu", "回收哥","440882199808092213",
-//                "M", 2);
-//
-//        company = new Company("回收哥", "123456",
-//                "15824568897", "440882", "西湖大道7号");
+        customer = new Customer("乔治", "123", "M",
+                "11234423110",
+                new Address("江苏省", "南京市", "江宁区", "佛城西路八号"));
 
+        collector = new Collector("汤姆", "123", "M", "11234423110",
+                "回收哥", "440882199502122234",
+                new Address("江苏省", "南京市", "江宁区", "佛城西路八号"));
+
+        company = new Company("废品大叔", "123", "12343242231",
+                new Address("江苏省", "南京市", "江宁区", "佛城西路八号"));
+
+        manager = new Manager("陈先生", "123", "M", "12345678901",
+                new Address("江苏省", "南京市", "江宁区", null));
     }
 
     @Test
     public void addCustomer() {
         userDao.addCustomer(customer);
-        System.out.println(customer.getId());
     }
 
     @Test
     public void getCustomer() {
-        System.out.println(userDao.getCustomer("jack"));
+        System.out.println(userDao.getCustomer("乔治"));
     }
 
     @Test
     public void updateCustomer() {
-        System.out.println("修改前：" + userDao.getCustomer("jack"));
-
-//        customer.setHousingEstateId(1);
+        customer = userDao.getCustomer("乔治");
+        customer.setGender("F");
         userDao.updateCustomer(customer);
-
-        System.out.println("修改后：" + userDao.getCustomer("jack"));
     }
 
     @Test
     public void deleteCustomer() {
-        System.out.println("删除前的jack： " + userDao.getCustomer("jack"));
-        userDao.deleteCustomer("jack");
-        System.out.println("删除后jack： " + userDao.getCustomer("jack"));
+        userDao.deleteCustomer("杰克");
     }
 
     @Test
     public void addCollector() {
         userDao.addCollector(collector);
-        System.out.println(collector.getId());
     }
 
     @Test
     public void getCollector() {
-        System.out.println(userDao.getCollector("tiezhu"));
+        System.out.println(userDao.getCollector("恐怖利刃"));
     }
 
     @Test
     public void updateCollector() {
-        System.out.println("修改前的tiezhu：" + userDao.getCollector("tiezhu"));
-
+        collector = userDao.getCollector("恐怖利刃");
         collector.setGender("F");
         userDao.updateCollector(collector);
-
-        System.out.println("修改后的tiezhu：" + userDao.getCollector("tiezhu"));
     }
 
     @Test
     public void deleteCollector() {
-        System.out.println("删除前的tiezhu：" + userDao.getCollector("tiezhu"));
-        userDao.deleteCollector("tiezhu");
-        System.out.println("删除后的tiezhu：" + userDao.getCollector("tiezhu"));
+        userDao.deleteCollector("汤姆");
     }
 
     @Test
     public void addCompany() {
         userDao.addCompany(company);
-        System.out.println(company.getId());
     }
 
     @Test
     public void getCompany() {
-        System.out.println("公司回收哥：" + userDao.getCompany("回收哥"));
+        System.out.println(userDao.getCompany("回收哥"));
     }
 
     @Test
     public void updateCompany() {
-        System.out.println("修改前回收哥：" + userDao.getCompany("回收哥"));
-//        company.setAddrDetail("新城大道8号");
+        company = userDao.getCompany("废品大叔");
+        company.setPassword("123456");
         userDao.updateCompany(company);
-        System.out.println("修改后回收哥：" + userDao.getCompany("回收哥"));
     }
 
     @Test
     public void deleteCompany() {
-        System.out.println("删除前回收哥：" + userDao.getCompany("回收哥"));
-        userDao.deleteCompany("回收哥");
-        System.out.println("删除后回收哥：" + userDao.getCompany("回收哥"));
+        userDao.deleteCompany("废品大叔");
     }
 
-    @Test
-    public void getCustomerById() {
-        System.out.println(userDao.getCustomerById(1));
-    }
 
     @Test
-    public void getCollectorById() {
-        System.out.println(userDao.getCollectorById(1));
-    }
-
-    @Test
-    public void getCompanyById() {
-        System.out.println(userDao.getCompanyById(1));
-    }
-
-    @Test
-    public void getCustomersId() {
-        System.out.println(userDao.getCustomersId(2));
+    public void addManager() {
+        userDao.addManager(manager);
     }
 
     @Test
     public void getManager() {
         System.out.println(userDao.getManager("陈先生"));
+    }
+
+    @Test
+    public void updateManager() {
+        manager = userDao.getManager("陈先生");
+        manager.setPassword("123456");
+        userDao.updateManager(manager);
+        System.out.println(userDao.getManager("陈先生"));
+    }
+
+    @Test
+    public void deleteManager() {
+        userDao.deleteManager("陈先生");
     }
 }

@@ -12,6 +12,16 @@ public class Address implements Serializable {
     private String area;
     private String detail;
 
+    public Address() {
+    }
+
+    public Address(String province, String city, String area, String detail) {
+        this.province = province;
+        this.city = city;
+        this.area = area;
+        this.detail = detail;
+    }
+
     public String getProvince() {
         return province;
     }
@@ -42,5 +52,15 @@ public class Address implements Serializable {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", area='" + area + '\'' +
+                ", detail='" + detail + '\'' +
+                '}';
     }
 }

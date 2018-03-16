@@ -9,6 +9,20 @@ public class Garbage implements Serializable {
     private String name;
     private double price;
 
+    public Garbage() {
+    }
+
+    public Garbage(String typeName, String name) {
+        this.typeName = typeName;
+        this.name = name;
+    }
+
+    public Garbage(String typeName, String name, double price) {
+        this.typeName = typeName;
+        this.name = name;
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }

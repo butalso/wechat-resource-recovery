@@ -5,6 +5,13 @@
 
 <mapper namespace="dao.AddressDao">
 
+    <resultMap id="address" type="dto.Address">
+        <result property="province" column="address_province" />
+        <result property="city" column="address_city" />
+        <result property="area" column="address_area" />
+        <result property="detail" column="address_detail" />
+    </resultMap>
+
     <select id="getProvinces" resultType="String">
         SELECT name FROM province;
     </select>
@@ -19,43 +26,34 @@
         ON a.city_id = c.id WHERE c.name = #{city}
     </select>
 
-    <select id="getAreaId" resultType="String">
-        SELECT id FROM area WHERE name = #{area}
+    <select id="getAddrDetails" resultType="String">
+        SELECT a1.name FROM addr_detail a1 INNER JOIN area a2
+        ON a1.area_id = a2.id AND a2.name = #{area}
+        WHERE a1.kind = #{kind};
     </select>
 
-    <select id="getHousingEstates" resultType="String">
-        SELECT h.name FROM housing_estate h INNER JOIN area a
-        ON h.area_id = a.id AND a.name = #{area}
-    </select>
-
-    <select id="gethousingEstateAddress" resultType="dto.Address">
-        SELECT h.name as housingEstate, a.name as area, c.name as city, p.name as province
-        FROM ((housing_estate h INNER JOIN area a
-        ON h.area_id = a.id) INNER JOIN city c
-        ON a.city_id = c.id) INNER JOIN province p
-        ON c.province_id = p.id
-        WHERE h.id = #{housingEstateId}
-    </select>
-
-    <select id="getAreaAddress" resultType="dto.Address">
-        SELECT a.name as area, c.name as city, p.name as province
-        FROM (area a INNER JOIN city c
-        ON a.city_id = c.id) INNER JOIN province p
-        ON c.province_id = p.id
-        WHERE a.id = #{areaId}
-    </select>
-
-    <insert id="addHousingEstate">
-        INSERT IGNORE INTO housing_estate (name, area_id)
-        VALUE (#{name}, #{areaId})
+    <insert id="addAddrDetail">
+        INSERT IGNORE INTO addr_detail (name, area_id, kind)
+        VALUE (#{name}, (SELECT id FROM area WHERE name = #{area}), #{kind})
     </insert>
 
-    <delete id="delHousingEstate">
-        DELETE FROM housing_estate WHERE name = #{name} AND area_id = #{areaId}
+    <delete id="deleteAddrDetail">
+        DELETE FROM addr_detail WHERE name = #{name}
+        AND area_id = (SELECT id FROM area WHERE name = #{area})
     </delete>
 
-    <select id="getHousingEstateId" resultType="int">
-        SELECT id FROM housing_estate WHERE name = #{name} AND area_id = #{areaId}
+    <select id="getAddrDetailId" resultType="Integer">
+        SELECT id FROM addr_detail WHERE name = #{name}
+        AND area_id = (SELECT id FROM area WHERE name = #{area})
+    </select>
+
+    <select id="getAddress" resultType="dto.Address">
+        SELECT ad.name as detail, a.name as area, c.name as city, p.name as province
+        FROM ((addr_detail ad INNER JOIN
+        area a ON ad.area_id = a.id)
+        INNER JOIN city c ON a.city_id = c.id)
+        INNER JOIN province p ON c.province_id = p.id
+        WHERE ad.id = #{addrDetailId}
     </select>
 
 </mapper>

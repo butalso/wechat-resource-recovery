@@ -9,8 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import service.AccountHandler;
-import service.UserHandler;
+import service.UserService;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.IOException;
@@ -22,7 +21,7 @@ import java.util.Map;
 @Api(tags = "用户信息控制")
 public class UserController {
     @Reference
-    UserHandler userHandler;
+    UserService userService;
     @Reference
     AccountHandler accountHandler;
 
@@ -115,7 +114,7 @@ public class UserController {
             }
             newUser.setId(user.getId());
             newUser.setPassword(user.getPassword());
-            userHandler.updateUser(newUser);
+            userService.updateUser(newUser);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>("修改失败", HttpStatus.FORBIDDEN);
@@ -140,7 +139,7 @@ public class UserController {
         try {
             newUser = mapToUser(userInfo);
             newUser.setPassword((String) userInfo.get("password"));
-            userHandler.addUser(newUser);
+            userService.addUser(newUser);
         } catch (IOException e) {
             e.printStackTrace();
             return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);

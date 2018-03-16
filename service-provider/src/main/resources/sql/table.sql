@@ -38,7 +38,7 @@ CREATE TABLE addr_detail(
   id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的地址详情id',
   name VARCHAR(255) NOT NULL COMMENT '地址名称',
   area_id VARCHAR(6) NOT NULL COMMENT '该小区所属的区编号',
-  kind INT NOT NULL DEFAULT 0 COMMENT '地址详情，0代表小区，1代表公司地址'
+  kind INT NOT NULL DEFAULT 0 COMMENT '地址详情，0代表小区，1代表非小区',
 
   PRIMARY KEY (name, area_id),
   FOREIGN KEY (area_id) REFERENCES area(id),
@@ -58,10 +58,7 @@ CREATE TABLE customer(
   point INT DEFAULT 0 COMMENT '用户积分值，由用户在平台上交易产生，可用于兑换礼品',
   experience INT DEFAULT 0 COMMENT '用户平台经验值，用于划分等级',
   addr_detail_id INT NOT NULL COMMENT '用户所在小区编号',
-  balance FLOAT DEFAULT 0 COMMENT '用户账户钱包余额',
-  pay_password VARCHAR(32) DEFAULT 'e10adc3949ba59abbe56e057f20f883e'
-    COMMENT '钱包支付密码，初始密码为123456';
-  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '用户注册时间',
 
   PRIMARY KEY(name),
   KEY idx_id(id)
@@ -82,10 +79,7 @@ CREATE TABLE collector(
   point INT DEFAULT 0 COMMENT '用户积分值，由用户在平台上交易产生，可用于兑换礼品',
   experience INT DEFAULT 0 COMMENT '用户平台经验值，用于划分等级',
   addr_detail_id INT NOT NULL COMMENT '用户所在具体地址编号',
-  balance FLOAT DEFAULT 0 COMMENT '用户账户钱包余额',
-  pay_password VARCHAR(32) DEFAULT 'e10adc3949ba59abbe56e057f20f883e'
-    COMMENT '钱包支付密码，初始密码为123456';
-  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '用户注册时间',
 
   PRIMARY KEY (name),
   KEY idx_id(id)
@@ -100,15 +94,50 @@ CREATE TABLE company(
   image_url VARCHAR(255) NOT NULL DEFAULT '/web-consumer/static/images/users/company/default.jpg'COMMENT '用户个人头像',
   phone VARCHAR(11) NOT NULL COMMENT '企业电话号码',
   addr_detail_id INT NOT NULL COMMENT '企业所在地址编号',
-  balance FLOAT DEFAULT 0 COMMENT '用户账户钱包余额',
-  pay_password VARCHAR(32) DEFAULT 'e10adc3949ba59abbe56e057f20f883e'
-    COMMENT '钱包支付密码，初始密码为123456';
-  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '用户注册时间',
 
   PRIMARY KEY (name),
   KEY idx_id(id)
 ) DEFAULT CHARSET = utf8
   COMMENT ='企业数据表';
+
+-- 管理员数据表
+CREATE TABLE manager(
+  id INT NOT NULL AUTO_INCREMENT COMMENT '管理员id',
+  name VARCHAR(50) NOT NULL COMMENT '管理员昵称',
+  password VARCHAR(20) NOT NULL COMMENT '管理员密码',
+  gender VARCHAR(1) NOT NULL COMMENT '管理员性别',
+  image_url VARCHAR(255) NOT NULL DEFAULT '/web-consumer/static/images/users/manager/default.jpg'COMMENT '用户个人头像',
+  phone VARCHAR(11) NOT NULL COMMENT '管理员电话号码',
+  area_id VARCHAR(6) NOT NULL COMMENT '管理员所在县级市编号',
+  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (name),
+  KEY idx_id(id)
+) DEFAULT CHARSET = utf8
+  COMMENT ='管理员数据表';
+
+-- 回收员回收小区范围数据表
+CREATE TABLE wallet(
+  id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配钱包id',
+  user_id INT NOT NULL COMMENT '用户id',
+  user_kind INT NOT NULL COMMENT '用户类型',
+  balance DOUBLE DEFAULT 0 COMMENT '钱包余额',
+  pay_password VARCHAR(255) DEFAULT 'e10adc3949ba59abbe56e057f20f883e'
+    COMMENT '钱包支付密码，初始密码为123456',
+
+  PRIMARY KEY (id)
+) DEFAULT CHARSET = utf8
+  COMMENT ='钱包数据表';
+
+CREATE TABLE wallet_record(
+    id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配钱包记录id',
+    wallet_id INT NOT NULL COMMENT '钱包id',
+    record VARCHAR(255) NOT NULL COMMENT '记录信息',
+
+    PRIMARY KEY (id)
+) DEFAULT CHARSET = utf8
+  COMMENT ='钱包交易记录数据表';
 
 -- 回收员回收小区范围数据表
 CREATE TABLE collect_range(
@@ -149,12 +178,15 @@ CREATE TABLE order_item(
   id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的订单id',
   create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   finish_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '完成时间',
+  collect_from_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '用户方便的上门回收开始时间',
+  collect_end_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '用户方便的上门回收开始时间',
   state INT NOT NULL DEFAULT 0
     COMMENT '订单状态，0代表回收员未接单，1代表回收员已接单未回收,2代表回收员已回收未交接，3代表回收员已交接，订单完成',
-  user_id INT NOT NULL COMMENT '创建订单的用户id',
-  collector_id INT COMMENT '接单的回收员id',
-  company_id INT COMMENT '回收员接单时所属企业的id',
-  user_grade INT DEFAULT 0 COMMENT '用户对本订单评分',
+  customer_id INT NOT NULL COMMENT '创建订单的用户id',
+  collector_id INT DEFAULT 1 COMMENT '接单的回收员id',
+  company_id INT DEFAULT 1 COMMENT '回收员接单时所属企业的id',
+  addr_detail_id INT NOT NULL COMMENT '订单交易地点',
+  customer_grade INT DEFAULT 0 COMMENT '用户对本订单评分',
   collector_grade INT DEFAULT 0 COMMENT '回收员对本订单评分',
 
   PRIMARY KEY (id)
@@ -163,29 +195,16 @@ CREATE TABLE order_item(
 
 -- 订单详情数据表
 CREATE TABLE order_detail(
-  id INT NOT NULL COMMENT '订单id',
+  id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配的订单详情id',
+  order_item_id INT NOT NULL COMMENT '订单id',
   name VARCHAR(50) NOT NULL COMMENT '废品名称',
   weight DOUBLE NOT NULL COMMENT '该废品详情的重量',
   price DOUBLE NOT NULL COMMENT '交易时废品单价',
 
-  PRIMARY KEY (id, name)
+  PRIMARY KEY (order_item_id, name),
+  KEY id_idx(id)
 ) DEFAULT CHARSET = utf8
   COMMENT ='订单详情具体某项废品数据表';
-
-
--- 管理员数据表
-CREATE TABLE manager(
-  id INT NOT NULL AUTO_INCREMENT COMMENT '管理员id',
-  name VARCHAR(50) NOT NULL COMMENT '管理员昵称',
-  password VARCHAR(20) NOT NULL COMMENT '管理员密码',
-  image_url VARCHAR(255) NOT NULL DEFAULT '/web-consumer/static/images/users/manager/default.jpg'COMMENT '用户个人头像',
-  phone VARCHAR(11) NOT NULL COMMENT '管理员电话号码',
-  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-  PRIMARY KEY (name),
-  KEY idx_id(id)
-) DEFAULT CHARSET = utf8
-  COMMENT ='管理员数据表';
 
 -- 消息表
 CREATE TABLE message(
@@ -229,14 +248,25 @@ COMMENT ='礼品快递信息数据表';
 -- 用户活跃度数据表
 CREATE TABLE user_activation(
     id INT NOT NULL AUTO_INCREMENT COMMENT '活跃度表id',
-    date DATE NOT NULL '活跃日期',
+    date DATE NOT NULL COMMENT '活跃日期',
     duration INT NOT NULL DEFAULT 0 COMMENT '当日活跃持续时间',
-    login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP '登录时间，用于用户退出登录时计算持续时间',
+    login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '登录时间，用于用户退出登录时计算持续时间',
 
-    user_id INT NOT NULL DEFAULT '用户id',
-    user_kind INT NOT NULL DEFAULT '用户类型',
+    user_id INT NOT NULL COMMENT '用户id',
+    user_kind INT NOT NULL COMMENT '用户类型',
 
     PRIMARY KEY(id)
+) DEFAULT CHARSET = utf8
+COMMENT ='用户活跃度数据表';
+
+-- 数据字典
+CREATE TABLE order_state_enum(
+    id INT NOT NULL AUTO_INCREMENT COMMENT '订单状态id',
+    state INT NOT NULL COMMENT '订单状态key值',
+    state_info VARCHAR(255) COMMENT '订单状态info值',
+
+    PRIMARY KEY(state),
+    KEY idx_id(id)
 ) DEFAULT CHARSET = utf8
 COMMENT ='用户活跃度数据表';
 

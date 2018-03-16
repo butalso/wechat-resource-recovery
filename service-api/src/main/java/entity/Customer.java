@@ -5,27 +5,26 @@ import dto.Address;
 /**
  * 业主实体（卖废品的用户）
  */
-public class Customer extends User {
+public class Customer extends ECPUser {
     private final Integer userKind = 0;
-    private String gender;
-    private Integer credit;
-    private Integer point;
-    private Integer experience;
 
     public Customer() {
     }
 
-    public Customer(String name) {
-        super(name);
+    public Customer(Integer id, String name) {
+        super(id, name);
     }
 
-    public Customer(String name, String password, String phone, String gender, Address address) {
-        super(name, password, phone, address);
-        this.gender = gender;
+    public Customer(String name, String password) {
+        super(name, password);
     }
 
-    public Customer(Customer customer) {
-        this(customer.getName(), null, customer.getPhone(), customer.gender, null);
+    public Customer(String name, String password, String gender
+            , String phone, Address address) {
+        super(name, password);
+        this.setGender(gender);
+        this.setPhone(phone);
+        this.setAddress(address);
     }
 
     @Override
@@ -33,46 +32,11 @@ public class Customer extends User {
         return userKind;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public Integer getCredit() {
-        return credit;
-    }
-
-    public void setCredit(Integer credit) {
-        this.credit = credit;
-    }
-
-    public Integer getPoint() {
-        return point;
-    }
-
-    public void setPoint(Integer point) {
-        this.point = point;
-    }
-
-    public Integer getExperience() {
-        return experience;
-    }
-
-    public void setExperience(Integer experience) {
-        this.experience = experience;
-    }
-
     @Override
     public String toString() {
         return "Customer{" +
+                super.toString() +
                 "userKind=" + userKind +
-                ", gender='" + gender + '\'' +
-                ", credit=" + credit +
-                ", point=" + point +
-                ", experience=" + experience +
                 '}';
     }
 }

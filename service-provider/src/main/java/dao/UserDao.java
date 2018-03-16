@@ -4,25 +4,19 @@ import entity.Collector;
 import entity.Company;
 import entity.Customer;
 import entity.Manager;
+import exception.UserNameExistException;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 /**
- * 系统使用者（业主、回收员、企业）信息的增删改查
+ * 系统使用者（业主、回收员、企业、管理员）信息的增删改查
  */
 public interface UserDao {
 
     /**
-     * 获取某一小区内所有业主的id
-     * @param addrDetailId
-     * @return
-     */
-    List<Integer> getCustomersId(@Param("addrDetailId") int addrDetailId);
-
-    /**
-     * 增加业主实体（卖废品的用户）
-     * @param customer 完成后设置id到形参中的对象
+     * 增加业主实体
+     * @param customer
      */
     void addCustomer(@Param("c") Customer customer);
 
@@ -34,41 +28,41 @@ public interface UserDao {
     Customer getCustomer(String name);
 
     /**
-     * 根据参数中业主实体昵称名修改业主实体（卖废品的用户）
+     * 根据参数中业主用户名修改业主实体（卖废品的用户）
      * @param customer
      */
     void updateCustomer(@Param("c") Customer customer);
 
     /**
-     * 删除给定呢称名的业主实体（卖废品的用户）
-     * @param nickName
+     * 删除给定用户名的业主实体（卖废品的用户）
+     * @param name
      */
-    void deleteCustomer(String nickName);
+    void deleteCustomer(String name);
 
     /**
      * 增加回收员
-     * @param collector 完成后设置id到形参中的对象
+     * @param collector
      */
     void addCollector(@Param("c") Collector collector);
 
     /**
-     * 根据昵称名查询回收员信息
-     * @param nick_name
+     * 根据用户名查询回收员信息
+     * @param name
      * @return
      */
-    Collector getCollector(String nick_name);
+    Collector getCollector(String name);
 
     /**
-     * 根据参数中回收员实体昵称修改回收员信息
+     * 根据参数中回收员id修改回收员信息
      * @param collector
      */
     void updateCollector(@Param("c") Collector collector);
 
     /**
      * 删除参数中回收员信息
-     * @param nickName
+     * @param name
      */
-    void deleteCollector(String nickName);
+    void deleteCollector(String name);
 
     /**
      * 添加企业
@@ -96,25 +90,27 @@ public interface UserDao {
     void deleteCompany(String name);
 
     /**
-     * 根据用户id获取业主实体
-     * @param id
-     * @return
+     * 增添管理员
+     * @param manager
      */
-    Customer getCustomerById(int id);
+    void addManager(@Param("m") Manager manager);
 
     /**
-     * 根据id获取回收员实体
-     * @param id
+     * 获取管理员信息
+     * @param name
      * @return
      */
-    Collector getCollectorById(int id);
+    Manager getManager(String name);
 
     /**
-     * 根据id获取公司实体
-     * @param id
-     * @return
+     * 修改管理员信息
+     * @param manager
      */
-    Company getCompanyById(int id);
+    void updateManager(@Param("m") Manager manager);
 
-    Manager getManager(String nickName);
+    /**
+     * 删除管理员
+     * @param name
+     */
+    void deleteManager(String name);
 }

@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 系统的使用者，Customer和Collector和Company的父类
+ * 系统的使用者，Customer和Collector和Company和manager的父类
  */
 
 public class User implements Serializable {
@@ -14,23 +14,22 @@ public class User implements Serializable {
     private Integer id;
     private String name;
     private String password;
-    private String image_url;
+    private String imageUrl;
     private String phone;
-    private Float balance;
     private Address address;
+    private Date createTime;
 
     public User() {
     }
 
-    public User(String name) {
+    public User(Integer id, String name) {
+        this.id = id;
         this.name = name;
     }
 
-    public User(String name, String password, String phone, Address address) {
+    public User(String name, String password) {
         this.name = name;
         this.password = password;
-        this.phone = phone;
-        this.address = address;
     }
 
     public Integer getUserKind() {
@@ -61,12 +60,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getImage_url() {
-        return image_url;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getPhone() {
@@ -77,14 +76,6 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public Float getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Float balance) {
-        this.balance = balance;
-    }
-
     public Address getAddress() {
         return address;
     }
@@ -93,16 +84,24 @@ public class User implements Serializable {
         this.address = address;
     }
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
-                ", image_url='" + image_url + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
                 ", phone='" + phone + '\'' +
-                ", balance=" + balance +
                 ", address=" + address +
+                ", createTime=" + createTime +
                 '}';
     }
 }

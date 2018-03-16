@@ -31,37 +31,42 @@ public interface AddressDao {
     List<String> getAreas(String city);
 
     /**
-     * 查询区的行政代号
+     * 查询参数中县级市中地址详情
      * @param area
      * @return
      */
-    String getAreaId(String area);
+    List<String> getAddrDetails(@Param("area") String area, @Param("kind") Integer kind);
 
     /**
-     * 查询参数中县级市中所有小区
+     * 增添地址详情
+     * @param name
+     * @param area
+     * @param kind
+     */
+    void addAddrDetail(@Param("name") String name,
+                       @Param("area") String area, @Param("kind") Integer kind);
+
+    /**
+     * 删除地址详情
+     * @param name
+     * @param area
+     */
+    void deleteAddrDetail(@Param("name") String name, @Param("area") String area);
+
+    /**
+     * 获取地址详情的id，主要用来判断地址存不存在
+     * @param name
      * @param area
      * @return
      */
-    List<String> getHousingEstates(String area);
+    Integer getAddrDetailId(@Param("name") String name, @Param("area") String area);
 
     /**
-     * 根据小区号查询该小区完整地址
-     * @param housingEstateId
+     * 根据地址详情id获取完整地址
+     * @param addrDetailId
      * @return
      */
-    Address gethousingEstateAddress(int housingEstateId);
+    Address getAddress(@Param("addrDetailId") Integer addrDetailId);
 
-    /**
-     * 根据县级市行政编号查询该县级市完整地址
-     * @param areaId
-     * @return
-     */
-    Address getAreaAddress(String areaId);
-
-    void addHousingEstate(@Param("name") String name, @Param("areaId") String areaId);
-
-    void delHousingEstate(@Param("name") String name, @Param("areaId") String areaId);
-
-    int getHousingEstateId(@Param("name") String name, @Param("areaId") String areaId);
 
 }

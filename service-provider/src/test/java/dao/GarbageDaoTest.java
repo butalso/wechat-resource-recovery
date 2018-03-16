@@ -1,5 +1,6 @@
 package dao;
 
+import entity.Garbage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,30 @@ public class GarbageDaoTest {
     @Test
     public void getGarbages() {
         System.out.println(garbageDao.getGarbages("废纸"));
+    }
+
+    @Test
+    public void getGarbageTypes() {
+        System.out.println(garbageDao.getGarbageTypes());
+    }
+
+    @Test
+    public void addGarbageType() {
+        garbageDao.addGarbageType("自行车");
+    }
+
+    @Test
+    public void addGarbage() {
+        garbageDao.addGarbage(new Garbage("自行车", "凤凰牌", 22.2));
+    }
+
+    @Test
+    public void delteGarbageType() {
+        garbageDao.delteGarbageType("自行车");
+    }
+
+    @Test
+    public void deleteGarbage() {
+        garbageDao.deleteGarbage(new Garbage("自行车", "凤凰牌"));
     }
 }

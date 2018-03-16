@@ -1,7 +1,6 @@
 package controller.home;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import entity.Manager;
 import entity.User;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
-import service.UserHandler;
+import service.UserService;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpSession;
 public class Home {
 
     @Reference
-    UserHandler userHandler;
+    UserService userService;
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     @ApiOperation(value = "获取首页")
@@ -68,7 +67,7 @@ public class Home {
                                         @ApiIgnore HttpSession session, @ApiIgnore ModelMap modelMap) {
         ResponseEntity<String> result = null;
 
-        User user = userHandler.getUser(userName, userKind);
+        User user = userService.getUser(userName, userKind);
 
         if (user == null) {
             /* 用户不存在 */

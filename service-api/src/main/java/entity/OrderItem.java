@@ -1,38 +1,39 @@
 package entity;
 
+import dto.Address;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class OrderItem {
-    private int id;
+public class OrderItem implements Serializable {
+    private Integer id;
     private Date createTime;
     private Date finishTime;
-    private int state;
-    private int userId;
-    private int collectorId;
-    private int companyId;
-    private int userGrade;
-    private int collectorGrade;
+    private Date collectFromTime;
+    private Date collectEndTime;
+    private String state;
+    private String customerName;
+    private String collectorName;
+    private String companyName;
+    private Address address;
+    private Integer customerGrade;
+    private Integer collectorGrade;
 
     public OrderItem() {
     }
 
-    public OrderItem(int id, Date finishTime, int state,
-                     int collectorId, int companyId, int userGrade,
-                     int collectorGrade) {
-        this.id = id;
-        this.finishTime = finishTime;
-        this.state = state;
-        this.collectorId = collectorId;
-        this.companyId = companyId;
-        this.userGrade = userGrade;
-        this.collectorGrade = collectorGrade;
+    public OrderItem(String customerName, Address address, Date collectFromTime, Date collectEndTime) {
+        this.customerName = customerName;
+        this.address = address;
+        this.collectFromTime = collectFromTime;
+        this.collectEndTime = collectEndTime;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -52,51 +53,75 @@ public class OrderItem {
         this.finishTime = finishTime;
     }
 
-    public int getState() {
+    public Date getCollectFromTime() {
+        return collectFromTime;
+    }
+
+    public void setCollectFromTime(Date collectFromTime) {
+        this.collectFromTime = collectFromTime;
+    }
+
+    public Date getCollectEndTime() {
+        return collectEndTime;
+    }
+
+    public void setCollectEndTime(Date collectEndTime) {
+        this.collectEndTime = collectEndTime;
+    }
+
+    public String getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(String state) {
         this.state = state;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public int getCollectorId() {
-        return collectorId;
+    public String getCollectorName() {
+        return collectorName;
     }
 
-    public void setCollectorId(int collectorId) {
-        this.collectorId = collectorId;
+    public void setCollectorName(String collectorName) {
+        this.collectorName = collectorName;
     }
 
-    public int getCompanyId() {
-        return companyId;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
-    public int getUserGrade() {
-        return userGrade;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setUserGrade(int userGrade) {
-        this.userGrade = userGrade;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-    public int getCollectorGrade() {
+    public Integer getCustomerGrade() {
+        return customerGrade;
+    }
+
+    public void setCustomerGrade(Integer customerGrade) {
+        this.customerGrade = customerGrade;
+    }
+
+    public Integer getCollectorGrade() {
         return collectorGrade;
     }
 
-    public void setCollectorGrade(int collectorGrade) {
+    public void setCollectorGrade(Integer collectorGrade) {
         this.collectorGrade = collectorGrade;
     }
 
@@ -106,11 +131,14 @@ public class OrderItem {
                 "id=" + id +
                 ", createTime=" + createTime +
                 ", finishTime=" + finishTime +
-                ", state=" + state +
-                ", userId=" + userId +
-                ", collectorId=" + collectorId +
-                ", companyId=" + companyId +
-                ", userGrade=" + userGrade +
+                ", collectFromTime=" + collectFromTime +
+                ", collectEndTime=" + collectEndTime +
+                ", state='" + state + '\'' +
+                ", customerName='" + customerName + '\'' +
+                ", collectorName='" + collectorName + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", address=" + address +
+                ", customerGrade=" + customerGrade +
                 ", collectorGrade=" + collectorGrade +
                 '}';
     }

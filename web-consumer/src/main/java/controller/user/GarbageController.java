@@ -6,7 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import service.GarbageHandler;
+import service.GarbageService;
 
 import java.util.List;
 
@@ -16,13 +16,13 @@ import java.util.List;
 public class GarbageController {
 
     @Reference
-    GarbageHandler garbageHandler;
+    GarbageService garbageService;
 
     @RequestMapping(value = "/price", method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
     @ResponseBody
     @ApiOperation(value = "获取某大类废品价格信息")
     List<Garbage> getGarbages(@RequestParam(value = "name") String garbageType) {
-        return garbageHandler.getGarbages(garbageType);
+        return garbageService.getGarbages(garbageType);
     }
 }

@@ -3,16 +3,25 @@ package entity;
 import java.io.Serializable;
 
 public class Gift implements Serializable {
-    private int id;
+    private Integer id;
     private String name;
-    private int value;
-    private int inventory;
+    private Integer point;
+    private Integer inventory;
 
-    public int getId() {
+    public Gift() {
+    }
+
+    public Gift(String name, Integer point, Integer inventory) {
+        this.name = name;
+        this.point = point;
+        this.inventory = inventory;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -24,19 +33,19 @@ public class Gift implements Serializable {
         this.name = name;
     }
 
-    public int getValue() {
-        return value;
+    public Integer getPoint() {
+        return point;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setPoint(Integer point) {
+        this.point = point;
     }
 
-    public int getInventory() {
+    public Integer getInventory() {
         return inventory;
     }
 
-    public void setInventory(int inventory) {
+    public void setInventory(Integer inventory) {
         this.inventory = inventory;
     }
 
@@ -45,7 +54,7 @@ public class Gift implements Serializable {
         return "Gift{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", value=" + value +
+                ", point=" + point +
                 ", inventory=" + inventory +
                 '}';
     }
