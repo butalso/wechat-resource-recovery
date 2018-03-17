@@ -1,10 +1,12 @@
 $(function () {
-    init();
+    // init();
     $(".moreOrder").click(function () {
         getMoreOrder();
     });
 });
-
+window.onbeforeunload=function (ev) {
+    alert("?")
+}
 function init() {
     $.ajax({
         type: 'GET',

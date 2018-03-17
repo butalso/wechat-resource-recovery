@@ -27,95 +27,98 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="logo">
             <a href="/web-consumer"><span>Waste</span>Recycling</a>
         </div>
-        <div class="header-right">
-            <a class="account" href="/web-consumer/garbage/shoppingCar">废品筐</a>
-            <a class="account" href="#">回收小知识</a>
-            <a class="account" href="/web-consumer/user/info">个人中心</a>
-        </div>
+        <nav>
+            <ul class="nav nav-pills">
+                <li role="presentation"><a class="account" href="/web-consumer"><i class="fa fa-home" aria-hidden="true"></i>主页</a></li>
+                <li role="presentation"><a class="account" href="/web-consumer/garbage/shoppingCar"><i class="fa fa-database" aria-hidden="true"></i>废品筐</a></li>
+                <li role="presentation"><a class="account" href="#"><i class="fa fa-gift" aria-hidden="true"></i>积分兑换</a></li>
+                <li role="presentation"><a class="account" href="/web-consumer/user/info"><i class="fa fa-user" aria-hidden="true"></i>个人中心</a></li>
+            </ul>
+        </nav>
     </div>
 </div>
 </@block>
 <@block name="content">
 
 </@block>
-<@block name="footer">
-<!--footer section start-->
-<footer>
-    <div class="footer-top">
-        <div class="container">
-            <div class="foo-grids">
-                <div class="col-md-3 footer-grid">
-                    <h4 class="footer-head">我们是谁</h4>
-                    <p>既然你诚信诚意地发问了</p>
-                    <p>我就大发慈悲地告诉你</p>
-                    <p>我们就是穿越银河的火箭队</p>
-                    <p>绿色的明天在等着我们</p>
-                    <p>就是这样，喵～</p>
-                </div>
-                <div class="col-md-3 footer-grid">
-                    <h4 class="footer-head">帮助</h4>
-                    <ul>
-                        <li><a href="#">啥玩意儿啊</a></li>
-                        <li><a href="#">咋回事儿啊</a></li>
-                        <li><a href="#">这可咋整啊</a></li>
-                        <li><a href="#">大兄弟帮帮忙啊</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 footer-grid">
-                    <h4 class="footer-head">信息门户</h4>
-                    <ul>
-                        <li><a href="#">地点地图</a></li>
-                        <li><a href="#">使用条款</a></li>
-                        <li><a href="#">热门搜索</a></li>
-                        <li><a href="#">隐私政策</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 footer-grid">
-                    <h4 class="footer-head">联系我们</h4>
-                    <span class="hq">我们的老巢</span>
-                    <address>
-                        <ul class="location">
-                            <li><span class="glyphicon glyphicon-map-marker"></span></li>
-                            <li>江苏省南京市江宁区佛城西路8号河（jun）海（yuan）大学</li>
-                            <div class="clearfix"></div>
-                        </ul>
-                        <ul class="location">
-                            <li><span class="glyphicon glyphicon-earphone"></span></li>
-                            <li>15850680971</li>
-                            <div class="clearfix"></div>
-                        </ul>
-                        <ul class="location">
-                            <li><span class="glyphicon glyphicon-envelope"></span></li>
-                            <li><a href="mailto:lan_xiao163@163.com">lan_xiao163@163.com</a></li>
-                            <div class="clearfix"></div>
-                        </ul>
-                    </address>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-    <div class="footer-bottom text-center">
-        <div class="container">
-            <div class="footer-logo">
-                <a href="index.ftl"><span>Waste</span>Recycling</a>
-            </div>
-            <div class="footer-social-icons">
-                <ul>
-                    <li><a class="facebook" href="#"><span>Facebook</span></a></li>
-                    <li><a class="twitter" href="#"><span>Twitter</span></a></li>
-                    <li><a class="flickr" href="#"><span>Flickr</span></a></li>
-                    <li><a class="googleplus" href="#"><span>Google+</span></a></li>
-                    <li><a class="dribbble" href="#"><span>Dribbble</span></a></li>
-                </ul>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</footer>
-<!--footer section end-->
+<#--<@block name="footer">-->
+<#--<!--footer section start&ndash;&gt;-->
+<#--<footer>-->
+    <#--<div class="footer-top">-->
+        <#--<div class="container">-->
+            <#--<div class="foo-grids">-->
+                <#--<div class="col-md-3 footer-grid">-->
+                    <#--<h4 class="footer-head">我们是谁</h4>-->
+                    <#--<p>既然你诚信诚意地发问了</p>-->
+                    <#--<p>我就大发慈悲地告诉你</p>-->
+                    <#--<p>我们就是穿越银河的火箭队</p>-->
+                    <#--<p>绿色的明天在等着我们</p>-->
+                    <#--<p>就是这样，喵～</p>-->
+                <#--</div>-->
+                <#--<div class="col-md-3 footer-grid">-->
+                    <#--<h4 class="footer-head">帮助</h4>-->
+                    <#--<ul>-->
+                        <#--<li><a href="#">啥玩意儿啊</a></li>-->
+                        <#--<li><a href="#">咋回事儿啊</a></li>-->
+                        <#--<li><a href="#">这可咋整啊</a></li>-->
+                        <#--<li><a href="#">大兄弟帮帮忙啊</a></li>-->
+                    <#--</ul>-->
+                <#--</div>-->
+                <#--<div class="col-md-3 footer-grid">-->
+                    <#--<h4 class="footer-head">信息门户</h4>-->
+                    <#--<ul>-->
+                        <#--<li><a href="#">地点地图</a></li>-->
+                        <#--<li><a href="#">使用条款</a></li>-->
+                        <#--<li><a href="#">热门搜索</a></li>-->
+                        <#--<li><a href="#">隐私政策</a></li>-->
+                    <#--</ul>-->
+                <#--</div>-->
+                <#--<div class="col-md-3 footer-grid">-->
+                    <#--<h4 class="footer-head">联系我们</h4>-->
+                    <#--<span class="hq">我们的老巢</span>-->
+                    <#--<address>-->
+                        <#--<ul class="location">-->
+                            <#--<li><span class="glyphicon glyphicon-map-marker"></span></li>-->
+                            <#--<li>江苏省南京市江宁区佛城西路8号河（jun）海（yuan）大学</li>-->
+                            <#--<div class="clearfix"></div>-->
+                        <#--</ul>-->
+                        <#--<ul class="location">-->
+                            <#--<li><span class="glyphicon glyphicon-earphone"></span></li>-->
+                            <#--<li>15850680971</li>-->
+                            <#--<div class="clearfix"></div>-->
+                        <#--</ul>-->
+                        <#--<ul class="location">-->
+                            <#--<li><span class="glyphicon glyphicon-envelope"></span></li>-->
+                            <#--<li><a href="mailto:lan_xiao163@163.com">lan_xiao163@163.com</a></li>-->
+                            <#--<div class="clearfix"></div>-->
+                        <#--</ul>-->
+                    <#--</address>-->
+                <#--</div>-->
+                <#--<div class="clearfix"></div>-->
+            <#--</div>-->
+        <#--</div>-->
+    <#--</div>-->
+    <#--<div class="footer-bottom text-center">-->
+        <#--<div class="container">-->
+            <#--<div class="footer-logo">-->
+                <#--<a href="index.ftl"><span>Waste</span>Recycling</a>-->
+            <#--</div>-->
+            <#--<div class="footer-social-icons">-->
+                <#--<ul>-->
+                    <#--<li><a class="facebook" href="#"><span>Facebook</span></a></li>-->
+                    <#--<li><a class="twitter" href="#"><span>Twitter</span></a></li>-->
+                    <#--<li><a class="flickr" href="#"><span>Flickr</span></a></li>-->
+                    <#--<li><a class="googleplus" href="#"><span>Google+</span></a></li>-->
+                    <#--<li><a class="dribbble" href="#"><span>Dribbble</span></a></li>-->
+                <#--</ul>-->
+            <#--</div>-->
+            <#--<div class="clearfix"></div>-->
+        <#--</div>-->
+    <#--</div>-->
+<#--</footer>-->
+<#--<!--footer section end&ndash;&gt;-->
 
-</@block>
+<#--</@block>-->
 
 </body>
 
