@@ -43,6 +43,6 @@
 </@override>
 
 <@override name="js">
-<script src="/web-consumer/static/index/customer_order_list.js"></script>
+<script src="/web-consumer/static/index/customer_order.js"></script>
 </@override>
 <@extends name="layout.ftl"/>
