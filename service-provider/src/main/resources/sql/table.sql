@@ -17,8 +17,7 @@ CREATE TABLE city(
   name VARCHAR(15) NOT NULL COMMENT '市的名称',
   province_id VARCHAR(6) NOT NULL COMMENT '该市所属的省份行政编号',
 
-  PRIMARY KEY (id),
-  FOREIGN KEY (province_id) REFERENCES province(id)
+  PRIMARY KEY (id)
 ) DEFAULT CHARSET = utf8
   COMMENT ='市数据表';
 
@@ -28,8 +27,7 @@ CREATE TABLE area(
   name VARCHAR(15) NOT NULL COMMENT '区的名称',
   city_id VARCHAR(6) NOT NULL COMMENT '该区所属的区行政编号',
 
-  PRIMARY KEY (id),
-  FOREIGN KEY (city_id) REFERENCES city(id)
+  PRIMARY KEY (id)
 ) DEFAULT CHARSET = utf8
   COMMENT ='区数据表';
 
@@ -41,7 +39,6 @@ CREATE TABLE addr_detail(
   kind INT NOT NULL DEFAULT 0 COMMENT '地址详情，0代表小区，1代表非小区',
 
   PRIMARY KEY (name, area_id),
-  FOREIGN KEY (area_id) REFERENCES area(id),
   KEY idx_id(id)
 ) DEFAULT CHARSET = utf8
   COMMENT ='小区数据表';
