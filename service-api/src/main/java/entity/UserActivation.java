@@ -1,8 +1,9 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserActivation {
+public class UserActivation implements Serializable {
     private Integer id;
     private Integer userId;
     private Integer userKind;

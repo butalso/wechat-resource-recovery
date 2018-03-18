@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import service.OrderService;
+import service.WalletService;
 import util.Md5Util;
 import util.OrderUtil;
 
@@ -18,6 +19,8 @@ import java.util.*;
 @Service
 @com.alibaba.dubbo.config.annotation.Service
 public class OrderServiceImpl implements OrderService {
+
+
     private final Double drawPercentage = 0.1d;
 
     @Autowired
@@ -28,11 +31,20 @@ public class OrderServiceImpl implements OrderService {
     private WalletDao walletDao;
     @Autowired
     private AddressDao addressDao;
+    @Autowired
+    WalletService walletService;
+
+    @Override
+    public Order getOrder(Integer orderItemId) {
+        OrderItem orderItem = orderDao.getOrderItem(orderItemId);
+        List<OrderDetail> orderDetails = orderDao.getOrderDetails(orderItemId);
+        return new Order(orderItem, orderDetails);
+    }
 
     @Override
     public void addOrder(Order order)
             throws UserNonExistsException, AddressNonExistsException {
-        Customer customer = userDao.getCustomer(order.getOrderItem().getCustomerName());
+        Customer customer = userDao.getCustomerDetails(order.getOrderItem().getCustomerName());
         Address address = order.getOrderItem().getAddress();
 
         if (customer == null) {
@@ -119,8 +131,8 @@ public class OrderServiceImpl implements OrderService {
             throw new OrderOwnerException();
         }
 
-        Customer customer = userDao.getCustomer(orderItem.getCustomerName());
-        Company company = userDao.getCompany(orderItem.getCompanyName());
+        Customer customer = userDao.getCustomerDetails(orderItem.getCustomerName());
+        Company company = userDao.getCompanyDetails(orderItem.getCompanyName());
         Wallet customerWallet = walletDao.getWallet(customer.getId(), customer.getUserKind());
         Wallet companyWallet = walletDao.getWallet(company.getId(), company.getUserKind());
 
@@ -134,7 +146,7 @@ public class OrderServiceImpl implements OrderService {
             /*订单状态改变*/
             orderDao.collectorConfirmReceive(orderItemId, name);
             /*企业向用户转账*/
-            transfer(companyWallet, customerWallet, value);
+            walletService.transfer(companyWallet, customerWallet, value);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -150,8 +162,8 @@ public class OrderServiceImpl implements OrderService {
         List<OrderDetail> orderDetails = orderDao.getOrderDetails(orderItemId);
         Order order = new Order(orderItem, orderDetails);
 
-        Collector collector = userDao.getCollector(orderItem.getCollectorName());
-        Company company = userDao.getCompany(orderItem.getCompanyName());
+        Collector collector = userDao.getCollectorDetails(orderItem.getCollectorName());
+        Company company = userDao.getCompanyDetails(orderItem.getCompanyName());
 
         if (company != null && !name.equals(company.getName())) {
             /*不属于该企业的订单*/
@@ -175,7 +187,7 @@ public class OrderServiceImpl implements OrderService {
             /*订单状态改变*/
             orderDao.finishOrder(orderItemId, name);
             /*企业向回收员转账*/
-            transfer(companyWallet, collectorWallet, value * drawPercentage);
+            walletService.transfer(companyWallet, collectorWallet, value * drawPercentage);
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
@@ -183,18 +195,6 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
-    private void transfer(Wallet fromWallet, Wallet toWallet, double value)
-            throws LackOfBalanceException {
-        /*保留两位小数*/
-        value = (double) Math.round(value * 100) / 100;
-        /*回收员向用户转账*/
-        int update = walletDao.updateWallet(fromWallet.getId(), fromWallet.getPayPassword(), -value);
-        if (update <= 0) {
-            throw new LackOfBalanceException();
-        }
-        walletDao.updateWallet(toWallet.getId(), toWallet.getPayPassword(), value);
-
-    }
 
     @Override
     public void gradeOrder(Integer orderItemId, String name, int useKind, int grade)
@@ -203,8 +203,8 @@ public class OrderServiceImpl implements OrderService {
 
         List<OrderDetail> orderDetails = orderDao.getOrderDetails(orderItemId);
         Order order = new Order(orderItem, orderDetails);
-        Customer customer = userDao.getCustomer(orderItem.getCustomerName());
-        Collector collector = userDao.getCollector(orderItem.getCollectorName());
+        Customer customer = userDao.getCustomerDetails(orderItem.getCustomerName());
+        Collector collector = userDao.getCollectorDetails(orderItem.getCollectorName());
 
         if (OrderState.CREATE.getStateInfo().equals(orderItem.getState()) ||
                 OrderState.RECEIVE.getStateInfo().equals(orderItem.getState())) {
@@ -239,5 +239,20 @@ public class OrderServiceImpl implements OrderService {
         user.setExperience(user.getExperience() + experience);
         user.setCredit(user.getCredit() + credit);
         user.setPoint(user.getPoint() + point);
+    }
+
+    @Override
+    public void updateOrderDetails(Integer orderItemId, List<OrderDetail> orderDetails)
+            throws OrderNonExistException, OrderHadBeenPayedException {
+        OrderItem orderItem = orderDao.getOrderItem(orderItemId);
+        if (orderItem == null) {
+            throw new OrderNonExistException();
+        }
+        if (orderItem.getState().equals(OrderState.COLLECT) ||
+                orderItem.getState().equals(OrderState.FINISH)) {
+            throw new OrderHadBeenPayedException();
+        }
+        orderDao.deleteOrderDetails(orderItemId);
+        orderDao.addOrderDetails(orderItemId, orderDetails);
     }
 }

@@ -1,7 +1,8 @@
-package controller.home;
+package controller.user;
+
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import entity.Manager;
+import entity.Customer;
 import entity.User;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import service.UserService;
 import springfox.documentation.annotations.ApiIgnore;
+import util.LoginLogoutUtil;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,25 +21,14 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/")
 @SessionAttributes("user")
 @Api(tags = "获取首页，控制用户登录、登出、注册")
-public class Home {
-
+public class UserHome {
     @Reference
     UserService userService;
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-    @ApiOperation(value = "获取首页")
+    @ApiOperation(value = "获取用户首页")
     public String userHome() {
         return "user/index";
-    }
-
-    @RequestMapping(value = "/manager", method = RequestMethod.GET)
-    @ApiOperation(value = "获取管理员首页，未登录返回登录页面")
-    public String managerHome(HttpSession session) {
-        if (session.getAttribute("user") == null ||
-                ((User)session.getAttribute("user")).getUserKind() != 4) {
-            return "manager/login";
-        }
-        return "manager/index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -53,6 +44,22 @@ public class Home {
         return "user/register";
     }
 
+    @RequestMapping(value = "/register", method = RequestMethod.POST,
+            consumes = "application/json;charset=UTF-8",
+            produces = "text/plain;charset=UTF-8")
+    @ApiOperation(value = "处理用户注册，用户需要填写地址，性别，用户名，密码，电话")
+    public ResponseEntity<String> addUser(@RequestBody Customer customer) {
+        ResponseEntity<String> result = null;
+
+        try {
+            userService.addUser(customer);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<>("注册成功", HttpStatus.CREATED);
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST,
             produces = "text/plain;charset=utf-8")
     @ApiOperation(value = "处理用户登录信息")
@@ -63,32 +70,16 @@ public class Home {
                                             @RequestParam("userName") String userName,
                                         @ApiParam(value = "密码", required = true)
                                             @RequestParam("password") String password,
-                                        @ApiParam(value = "用户类型,0代表业主，1代表回收员，2代表企业, 3代表管理员", required = true)
+                                        @ApiParam(value = "用户类型,0代表业主，1代表回收员，2代表企业", required = true)
                                             @RequestParam("userKind") int userKind,
                                         @ApiIgnore HttpSession session, @ApiIgnore ModelMap modelMap) {
-        ResponseEntity<String> result = null;
-
-        User user = userService.getUser(userName, userKind);
-
-        if (user == null) {
-            /* 用户不存在 */
-            result = new ResponseEntity<>("用户不存在", HttpStatus.UNAUTHORIZED);
-        } else if (!user.getPassword().equals(password)) {
-            /* 密码错误 */
-            result = new ResponseEntity<>("密码错误", HttpStatus.UNAUTHORIZED);
-        } else {
-            /* 密码正确，设置用户登录状态 */
-            // TODO 用户账号状态
-            modelMap.addAttribute("user", user);
-            result = new ResponseEntity<>("登录成功", HttpStatus.OK);
-        }
-        return result;
+        return LoginLogoutUtil.login(userName, password, userKind, session, modelMap);
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     @ApiOperation(value = "登出，重定向到首页")
-    public String logout(SessionStatus sessionStatus) {
-        sessionStatus.setComplete();
+    public String logout(SessionStatus sessionStatus, @ApiIgnore @ModelAttribute("user") User user) {
+        LoginLogoutUtil.logout(sessionStatus, user);
         return "redirect:index";
     }
 

@@ -10,6 +10,13 @@ import java.util.List;
 public interface OrderService {
 
     /**
+     * 获取指定订单号的订单
+     * @param orderItemId
+     * @return
+     */
+    Order getOrder(Integer orderItemId);
+
+    /**
      * 用户创建订单
      * @param order
      */
@@ -29,6 +36,14 @@ public interface OrderService {
      * @return
      */
     List<Order> getNewOrders(String name);
+
+    /**
+     * 修正某一订单信息
+     * @param orderItemId
+     * @param orderDetails
+     */
+    void updateOrderDetails(Integer orderItemId, List<OrderDetail> orderDetails)
+            throws OrderNonExistException, OrderHadBeenPayedException;
 
     /**
      * 业主删除未完成订单

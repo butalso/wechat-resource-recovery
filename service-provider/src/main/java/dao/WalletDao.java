@@ -33,4 +33,11 @@ public interface WalletDao {
      * @param userKind
      */
     void deleteWallet(@Param("userId") Integer userId, @Param("userKind") Integer userKind);
+
+    /**
+     * 获取钱包信息
+     * @param id
+     * @return
+     */
+    Wallet getWalletById(Integer id);
 }

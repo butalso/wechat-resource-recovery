@@ -13,7 +13,7 @@
         <module>service-provider</module>
         <module>web-consumer</module>
     </modules>
-
+    
     <dependencies>
         <!-- 单元测试 -->
         <dependency>

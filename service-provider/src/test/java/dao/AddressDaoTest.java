@@ -50,4 +50,9 @@ public class AddressDaoTest {
     public void getAddrDetailId() {
         System.out.println(addressDao.getAddrDetailId("江南青年城", "江宁区"));
     }
+
+    @Test
+    public void getAddresses() {
+        System.out.println(addressDao.getAddresses());
+    }
 }

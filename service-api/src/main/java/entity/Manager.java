@@ -3,14 +3,15 @@ package entity;
 import dto.Address;
 
 public class Manager extends User {
-    private final Integer userKind = 3;
+    private final int userKind = 3;
     private String gender;
 
     public Manager() {
     }
 
     public Manager(Integer id, String name) {
-        super(id, name);
+        this.setId(id);
+        this.setName(name);
     }
 
     public Manager(String name, String password) {
@@ -34,7 +35,7 @@ public class Manager extends User {
     }
 
     @Override
-    public Integer getUserKind() {
+    public int getUserKind() {
         return userKind;
     }
 

@@ -68,5 +68,11 @@ public interface AddressDao {
      */
     Address getAddress(@Param("addrDetailId") Integer addrDetailId);
 
+    /**
+     * 获取所有的小区地址
+     * @return
+     */
+    List<Address> getAddresses();
+
 
 }

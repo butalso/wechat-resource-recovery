@@ -1,3 +1,7 @@
+<div>
+    <p>添加${userDetails}</p>
+</div>
+
 <@override name="header"></@override>
 <@override name="content">
     <div class="regions main-grid-border">

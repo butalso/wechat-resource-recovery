@@ -23,13 +23,13 @@ public class UserActivationServiceImplTest {
 
     @Test
     public void addActivation() {
-        userActivationService.addActivation(new Customer(1, "狙击手"), false);
+//        userActivationService.addActivation(new Customer(1, "狙击手"), false);
 //        userActivationService.addActivation(new Customer(1, "狙击手"), true);
     }
 
     @Test
     public void getUserActivations() {
-        System.out.println(userActivationService.getUserActivations(new Customer(1, "狙击手")));
+//        System.out.println(userActivationService.getUserActivations(new Customer(1, "狙击手")));
     }
 
     @Test

@@ -28,4 +28,11 @@ public interface GiftService {
      * @return
      */
     List<Gift> getGifts();
+
+    /**
+     * 获取某一礼品
+     * @param id
+     * @return
+     */
+    Gift getGift(Integer id);
 }

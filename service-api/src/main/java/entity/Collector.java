@@ -6,7 +6,7 @@ import dto.Address;
  * 回收员实体
  */
 public class Collector extends ECPUser {
-    private final Integer userKind = 1;
+    private final int userKind = 1;
     private String companyName;
     private String IDCardNo;
 
@@ -33,7 +33,7 @@ public class Collector extends ECPUser {
     }
 
     @Override
-    public Integer getUserKind() {
+    public int getUserKind() {
         return userKind;
     }
 

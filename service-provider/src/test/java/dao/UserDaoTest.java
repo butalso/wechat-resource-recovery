@@ -49,12 +49,12 @@ public class UserDaoTest {
 
     @Test
     public void getCustomer() {
-        System.out.println(userDao.getCustomer("乔治"));
+        System.out.println(userDao.getCustomerDetails("乔治"));
     }
 
     @Test
     public void updateCustomer() {
-        customer = userDao.getCustomer("乔治");
+        customer = userDao.getCustomerDetails("乔治");
         customer.setGender("F");
         userDao.updateCustomer(customer);
     }
@@ -71,12 +71,12 @@ public class UserDaoTest {
 
     @Test
     public void getCollector() {
-        System.out.println(userDao.getCollector("恐怖利刃"));
+        System.out.println(userDao.getCollectorDetails("恐怖利刃"));
     }
 
     @Test
     public void updateCollector() {
-        collector = userDao.getCollector("恐怖利刃");
+        collector = userDao.getCollectorDetails("恐怖利刃");
         collector.setGender("F");
         userDao.updateCollector(collector);
     }
@@ -93,12 +93,12 @@ public class UserDaoTest {
 
     @Test
     public void getCompany() {
-        System.out.println(userDao.getCompany("回收哥"));
+        System.out.println(userDao.getCompanyDetails("回收哥"));
     }
 
     @Test
     public void updateCompany() {
-        company = userDao.getCompany("废品大叔");
+        company = userDao.getCompanyDetails("废品大叔");
         company.setPassword("123456");
         userDao.updateCompany(company);
     }
@@ -130,5 +130,20 @@ public class UserDaoTest {
     @Test
     public void deleteManager() {
         userDao.deleteManager("陈先生");
+    }
+
+    @Test
+    public void getCustomerBasic() {
+        System.out.println(userDao.getCustomerBasic("熊大"));
+    }
+
+    @Test
+    public void getCollectorBasic() {
+        System.out.println(userDao.getCollectorBasic("恐怖利刃"));
+    }
+
+    @Test
+    public void getCompanyBasic() {
+        System.out.println(userDao.getCompanyBasic("回收哥"));
     }
 }

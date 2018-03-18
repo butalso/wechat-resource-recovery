@@ -39,4 +39,9 @@ public class WalletDaoTest {
     public void deleteWallet() {
         walletDao.deleteWallet(1, 0);
     }
+
+    @Test
+    public void getWalletById() {
+        System.out.println(walletDao.getWalletById(2));
+    }
 }

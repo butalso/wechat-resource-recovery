@@ -33,6 +33,11 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
+    public List<Address> getAddresss() {
+        return null;
+    }
+
+    @Override
     public void addAddressDetail(Address address, Integer kind) {
         addressDao.addAddrDetail(address.getDetail(), address.getArea(), kind);
     }

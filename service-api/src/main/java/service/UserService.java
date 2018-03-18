@@ -2,6 +2,7 @@ package service;
 
 import entity.User;
 import exception.AddressNonExistsException;
+import exception.PasswordErrorException;
 import exception.UserNameExistException;
 import exception.UserNonExistsException;
 
@@ -29,10 +30,28 @@ public interface UserService {
     void updateUser(User user) throws UserNonExistsException, AddressNonExistsException;
 
     /**
-     * 获取用户信息
+     * 获取用户全部个人信息
      * @param name
      * @param userKind
      * @return
      */
-    User getUser(String name, int userKind);
+    User getUserDetails(String name, int userKind);
+
+    /**
+     * 返回用户id， 名字， 密码, 头像
+     * @param name
+     * @param userKind
+     * @return
+     */
+    User getUserBasic(String name, int userKind);
+
+    /**
+     * 修改登录密码
+     * @param name
+     * @param userKind
+     * @param oldPass
+     * @param newPass
+     */
+    void updatePassword(String name, int userKind, String oldPass, String newPass)
+            throws PasswordErrorException;
 }

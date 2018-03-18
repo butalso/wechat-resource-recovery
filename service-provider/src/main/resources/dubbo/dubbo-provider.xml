@@ -37,4 +37,7 @@
 
     <bean id="userService" class="serviceImpl.UserServiceImpl" />
     <dubbo:service interface="service.UserService" ref="userService" />
+
+    <bean id="walletService" class="serviceImpl.WalletServiceImpl" />
+    <dubbo:service interface="service.WalletService" ref="walletService" />
 </beans>
