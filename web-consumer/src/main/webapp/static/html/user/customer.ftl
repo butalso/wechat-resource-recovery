@@ -21,7 +21,7 @@
         <hr>
         <div class="region-block">
             <div class="state">
-                <h3>废品订单<span class="more">>></span></h3>
+                <a href="/web-consumer/user/order"><h3>废品订单<span class="more">>></span></h3></a>
             </div>
             <div class="clearfix"></div>
         </div>

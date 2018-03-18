@@ -1294,6 +1294,10 @@ span.total strong {
     margin: 0 auto;
     width: 70%;
 }
+.region-block ul {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
 .state h3 {
     color: #01A185;
     font-size: 20px;
@@ -3362,7 +3366,7 @@ label {
     background-color: #01a185;
     position: fixed;
     z-index: 1030;
-    right: 15%;
+    right: 5%;
     border-width: 1px 0 0;
     margin: 5px;
 }
@@ -3377,6 +3381,10 @@ label {
     color: #666;
     font-size: 16px;
     margin-top: 20px;
+}
+.more {
+    float: right;
+    padding-right: 20px;
 }
 
 /*-- responsive media queries --*/
