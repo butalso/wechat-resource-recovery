@@ -3,36 +3,63 @@
         <div id="page-wrapper" class="sign-in-wrapper">
             <div class="graphs">
                 <div class="sign-up">
-                    <form id="registerForm">
+                    <form class="form-horizontal">
                         <h1>注册一个新帐户</h1>
                         <p class="creating">在这方面，我们很熟链</p>
                         <h2>个人信息</h2>
-                        <div class="sign-u">
-                            <div class="sign-up1">
-                                <h4>帐号* :</h4>
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="name">
                             </div>
-                            <div class="sign-up2">
-                                <input type="text" class="user" name="userName" placeholder='账户'/>
-                            </div>
-                            <div class="clearfix"></div>
                         </div>
-                        <div class="sign-u">
-                            <div class="sign-up1">
-                                <h4>密码* :</h4>
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">phone</label>
+                            <div class="col-sm-8">
+                                <input type="phone" class="form-control" name="phone">
                             </div>
-                            <div class="sign-up2">
-                                <input type="password" class="lock" name="password" placeholder='密码'/>
-                            </div>
-                            <div class="clearfix"></div>
                         </div>
-                        <div class="sign-u">
-                            <div class="sign-up1">
-                                <h4>确认密码* :</h4>
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">password</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control1" name="password">
                             </div>
-                            <div class="sign-up2">
-                                <input type="password" class="lock" name="confirmPassword" placeholder='确认密码'/>
+                        </div>
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">nickName</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control1" name="nickName">
                             </div>
-                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="province" class="col-sm-2 control-label">address</label>
+                            <div class="col-sm-8">
+                                <div class="col-sm-4 col-xs-4">
+                                    <select name="province" class="form-control1"> </select>
+                                </div>
+                                <div class="col-sm-4 col-xs-4">
+                                    <select name="city" class="form-control1"> </select>
+                                </div>
+                                <div class="col-sm-4 col-xs-4">
+                                    <select name="area" class="form-control1"> </select>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" class="form-control1" name="userKind" value="0">
+                        <div class="form-group">
+                            <label for="focusedinput" class="col-sm-2 control-label">gender</label>
+                            <div class="col-sm-8">
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio" name="gender" value="F" checked>F
+                                    </label>
+                                </div>
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio" name="gender" value="M">M
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <div class="sub_home">
                             <div class="sub_home_left">
