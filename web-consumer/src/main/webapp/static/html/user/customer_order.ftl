@@ -1,3 +1,7 @@
+<#list orders as order>
+        <li>${order}</li>
+</#list>
+
 <@override name="content">
 <div class="container orderList">
     <div class="region-block">

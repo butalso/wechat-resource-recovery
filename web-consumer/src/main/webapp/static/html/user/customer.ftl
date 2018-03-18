@@ -33,7 +33,7 @@
         </div>
         <div class="region-block">
             <div class="state">
-                <h3>交易记录<span class="more">>></span></h3>
+                <h3>礼品兑换记录<span class="more">>></span></h3>
             </div>
             <div class="clearfix"></div>
         </div>
