@@ -1272,7 +1272,7 @@ span.total strong {
 /*-- //Categories --*/
 
 /*-- Regions --*/
-.region-block:nth-child(even) {
+.region-block:nth-child(odd) {
     background-color: #f4f4f4;
 }
 .sun-regions ul li {
@@ -1290,7 +1290,13 @@ span.total strong {
 	color:#f3c500;
 }
 .region-block {
-    padding: 40px 0px;
+    padding: 15px 25px;
+    margin: 0 auto;
+    width: 70%;
+}
+.region-block ul {
+    margin-top: 20px;
+    margin-bottom: 0;
 }
 .state h3 {
     color: #01A185;
@@ -3356,6 +3362,30 @@ label {
 .badge-danger {
   background-color: #e51c23;
 }
+.nav {
+    background-color: #01a185;
+    position: fixed;
+    z-index: 1030;
+    right: 5%;
+    border-width: 1px 0 0;
+    margin: 5px;
+}
+.nav li {
+    height: 60px;
+}
+.nav li a {
+    margin: 10px auto;
+}
+.head .logout {
+    float: right;
+    color: #666;
+    font-size: 16px;
+    margin-top: 20px;
+}
+.more {
+    float: right;
+    padding-right: 20px;
+}
 
 /*-- responsive media queries --*/
 @media (max-width: 1366px){
@@ -3364,12 +3394,9 @@ label {
 	}
 }
 @media (max-width: 1280px){
-	.main-banner {
+    .main-banner {
 		min-height: 350px;
 		padding: 90px 0 0 0;
-	}
-	.region-block {
-		padding: 30px 0px;
 	}
 }
 @media (max-width: 1080px){
@@ -3490,12 +3517,6 @@ label {
 	h2.head {
 		font-size: 33px;
 		margin: 33px 0;
-	}
-	.head .logout {
-		float: right;
-		color: #666;
-		font-size: 16px;
-		margin-top: 20px;
 	}
 	.product-view h2 {
 		font-size: 25px;
@@ -3753,10 +3774,6 @@ label {
 	form#filldetails {
 		width: 85%;
 	}
-	.state.col-md-3 {
-		width: 25%;
-		float: left;
-	}
 	.sun-regions.col-md-9 {
 		width: 75%;
 		float: left;
@@ -3879,6 +3896,9 @@ label {
 	.categories {
 		padding: 30px 0;
 	}
+    .categories .col-xs-3 {
+        padding: 0;
+    }
 	.ad-info h5 {
 		font-size: 16px;
 	}
@@ -4039,9 +4059,9 @@ label {
 		padding: 30px 0 0 0;
 	}
 	.focus-image i {
-		font-size: 35px;
-		width: 75px;
-		height: 75px;
+		font-size: 25px;
+		width: 50px;
+		height: 50px;
 		line-height: 75px;
 	}
 	.banner h1 {
@@ -4110,7 +4130,7 @@ label {
 		font-size: 15px;
 		padding: 0;
 		background: transparent;
-		color: #6D6D6D;
+		color: #fff;
 	}
 	a.account:hover {
 		background: transparent;
@@ -4177,12 +4197,6 @@ label {
 		font-size: 28px;
 		margin: 25px 0;
 	}
-	.head .logout {
-		float: right;
-		color: #666;
-		font-size: 16px;
-		margin-top: 20px;
-	}
 	.state h3 {
 		font-size: 19px;
 	}
@@ -4194,7 +4208,9 @@ label {
 		font-size: 13px;
 	}
 	.region-block {
-		padding: 25px 0px;
+        padding: 15px 25px;
+        margin: 0;
+        width: 100%;
 	}
 	.post-ad-form form label {
 		width: 100%;
@@ -4399,6 +4415,12 @@ label {
 	}
 }
 @media (max-width: 414px){
+    .nav {
+        right: 0;
+        left: 0;
+        bottom: 0;
+        margin: 0;
+    }
 	.header-right {
 		width: 95%;
 	}
@@ -4493,10 +4515,6 @@ label {
 		padding: 9px 20px;
 		font-size: 15px;
 		letter-spacing: 1px;
-	}
-	.state.col-md-3 {
-		width: 100%;
-		margin-bottom: 5%;
 	}
 	.sun-regions ul li {
 		width: 30%;
