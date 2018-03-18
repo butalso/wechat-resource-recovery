@@ -35,4 +35,9 @@ public class GiftServiceImpl implements GiftService {
     public List<Gift> getGifts() {
         return giftDao.getGifts();
     }
+
+    @Override
+    public Gift getGift(Integer id) {
+        return giftDao.getGift(id);
+    }
 }

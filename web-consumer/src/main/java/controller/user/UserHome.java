@@ -28,7 +28,7 @@ public class UserHome {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     @ApiOperation(value = "获取用户首页")
     public String userHome() {
-        return "user/customer_details";
+        return "user/index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
