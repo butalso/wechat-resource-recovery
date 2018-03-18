@@ -253,7 +253,7 @@ CREATE TABLE user_activation(
     id INT NOT NULL AUTO_INCREMENT COMMENT '活跃度表id',
     date DATE NOT NULL COMMENT '活跃日期',
     duration INT NOT NULL DEFAULT 0 COMMENT '当日活跃持续时间',
-    login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '登录时间，用于用户退出登录时计算持续时间',
+    last_login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '登录时间，用于用户退出登录时计算持续时间',
 
     user_id INT NOT NULL COMMENT '用户id',
     user_kind INT NOT NULL COMMENT '用户类型',
