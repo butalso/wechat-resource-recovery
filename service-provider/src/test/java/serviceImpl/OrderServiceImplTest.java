@@ -78,12 +78,17 @@ public class OrderServiceImplTest {
 
     @Test
     public void confirmOrderFinish() {
-        orderService.confirmOrderFinish("回收哥", 8, "123456");
+        orderService.confirmOrderFinish("回收哥", 4, "123456");
     }
 
     @Test
     public void gradeOrder() {
         orderService.gradeOrder(8, "熊大", 0, 5);
         orderService.gradeOrder(8, "恐怖利刃", 1, 5);
+    }
+
+    @Test
+    public void updateOrderDetails() {
+        orderService.updateOrderDetails(2, orderDetails);
     }
 }

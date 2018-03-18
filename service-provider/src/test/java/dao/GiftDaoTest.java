@@ -46,4 +46,9 @@ public class GiftDaoTest {
     public void getGifts() {
         System.out.println(giftDao.getGifts());
     }
+
+    @Test
+    public void getGift() {
+        System.out.println(giftDao.getGift(2));
+    }
 }

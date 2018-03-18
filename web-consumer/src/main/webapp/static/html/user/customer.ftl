@@ -1,5 +1,5 @@
 <div>
-    <p>添加${user}</p>
+    <p>添加${userDetails}</p>
 </div>
 
 <@override name="content">

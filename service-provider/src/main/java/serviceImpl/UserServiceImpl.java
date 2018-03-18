@@ -5,6 +5,7 @@ import dao.UserDao;
 import dao.WalletDao;
 import entity.*;
 import exception.AddressNonExistsException;
+import exception.PasswordErrorException;
 import exception.UserNameExistException;
 import exception.UserNonExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) throws UserNameExistException, AddressNonExistsException {
-        if (getUser(user.getName(), user.getUserKind()) != null) {
+        if (getUserDetails(user.getName(), user.getUserKind()) != null) {
             /*用户已存在*/
             throw new UserNameExistException();
         }
@@ -52,13 +53,13 @@ public class UserServiceImpl implements UserService {
         int userId = 0;
         // TODO 权限控制
         switch (userKind) {
-            case 0: userId = userDao.getCustomer(name).getId();
+            case 0: userId = userDao.getCustomerDetails(name).getId();
                     userDao.deleteCustomer(name);
                     break;
-            case 1: userId = userDao.getCollector(name).getId();
+            case 1: userId = userDao.getCollectorDetails(name).getId();
                     userDao.deleteCollector(name);
                     break;
-            case 2: userId = userDao.getCompany(name).getId();
+            case 2: userId = userDao.getCompanyDetails(name).getId();
                     userDao.deleteCompany(name);
                     break;
             case 3: userDao.deleteManager(name);
@@ -69,7 +70,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user) throws UserNonExistsException, AddressNonExistsException {
-        User oldUser = getUser(user.getName(), user.getUserKind());
+        User oldUser = getUserDetails(user.getName(), user.getUserKind());
         if (oldUser == null) {
             /*用户不存在*/
             throw new UserNonExistsException();
@@ -86,10 +87,6 @@ public class UserServiceImpl implements UserService {
             throw new AddressNonExistsException();
         }
 
-        /* 用户保留登陆密码 */
-        user.setPassword(oldUser.getPassword());
-        setUserInfo(oldUser, user);
-
         switch (user.getUserKind()) {
             case 0: userDao.updateCustomer((Customer) user);
                     break;
@@ -101,48 +98,44 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    /**
-     * 保留非用户可修改的个人信息
-     * @param oldUser
-     * @param user
-     */
-    private void setUserInfo(User oldUser, User user) {
-        if (user.getUserKind() == 3 || user.getUserKind() == 2) {
-            /* 管理员、企业信息全部可以修改 */
-            return;
-        }
-        if (user.getUserKind() == 1) {
-            /*回收员保留账户余额、支付密码、所属企业、信誉值、经验值、积分值*/
-            Collector cuser = (Collector) user;
-            Collector coldUser = (Collector) user;
-            cuser.setCompanyName(coldUser.getCompanyName());
-            cuser.setCredit(coldUser.getCredit());
-            cuser.setExperience(coldUser.getExperience());
-            cuser.setPoint(coldUser.getPoint());
-        }
-        if (user.getUserKind() == 0) {
-            /*业主保留账户余额、支付密码、信誉值、经验值、积分值*/
-            Customer cuser = (Customer) user;
-            Customer coldUser = (Customer) user;
-            cuser.setCredit(coldUser.getCredit());
-            cuser.setExperience(coldUser.getExperience());
-            cuser.setPoint(coldUser.getPoint());
-        }
-    }
-
     @Override
-    public User getUser(String name, int userKind) {
+    public User getUserDetails(String name, int userKind) {
         User result = null;
         switch (userKind) {
-            case 0: result = userDao.getCustomer(name);
+            case 0: result = userDao.getCustomerDetails(name);
                 break;
-            case 1: result = userDao.getCollector(name);
+            case 1: result = userDao.getCollectorDetails(name);
                 break;
-            case 2: result = userDao.getCompany(name);
+            case 2: result = userDao.getCompanyDetails(name);
                 break;
             case 3: result = userDao.getManager(name);
         }
         return result;
     }
 
+    @Override
+    public User getUserBasic(String name, int userKind) {
+        User result = null;
+        switch (userKind) {
+            case 0: result = userDao.getCustomerBasic(name);
+                break;
+            case 1: result = userDao.getCollectorBasic(name);
+                break;
+            case 2: result = userDao.getCompanyBasic(name);
+                break;
+            case 3: result = userDao.getManager(name);
+        }
+        return result;
+    }
+
+    @Override
+    public void updatePassword(String name, int userKind, String oldPass, String newPass)
+            throws PasswordErrorException {
+        User user = getUserDetails(name, userKind);
+        if (!user.getPassword().equals(oldPass)) {
+            throw new PasswordErrorException();
+        }
+        user.setPassword(newPass);
+        updateUser(user);
+    }
 }

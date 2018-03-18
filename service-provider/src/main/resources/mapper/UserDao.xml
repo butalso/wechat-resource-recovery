@@ -31,9 +31,9 @@
         where name=#{c.address.detail} AND area_id=((SELECT id FROM area WHERE name=#{c.address.area}))));
     </insert>
 
-    <select id="getCustomer" resultMap="customer">
+    <select id="getCustomerDetails" resultMap="customer">
         SELECT c.id, c.name, c.password, c.image_url, c.gender,
-        c.phone, c.credit, c.point, c.experience, w.balance as w_balance,
+        c.phone, c.credit, c.point, c.experience, w.id as w_id, w.balance as w_balance,
         c.create_time, a.name as address_detail,
         area.name as address_area, city.name as address_city,
         province.name as address_province
@@ -71,10 +71,10 @@
         area_id=((SELECT id FROM area WHERE name=#{c.address.area})))))
     </insert>
 
-    <select id="getCollector" resultMap="collector">
+    <select id="getCollectorDetails" resultMap="collector">
         SELECT c1.id, c1.name, c2.name as company_name,
         c1.password, c1.image_url, c1.IDCardNo, c1.gender,
-        c1.phone, c1.credit, c1.point, c1.experience, w.balance as w_balance,
+        c1.phone, c1.credit, c1.point, c1.experience,w.id as w_id, w.balance as w_balance,
         c1.create_time, a1.name as address_detail,
         a2.name as address_area, c3.name as address_city,
         p.name as address_province
@@ -111,9 +111,9 @@
         AND area_id=((SELECT id FROM area WHERE name=#{c.address.area}))))
     </insert>
 
-    <select id="getCompany" resultMap="company">
+    <select id="getCompanyDetails" resultMap="company">
         SELECT c1.id, c1.name, c1.password, c1.image_url,
-        c1.phone, w.balance as w_balance, c1.create_time,
+        c1.phone, w.id as w_id, w.balance as w_balance, c1.create_time,
         a1.name as address_detail,
         a2.name as address_area, c2.name as address_city,
         p.name as address_province
@@ -168,5 +168,32 @@
         DELETE FROM manager WHERE name = #{name}
     </delete>
 
+    <select id="getCustomerBasic" resultType="entity.Customer">
+        SELECT id, name, password, image_url, gender, phone,
+        credit, point, experience FROM customer WHERE name = #{name}
+    </select>
+
+    <select id="getCollectorBasic" resultType="entity.Collector">
+        SELECT id, name, password, image_url, gender, phone,
+        credit, point, experience FROM collector WHERE name = #{name}
+    </select>
+
+    <select id="getCompanyBasic" resultType="entity.Company">
+        SELECT id, name, password, image_url, phone FROM company WHERE name = #{name}
+    </select>
+
+    <select id="getCustomerBasicById" resultType="entity.Customer">
+        SELECT id, name, password, image_url, gender, phone,
+        credit, point, experience FROM customer WHERE id = #{id}
+    </select>
+
+    <select id="getCollectorBasicById" resultType="entity.Collector">
+        SELECT id, name, password, image_url, gender, phone,
+        credit, point, experience FROM collector WHERE id = #{id}
+    </select>
+
+    <select id="getCompanyBasicById" resultType="entity.Company">
+        SELECT id, name, password, image_url, phone FROM company WHERE id = #{id}
+    </select>
 
 </mapper>

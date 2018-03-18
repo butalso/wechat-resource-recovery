@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import service.UserService;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -25,146 +26,57 @@ public class UserController {
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ApiOperation(value = "返回用户个人中心页面")
-    public String getUserDetail(@ApiIgnore @ModelAttribute("user") User user) {
+    public ModelAndView getUserDetail(@ApiIgnore @ModelAttribute("user") User user) {
+        ModelAndView mav = null;
         switch (user.getUserKind()) {
-            case 0: return "user/customer";
-            case 1: return "user/collector";
-            case 2: return "user/company";
-
-            default: return "manager/index";
+            case 0:
+                mav = new ModelAndView("user/customer");
+                break;
+            case 1:
+                mav = new ModelAndView("user/collector");
+                break;
+            case 2:
+                mav = new ModelAndView("user/company");
+                break;
         }
-    }
-
-    @RequestMapping(value = "/info/detail", method = RequestMethod.GET,
-            produces = "application/json;charset=UTF-8")
-    @ResponseBody
-    @ApiOperation(value = "ajax获取用户个人具体信息")
-    public User ajaxGetUserDetail(@ApiIgnore @ModelAttribute("user") User user) {
-        return user;
+        User useDetails = userService.getUserDetails(user.getName(), user.getUserKind());
+        useDetails.setPassword(null);
+        mav.addObject("userDetails", useDetails);
+        return mav;
     }
 
     @RequestMapping(value = "/info", method = RequestMethod.POST,
             consumes = "application/json;charset=UTF-8",
-            produces = "texp/plain;charset=UTF-8")
-    @ApiOperation(value = "修改更新个人信息", notes = "格式：" +
-            "业主：{\n" +
-            "    \"name\": \"小华仔\",\n" +
-            "    \"phone\": \"15867620882\",\n" +
-            "    \"address\": {\n" +
-            "        \"province\": \"广东省\",\n" +
-            "        \"city\": \"湛江市\",\n" +
-            "        \"area\": \"雷州市\",\n" +
-            "        \"housingEstate\": \"召唤森林\"\n" +
-            "    },\n" +
-            "    \"userKind\": 0,\n" +
-            "    \"nickName\": \"狙击手\",\n" +
-            "    \"gender\": \"F\"\n" +
-            "}\n" +
-            "回收员：{\n" +
-            "    \"name\": \"问自己\",\n" +
-            "    \"phone\": \"13822105068\",\n" +
-            "    \"address\": {\n" +
-            "        \"province\": \"广东省\",\n" +
-            "        \"city\": \"湛江市\",\n" +
-            "        \"area\": \"雷州市\",\n" +
-            "        \"housingEstate\": \"青青草原\"\n" +
-            "    },\n" +
-            "    \"userKind\": 1,\n" +
-            "    \"nickName\": \"巫医\",\n" +
-            "    \"companyName\": \"回收哥\",\n" +
-            "    \"gender\": \"M\",\n" +
-            "    \"idcardNo\": \"130682199005066998\"\n" +
-            "}\n" +
-            "企业：{\n" +
-            "    \"name\": \"回收哥哥\",\n" +
-            "    \"phone\": \"13825672120\",\n" +
-            "    \"address\": {\n" +
-            "        \"province\": \"广东省\",\n" +
-            "        \"city\": \"湛江市\",\n" +
-            "        \"area\": \"遂溪县\"\n" +
-            "    },\n" +
-            "    \"addrDetail\": \"西湖大道18号\"\n" +
-            "}"
-    )
-    @ApiImplicitParams({@ApiImplicitParam(name = "userInfo", value = "用户个人信息",required = true, paramType = "body")})
-    @ApiResponses({@ApiResponse(code = 403, message = "请求体信息缺少或格式不正确"),
-            @ApiResponse(code = 201, message = "用户修改数据成功")
-    })
-    public ResponseEntity<String> updateUserDetail(@ApiIgnore @ModelAttribute("user") User user,
-                                           @RequestBody Map userInfo,
-                                           @ApiIgnore ModelMap modelMap) {
-        ResponseEntity<String> result = null;
-
-        User newUser = null;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(userInfo);
-            switch (user.getUserKind()) {
-                /* 解析json字符串到实体 */
-                case 0: newUser = mapper.readValue(json, Customer.class);
-                        ((Customer)newUser).setCredit(
-                                ((Customer)user).getCredit());
-                        break;
-                case 1: newUser = mapper.readValue(json, Collector.class);
-                        ((Collector)newUser).setCredit(
-                                ((Collector)user).getCredit());
-                        break;
-                default: newUser = mapper.readValue(json, Company.class);
-            }
-            newUser.setId(user.getId());
-            newUser.setPassword(user.getPassword());
-            userService.updateUser(newUser);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>("修改失败", HttpStatus.FORBIDDEN);
-        }
-        newUser.setCreateTime(user.getCreateTime());
-        modelMap.addAttribute("user", newUser);
+            produces = "text/plain;charset=UTF-8")
+    @ApiOperation(value = "业主修改头像，性别，电话，地址信息")
+    public ResponseEntity<String> updateUserDetail(@RequestBody Customer customer,
+                                                   @ApiIgnore @ModelAttribute("user") User user) {
+        Customer oldCustomer = (Customer) userService.getUserDetails(user.getName(), user.getUserKind());
+        resetCustomer(oldCustomer, customer);
+        userService.updateUser(oldCustomer);
         return new ResponseEntity<>("修改成功", HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    @ApiOperation(value = "返回用户注册页面")
-    public String addUser() {
-        return "register";
+    private void resetCustomer(Customer oldCustomer, Customer newCustomer) {
+        oldCustomer.setPhone(newCustomer.getPhone());
+        oldCustomer.setGender(newCustomer.getGender());
+        oldCustomer.setAddress(newCustomer.getAddress());
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST,
+
+    @RequestMapping(value = "/password", method = RequestMethod.POST,
             consumes = "application/json;charset=UTF-8")
-    public ResponseEntity<String> addUser(@RequestBody Map userInfo) {
-        ResponseEntity<String> result = null;
+    public ResponseEntity<String> changePassword(@ApiIgnore @ModelAttribute("user") User user,
+                                                 @RequestParam("oldPass") String oldPass,
+                                                 @RequestParam("newPass") String newPass) {
 
-        User newUser = null;
-        try {
-            newUser = mapToUser(userInfo);
-            newUser.setPassword((String) userInfo.get("password"));
-            userService.addUser(newUser);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
+        User user1 = userService.getUserDetails(user.getName(), user.getUserKind());
+        if (user1 != null && !user1.getPassword().equals(oldPass)) {
+            return new ResponseEntity<String>("旧密码错误", HttpStatus.FORBIDDEN);
         }
-        return new ResponseEntity<>("注册成功", HttpStatus.CREATED);
-    }
-
-    private User mapToUser(Map userInfo) throws IOException {
-        User newUser = null;
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(userInfo);
-        Integer userKind = (Integer) userInfo.get("userKind");
-
-        switch (userKind) {
-            /* 解析json字符串到实体 */
-            case 0:
-                newUser = mapper.readValue(json, Customer.class);
-                break;
-            case 1:
-                newUser = mapper.readValue(json, Collector.class);
-                break;
-            default:
-                newUser = mapper.readValue(json, Company.class);
-        }
-
-        return newUser;
+        user1.setPassword(newPass);
+        userService.updateUser(user1);
+        return new ResponseEntity<>("密码修改成功", HttpStatus.CREATED);
     }
 
 }

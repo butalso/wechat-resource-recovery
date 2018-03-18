@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import service.AddressService;
+import util.AddressUtil;
 
 import java.util.List;
 
@@ -23,19 +24,7 @@ public class AddressController {
     public List<String> linkage(@RequestParam(value = "province", required = false) String province,
                                 @RequestParam(value = "city", required = false) String city,
                                 @RequestParam(value = "area", required = false) String area) {
-        Address address = new Address();
-        address.setProvince(province);
-        address.setCity(city);
-        address.setArea(area);
-        return addressService.linkage(address);
+        return AddressUtil.linkage(province, city, area);
     }
 
-    @RequestMapping(value = "/housingEstate", method = RequestMethod.POST,
-        produces = "text/plain;charset=UTF-8")
-    @ResponseBody
-    @ApiOperation(value = "根据地址县和小区名称，添加小区")
-    public String addHousingEstate(@RequestBody Address address) {
-//        addressService.addAddressDetail(address);
-        return "添加成功";
-    }
 }

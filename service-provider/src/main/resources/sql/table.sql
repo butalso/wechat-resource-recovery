@@ -1,6 +1,6 @@
 -- 创建数据库
-CREATE DATABASE resource_recovery;
-USE resource_recovery;
+CREATE DATABASE rr;
+USE rr;
 
 -- 省数据表
 CREATE TABLE province(
@@ -133,7 +133,10 @@ CREATE TABLE wallet(
 CREATE TABLE wallet_record(
     id INT NOT NULL AUTO_INCREMENT COMMENT '数据库表分配钱包记录id',
     wallet_id INT NOT NULL COMMENT '钱包id',
-    record VARCHAR(255) NOT NULL COMMENT '记录信息',
+    transfer VARCHAR(255) NOT NULL COMMENT '转账方',
+    receiver VARCHAR(255) NOT NULL COMMENT '被转账方',
+    value DOUBLE NOT NULL COMMENT '金额',
+    create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '时间',
 
     PRIMARY KEY (id)
 ) DEFAULT CHARSET = utf8

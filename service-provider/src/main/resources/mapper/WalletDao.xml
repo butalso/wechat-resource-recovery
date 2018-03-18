@@ -32,4 +32,9 @@
         DELETE FROM wallet WHERE user_id = #{userId} AND user_kind = #{userKind}
     </delete>
 
+    <select id="getWalletById" resultType="entity.Wallet">
+        SELECT id, user_id, user_kind, balance, pay_password
+        FROM wallet WHERE id = #{id}
+    </select>
+
 </mapper>

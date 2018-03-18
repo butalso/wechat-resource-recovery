@@ -13,8 +13,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import service.UserService;
 
-import static org.junit.Assert.*;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 // spring配置文件
 @ContextConfiguration({"classpath:spring/spring-dao.xml", "classpath:spring/spring-service.xml"})
@@ -58,10 +56,10 @@ public class UserServiceImplTest {
 
     @Test
     public void updateUser() {
-        customer = (Customer) userService.getUser("熊大", 0);
-        collector = (Collector) userService.getUser("熊二", 1);
-        company = (Company) userService.getUser("废品大叔", 2);
-        manager = (Manager) userService.getUser("周先生", 3);
+        customer = (Customer) userService.getUserDetails("熊大", 0);
+        collector = (Collector) userService.getUserDetails("熊二", 1);
+        company = (Company) userService.getUserDetails("废品大叔", 2);
+        manager = (Manager) userService.getUserDetails("周先生", 3);
 
         customer.setPassword("123456");
         customer.setPhone("222");
@@ -82,9 +80,14 @@ public class UserServiceImplTest {
 
     @Test
     public void getUser() {
-        System.out.println(userService.getUser("狙击手", 0));
-//        System.out.println(userService.getUser("熊二", 1));
-//        System.out.println(userService.getUser("废品大叔", 2));
-//        System.out.println(userService.getUser("周先生", 3));
+        System.out.println(userService.getUserDetails("狙击手", 0));
+        System.out.println(userService.getUserDetails("熊二", 1));
+        System.out.println(userService.getUserDetails("废品大叔", 2));
+        System.out.println(userService.getUserDetails("周先生", 3));
+    }
+
+    @Test
+    public void updatePassword() {
+        userService.updatePassword("狙击手", 0, "123456", "123");
     }
 }

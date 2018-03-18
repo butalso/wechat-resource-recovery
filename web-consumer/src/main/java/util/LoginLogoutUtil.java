@@ -26,7 +26,7 @@ public class LoginLogoutUtil {
                                                HttpSession session, ModelMap modelMap) {
         ResponseEntity<String> result = null;
 
-        User user = userService.getUser(userName, userKind);
+        User user = userService.getUserBasic(userName, userKind);
 
         if (user == null) {
             /* 用户不存在 */
@@ -37,7 +37,6 @@ public class LoginLogoutUtil {
         } else {
             /* 密码正确，设置用户登录状态和活跃记录 */
             // TODO 根据用户账号状态对用户进行处理
-            user = new User(user.getId(), user.getName(), user.getUserKind());
             userActivationService.addActivation(user, false);
             modelMap.addAttribute("user", user);
             result = new ResponseEntity<>("登录成功", HttpStatus.OK);

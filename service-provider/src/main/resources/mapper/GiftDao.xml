@@ -23,4 +23,8 @@
         SELECT id, name, point, inventory FROM gift
     </select>
 
+    <select id="getGift" resultType="entity.Gift">
+        SELECT id, name, point, inventory FROM gift WHERE id = #{id}
+    </select>
+
 </mapper>

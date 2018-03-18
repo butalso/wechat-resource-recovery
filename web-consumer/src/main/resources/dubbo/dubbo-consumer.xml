@@ -30,4 +30,7 @@
     <dubbo:reference id="userActivationService" interface="service.UserActivationService" />
 
     <dubbo:reference id="userService" interface="service.UserService" />
+
+    <dubbo:reference id="walletService" interface="service.WalletService" />
+
 </beans>

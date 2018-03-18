@@ -25,7 +25,7 @@ public interface UserDao {
      * @param name
      * @return
      */
-    Customer getCustomer(String name);
+    Customer getCustomerDetails(String name);
 
     /**
      * 根据参数中业主用户名修改业主实体（卖废品的用户）
@@ -50,7 +50,7 @@ public interface UserDao {
      * @param name
      * @return
      */
-    Collector getCollector(String name);
+    Collector getCollectorDetails(String name);
 
     /**
      * 根据参数中回收员id修改回收员信息
@@ -75,7 +75,7 @@ public interface UserDao {
      * @param name
      * @return
      */
-    Company getCompany(String name);
+    Company getCompanyDetails(String name);
 
     /**
      * 根据参数中企业实体名称修改回收员信息
@@ -113,4 +113,46 @@ public interface UserDao {
      * @param name
      */
     void deleteManager(String name);
+
+    /**
+     * 获取业主基本信息
+     * @param name
+     * @return
+     */
+    Customer getCustomerBasic(String name);
+
+    /**
+     * 获取回收员基本信息
+     * @param name
+     * @return
+     */
+    Collector getCollectorBasic(String name);
+
+    /**
+     * 获取企业基本信息
+     * @param name
+     * @return
+     */
+    Company getCompanyBasic(String name);
+
+    /**
+     * 获取业主基本信息
+     * @param id
+     * @return
+     */
+    Customer getCustomerBasicById(Integer id);
+
+    /**
+     * 获取回收员基本信息
+     * @param id
+     * @return
+     */
+    Collector getCollectorBasicById(Integer id);
+
+    /**
+     * 获取企业基本信息
+     * @param id
+     * @return
+     */
+    Company getCompanyBasicById(Integer id);
 }
