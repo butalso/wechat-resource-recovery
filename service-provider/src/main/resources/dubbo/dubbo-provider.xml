@@ -17,23 +17,27 @@
     <!-- use dubbo protocol to export service on port 20880 -->
     <dubbo:protocol name="dubbo" port="20880"/>
 
-    <bean id="accountHandler" class="serviceImpl.AccountHandlerImpl" />
-    <dubbo:service interface="service.AccountHandler" ref="accountHandler" />
+    <bean id="addressService" class="serviceImpl.AddressServiceImpl" />
+    <dubbo:service interface="service.AddressService" ref="addressService" />
 
-    <bean id="addressHandler" class="serviceImpl.AddressHandlerImpl"/>
-    <dubbo:service interface="service.AddressHandler" ref="addressHandler"/>
+    <bean id="collectRangeService" class="serviceImpl.CollectRangeServiceImpl" />
+    <dubbo:service interface="service.CollectRangeService" ref="collectRangeService" />
 
-    <bean id="garbageHandler" class="serviceImpl.GarbageHandlerImpl" />
-    <dubbo:service interface="service.GarbageHandler" ref="garbageHandler" />
+    <bean id="garbageService" class="serviceImpl.GarbageServiceImpl" />
+    <dubbo:service interface="service.GarbageService" ref="garbageService" />
 
-    <bean id="orderHandler" class="serviceImpl.OrderHandlerImpl" />
-    <dubbo:service interface="service.OrderHandler" ref="orderHandler" />
+    <bean id="giftService" class="serviceImpl.GiftServiceImpl" />
+    <dubbo:service interface="service.GiftService" ref="giftService" />
 
-    <bean id="transactionHandler" class="serviceImpl.TransactionHandlerImpl" />
-    <dubbo:service interface="service.TransactionHandler" ref="transactionHandler" />
+    <bean id="orderService" class="serviceImpl.OrderServiceImpl" />
+    <dubbo:service interface="service.OrderService" ref="orderService" />
 
-    <bean id="userHandler" class="serviceImpl.UserHandlerImpl" />
-    <dubbo:service interface="service.UserHandler" ref="userHandler" />
+    <bean id="userActivationService" class="serviceImpl.UserActivationServiceImpl" />
+    <dubbo:service interface="service.UserActivationService" ref="userActivationService" />
 
+    <bean id="userService" class="serviceImpl.UserServiceImpl" />
+    <dubbo:service interface="service.UserService" ref="userService" />
 
+    <bean id="walletService" class="serviceImpl.WalletServiceImpl" />
+    <dubbo:service interface="service.WalletService" ref="walletService" />
 </beans>

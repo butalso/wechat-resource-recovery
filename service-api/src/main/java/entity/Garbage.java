@@ -1,16 +1,27 @@
 package entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.io.Serializable;
 
-@JsonIgnoreProperties(value = {"id", "typeName"})
 public class Garbage implements Serializable {
 
     private int id;
     private String typeName;
     private String name;
     private double price;
+
+    public Garbage() {
+    }
+
+    public Garbage(String typeName, String name) {
+        this.typeName = typeName;
+        this.name = name;
+    }
+
+    public Garbage(String typeName, String name, double price) {
+        this.typeName = typeName;
+        this.name = name;
+        this.price = price;
+    }
 
     public int getId() {
         return id;

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.WalletDao">
+
+    <resultMap id="wallet" type="entity.Wallet">
+        <result property="id" column="w_id" />
+        <result property="userId" column="w_user_id" />
+        <result property="userKind" column="w_user_kind" />
+        <result property="balance" column="w_balance" />
+        <result property="payPassword" column="w_pay_password" />
+    </resultMap>
+
+    <insert id="addWallet">
+        INSERT INTO wallet(user_id, user_kind) VALUE (#{userId}, #{userKind})
+    </insert>
+
+    <update id="updateWallet">
+        UPDATE wallet SET pay_password = #{payPassword},
+        balance = balance + #{value}
+        WHERE balance + #{value} > 0 AND id = #{id}
+    </update>
+
+    <select id="getWallet" resultType="entity.Wallet">
+        SELECT id, user_id, user_kind, balance, pay_password
+        FROM wallet WHERE user_id = #{userId} AND user_kind = #{userKind}
+    </select>
+
+    <delete id="deleteWallet">
+        DELETE FROM wallet WHERE user_id = #{userId} AND user_kind = #{userKind}
+    </delete>
+
+    <select id="getWalletById" resultType="entity.Wallet">
+        SELECT id, user_id, user_kind, balance, pay_password
+        FROM wallet WHERE id = #{id}
+    </select>
+
+</mapper>

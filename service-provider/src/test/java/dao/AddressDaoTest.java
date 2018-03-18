@@ -16,60 +16,43 @@ public class AddressDaoTest {
     @Autowired
     AddressDao addressDao;
 
-
     @Test
     public void getProvinces() {
-        System.out.println("所有省份：");
         System.out.println(addressDao.getProvinces());
     }
 
     @Test
     public void getCities() {
-        System.out.println("广东省所有的市：");
-        System.out.println(addressDao.getCities("广东省"));
+        System.out.println(addressDao.getCities("江苏省"));
     }
 
     @Test
     public void getAreas() {
-        System.out.println("湛江市所有的县：");
-        System.out.println(addressDao.getAreas("湛江市"));
+        System.out.println(addressDao.getAreas("南京市"));
     }
 
     @Test
-    public void gethousingEstateAddress() {
-        System.out.println(addressDao.gethousingEstateAddress(2));
+    public void getAddrDetails() {
+        System.out.println(addressDao.getAddrDetails("江宁区", 0));
     }
 
     @Test
-    public void getAreaAddress() {
-        System.out.println("雷州市地址：");
-        System.out.println(addressDao.getAreaAddress("440882"));
+    public void addAddrDetail() {
+        addressDao.addAddrDetail("江南老年城", "江宁区", 0);
     }
 
     @Test
-    public void getAreaId() {
-        System.out.println("雷州市行政代码：");
-        System.out.println(addressDao.getAreaId("雷州市"));
+    public void deleteAddrDetail() {
+        addressDao.deleteAddrDetail("江南老年城", "江宁区");
     }
 
     @Test
-    public void addHousingEstate() {
-        addressDao.addHousingEstate("金利小区", "440882");
-        addressDao.addHousingEstate("福泉小区", "440882");
-        addressDao.addHousingEstate("金易小区", "440882");
-        System.out.println("雷州市所有的小区：");
-        System.out.println(addressDao.getHousingEstates("雷州市"));
+    public void getAddrDetailId() {
+        System.out.println(addressDao.getAddrDetailId("江南青年城", "江宁区"));
     }
 
     @Test
-    public void delHousingEstate() {
-        addressDao.delHousingEstate("金易小区", "440882");
-        System.out.println("雷州市所有的小区：");
-        System.out.println(addressDao.getHousingEstates("雷州市"));
-    }
-
-    @Test
-    public void getHousingEstateId() {
-        System.out.println(addressDao.getHousingEstateId("金利小区", "440882"));
+    public void getAddresses() {
+        System.out.println(addressDao.getAddresses());
     }
 }

@@ -1,40 +1,40 @@
 package entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import dto.Address;
 
 /**
  * 回收员实体
  */
-@JsonIgnoreProperties(value = {"id", "password", "housingEstateId"})
-public class Collector extends User {
+public class Collector extends ECPUser {
     private final int userKind = 1;
-    private String nickName;
     private String companyName;
     private String IDCardNo;
-    private String gender;
-    private int credit;
-    private int housingEstateId;
 
     public Collector() {
     }
 
-    public Collector(String name, String password, String phone,
-                     String nickName, String companyName, String IDCardNo,
-                     String gender, int housingEstateId) {
-        super(name, password, phone);
-        this.nickName = nickName;
+    public Collector(Integer id, String name) {
+        super(id, name);
+    }
+
+    public Collector(String name, String password) {
+        super(name, password);
+    }
+
+    public Collector(String name, String password, String gender,
+                     String phone, String companyName, String IDCardNo,
+                     Address address) {
+        super(name, password);
+        this.setPhone(phone);
         this.companyName = companyName;
         this.IDCardNo = IDCardNo;
-        this.gender = gender;
-        this.housingEstateId = housingEstateId;
+        this.setGender(gender);
+        this.setAddress(address);
     }
 
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    @Override
+    public int getUserKind() {
+        return userKind;
     }
 
     public String getCompanyName() {
@@ -53,45 +53,13 @@ public class Collector extends User {
         this.IDCardNo = IDCardNo;
     }
 
-    public int getUserKind() {
-        return userKind;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public int getCredit() {
-        return credit;
-    }
-
-    public void setCredit(int credit) {
-        this.credit = credit;
-    }
-
-    public int getHousingEstateId() {
-        return housingEstateId;
-    }
-
-    public void setHousingEstateId(int housingEstateId) {
-        this.housingEstateId = housingEstateId;
-    }
-
     @Override
     public String toString() {
         return "Collector{" +
                 super.toString() +
                 "userKind=" + userKind +
-                ", nickName='" + nickName + '\'' +
                 ", companyName='" + companyName + '\'' +
                 ", IDCardNo='" + IDCardNo + '\'' +
-                ", gender='" + gender + '\'' +
-                ", credit=" + credit +
-                ", housingEstateId=" + housingEstateId +
                 '}';
     }
 }

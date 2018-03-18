@@ -2,7 +2,7 @@ package enums;
 
 public enum UserKind {
     CUSTOMER(0, "customer"), COLLECTOR(1, "collector"),
-    COMPANY(2, "company");
+    COMPANY(2, "company"), MANAGER(3, "manager");
 
     private int kind;
     private String kindInfo;

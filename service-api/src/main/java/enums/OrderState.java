@@ -1,7 +1,7 @@
 package enums;
 
 public enum OrderState {
-    CREATE(0, "订单已创建"), RECEIVE(1, "回收员已接单"), COLLECT(2, "回收员已回收"),
+    CREATE(0, "订单创建成功"), RECEIVE(1, "回收员已接单"), COLLECT(2, "已上门回收"),
     FINISH(3, "订单完成");
 
     private int state;

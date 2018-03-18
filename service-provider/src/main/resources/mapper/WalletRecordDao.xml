@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.WalletRecordDao">
+
+    <select id="getWalletRecords" resultType="entity.WalletRecord">
+        SELECT id, wallet_id, transfer, receiver, value, create_time
+        FROM wallet_record WHERE wallet_id = #{walletId}
+    </select>
+
+    <insert id="addWalletRecord">
+        INSERT INTO wallet_record(wallet_id, transfer, receiver, value)
+        VALUE (#{w_id}, #{t}, #{r}, #{v})
+    </insert>
+
+</mapper>

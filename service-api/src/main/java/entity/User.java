@@ -1,51 +1,52 @@
 package entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import dto.Address;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 系统的使用者，Customer和Collector和Company的父类
+ * 系统的使用者，Customer和Collector和Company和manager的父类
  */
 
 public class User implements Serializable {
 
-    private int id;
+    private Integer id;
     private String name;
     private String password;
+    private String imageUrl;
     private String phone;
-    private Date createTime;
-    /* 传递给web时将地址id转化为地址 */
     private Address address;
+    private Date createTime;
+    private int userKind;
 
     public User() {
     }
 
-    public User(String name, String password, String phone) {
+    public User(Integer id, String name, Integer userKind) {
+        this.id = id;
+        this.name = name;
+        this.userKind = userKind;
+    }
+
+    public User(String name, String password) {
         this.name = name;
         this.password = password;
-        this.phone = phone;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public int getUserKind() {
-        return 0;
+        return userKind;
     }
 
-    public int getId() {
+    public void setUserKind(int userKind) {
+        this.userKind = userKind;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -65,12 +66,28 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public Date getCreateTime() {
@@ -87,9 +104,11 @@ public class User implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
                 ", phone='" + phone + '\'' +
-                ", createTime=" + createTime +
                 ", address=" + address +
+                ", createTime=" + createTime +
                 '}';
     }
+
 }
