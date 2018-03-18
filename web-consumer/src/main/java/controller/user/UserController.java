@@ -79,16 +79,4 @@ public class UserController {
         return new ResponseEntity<>("密码修改成功", HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = {"/order"}, method = RequestMethod.GET)
-    @ApiOperation(value = "获取用户订单详情页面")
-    public String customerOrder() {
-        return "user/customer_order";
-    }
-
-    @RequestMapping(value = {"/details"}, method = RequestMethod.GET)
-    @ApiOperation(value = "获取用户个人详情页面")
-    public String customerDetails() {
-        return "user/customer_details";
-    }
-
 }
