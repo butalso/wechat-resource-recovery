@@ -28,20 +28,23 @@ public class UserController {
     @ApiOperation(value = "返回用户个人中心页面")
     public ModelAndView getUserDetail(@ApiIgnore @ModelAttribute("user") User user) {
         ModelAndView mav = null;
+        User useDetails = userService.getUserDetails(user.getName(), user.getUserKind());
         switch (user.getUserKind()) {
             case 0:
                 mav = new ModelAndView("user/customer");
+                mav.addObject("userDetails", (Customer) useDetails);
                 break;
             case 1:
                 mav = new ModelAndView("user/collector");
+                mav.addObject("userDetails", (Collector) useDetails);
                 break;
             case 2:
                 mav = new ModelAndView("user/company");
+                mav.addObject("userDetails", (Company) useDetails);
                 break;
         }
-        User useDetails = userService.getUserDetails(user.getName(), user.getUserKind());
         useDetails.setPassword(null);
-        mav.addObject("userDetails", useDetails);
+
         return mav;
     }
 
