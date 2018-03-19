@@ -4,7 +4,7 @@
         <div class="container">
             <ol class="breadcrumb" style="margin-bottom: 5px;">
                 <li><a href="/web-consumer">主页</a></li>
-                <li class="active"><a class="secDirect" href="/web-consumer/categories">XX</a></li>
+                <li class="active"><a class="secDirect" href="/web-consumer/garbage/categories">XX</a></li>
             </ol>
             <div class="product-desc">
                 <div class="col-md-5 product-details-grid">

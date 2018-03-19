@@ -9,19 +9,19 @@
                 <div class="media-left media-middle">
                     <a href="#">
                         <i class="fa fa-user" aria-hidden="true" style="font-size: 70px;"></i>
-                    <#--<img class="media-object" src="/web-consumer/static/images/b1.jpg" alt="...">-->
+                    <#--<img class="media-object" src="" alt="...">-->
                     </a>
                 </div>
                 <div class="media-body">
-                    <h2 class="head media-heading">您好 许先生<a href="/web-consumer/logout" class="logout">登出</a></h2>
-                    经验值: 12/100
+                    <h2 class="head media-heading">您好 ${userDetails.name}<a href="/web-consumer/logout" class="logout">登出</a></h2>
+                    经验值: ${userDetails.}
                 </div>
             </div>
         </div>
         <hr>
         <div class="region-block">
             <div class="state">
-                <a href="/web-consumer/user/order"><h3>废品订单<span class="more">>></span></h3></a>
+                <a href="/web-consumer/order/info"><h3>废品订单<span class="more">>></span></h3></a>
             </div>
             <div class="clearfix"></div>
         </div>

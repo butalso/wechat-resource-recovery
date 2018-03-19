@@ -11,7 +11,7 @@
     <div class="categories">
         <div class="container">
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage/#parentVerticalTab1">
+                <a href="/web-consumer/garbage/categories/#parentVerticalTab1">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-file"></i></div>
@@ -21,7 +21,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage#parentVerticalTab2">
+                <a href="/web-consumer/garbage/categories#parentVerticalTab2">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-cubes"></i></div>
@@ -31,7 +31,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage#parentVerticalTab3">
+                <a href="/web-consumer/garbage/categories#parentVerticalTab3">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-mobile"></i></div>
@@ -41,7 +41,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage#parentVerticalTab4">
+                <a href="/web-consumer/garbage/categories#parentVerticalTab4">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-battery-1"></i></div>
@@ -51,7 +51,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage#parentVerticalTab5">
+                <a href="/web-consumer/garbage/categories#parentVerticalTab5">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-car"></i></div>
@@ -61,7 +61,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage#parentVerticalTab6">
+                <a href="/web-consumer/garbage/categories#parentVerticalTab6">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-cogs"></i></div>
@@ -71,7 +71,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage#parentVerticalTab7">
+                <a href="/web-consumer/garbage/categories#parentVerticalTab7">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-television"></i></div>
@@ -81,7 +81,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage#parentVerticalTab8">
+                <a href="/web-consumer/garbage/categories#parentVerticalTab8">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-cutlery"></i></div>
@@ -91,7 +91,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage#parentVerticalTab9">
+                <a href="/web-consumer/garbage/categories#parentVerticalTab9">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-diamond"></i></div>

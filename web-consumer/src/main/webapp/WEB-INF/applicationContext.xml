@@ -46,16 +46,16 @@
   </mvc:annotation-driven>
 
   <!--配置登录状态拦截器-->
-  <!--<mvc:interceptors>-->
-    <!--<mvc:interceptor>-->
-      <!--&lt;!&ndash;进行拦截&ndash;&gt;-->
-      <!--<mvc:mapping path="/user/**" />-->
-      <!--<mvc:mapping path="/order/**" />-->
-      <!--<mvc:mapping path="/account/**" />-->
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <!--进行拦截-->
+      <mvc:mapping path="/user/**" />
+      <mvc:mapping path="/order/**" />
+      <mvc:mapping path="/account/**" />
 
-      <!--<bean id="loginInterceptor" class="interceptor.Login"></bean>-->
-    <!--</mvc:interceptor>-->
-  <!--</mvc:interceptors>-->
+      <bean id="loginInterceptor" class="interceptor.Login"></bean>
+    </mvc:interceptor>
+  </mvc:interceptors>
 
   <!--servlet mapping -->
   <!--静态资源配置 默认servlet配置
