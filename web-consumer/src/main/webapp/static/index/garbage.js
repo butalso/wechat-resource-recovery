@@ -5,7 +5,7 @@ var price;
 $(function () {
     init();
     $(".btn").click(function () {
-        $(this).attr("disabled", true);;
+        $(this).attr("disabled", true);
         addShopoingCart();
     });
 });
@@ -13,6 +13,7 @@ $(function () {
 function init() {
     categories = getQueryString("categories");
     name = getQueryString("name");
+    console.log(categories, name);
     getPrice({name: name});
     $(".secDirect").text(categories);
     $(".itemtype h4").text(name);

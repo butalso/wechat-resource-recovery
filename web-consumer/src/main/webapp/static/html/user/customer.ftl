@@ -1,7 +1,3 @@
-<div>
-    <p>添加${userDetails}</p>
-</div>
-
 <@override name="content">
     <div class="regions main-grid-border">
         <div class="container">
@@ -9,12 +5,13 @@
                 <div class="media-left media-middle">
                     <a href="#">
                         <i class="fa fa-user" aria-hidden="true" style="font-size: 70px;"></i>
-                    <#--<img class="media-object" src="" alt="...">-->
+                        <img class="media-object" src="${userDetails.imageUrl}" alt="...">
                     </a>
                 </div>
                 <div class="media-body">
-                    <h2 class="head media-heading">您好 ${userDetails.name}<a href="/web-consumer/logout" class="logout">登出</a></h2>
-                    经验值: ${userDetails.}
+                    <h2 class="head media-heading">您好 ${userDetails.name}<a href="/web-consumer/logout" class="logout">登出</a>
+                    </h2>
+                    经验值: ${userDetails.experience}
                 </div>
             </div>
         </div>

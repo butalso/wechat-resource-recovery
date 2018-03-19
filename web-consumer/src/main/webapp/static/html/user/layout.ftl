@@ -38,9 +38,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 </@block>
-<@block name="content">
 
-</@block>
+<div class="content">
+    <@block name="content">
+
+    </@block>
+</div>
 <#--<@block name="footer">-->
 <#--<!--footer section start&ndash;&gt;-->
 <#--<footer>-->

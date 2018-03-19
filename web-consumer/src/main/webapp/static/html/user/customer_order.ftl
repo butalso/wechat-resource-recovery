@@ -1,48 +1,21 @@
-<#list orders as order>
-        <li>${order}</li>
-</#list>
-
 <@override name="content">
 <div class="container orderList">
-    <div class="region-block">
-        <div class="media" orderId="123">
-            <div class="media-left">
-                <a href="#">
-                    <i class="fa fa-user" aria-hidden="true" style="font-size: 50px;"></i>
-                </a>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading">订单编号<span class="more">>></span></h4>
-                订单时间
-            </div>
-        </div>
-    </div>
-    <div class="region-block">
-        <div class="media">
-            <div class="media-left">
-                <a href="#">
-                    <i class="fa fa-user" aria-hidden="true" style="font-size: 50px;"></i>
-                </a>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading">订单编号<span class="more">>></span></h4>
-                订单时间
+    <#list orders as order>
+        <div class="region-block">
+            <div class="media" orderId="${order.orderItem.id}">
+                <div class="media-left">
+                    <a href="#">
+                        <i class="fa fa-user" aria-hidden="true" style="font-size: 50px;"></i>
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">订单编号:${order.orderItem.id}<span class="more">>></span></h4>
+                    <div>${order.orderItem.state}</div>
+                    <div>订单时间:${(order.orderItem.createTime?string("yyyy-MM-dd  hh:mm:ss"))!}</div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="region-block">
-        <div class="media">
-            <div class="media-left">
-                <a href="#">
-                    <i class="fa fa-user" aria-hidden="true" style="font-size: 50px;"></i>
-                </a>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading">订单编号<span class="more">>></span></h4>
-                订单时间
-            </div>
-        </div>
-    </div>
+    </#list>
 </div>
 </@override>
 

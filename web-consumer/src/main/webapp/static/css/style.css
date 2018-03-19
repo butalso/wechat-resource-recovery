@@ -3387,6 +3387,9 @@ label {
     float: right;
     padding-right: 20px;
 }
+.content {
+    margin-bottom: 100px;
+}
 
 /*-- responsive media queries --*/
 @media (max-width: 1366px){
