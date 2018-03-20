@@ -9,13 +9,14 @@
     <artifactId>web-consumer</artifactId>
     <packaging>war</packaging>
     <name>web-consumer Maven Webapp</name>
-    <url>http://maven.apache.org</url>
+
     <dependencies>
         <!--服务api-->
         <dependency>
             <artifactId>service-api</artifactId>
             <groupId>cn.edu.hhu</groupId>
             <version>${project.parent.version}</version>
+            <type>pom</type>
         </dependency>
         <!-- servlet web依赖 -->
         <dependency>

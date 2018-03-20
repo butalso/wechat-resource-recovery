@@ -6,6 +6,8 @@ import exception.PasswordErrorException;
 import exception.UserNameExistException;
 import exception.UserNonExistsException;
 
+import java.util.List;
+
 /**
  * 用户（业主、回收员、企业）的增删改查
  */
@@ -54,4 +56,11 @@ public interface UserService {
      */
     void updatePassword(String name, int userKind, String oldPass, String newPass)
             throws PasswordErrorException;
+
+    /**
+     * 返回某类全部用户基本信息
+     * @param userKind
+     * @return
+     */
+    List<? extends User> getAllUsers(Integer userKind);
 }

@@ -196,4 +196,18 @@
         SELECT id, name, password, image_url, phone FROM company WHERE id = #{id}
     </select>
 
+    <select id="getCustomers" resultType="entity.Customer">
+        SELECT id, name, password, image_url, gender, phone,
+        credit, point, experience, create_time FROM customer
+    </select>
+
+    <select id="getCollectors" resultType="entity.Collector">
+        SELECT id, name, password, image_url, gender, phone,
+        credit, point, experience, create_time FROM collector WHERE id &lt;&gt; 1
+    </select>
+
+    <select id="getCompanys" resultType="entity.Company">
+        SELECT id, name, password, image_url, phone, create_time FROM company WHERE id &lt;&gt; 1
+    </select>
+
 </mapper>

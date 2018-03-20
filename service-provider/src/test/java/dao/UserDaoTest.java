@@ -146,4 +146,19 @@ public class UserDaoTest {
     public void getCompanyBasic() {
         System.out.println(userDao.getCompanyBasic("回收哥"));
     }
+
+    @Test
+    public void getCustomers() {
+        System.out.println(userDao.getCustomers());
+    }
+
+    @Test
+    public void getCollectors() {
+        System.out.println(userDao.getCollectors());
+    }
+
+    @Test
+    public void getCompanys() {
+        System.out.println(userDao.getCompanys());
+    }
 }

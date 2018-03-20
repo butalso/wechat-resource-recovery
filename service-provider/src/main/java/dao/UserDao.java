@@ -155,4 +155,22 @@ public interface UserDao {
      * @return
      */
     Company getCompanyBasicById(Integer id);
+
+    /**
+     * 获取全部的业主
+     * @return
+     */
+    List<Customer> getCustomers();
+
+    /**
+     * 获取全部的回收员
+     * @return
+     */
+    List<Collector> getCollectors();
+
+    /**
+     * 获取全部的企业
+     * @return
+     */
+    List<Company> getCompanys();
 }

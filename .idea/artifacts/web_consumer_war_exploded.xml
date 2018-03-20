@@ -7,7 +7,7 @@
           <element id="module-output" name="web-consumer" />
         </element>
         <element id="directory" name="lib">
-          <element id="archive" name="service-api-1.0-SNAPSHOT.jar">
+          <element id="archive" name="service-api-1.0-SNAPSHOT.pom">
             <element id="module-output" name="service-api" />
           </element>
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.1" />

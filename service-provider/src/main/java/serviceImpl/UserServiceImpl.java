@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.UserService;
 
+import java.util.List;
+
 @Service
 @com.alibaba.dubbo.config.annotation.Service
 public class UserServiceImpl implements UserService {
@@ -137,5 +139,10 @@ public class UserServiceImpl implements UserService {
         }
         user.setPassword(newPass);
         updateUser(user);
+    }
+
+    @Override
+    public List<? extends User> getAllUsers(Integer userKind) {
+        return null;
     }
 }
