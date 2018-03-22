@@ -13,7 +13,6 @@
                         <li>电池</li>
                         <li>报废车辆</li>
                         <li>废金属</li>
-                        <li>电视机</li>
                         <li>厨房五金</li>
                         <li>其他</li>
                         <a href="#">所有分类</a>
@@ -33,9 +32,16 @@
                             </div>
                             <div class="sub-categories">
                                 <ul>
+                                    <li><a href="/web-consumer/garbage/details?categories=废纸&name=纸板箱">纸板箱</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废纸&name=瓦愣纸">瓦愣纸</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废纸&name=牛皮纸">牛皮纸</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废纸&name=铜版纸">铜版纸</a></li>
                                     <li><a href="/web-consumer/garbage/details?categories=废纸&name=废报纸">废报纸</a></li>
-                                    <li><a href="/web-consumer/garbage/details?categories=废纸&name=废纸箱">废纸箱</a></li>
-                                    <li><a href="/web-consumer/garbage/details?categories=废纸&name=废书纸">废书纸</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废纸&name=书刊纸">书刊纸</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废纸&name=废卡纸">废卡纸</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废纸&name=废纸边">废纸边</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废纸&name=办公废纸">办公废纸</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废纸&name=混合废纸">混合废纸</a></li>
                                     <div class="clearfix"></div>
                                 </ul>
                             </div>
@@ -55,10 +61,11 @@
                             <div class="sub-categories">
                                 <ul>
                                     <li><a href="/web-consumer/garbage/details?categories=废塑料&name=塑料瓶">塑料瓶</a></li>
-                                    <li><a href="/web-consumer/garbage/details?categories=废塑料&name=薄膜保鲜袋">薄膜/保鲜袋</a></li>
-                                    <li><a href="/web-consumer/garbage/details?categories=废塑料&name=塑料玩具">塑料玩具</a></li>
                                     <li><a href="/web-consumer/garbage/details?categories=废塑料&name=塑料容器">塑料容器</a></li>
-                                    <li><a href="/web-consumer/garbage/details?categories=废塑料&name=其他塑料制品">其他塑料制品</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废塑料&name=塑料薄膜">塑料薄膜</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废塑料&name=塑料玩具">塑料玩具</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废塑料&name=一次性塑料饭盒">一次性塑料饭盒</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废塑料&name=泡沫塑料">泡沫塑料</a></li>
                                     <div class="clearfix"></div>
                                 </ul>
                             </div>

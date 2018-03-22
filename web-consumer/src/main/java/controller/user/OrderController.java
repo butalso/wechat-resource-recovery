@@ -195,4 +195,10 @@ public class OrderController {
         return new ResponseEntity<>("确认成功", HttpStatus.CREATED);
     }
 
+    @RequestMapping(value = {"/details"}, method = RequestMethod.GET)
+    @ApiOperation(value = "获取订单详情页面")
+    public String orderDetails() {
+        return "user/customer_order_details";
+    }
+
 }
