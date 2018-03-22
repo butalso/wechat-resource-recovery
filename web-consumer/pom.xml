@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <artifactId>wechat-resource-recovery</artifactId>
         <groupId>cn.edu.hhu</groupId>
+        <artifactId>wechat-resource-recovery</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,10 +13,10 @@
     <dependencies>
         <!--服务api-->
         <dependency>
-            <artifactId>service-api</artifactId>
             <groupId>cn.edu.hhu</groupId>
+            <artifactId>service-api</artifactId>
             <version>${project.parent.version}</version>
-            <type>pom</type>
+            <type>jar</type>
         </dependency>
         <!-- servlet web依赖 -->
         <dependency>
