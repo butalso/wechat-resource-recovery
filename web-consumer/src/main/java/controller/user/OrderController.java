@@ -2,28 +2,19 @@ package controller.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import dto.Order;
-import entity.OrderDetail;
-import entity.OrderItem;
 import entity.User;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.auth.In;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.support.HttpRequestHandlerServlet;
 import org.springframework.web.servlet.ModelAndView;
 import service.OrderService;
 import springfox.documentation.annotations.ApiIgnore;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/order")
@@ -109,7 +100,7 @@ public class OrderController {
             return new ModelAndView("redirect:/order");
         }
 
-        ModelAndView mav = new ModelAndView("user/newOrder");
+        ModelAndView mav = new ModelAndView("user/collector_newOrder");
         mav.addObject("orders", orderService.getNewOrders(user.getName()));
         return mav;
     }
