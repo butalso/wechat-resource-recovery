@@ -33,7 +33,7 @@
                             <div class="sub-categories">
                                 <ul>
                                     <li><a href="/web-consumer/garbage/details?categories=废纸&name=纸板箱">纸板箱</a></li>
-                                    <li><a href="/web-consumer/garbage/details?categories=废纸&name=瓦愣纸">瓦愣纸</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=废纸&name=瓦楞纸">瓦楞纸</a></li>
                                     <li><a href="/web-consumer/garbage/details?categories=废纸&name=牛皮纸">牛皮纸</a></li>
                                     <li><a href="/web-consumer/garbage/details?categories=废纸&name=铜版纸">铜版纸</a></li>
                                     <li><a href="/web-consumer/garbage/details?categories=废纸&name=废报纸">废报纸</a></li>

@@ -4389,7 +4389,7 @@ label {
 		font-size: 1.8em;
 	}
 	.btn{
-		margin-bottom:1em;
+		/*margin-bottom:1em;*/
 	}
 	.modal-dialog {
 		width: 390px;

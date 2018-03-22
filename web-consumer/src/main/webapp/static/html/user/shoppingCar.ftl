@@ -68,7 +68,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" id="payBtn" class="btn btn-primary">下单</button>
+                    <button type="button" id="payBtn" class="btn btn-default">下单</button>
                 </div>
             </div>
         </div>
