@@ -1,5 +1,9 @@
 <@override name="content">
 <div class="container orderList">
+    <a href="/web-consumer/user/info" class="btn">
+        <
+        <返回
+    </a>
     <#list orders as order>
         <div class="region-block">
             <div class="media" orderId="${order.orderItem.id}">
@@ -9,7 +13,10 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading">订单编号:${order.orderItem.id}<span class="more">>></span></h4>
+                    <h4 class="media-heading">
+                        订单编号:${order.orderItem.id}
+                        <span class="more" orderId="${order.orderItem.id}">>></span>
+                    </h4>
                     <div>${order.orderItem.state}</div>
                     <div>订单时间:${(order.orderItem.createTime?string("yyyy-MM-dd  hh:mm:ss"))!}</div>
                 </div>
