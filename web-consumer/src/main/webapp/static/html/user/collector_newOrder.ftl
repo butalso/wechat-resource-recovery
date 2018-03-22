@@ -1,3 +1,4 @@
+<@override name="nav"></@override>
 <@override name="content">
 <div class="container orderList">
     <a href="/web-consumer/user/info" class="btn">
@@ -26,7 +27,6 @@
         </div>
     </#list>
 </div>
-<button>刷新！！！！！！！！！！！！！</button>
 </@override>
 
 <@override name="js">

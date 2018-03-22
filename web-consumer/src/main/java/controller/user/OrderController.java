@@ -29,9 +29,10 @@ public class OrderController {
             produces = "application/json;charset=UTF-8")
     @ApiOperation(value = "返回与用户相关订单集合和订单页面")
     public ModelAndView getOrders(@ApiIgnore @ModelAttribute("user") User user) {
-        ModelAndView mav = new ModelAndView("user/customer_order");
+        ModelAndView mav = new ModelAndView("user/order_list");
         List<Order> orders = orderService.getOrders(user.getName(), user.getUserKind());
         mav.addObject("orders", orders);
+        mav.addObject("userKind", user.getUserKind());
         return mav;
     }
 

@@ -1,4 +1,4 @@
-<@override name="header"></@override>
+<@override name="nav"></@override>
 <@override name="content">
     <div class="regions main-grid-border">
         <div class="container">
@@ -6,7 +6,7 @@
                 <div class="media-left media-middle">
                     <a href="#">
                         <i class="fa fa-user" aria-hidden="true" style="font-size: 70px;"></i>
-                        <#--<img class="media-object" src="${userDetails.imageUrl}" alt="...">-->
+                    <#--<img class="media-object" src="${userDetails.imageUrl}" alt="...">-->
                     </a>
                 </div>
                 <div class="media-body">
@@ -25,13 +25,7 @@
         </div>
         <div class="region-block">
             <div class="state">
-                <h3>待回收<span class="more">>></span></h3>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <div class="region-block">
-            <div class="state">
-                <h3>所有订单<span class="more">>></span></h3>
+                <a href="/web-consumer/order/info"><h3>待回收<span class="more">>></span></h3></a>
             </div>
             <div class="clearfix"></div>
         </div>
