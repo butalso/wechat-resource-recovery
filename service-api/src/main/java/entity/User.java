@@ -23,6 +23,11 @@ public class User implements Serializable {
     public User() {
     }
 
+    public User(String name, int userKind) {
+        this.name = name;
+        this.userKind = userKind;
+    }
+
     public User(Integer id, String name, Integer userKind) {
         this.id = id;
         this.name = name;

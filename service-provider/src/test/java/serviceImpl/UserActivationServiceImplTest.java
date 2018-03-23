@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import service.UserActivationService;
+import service.UserService;
 
 import java.util.Date;
 
@@ -20,6 +21,8 @@ public class UserActivationServiceImplTest {
 
     @Autowired
     UserActivationService userActivationService;
+    @Autowired
+    UserService userService;
 
     @Test
     public void addActivation() {
@@ -29,6 +32,8 @@ public class UserActivationServiceImplTest {
 
     @Test
     public void getUserActivations() {
+        User user = userService.getUserDetails("狙击手", 0);
+        System.out.println(userActivationService.getUserActivations(new User(user.getId(), user.getName(), 0)));
 //        System.out.println(userActivationService.getUserActivations(new Customer(1, "狙击手")));
     }
 
@@ -36,4 +41,5 @@ public class UserActivationServiceImplTest {
     public void getDateActivations() {
         System.out.println(userActivationService.getDateActivations(new Date()));
     }
+
 }

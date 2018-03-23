@@ -49,7 +49,7 @@ public class UserDaoTest {
 
     @Test
     public void getCustomer() {
-        System.out.println(userDao.getCustomerDetails("乔治"));
+        System.out.println(userDao.getCustomerDetails("喜羊羊"));
     }
 
     @Test
@@ -134,7 +134,7 @@ public class UserDaoTest {
 
     @Test
     public void getCustomerBasic() {
-        System.out.println(userDao.getCustomerBasic("熊大"));
+        System.out.println(userDao.getCustomerBasic("喜羊羊"));
     }
 
     @Test

@@ -25,7 +25,7 @@ public class UserHome {
     @Reference
     UserService userService;
 
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"", "/index"}, method = RequestMethod.GET)
     @ApiOperation(value = "获取用户首页")
     public String userHome() {
         return "user/index";

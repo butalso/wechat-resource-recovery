@@ -8,6 +8,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import service.WalletService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,5 +38,23 @@ public class WalletServiceImplTest {
     @Test
     public void getWalletRecord() {
         System.out.println(walletService.getWalletRecord(13));
+    }
+
+    @Test
+    public void t() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+        int size = list.size();
+        for (int j = 0; j < size; j++) {
+            System.out.println(list.get(j));
+            if (j == 2) {
+                list.remove(j);
+            }
+        }
     }
 }

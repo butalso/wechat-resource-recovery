@@ -18,7 +18,7 @@ public class GarbageController {
     @Reference
     GarbageService garbageService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation(value = "获取指定废品信息")
     public Garbage getGarbage(@RequestParam("name") String name) {
@@ -31,6 +31,7 @@ public class GarbageController {
         return "user/shoppingCar";
     }
 
+
     @RequestMapping(value = {"/categories"}, method = RequestMethod.GET)
     @ApiOperation(value = "获取废品分类页面")
     public String categories() {
@@ -42,4 +43,5 @@ public class GarbageController {
     public String details() {
         return "user/garbage";
     }
+  
 }

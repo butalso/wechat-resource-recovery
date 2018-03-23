@@ -143,6 +143,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<? extends User> getAllUsers(Integer userKind) {
-        return null;
+        switch (userKind) {
+            case 0: return userDao.getCustomers();
+            case 1: return userDao.getCollectors();
+            case 2: return userDao.getCompanys();
+            default:return null;
+        }
     }
 }
