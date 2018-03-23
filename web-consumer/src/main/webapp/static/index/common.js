@@ -16,6 +16,7 @@ function forMobileApps() {
     }
 }
 
+// 获取url中的参数
 function getQueryString(key) {
     var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
     var result = window.location.search.substr(1).match(reg);

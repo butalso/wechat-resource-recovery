@@ -5,6 +5,7 @@ var price;
 $(function () {
     init();
     $(".btn").click(function () {
+        $(this).attr("disabled", true);
         addShopoingCart();
     });
 });
@@ -12,7 +13,8 @@ $(function () {
 function init() {
     categories = getQueryString("categories");
     name = getQueryString("name");
-    getPrice({name: categories});
+    console.log(categories, name);
+    getPrice({name: name});
     $(".secDirect").text(categories);
     $(".itemtype h4").text(name);
 }
@@ -20,18 +22,14 @@ function init() {
 function getPrice(data) {
     $.ajax({
         type: 'GET',
-        url: LOCALHOST + "/garbage/price",
+        url: LOCALHOST + "/garbage/",
         dataType: 'json',
         data: data,
         complete: function (XMLHttpRequest, textStatus) {
         },
         success: function (data) {
             console.log(data);
-            $.each(data, function (index, element) {
-                if (element.name == name) {
-                    price = element.price;
-                }
-            })
+            price = data.price;
         },
         error: function (err) {
             console.log(err);
@@ -61,5 +59,6 @@ function addShopoingCart() {
         }]
         sessionStorage.setItem("shoppingCar", JSON.stringify(data));
     }
-    Toast("废品已添加~", 2000);
+    Toast("废品已添加~", 1000);
+    setTimeout("window.history.go(-1)", 2000);
 }

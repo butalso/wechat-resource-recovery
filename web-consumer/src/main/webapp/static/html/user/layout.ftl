@@ -27,6 +27,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="logo">
             <a href="/web-consumer"><span>Waste</span>Recycling</a>
         </div>
+        <@block name="nav">
         <nav>
             <ul class="nav nav-pills">
                 <li role="presentation"><a class="account" href="/web-consumer"><i class="fa fa-home" aria-hidden="true"></i>主页</a></li>
@@ -35,12 +36,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <li role="presentation"><a class="account" href="/web-consumer/user/info"><i class="fa fa-user" aria-hidden="true"></i>个人中心</a></li>
             </ul>
         </nav>
+        </@block>
     </div>
 </div>
 </@block>
-<@block name="content">
 
-</@block>
+<div class="content">
+    <@block name="content">
+
+    </@block>
+</div>
 <#--<@block name="footer">-->
 <#--<!--footer section start&ndash;&gt;-->
 <#--<footer>-->

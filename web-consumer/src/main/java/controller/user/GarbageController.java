@@ -32,4 +32,16 @@ public class GarbageController {
     }
 
 
+    @RequestMapping(value = {"/categories"}, method = RequestMethod.GET)
+    @ApiOperation(value = "获取废品分类页面")
+    public String categories() {
+        return "user/categories";
+    }
+
+    @RequestMapping(value = {"/details"}, method = RequestMethod.GET)
+    @ApiOperation(value = "获取废品详细页面")
+    public String details() {
+        return "user/garbage";
+    }
+  
 }

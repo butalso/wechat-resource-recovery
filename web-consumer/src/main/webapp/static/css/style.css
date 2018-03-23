@@ -1307,6 +1307,7 @@ span.total strong {
 }
 .main-grid-border{
     border-bottom: 3px solid #F4F4F4;
+    margin-bottom: 100px;
 }
 h2.head {
     color: #f3c500;
@@ -3386,6 +3387,9 @@ label {
     float: right;
     padding-right: 20px;
 }
+.content {
+    margin-bottom: 100px;
+}
 
 /*-- responsive media queries --*/
 @media (max-width: 1366px){
@@ -4385,7 +4389,7 @@ label {
 		font-size: 1.8em;
 	}
 	.btn{
-		margin-bottom:1em;
+		/*margin-bottom:1em;*/
 	}
 	.modal-dialog {
 		width: 390px;

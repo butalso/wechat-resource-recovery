@@ -93,7 +93,7 @@ public class UserDaoTest {
 
     @Test
     public void getCompany() {
-        System.out.println(userDao.getCompanyDetails("回收哥"));
+        System.out.println(userDao.getCompanyDetails("废品大叔"));
     }
 
     @Test

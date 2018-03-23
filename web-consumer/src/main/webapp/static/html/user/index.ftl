@@ -11,7 +11,7 @@
     <div class="categories">
         <div class="container">
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage/#parentVerticalTab1">
+                <a href="/web-consumer/garbage/categories/#parentVerticalTab1">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-file"></i></div>
@@ -21,7 +21,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage#parentVerticalTab2">
+                <a href="/web-consumer/garbage/categories#parentVerticalTab2">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-cubes"></i></div>
@@ -31,7 +31,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage#parentVerticalTab3">
+                <a href="/web-consumer/garbage/categories#parentVerticalTab3">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-mobile"></i></div>
@@ -41,7 +41,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage#parentVerticalTab4">
+                <a href="/web-consumer/garbage/categories#parentVerticalTab4">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-battery-1"></i></div>
@@ -51,7 +51,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage#parentVerticalTab5">
+                <a href="/web-consumer/garbage/categories#parentVerticalTab5">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-car"></i></div>
@@ -61,7 +61,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage#parentVerticalTab6">
+                <a href="/web-consumer/garbage/categories#parentVerticalTab6">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-cogs"></i></div>
@@ -71,17 +71,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage#parentVerticalTab7">
-                    <div class="focus-border">
-                        <div class="focus-layout">
-                            <div class="focus-image"><i class="fa fa-television"></i></div>
-                            <h4 class="clrchg">电视机</h4>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage#parentVerticalTab8">
+                <a href="/web-consumer/garbage/categories#parentVerticalTab7">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-cutlery"></i></div>
@@ -91,7 +81,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3">
-                <a href="/web-consumer/garbage#parentVerticalTab9">
+                <a href="/web-consumer/garbage/categories#parentVerticalTab9">
                     <div class="focus-border">
                         <div class="focus-layout">
                             <div class="focus-image"><i class="fa fa-diamond"></i></div>
@@ -103,61 +93,61 @@
             <div class="clearfix"></div>
         </div>
     </div>
-    <#--<div class="trending-ads">-->
-        <#--<div class="container">-->
-            <#--<!-- slider &ndash;&gt;-->
-            <#--<div class="trend-ads">-->
-                <#--<h2>废品回收概况</h2>-->
-                <#--<ul id="flexiselDemo3">-->
-                    <#--<li>-->
-                        <#--<div class="col-md-3 biseller-column">-->
-                            <#--<a href="single.html">-->
-                                <#--<img src="/web-consumer/static/images/p1.jpg"/>-->
-                                <#--<span class="price">&#36; 450</span>-->
-                            <#--</a>-->
-                            <#--<div class="ad-info">-->
-                                <#--<h5>朝阳区李女士</h5>-->
-                                <#--<span>1小时前</span>-->
-                            <#--</div>-->
-                        <#--</div>-->
-                        <#--<div class="col-md-3 biseller-column">-->
-                            <#--<a href="single.html">-->
-                                <#--<img src="/web-consumer/static/images/p2.jpg"/>-->
-                                <#--<span class="price">&#36; 399</span>-->
-                            <#--</a>-->
-                            <#--<div class="ad-info">-->
-                                <#--<h5>江宁区欧学长</h5>-->
-                                <#--<span>3小时前</span>-->
-                            <#--</div>-->
-                        <#--</div>-->
-                    <#--</li>-->
-                    <#--<li>-->
-                        <#--<div class="col-md-3 biseller-column">-->
-                            <#--<a href="single.html">-->
-                                <#--<img src="/web-consumer/static/images/p1.jpg"/>-->
-                                <#--<span class="price">&#36; 450</span>-->
-                            <#--</a>-->
-                            <#--<div class="ad-info">-->
-                                <#--<h5>There are many variations of passages</h5>-->
-                                <#--<span>1 hour ago</span>-->
-                            <#--</div>-->
-                        <#--</div>-->
-                        <#--<div class="col-md-3 biseller-column">-->
-                            <#--<a href="single.html">-->
-                                <#--<img src="/web-consumer/static/images/p2.jpg"/>-->
-                                <#--<span class="price">&#36; 399</span>-->
-                            <#--</a>-->
-                            <#--<div class="ad-info">-->
-                                <#--<h5>Lorem Ipsum is simply dummy</h5>-->
-                                <#--<span>3 hour ago</span>-->
-                            <#--</div>-->
-                        <#--</div>-->
-                    <#--</li>-->
-                <#--</ul>-->
-            <#--</div>-->
-        <#--</div>-->
-        <#--<!-- //slider &ndash;&gt;-->
-    <#--</div>-->
+<#--<div class="trending-ads">-->
+<#--<div class="container">-->
+<#--<!-- slider &ndash;&gt;-->
+<#--<div class="trend-ads">-->
+<#--<h2>废品回收概况</h2>-->
+<#--<ul id="flexiselDemo3">-->
+<#--<li>-->
+<#--<div class="col-md-3 biseller-column">-->
+<#--<a href="single.html">-->
+<#--<img src="/web-consumer/static/images/p1.jpg"/>-->
+<#--<span class="price">&#36; 450</span>-->
+<#--</a>-->
+<#--<div class="ad-info">-->
+<#--<h5>朝阳区李女士</h5>-->
+<#--<span>1小时前</span>-->
+<#--</div>-->
+<#--</div>-->
+<#--<div class="col-md-3 biseller-column">-->
+<#--<a href="single.html">-->
+<#--<img src="/web-consumer/static/images/p2.jpg"/>-->
+<#--<span class="price">&#36; 399</span>-->
+<#--</a>-->
+<#--<div class="ad-info">-->
+<#--<h5>江宁区欧学长</h5>-->
+<#--<span>3小时前</span>-->
+<#--</div>-->
+<#--</div>-->
+<#--</li>-->
+<#--<li>-->
+<#--<div class="col-md-3 biseller-column">-->
+<#--<a href="single.html">-->
+<#--<img src="/web-consumer/static/images/p1.jpg"/>-->
+<#--<span class="price">&#36; 450</span>-->
+<#--</a>-->
+<#--<div class="ad-info">-->
+<#--<h5>There are many variations of passages</h5>-->
+<#--<span>1 hour ago</span>-->
+<#--</div>-->
+<#--</div>-->
+<#--<div class="col-md-3 biseller-column">-->
+<#--<a href="single.html">-->
+<#--<img src="/web-consumer/static/images/p2.jpg"/>-->
+<#--<span class="price">&#36; 399</span>-->
+<#--</a>-->
+<#--<div class="ad-info">-->
+<#--<h5>Lorem Ipsum is simply dummy</h5>-->
+<#--<span>3 hour ago</span>-->
+<#--</div>-->
+<#--</div>-->
+<#--</li>-->
+<#--</ul>-->
+<#--</div>-->
+<#--</div>-->
+<#--<!-- //slider &ndash;&gt;-->
+<#--</div>-->
 </div>
 </@override>
 <@override name="js">

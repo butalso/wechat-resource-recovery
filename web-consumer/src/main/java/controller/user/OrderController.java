@@ -2,28 +2,19 @@ package controller.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import dto.Order;
-import entity.OrderDetail;
-import entity.OrderItem;
 import entity.User;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.auth.In;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.support.HttpRequestHandlerServlet;
 import org.springframework.web.servlet.ModelAndView;
 import service.OrderService;
 import springfox.documentation.annotations.ApiIgnore;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/order")
@@ -38,9 +29,10 @@ public class OrderController {
             produces = "application/json;charset=UTF-8")
     @ApiOperation(value = "返回与用户相关订单集合和订单页面")
     public ModelAndView getOrders(@ApiIgnore @ModelAttribute("user") User user) {
-        ModelAndView mav = new ModelAndView("user/customer_order");
+        ModelAndView mav = new ModelAndView("user/order_list");
         List<Order> orders = orderService.getOrders(user.getName(), user.getUserKind());
         mav.addObject("orders", orders);
+        mav.addObject("userKind", user.getUserKind());
         return mav;
     }
 
@@ -109,7 +101,7 @@ public class OrderController {
             return new ModelAndView("redirect:/order");
         }
 
-        ModelAndView mav = new ModelAndView("user/newOrder");
+        ModelAndView mav = new ModelAndView("user/collector_newOrder");
         mav.addObject("orders", orderService.getNewOrders(user.getName()));
         return mav;
     }
@@ -193,6 +185,12 @@ public class OrderController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<>("确认成功", HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = {"/details"}, method = RequestMethod.GET)
+    @ApiOperation(value = "获取订单详情页面")
+    public String orderDetails() {
+        return "user/customer_order_details";
     }
 
 }
