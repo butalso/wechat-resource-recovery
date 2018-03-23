@@ -5,7 +5,7 @@
                 <div class="media-left media-middle">
                     <a href="#">
                         <i class="fa fa-user" aria-hidden="true" style="font-size: 70px;"></i>
-                        <img class="media-object" src="${userDetails.imageUrl}" alt="...">
+                        <#--<img class="media-object" src="${userDetails.imageUrl}" alt="...">-->
                     </a>
                 </div>
                 <div class="media-body">

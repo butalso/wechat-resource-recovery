@@ -70,9 +70,6 @@
           <element id="library" level="project" name="Maven: org.bouncycastle:bcprov-jdk15:1.45" />
           <element id="library" level="project" name="Maven: org.freemarker:freemarker:2.3.20" />
           <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.6" />
-          <element id="archive" name="service-api-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="service-api" />
-          </element>
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-slf4j-impl:2.9.1" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.9.1" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.9.1" />

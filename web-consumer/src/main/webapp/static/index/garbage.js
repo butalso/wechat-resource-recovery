@@ -59,5 +59,6 @@ function addShopoingCart() {
         }]
         sessionStorage.setItem("shoppingCar", JSON.stringify(data));
     }
-    Toast("废品已添加~", 2000);
+    Toast("废品已添加~", 1000);
+    setTimeout("window.history.go(-1)", 2000);
 }

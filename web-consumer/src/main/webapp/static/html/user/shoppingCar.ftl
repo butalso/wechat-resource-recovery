@@ -8,17 +8,7 @@
                         <div id="container">
                             <div class="clearfix"></div>
                             <ul class="list">
-                                <li>
-                                    <section class="list-left">
-                                        <h5 class="title">废报纸</h5>
-                                        <p class="catpath">单价：7元/kg</p>
-                                    </section>
-                                    <section class="list-right">
-                                        <span class="date">重量100KG</span>
-                                        <span class="cityname">删除</span>
-                                    </section>
-                                    <div class="clearfix"></div>
-                                </li>
+
                             </ul>
                             <div>
                                 <!-- Button trigger modal -->

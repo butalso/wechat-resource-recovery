@@ -4,19 +4,19 @@
         <div class="container">
             <ol class="breadcrumb" style="margin-bottom: 5px;">
                 <li><a href="/web-consumer">主页</a></li>
-                <li class="active"><a class="secDirect" href="/web-consumer/garbage/categories">XX</a></li>
+                <li class="active"><a class="secDirect" href="/web-consumer/garbage/categories"></a></li>
             </ol>
             <div class="product-desc">
                 <div class="col-md-5 product-details-grid">
                     <div class="item-price">
                         <div class="itemtype">
                             <p class="p-price">选项：</p>
-                            <h4>XXX</h4>
+                            <h4></h4>
                             <div class="clearfix"></div>
                         </div>
                         <div class="product-price">
                             <p class="p-price">价格：</p>
-                            <h3 class="rate">XX元/KG</h3>
+                            <h3 class="rate">元/KG</h3>
                             <div class="clearfix"></div>
                         </div>
                         <div class="condition">
