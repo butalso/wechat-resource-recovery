@@ -1,10 +1,7 @@
 package controller.manager;
 
 import entity.User;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/manager")
+@Api(tags = "管理员登录，登出，首页")
 public class ManagerHome {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

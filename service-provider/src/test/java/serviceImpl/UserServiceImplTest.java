@@ -13,6 +13,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import service.UserService;
 
+import java.util.Date;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 // spring配置文件
 @ContextConfiguration({"classpath:spring/spring-dao.xml", "classpath:spring/spring-service.xml"})
@@ -48,15 +50,15 @@ public class UserServiceImplTest {
 
     @Test
     public void delUser() {
-        userService.delUser("熊大", 0);
-        userService.delUser("熊二", 1);
-        userService.delUser("废品大叔", 2);
-        userService.delUser("周先生", 3);
+        userService.delUser("胡昌明", 0);
+//        userService.delUser("熊二", 1);
+//        userService.delUser("废品大叔", 2);
+//        userService.delUser("周先生", 3);
     }
 
     @Test
     public void updateUser() {
-        customer = (Customer) userService.getUserDetails("熊大", 0);
+        customer = (Customer) userService.getUserDetails("喜羊羊", 0);
         collector = (Collector) userService.getUserDetails("熊二", 1);
         company = (Company) userService.getUserDetails("废品大叔", 2);
         manager = (Manager) userService.getUserDetails("周先生", 3);
@@ -65,17 +67,17 @@ public class UserServiceImplTest {
         customer.setPhone("222");
         userService.updateUser(customer);
 
-        collector.setPassword("123456");
-        collector.setPhone("222");
-        userService.updateUser(collector);
-
-        company.setPassword("123456");
-        company.setPhone("222");
-        userService.updateUser(company);
-
-        manager.setPassword("123456");
-        manager.setPhone("222");
-        userService.updateUser(manager);
+//        collector.setPassword("123456");
+//        collector.setPhone("222");
+//        userService.updateUser(collector);
+//
+//        company.setPassword("123456");
+//        company.setPhone("222");
+//        userService.updateUser(company);
+//
+//        manager.setPassword("123456");
+//        manager.setPhone("222");
+//        userService.updateUser(manager);
     }
 
     @Test
@@ -90,4 +92,17 @@ public class UserServiceImplTest {
     public void updatePassword() {
         userService.updatePassword("狙击手", 0, "123456", "123");
     }
+
+    @Test
+    public void getAllUsers() throws InterruptedException {
+//        System.out.println(userService.getAllUsers(0));
+        Date date = new Date();
+        Thread.sleep(1000);
+        Date date1 = new Date();
+        System.out.println(date);
+        System.out.println(date1);
+        System.out.println(date.before(date1));
+    }
+
+
 }

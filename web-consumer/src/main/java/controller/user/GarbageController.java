@@ -18,7 +18,7 @@ public class GarbageController {
     @Reference
     GarbageService garbageService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation(value = "获取指定废品信息")
     public Garbage getGarbage(@RequestParam("name") String name) {
@@ -30,4 +30,6 @@ public class GarbageController {
     public String shoppingCart() {
         return "user/shoppingCar";
     }
+
+
 }

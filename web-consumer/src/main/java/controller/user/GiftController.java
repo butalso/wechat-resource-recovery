@@ -27,7 +27,7 @@ public class GiftController {
     @Reference
     UserService userService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView getGifts() {
         ModelAndView mav = new ModelAndView("user/gift");
         List<Gift> gifts = giftService.getGifts();
