@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
             /*用户已存在*/
             throw new UserNameExistException();
         }
-        if (addressDao.getAddrDetailId(user.getAddress().getDetail(), user.getAddress().getArea()) == null) {
+        if (addressDao.getAddrDetailId(user.getAddress().getDetail(), user.getAddress().getCity(), user.getAddress().getArea()) == null) {
             throw new AddressNonExistsException();
         }
 
@@ -77,16 +77,20 @@ public class UserServiceImpl implements UserService {
             /*用户不存在*/
             throw new UserNonExistsException();
         }
-        if (addressDao.getAddrDetailId(user.getAddress().getDetail(), user.getAddress().getArea()) == null) {
-            throw new AddressNonExistsException();
-        }
 
-        Integer addrDetailId = addressDao.getAddrDetailId(
-                user.getAddress().getDetail(),
-                user.getAddress().getArea());
-        if (addrDetailId == null && user.getUserKind() != 3) {
-            /*地址错误*/
-            throw new AddressNonExistsException();
+        if (user.getUserKind() != 3) {
+            if (addressDao.getAddrDetailId(user.getAddress().getDetail(), user.getAddress().getCity(), user.getAddress().getArea()) == null) {
+                throw new AddressNonExistsException();
+            }
+
+            Integer addrDetailId = addressDao.getAddrDetailId(
+                    user.getAddress().getDetail(),
+                    user.getAddress().getCity(),
+                    user.getAddress().getArea());
+            if (addrDetailId == null && user.getUserKind() != 3) {
+                /*地址错误*/
+                throw new AddressNonExistsException();
+            }
         }
 
         switch (user.getUserKind()) {

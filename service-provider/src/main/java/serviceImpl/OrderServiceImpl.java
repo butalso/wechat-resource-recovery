@@ -50,7 +50,7 @@ public class OrderServiceImpl implements OrderService {
         if (customer == null) {
             throw new UserNonExistsException();
         }
-        if (addressDao.getAddrDetailId(address.getDetail(), address.getArea()) == null) {
+        if (addressDao.getAddrDetailId(address.getDetail(), address.getCity(), address.getArea()) == null) {
             throw new AddressNonExistsException();
         }
         OrderItem orderItem = order.getOrderItem();

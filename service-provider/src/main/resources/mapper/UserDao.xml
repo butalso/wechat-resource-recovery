@@ -23,12 +23,18 @@
     <resultMap id="manager" type="entity.Manager" autoMapping="true">
         <association property="address" javaType="dto.Address" resultMap="dao.AddressDao.address" />
     </resultMap>
+    
+    <sql id="addr_detail_id">
+        select id from addr_detail
+        where name=#{c.address.detail} AND area_id=(
+        (SELECT id FROM area WHERE name=#{c.address.area} AND city_id =
+        (SELECT id FROM city WHERE name = #{c.address.city})))
+    </sql>
 
     <insert id="addCustomer" keyProperty="c.id" parameterType="entity.Customer">
         INSERT INTO customer (name, password, gender, phone, addr_detail_id)
         VALUE (#{c.name}, #{c.password}, #{c.gender}, #{c.phone},
-        (select id from addr_detail
-        where name=#{c.address.detail} AND area_id=((SELECT id FROM area WHERE name=#{c.address.area}))));
+        (<include refid="addr_detail_id" />));
     </insert>
 
     <select id="getCustomerDetails" resultMap="customer">
@@ -50,9 +56,7 @@
         name = #{c.name}, password = #{c.password}, image_url = #{c.imageUrl},
         gender = #{c.gender}, phone = #{c.phone}, credit = #{c.credit},
         point = #{c.point}, experience = #{c.experience},
-        addr_detail_id = (SELECT id FROM addr_detail
-        WHERE name = #{c.address.detail}
-        AND area_id = (SELECT id FROM area WHERE name = #{c.address.area}))
+        addr_detail_id = (<include refid="addr_detail_id" />)
         WHERE id = #{c.id}
     </update>
 
@@ -66,9 +70,7 @@
         VALUE (#{c.name},
         (SELECT id FROM company WHERE name = #{c.companyName}),
         #{c.password}, #{c.IDCardNo}, #{c.gender}, #{c.phone},
-        ((select id from addr_detail
-        where name=#{c.address.detail} AND
-        area_id=((SELECT id FROM area WHERE name=#{c.address.area})))))
+        (<include refid="addr_detail_id" />))
     </insert>
 
     <select id="getCollectorDetails" resultMap="collector">
@@ -93,9 +95,7 @@
         password = #{c.password}, image_url = #{c.imageUrl},
         IDCardNo = #{c.IDCardNo}, gender = #{c.gender}, phone = #{c.phone},
         credit = #{c.credit}, point = #{c.point}, experience = #{c.experience},
-        addr_detail_id = (SELECT id FROM addr_detail
-        WHERE name = #{c.address.detail}
-        AND area_id = (SELECT id FROM area WHERE name = #{c.address.area}))
+        addr_detail_id = (<include refid="addr_detail_id" />)
         WHERE id = #{c.id}
     </update>
 
@@ -106,9 +106,7 @@
     <insert id="addCompany" keyProperty="c.id" parameterType="entity.Company">
         INSERT INTO company (name, password, phone, addr_detail_id)
         VALUE (#{c.name}, #{c.password}, #{c.phone},
-        (select id from addr_detail
-        where name=#{c.address.detail}
-        AND area_id=((SELECT id FROM area WHERE name=#{c.address.area}))))
+        (<include refid="addr_detail_id" />))
     </insert>
 
     <select id="getCompanyDetails" resultMap="company">
@@ -129,9 +127,7 @@
         UPDATE company SET
         name = #{c.name}, password = #{c.password}, image_url = #{c.imageUrl},
         phone = #{c.phone},
-        addr_detail_id = (select id from addr_detail
-        where name=#{c.address.detail}
-        AND area_id=((SELECT id FROM area WHERE name=#{c.address.area})))
+        addr_detail_id = (<include refid="addr_detail_id" />)
         WHERE id = #{c.id}
     </update>
 
@@ -141,8 +137,9 @@
 
     <insert id="addManager" parameterType="entity.Manager">
         INSERT INTO manager(name, password, gender, phone, area_id)
-        VALUE (#{m.name}, #{m.password}, #{m.gender}, #{m.phone},
-        (SELECT id FROM area WHERE name = #{m.address.area}))
+        VALUE (#{c.name}, #{c.password}, #{c.gender}, #{c.phone},
+        (SELECT id FROM area WHERE name = #{c.address.area} AND city_id =
+        (SELECT id FROM city WHERE name = #{c.address.city})))
     </insert>
 
     <select id="getManager" resultMap="manager">
@@ -159,9 +156,11 @@
 
     <update id="updateManager" parameterType="entity.Manager">
         UPDATE manager SET
-        name = #{m.name}, password = #{m.password}, gender = #{m.gender},
-        image_url = #{m.imageUrl}, phone = #{m.phone},
-        area_id = (SELECT id FROM area WHERE name = #{m.address.area})
+        name = #{c.name}, password = #{c.password}, gender = #{c.gender},
+        image_url = #{c.imageUrl}, phone = #{c.phone},
+        area_id = (SELECT id FROM area WHERE name = #{c.address.area} AND city_id =
+        (SELECT id FROM city WHERE name = #{c.address.city}))
+        where id = #{c.id}
     </update>
 
     <delete id="deleteManager">
