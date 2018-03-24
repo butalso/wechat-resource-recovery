@@ -20,6 +20,9 @@ $(function () {
             },
             success: function (data) {
                 console.log(data);
+                if (data == "修改成功") {
+                    location.reload();
+                }
             },
             error: function (err) {
                 console.log(err);

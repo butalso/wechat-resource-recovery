@@ -122,7 +122,7 @@
         <button class="btn btn-default col-xs-3 col-xs-offset-2" type="button" data-toggle="modal"
                 data-target="#myModal">修改地址
         </button>
-        <button class="btn btn-default col-xs-3 col-xs-offset-2" type="submit">返回</button>
+        <a href="/web-consumer/user/info" class="btn btn-default col-xs-3 col-xs-offset-2">返回</a>
     </div>
 </div>
 </@override>
