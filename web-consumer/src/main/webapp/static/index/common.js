@@ -38,3 +38,102 @@ function Toast(msg, duration) {
         }, d * 1000);
     }, duration);
 }
+
+function addressLinkage() {
+    $.ajax({
+        type: 'GET',
+        url: LOCALHOST + "/address/linkage",
+        dataType: 'json',
+        // data: data,
+        complete: function (XMLHttpRequest, textStatus) {
+        },
+        success: function (data) {
+            var $list = $("select[name='province']");
+            var node = '';
+            $list.append('<option>请选择</option>');
+            $.each(data, function (index, element) {
+                node = '<option value="' + this + '">' + this + '</option>';
+                $list.append(node);
+            });
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    }).done(function () {
+        $("select[name='province']").change(function () {
+            $.ajax({
+                type: 'GET',
+                url: LOCALHOST + "/address/linkage",
+                dataType: 'json',
+                data: {
+                    province: $(this).val()
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                },
+                success: function (data) {
+                    console.log(data);
+                    var $list = $("select[name='city']");
+                    $list.empty().append('<option>请选择</option>');
+                    var node = '';
+                    $.each(data, function (index, element) {
+                        node = '<option value="' + this + '">' + this + '</option>';
+                        $list.append(node);
+                    });
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        });
+        $("select[name='city']").change(function () {
+            $.ajax({
+                type: 'GET',
+                url: LOCALHOST + "/address/linkage",
+                dataType: 'json',
+                data: {
+                    city: $(this).val()
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                },
+                success: function (data) {
+                    console.log(data);
+                    var $list = $("select[name='area']");
+                    $list.empty().append('<option>请选择</option>');
+                    var node = '';
+                    $.each(data, function (index, element) {
+                        node = '<option value="' + this + '">' + this + '</option>';
+                        $list.append(node);
+                    });
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        });
+        $("select[name='area']").change(function () {
+            $.ajax({
+                type: 'GET',
+                url: LOCALHOST + "/address/linkage",
+                dataType: 'json',
+                data: {
+                    area: $(this).val()
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                },
+                success: function (data) {
+                    console.log(data);
+                    var $list = $("select[name='detail']");
+                    $list.empty().append('<option>请选择</option>');
+                    var node = '';
+                    $.each(data, function (index, element) {
+                        node = '<option value="' + this + '">' + this + '</option>';
+                        $list.append(node);
+                    });
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        });
+    });
+}

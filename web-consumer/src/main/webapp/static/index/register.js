@@ -3,56 +3,7 @@ $(function () {
     $("#registerBtn").click(function () {
         register();
     });
-    $("select[name='province']").change(function () {
-        $.ajax({
-            type: 'GET',
-            url: LOCALHOST + "/address/linkage",
-            dataType: 'json',
-            data: {
-                province: $(this).val()
-            },
-            complete: function (XMLHttpRequest, textStatus) {
-            },
-            success: function (data) {
-                console.log(data);
-                var $list = $("select[name='city']");
-                $list.empty();
-                var node = '';
-                $.each(data, function (index, element) {
-                    node = '<option value="' + this + '">' + this + '</option>';
-                    $list.append(node);
-                });
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
-    });
-    $("select[name='city']").change(function () {
-        $.ajax({
-            type: 'GET',
-            url: LOCALHOST + "/address/linkage",
-            dataType: 'json',
-            data: {
-                city: $(this).val()
-            },
-            complete: function (XMLHttpRequest, textStatus) {
-            },
-            success: function (data) {
-                console.log(data);
-                var $list = $("select[name='area']");
-                $list.empty();
-                var node = '';
-                $.each(data, function (index, element) {
-                    node = '<option value="' + this + '">' + this + '</option>';
-                    $list.append(node);
-                });
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
-    });
+    addressLinkage();
 });
 
 function register() {
