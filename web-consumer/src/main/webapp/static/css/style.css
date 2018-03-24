@@ -1307,7 +1307,8 @@ span.total strong {
 }
 .main-grid-border{
     border-bottom: 3px solid #F4F4F4;
-    margin-bottom: 100px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 h2.head {
     color: #f3c500;

@@ -1,3 +1,6 @@
+<#if (userKind=1)>
+    <@override name="nav"></@override>
+</#if>
 <@override name="content">
 <div class="container orderList">
     <a href="/web-consumer/user/info" class="btn">
@@ -7,9 +10,9 @@
     <#list orders as order>
         <div class="region-block">
         <#if (userKind>0)>
-        <div class="media">
+            <div class="media">
         <#else>
-        <div class="media" orderId="${order.orderItem.id}">
+            <div class="media" orderId="${order.orderItem.id}">
         </#if>
                 <div class="media-left">
                     <a href="#">
@@ -20,14 +23,16 @@
                     <h4 class="media-heading">
                         订单编号:${order.orderItem.id}
                         <#if (userKind>0&&order.orderItem.state='已上门回收')>
-                        <button type="button" class="btn btn-default more collector" disabled="true" orderId="${order.orderItem.id}">
-                            已回收
-                        </button>
+                            <button type="button" class="btn btn-default more collector" disabled="true"
+                                    orderId="${order.orderItem.id}">
+                                已回收
+                            </button>
                         <#elseif (userKind>0&&order.orderItem.state!='已上门回收')>
-                        <button type="button" class="btn btn-default more collector"orderId="${order.orderItem.id}">
-                            确认回收
-                        </button>
-                        <#else> <a href="/web-consumer/order/details?orderId=${order.orderItem.id}"><span class="more">>></span></a>
+                            <button type="button" class="btn btn-default more collector" orderId="${order.orderItem.id}">
+                                确认回收
+                            </button>
+                        <#else>
+                            <a href="/web-consumer/order/details?orderId=${order.orderItem.id}"><span class="more">>></span></a>
                         </#if>
                     </h4>
                     <div>${order.orderItem.state}</div>
