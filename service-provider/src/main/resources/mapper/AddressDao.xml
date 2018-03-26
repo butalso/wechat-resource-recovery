@@ -66,6 +66,7 @@
         area a ON ad.area_id = a.id)
         INNER JOIN city c ON a.city_id = c.id)
         INNER JOIN province p ON c.province_id = p.id
+        WHERE ad.kind = 0;
     </select>
 
 </mapper>

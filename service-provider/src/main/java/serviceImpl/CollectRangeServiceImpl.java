@@ -31,7 +31,7 @@ public class CollectRangeServiceImpl implements CollectRangeService {
 
     @Override
     public void addCollectRange(String name, Address address) {
-        collectRangeDao.deleteCollectRange(name, address);
+        collectRangeDao.addCollectRange(name, address);
     }
 
     @Override

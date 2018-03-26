@@ -7,10 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import service.GarbageService;
 
@@ -41,21 +38,21 @@ public class ManagerGarbageController {
         return mav;
     }
 
-    @RequestMapping(value = "/{garbageType}/{typeName}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{garbageType}", method = RequestMethod.POST)
     @ApiOperation("增添某类废品")
-    public ResponseEntity<String> addGarbageType(@PathVariable("typeName") String typeName) {
+    public ResponseEntity<String> addGarbageType(@RequestParam("typeName") String typeName) {
         garbageService.addGarbageType(typeName);
         return new ResponseEntity<String>("添加成功", HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{garbageType}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{garbageType}/{garbageName}", method = RequestMethod.POST)
     @ApiOperation("增添某类废品信息")
     public ResponseEntity<String> addGarbage(@RequestBody Garbage garbage) {
         garbageService.addGarbage(garbage);
         return new ResponseEntity<String>("添加成功", HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{garbageType}/{garbageName}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{garbageType}/{garbageName}", method = RequestMethod.PUT)
     @ApiOperation("修改废品信息")
     public ResponseEntity<String> updateGarbage(@PathVariable("garbageName") String garbageName,
                                                 @RequestBody Garbage garbage) {
@@ -66,6 +63,23 @@ public class ManagerGarbageController {
         garbageService.deleteGarbage(garbage1);
         garbageService.addGarbage(garbage);
         return new ResponseEntity<String>("修改成功", HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/{garbageType}/{garbageName}", method = RequestMethod.DELETE)
+    @ApiOperation("删除某废品信息")
+    public ResponseEntity<String> deleteGarbage(@PathVariable("garbageName") String garbageName) {
+        Garbage garbage = garbageService.getGrabage(garbageName);
+        if (garbage != null) {
+            garbageService.deleteGarbage(garbage);
+        }
+        return new ResponseEntity<String>("删除成功", HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/{garbageType}", method = RequestMethod.DELETE)
+    @ApiOperation("删除某类废品信息")
+    public ResponseEntity<String> deleteGarbageType(@PathVariable("garbageType") String garbageType) {
+        garbageService.delteGarbageType(garbageType);
+        return new ResponseEntity<String>("删除成功", HttpStatus.CREATED);
     }
 
 }

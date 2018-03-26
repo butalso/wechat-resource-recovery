@@ -43,7 +43,7 @@ public class AddressDaoTest {
 
     @Test
     public void deleteAddrDetail() {
-        addressDao.deleteAddrDetail("江南老年城", "南京市","江宁区");
+        addressDao.deleteAddrDetail("国", "南京市","江宁区");
     }
 
     @Test

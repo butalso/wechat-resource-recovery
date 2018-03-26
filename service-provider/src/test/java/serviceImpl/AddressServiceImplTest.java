@@ -31,6 +31,11 @@ public class AddressServiceImplTest {
 
     @Test
     public void delAddressDetail() {
-        addressService.delAddressDetail(new Address("江苏省", "南京市", "江宁区", "江南老年城"));
+        addressService.delAddressDetail(new Address("江苏省", "南京市", "江宁区", "国"));
+    }
+
+    @Test
+    public void getAddresss() {
+        System.out.println(addressService.getAddresss());
     }
 }
