@@ -51,7 +51,7 @@ public interface AddressDao {
      * @param name
      * @param area
      */
-    void deleteAddrDetail(@Param("name") String name, @Param("area") String area, @Param("city") String city);
+    void deleteAddrDetail(@Param("name") String name, @Param("city") String city, @Param("area") String area);
 
     /**
      * 获取地址详情的id，主要用来判断地址存不存在

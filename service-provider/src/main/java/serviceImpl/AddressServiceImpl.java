@@ -34,7 +34,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public List<Address> getAddresss() {
-        return null;
+        return addressDao.getAddresses();
     }
 
     @Override

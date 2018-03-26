@@ -51,12 +51,20 @@ public class ManagerAddressController {
                 disAddress1.add(address);
             }
         }
+
         mav.addObject("undisAddresses", addresses);
         mav.addObject("disAddresses", disAddresses);
         return mav;
     }
 
-    @RequestMapping(value = "/{collectorName}", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.DELETE)
+    @ApiOperation("删除某小区")
+    public ResponseEntity<String> delAddresses(@RequestBody Address address) {
+        addressService.delAddressDetail(address);
+        return new ResponseEntity<String>("删除成功", HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.POST)
     @ApiOperation("增加小区地址")
     public ResponseEntity<String> addAddress(@RequestBody Address address) {
         addressService.addAddressDetail(address, 0);
@@ -66,21 +74,28 @@ public class ManagerAddressController {
     @RequestMapping(value = "/{collectorName}/collect_range", method = RequestMethod.POST)
     @ApiOperation("分配回收地址")
     public ResponseEntity<String> addCollectRange(@PathVariable("collectorName") String collectorName,
-                                                  @RequestParam("province") String province,
-                                                  @RequestParam("city") String city,
-                                                  @RequestParam("area") String area,
-                                                  @RequestParam("detail") String detail) {
-        Address address = new Address(province, city, area, detail);
+                                                  @RequestBody Address address) {
         collectRangeService.addCollectRange(collectorName, address);
         return new ResponseEntity<String>("添加回收范围成功", HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{collectorName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{collectorName}/collect_range", method = RequestMethod.DELETE)
+    @ResponseBody
+    @ApiOperation("取消某小区分配")
+    public ResponseEntity<String> delCollectorCollectRange(@PathVariable("collectorName") String collectorName,
+                                                           @RequestBody Address address) {
+        collectRangeService.deleteCollectRange(collectorName, address);
+        return new ResponseEntity<String>("取消分配成功", HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/{collectorName}/collect_range", method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation("获取回收员回收范围小区")
     public List<Address> getCollectorCollectRange(@PathVariable("collectorName") String collectorName) {
         List<Address> addresses = addressService.getAddresss();
         return collectRangeService.getCollectRanges(collectorName);
     }
+
+
 
 }
