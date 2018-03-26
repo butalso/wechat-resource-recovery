@@ -38,6 +38,7 @@ public class ManagerHome {
         return LoginLogoutUtil.login(userName, password, 3, session, modelMap);
     }
 
+    @ApiOperation("管理员页面")
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String home() {
         return "manager/index";

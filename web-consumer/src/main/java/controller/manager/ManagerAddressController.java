@@ -63,7 +63,7 @@ public class ManagerAddressController {
         return new ResponseEntity<String>("添加小区成功", HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{collectorName}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{collectorName}/collect_range", method = RequestMethod.POST)
     @ApiOperation("分配回收地址")
     public ResponseEntity<String> addCollectRange(@PathVariable("collectorName") String collectorName,
                                                   @RequestParam("province") String province,
