@@ -5,10 +5,7 @@ import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import springfox.documentation.annotations.ApiIgnore;
 import util.LoginLogoutUtil;
@@ -17,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/manager")
+@SessionAttributes("user")
 @Api(tags = "管理员登录，登出，首页")
 public class ManagerHome {
 
@@ -40,6 +38,7 @@ public class ManagerHome {
         return LoginLogoutUtil.login(userName, password, 3, session, modelMap);
     }
 
+    @ApiOperation("管理员页面")
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String home() {
         return "manager/index";

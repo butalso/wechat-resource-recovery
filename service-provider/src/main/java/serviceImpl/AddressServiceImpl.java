@@ -21,7 +21,7 @@ public class AddressServiceImpl implements AddressService {
     public List<String> linkage(Address address) {
         List<String> result = null;
         if (address.getArea() != null) {
-            result = addressDao.getAddrDetails(address.getArea(), 0);
+            result = addressDao.getAddrDetails(address.getCity(), address.getArea(), 0);
         } else if (address.getCity() != null) {
             result = addressDao.getAreas(address.getCity());
         } else if (address.getProvince() != null){
@@ -34,19 +34,19 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public List<Address> getAddresss() {
-        return null;
+        return addressDao.getAddresses();
     }
 
     @Override
     public void addAddressDetail(Address address, Integer kind) {
-        addressDao.addAddrDetail(address.getDetail(), address.getArea(), kind);
+        addressDao.addAddrDetail(address.getDetail(), address.getCity(), address.getArea(), kind);
     }
 
     @Override
     public void delAddressDetail(Address address) {
         /*删除回收员回收范围*/
         collectRangeDao.deleteCollectRange2(address);
-        addressDao.deleteAddrDetail(address.getDetail(), address.getArea());
+        addressDao.deleteAddrDetail(address.getDetail(), address.getCity(), address.getArea());
     }
 
 }

@@ -27,24 +27,28 @@
     </select>
 
     <select id="getAddrDetails" resultType="String">
-        SELECT a1.name FROM addr_detail a1 INNER JOIN area a2
-        ON a1.area_id = a2.id AND a2.name = #{area}
+        SELECT a1.name FROM (addr_detail a1 INNER JOIN area a2
+        ON a1.area_id = a2.id AND a2.name = #{area})
+        INNER JOIN city c ON a2.city_id = c.id
         WHERE a1.kind = #{kind};
     </select>
 
     <insert id="addAddrDetail">
         INSERT IGNORE INTO addr_detail (name, area_id, kind)
-        VALUE (#{name}, (SELECT id FROM area WHERE name = #{area}), #{kind})
+        VALUE (#{name}, (SELECT id FROM area WHERE name = #{area} AND city_id =
+        (SELECT id FROM city WHERE name = #{city})), #{kind})
     </insert>
 
     <delete id="deleteAddrDetail">
         DELETE FROM addr_detail WHERE name = #{name}
-        AND area_id = (SELECT id FROM area WHERE name = #{area})
+        AND area_id = (SELECT id FROM area WHERE name = #{area} AND city_id =
+        (SELECT id FROM city WHERE name = #{city}))
     </delete>
 
     <select id="getAddrDetailId" resultType="Integer">
         SELECT id FROM addr_detail WHERE name = #{name}
-        AND area_id = (SELECT id FROM area WHERE name = #{area})
+        AND area_id = (SELECT id FROM area WHERE name = #{area} AND city_id =
+        (SELECT id FROM city WHERE name = #{city}))
     </select>
 
     <select id="getAddress" resultType="dto.Address">
@@ -62,6 +66,7 @@
         area a ON ad.area_id = a.id)
         INNER JOIN city c ON a.city_id = c.id)
         INNER JOIN province p ON c.province_id = p.id
+        WHERE ad.kind = 0;
     </select>
 
 </mapper>

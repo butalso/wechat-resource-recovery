@@ -26,6 +26,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/manager/user")
+@SessionAttributes("user")
 @Api(tags = "管理员管理用户信息")
 public class ManageUserController {
     @Reference
@@ -103,6 +104,23 @@ public class ManageUserController {
         for (User user : users) {
             Integer credit = ((ECPUser) user).getCredit();
             if (credit >= from && credit <= end) {
+                result.add(user);
+            }
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/{userKind}/wallet", method = RequestMethod.GET)
+    @ResponseBody
+    @ApiOperation(value = "根据用户钱包价值获取某类所有用户基本信息")
+    public List<User> getUsersByWallet(@PathVariable("userKind") Integer userKind,
+                                       @RequestParam("from") Double from,
+                                       @RequestParam("end") Double end) {
+        List<? extends User> users = userService.getAllUsers(userKind);
+        List<User> result = new ArrayList<>();
+        for (User user : users) {
+            Double balance = ((ECPUser) user).getWallet().getBalance();
+            if (balance >= from && balance <= end) {
                 result.add(user);
             }
         }

@@ -1,5 +1,6 @@
 package serviceImpl;
 
+import dto.Address;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class CollectRangeServiceImplTest {
 
     @Test
     public void addCollectRange() {
+        Address address = new Address("江苏省", "南京市", "江宁区", "国");
+        collectRangeService.addCollectRange("恐怖利刃", address);
     }
 
     @Test

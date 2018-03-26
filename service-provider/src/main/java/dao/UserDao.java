@@ -93,7 +93,7 @@ public interface UserDao {
      * 增添管理员
      * @param manager
      */
-    void addManager(@Param("m") Manager manager);
+    void addManager(@Param("c") Manager manager);
 
     /**
      * 获取管理员信息
@@ -106,7 +106,7 @@ public interface UserDao {
      * 修改管理员信息
      * @param manager
      */
-    void updateManager(@Param("m") Manager manager);
+    void updateManager(@Param("c") Manager manager);
 
     /**
      * 删除管理员

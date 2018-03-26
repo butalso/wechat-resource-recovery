@@ -27,7 +27,7 @@ public class UserServiceImplTest {
     Collector collector;
     Company company;
     Manager manager;
-    Address address = new Address("江苏省", "南京市", "江宁区", "江南老年城");
+    Address address = new Address("江苏省", "南京市", "鼓楼区", "江南骏园");
 
     @Before
     public void setUp() {
@@ -35,17 +35,17 @@ public class UserServiceImplTest {
                 address);
         collector = new Collector("熊二", "123", "M", "12345678900",
                 "回收哥", "440882199823140905", address);
-        company = new Company("废品大叔", "123", "12345678900", address);
-        manager = new Manager("周先生","123", "M", "12345678900", address);
+        company = new Company("熊三", "123", "12345678900", address);
+        manager = new Manager("熊四","123", "M", "12345678900", address);
     }
 
     @Test
     public void addUser() {
-        customer.setName("熊大");
-        userService.addUser(customer);
+//        customer.setName("熊大");
+//        userService.addUser(customer);
 //        userService.addUser(collector);
 //        userService.addUser(company);
-//        userService.addUser(manager);
+        userService.addUser(manager);
     }
 
     @Test
@@ -58,34 +58,30 @@ public class UserServiceImplTest {
 
     @Test
     public void updateUser() {
-        customer = (Customer) userService.getUserDetails("喜羊羊", 0);
+        customer = (Customer) userService.getUserDetails("熊大", 0);
         collector = (Collector) userService.getUserDetails("熊二", 1);
-        company = (Company) userService.getUserDetails("废品大叔", 2);
-        manager = (Manager) userService.getUserDetails("周先生", 3);
+        company = (Company) userService.getUserDetails("熊三", 2);
+        manager = (Manager) userService.getUserDetails("熊四", 3);
 
-        customer.setPassword("123456");
         customer.setPhone("222");
         userService.updateUser(customer);
 
-//        collector.setPassword("123456");
-//        collector.setPhone("222");
-//        userService.updateUser(collector);
-//
-//        company.setPassword("123456");
-//        company.setPhone("222");
-//        userService.updateUser(company);
-//
-//        manager.setPassword("123456");
-//        manager.setPhone("222");
-//        userService.updateUser(manager);
+        collector.setPhone("222");
+        userService.updateUser(collector);
+
+        company.setPhone("222");
+        userService.updateUser(company);
+
+        manager.setPhone("222");
+        userService.updateUser(manager);
     }
 
     @Test
     public void getUser() {
-        System.out.println(userService.getUserDetails("狙击手", 0));
-//        System.out.println(userService.getUserDetails("熊二", 1));
-//        System.out.println(userService.getUserDetails("废品大叔", 2));
-//        System.out.println(userService.getUserDetails("周先生", 3));
+        System.out.println(userService.getUserDetails("熊大", 0));
+        System.out.println(userService.getUserDetails("熊二", 1));
+        System.out.println(userService.getUserDetails("废品大叔", 2));
+        System.out.println(userService.getUserDetails("熊四", 3));
     }
 
     @Test

@@ -83,9 +83,15 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/details"}, method = RequestMethod.GET)
-    @ApiOperation(value = "获取用户首页")
-    public String userHome() {
-        return "user/customer_details";
+    @ApiOperation(value = "获取用户详情页")
+    public ModelAndView userHome(@ApiIgnore @ModelAttribute("user") User user) {
+        ModelAndView mav = null;
+        User useDetails = userService.getUserDetails(user.getName(), user.getUserKind());
+        mav = new ModelAndView("user/customer_details");
+        mav.addObject("userDetails", (Customer) useDetails);
+        useDetails.setPassword(null);
+
+        return mav;
     }
 
 }

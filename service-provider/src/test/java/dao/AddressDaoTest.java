@@ -33,22 +33,23 @@ public class AddressDaoTest {
 
     @Test
     public void getAddrDetails() {
-        System.out.println(addressDao.getAddrDetails("江宁区", 0));
+        System.out.println(addressDao.getAddrDetails("南京市","江宁区", 0));
     }
 
     @Test
     public void addAddrDetail() {
-        addressDao.addAddrDetail("江南老年城", "江宁区", 0);
+        addressDao.addAddrDetail("江南老年城", "南京市","江宁区", 0);
     }
 
     @Test
     public void deleteAddrDetail() {
-        addressDao.deleteAddrDetail("江南老年城", "江宁区");
+        addressDao.deleteAddrDetail("国", "南京市","江宁区");
     }
 
     @Test
     public void getAddrDetailId() {
-        System.out.println(addressDao.getAddrDetailId("江南青年城", "江宁区"));
+
+        System.out.println(addressDao.getAddrDetailId("江南骏园", "南京市","鼓楼区"));
     }
 
     @Test
