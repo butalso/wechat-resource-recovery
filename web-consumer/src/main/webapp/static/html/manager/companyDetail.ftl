@@ -17,8 +17,8 @@
 </p>
 <p>walletRecords:
 <#if walletRecords??>
-    <#list walletRecords as walletRecord>
-    <li>${walletRecord}</li>
-    </#list>
-</#if>
+<li>${walletRecord}</li>
+</#list>
+</#if>    <#list walletRecords as walletRecord>
+
 </p>

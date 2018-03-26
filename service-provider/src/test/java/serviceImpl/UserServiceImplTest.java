@@ -78,9 +78,9 @@ public class UserServiceImplTest {
 
     @Test
     public void getUser() {
-//        System.out.println(userService.getUserDetails("熊大", 0));
-////        System.out.println(userService.getUserDetails("熊二", 1));
-////        System.out.println(userService.getUserDetails("废品大叔", 2));
+        System.out.println(userService.getUserDetails("熊大", 0));
+        System.out.println(userService.getUserDetails("熊二", 1));
+        System.out.println(userService.getUserDetails("废品大叔", 2));
         System.out.println(userService.getUserDetails("熊四", 3));
     }
 

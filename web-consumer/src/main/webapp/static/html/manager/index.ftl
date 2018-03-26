@@ -321,9 +321,9 @@
                             </td>
 
                             <td class="hidden-480">
-																	<span class="label arrowed">
-																		<s>无货</s>
-																	</span>
+                                <span class="label arrowed">
+                                    <s>无货</s>
+                                </span>
                             </td>
                         </tr>
 
@@ -1131,5 +1131,6 @@
 <script src="/web-consumer/static/manager/flot/jquery.flot.resize.min.js"></script>
 <!-- inline scripts related to this page -->
 <script type="text/javascript" src="/web-consumer/static/manager/produceChart.js"></script>
+<script type="text/javascript" src="/web-consumer/static/manager/project/logicalDeal.js"></script>
 </@override>
-<@extends name="base.ftl"/>
+<@extends name="layout.ftl"/>
