@@ -2,7 +2,7 @@ $(function () {
     $("button").click(function () {
         var $this = $(this);
         $.ajax({
-            type: 'POST',
+            type: 'PUT',
             url: LOCALHOST + "/order/" + $this.attr("orderId") + "/receive",
             // dataType: 'json',
             // data: data,

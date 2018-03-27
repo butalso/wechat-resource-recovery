@@ -53,7 +53,7 @@ function getPay() {
     console.log(data);
     $.ajax({
         type: 'post',
-        url: LOCALHOST + "/order/info",
+        url: LOCALHOST + "/order",
         // dataType: 'json',
         headers: {
             "Accept": "text/plain; charset=utf-8",

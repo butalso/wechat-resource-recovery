@@ -1,55 +1,68 @@
 <@override name="content">
 <div class="container">
-    <a href="/web-consumer/order/info" class="btn">
-        <
-        <返回
+    <a href="/web-consumer/order" class="btn">
+        <span><<返回</span>
     </a>
-    <#--<div class="panel panel-default">-->
-        <#--<ul class="list-group">-->
-            <#--<li class="list-group-item">订单编号：</li>-->
-            <#--<li class="list-group-item">当前状态：</li>-->
-            <#--<li class="list-group-item">收获地址：</li>-->
-            <#--<li class="list-group-item">上门时间：</li>-->
-        <#--</ul>-->
-
-        <#--<div class="panel-heading">废品清单</div>-->
-        <#--<div class="panel-body">-->
-            <#--<table class="table table-bordered">-->
-                <#--<thead>-->
-                <#--<tr>-->
-                    <#--<th>#</th>-->
-                    <#--<th>废品名称</th>-->
-                    <#--<th>废品重量</th>-->
-                    <#--<th>价值</th>-->
-                <#--</tr>-->
-                <#--</thead>-->
-                <#--<tbody>-->
-                <#--<tr>-->
-                    <#--<th scope="row">1</th>-->
-                    <#--<td>Mark</td>-->
-                    <#--<td>Otto</td>-->
-                    <#--<td>@mdo</td>-->
-                <#--</tr>-->
-                <#--<tr>-->
-                    <#--<th scope="row">2</th>-->
-                    <#--<td>Jacob</td>-->
-                    <#--<td>Thornton</td>-->
-                    <#--<td>@fat</td>-->
-                <#--</tr>-->
-                <#--<tr>-->
-                    <#--<th scope="row">3</th>-->
-                    <#--<td>Larry</td>-->
-                    <#--<td>the Bird</td>-->
-                    <#--<td>@twitter</td>-->
-                <#--</tr>-->
-                <#--</tbody>-->
-            <#--</table>-->
-        <#--</div>-->
-    <#--</div>-->
-    <#--<div class="row">-->
-        <#--<button class="btn btn-default col-xs-3 col-xs-offset-2" type="submit">修改</button>-->
-        <#--<button class="btn btn-default col-xs-3 col-xs-offset-2" type="submit">取消</button>-->
-    <#--</div>-->
+</div>
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">修改订单内容</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal editForm">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default getNewOrder">修改订单</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="gradeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">请为此次交易评分</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline gradeForm row">
+                    <div class="form-group col-xs-2 col-xs-offset-1">
+                        <label for="exampleInputName2">1分</label>
+                        <input type="radio" class="form-control" name="grade" value="1">
+                    </div>
+                    <div class="form-group col-xs-2">
+                        <label for="exampleInputName2">2分</label>
+                        <input type="radio" class="form-control" name="grade" value="2">
+                    </div>
+                    <div class="form-group col-xs-2">
+                        <label for="exampleInputName2">3分</label>
+                        <input type="radio" class="form-control" name="grade" value="3">
+                    </div>
+                    <div class="form-group col-xs-2">
+                        <label for="exampleInputName2">4分</label>
+                        <input type="radio" class="form-control" name="grade" value="4">
+                    </div>
+                    <div class="form-group col-xs-2">
+                        <label for="exampleInputName2">5分</label>
+                        <input type="radio" class="form-control" name="grade" value="5" checked="true">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default getGrade">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
 </div>
 </@override>
 

@@ -29,8 +29,9 @@
 
     <insert id="addOrderItem" keyProperty="orderItem.id">
         INSERT INTO order_item (customer_id, addr_detail_id, collect_from_time, collect_end_time) VALUES
-        ((SELECT id FROM customer WHERE name = #{orderItem.customerName}), (SELECT id FROM addr_detail WHERE name=#{orderItem.address.detail}
-        AND area_id = (SELECT id FROM area WHERE name = #{orderItem.address.area})),
+        ((SELECT id FROM customer WHERE name = #{orderItem.customerName}), (SELECT id FROM addr_detail WHERE name = #{orderItem.address.detail}
+        AND area_id = (SELECT id FROM area WHERE name = #{orderItem.address.area} AND city_id =
+        (SELECT id FROM city WHERE name = #{orderItem.address.city}))),
         #{orderItem.collectFromTime}, #{orderItem.collectEndTime})
     </insert>
 

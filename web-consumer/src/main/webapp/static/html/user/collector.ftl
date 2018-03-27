@@ -19,13 +19,13 @@
         <hr>
         <div class="region-block">
             <div class="state">
-                <a href="/web-consumer/order/new_orders"><h3>待抢单<span class="more">>></span></h3></a>
+                <a href="/web-consumer/order/new"><h3>待抢单<span class="more">>></span></h3></a>
             </div>
             <div class="clearfix"></div>
         </div>
         <div class="region-block">
             <div class="state">
-                <a href="/web-consumer/order/info"><h3>待回收<span class="more">>></span></h3></a>
+                <a href="/web-consumer/order"><h3>待回收<span class="more">>></span></h3></a>
             </div>
             <div class="clearfix"></div>
         </div>

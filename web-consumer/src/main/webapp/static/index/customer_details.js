@@ -11,8 +11,8 @@ $(function () {
         user.address = formObj;
         console.log(user);
         $.ajax({
-            type: 'POST',
-            url: LOCALHOST + "/user/info",
+            type: 'PUT',
+            url: LOCALHOST + "/user",
             // dataType: 'json',
             data: JSON.stringify(user),
             contentType: 'application/json',
