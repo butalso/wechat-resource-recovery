@@ -1,9 +1,8 @@
 <@override name="nav"></@override>
 <@override name="content">
 <div class="container orderList">
-    <a href="/web-consumer/user/info" class="btn">
-        <
-        <返回
+    <a href="/web-consumer/user" class="btn">
+        <span><<返回</span>
     </a>
     <#list orders as order>
         <div class="region-block">

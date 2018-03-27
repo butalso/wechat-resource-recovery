@@ -25,7 +25,7 @@ public class OrderController {
     @Reference
     OrderService orderService;
 
-    @RequestMapping(value = "/info", method = RequestMethod.GET,
+    @RequestMapping(value = "", method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
     @ApiOperation(value = "返回与用户相关订单集合和订单页面")
     public ModelAndView getOrders(@ApiIgnore @ModelAttribute("user") User user) {
@@ -36,32 +36,11 @@ public class OrderController {
         return mav;
     }
 
-    @RequestMapping(value = "/info", method = RequestMethod.POST,
+    @RequestMapping(value = "", method = RequestMethod.POST,
             consumes = "application/json;charset=UTF-8",
             produces = "text/plain;charset=UTF-8")
     @ResponseBody
-    @ApiOperation(value = "用户创建订单", notes = "格式如下：{\n" +
-            "  \"orderDetails\": [\n" +
-            "    {\n" +
-            "      \"name\": \"废报纸\",\n" +
-            "      \"weight\": 10\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\": \"废纸箱\",\n" +
-            "      \"weight\": 10\n" +
-            "    }\n" +
-            "  ],\n" +
-            "  \"orderItem\": {\n" +
-            "    \"address\": {\n" +
-            "      \"area\": \"江宁区\",\n" +
-            "      \"city\": \"南京市\",\n" +
-            "      \"detail\": \"佛城西路八号\",\n" +
-            "      \"province\": \"江苏省\"\n" +
-            "    },\n" +
-            "    \"collectEndTime\": \"2018-03-18 09:07:47\",\n" +
-            "    \"collectFromTime\": \"2018-03-18 09:07:47\"\n" +
-            "  }\n" +
-            "}")
+    @ApiOperation(value = "用户创建订单")
     public ResponseEntity<String> createOrder(@RequestBody Order order,
                                               @ApiIgnore @ModelAttribute("user") User user) {
         order.getOrderItem().setCustomerName(user.getName());
@@ -75,7 +54,7 @@ public class OrderController {
         return new ResponseEntity<>("创建成功", HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/order_details", method = RequestMethod.POST,
+    @RequestMapping(value = "", method = RequestMethod.PUT,
             produces = "text/plain;charset=utf-8")
     @ResponseBody
     @ApiOperation(value = "用户修正订单详情")
@@ -91,7 +70,7 @@ public class OrderController {
         return new ResponseEntity<>("修改成功", HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/new_orders", method = RequestMethod.GET,
+    @RequestMapping(value = "/new", method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
     @ResponseBody
     @ApiOperation(value = "给回收员返回回收范围内用户新建订单集合")
@@ -114,7 +93,7 @@ public class OrderController {
         return orderService.getOrder(orderItemId);
     }
 
-    @RequestMapping(value = "/{orderItemId}/receive", method = RequestMethod.POST,
+    @RequestMapping(value = "/{orderItemId}/receive", method = RequestMethod.PUT,
             produces = "text/plain;charset=utf-8")
     @ResponseBody
     @ApiOperation(value = "回收员确定接受订单编号为orderItemId的订单")
@@ -133,7 +112,7 @@ public class OrderController {
         return new ResponseEntity<>("接单成功", HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{orderItemId}/confirm_receive", method = RequestMethod.POST,
+    @RequestMapping(value = "/{orderItemId}/confirm", method = RequestMethod.PUT,
             produces = "text/plain;charset=utf-8"
     )
     @ResponseBody
@@ -150,12 +129,12 @@ public class OrderController {
         return new ResponseEntity<>("确认成功", HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{orderItemId}/grade", method = RequestMethod.POST,
+    @RequestMapping(value = "/{orderItemId}/grade", method = RequestMethod.PUT,
             produces = "text/plain;charset=utf-8")
     @ResponseBody
     @ApiOperation(value = "业主，回收员对订单评分，获取经验值，诚信值，积分值")
     public ResponseEntity<String> gradeOrder(@ApiIgnore @ModelAttribute("user") User user,
-                                             @RequestParam("orderItemId") Integer orderItemId,
+                                             @PathVariable("orderItemId") Integer orderItemId,
                                              @RequestParam("grade") Integer grade) {
         try {
             orderService.gradeOrder(orderItemId, user.getName(), user.getUserKind(), grade);
@@ -187,7 +166,7 @@ public class OrderController {
         return new ResponseEntity<>("确认成功", HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = {"/details"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/details", method = RequestMethod.GET)
     @ApiOperation(value = "获取订单详情页面")
     public String orderDetails() {
         return "user/customer_order_details";

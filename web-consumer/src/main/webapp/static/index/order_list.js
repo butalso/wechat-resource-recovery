@@ -38,8 +38,8 @@ $(function () {
             $(".collectGradeBtn").click(function () {
                 var t = $(".gradeForm").serializeArray();
                 $.ajax({
-                    type: 'POST',
-                    url: LOCALHOST + "/order/" + $this.attr("orderId") + "/grade",
+                    type: 'PUT',
+                    url: LOCALHOST + "/order/" + $this.attr("orderId") + "/grade?grade=" + t[0].value,
                     // dataType: 'json',
                     data: {
                         orderItemId: $this.attr("orderId"),
@@ -66,8 +66,8 @@ $(function () {
         }
         else if ($this.attr("state") == "未回收") {
             $.ajax({
-                type: 'POST',
-                url: LOCALHOST + "/order/" + $this.attr("orderId") + "/confirm_receive",
+                type: 'PUT',
+                url: LOCALHOST + "/order/" + $this.attr("orderId") + "/confirm",
                 // dataType: 'json',
                 // data: data,
                 complete: function (XMLHttpRequest, textStatus) {

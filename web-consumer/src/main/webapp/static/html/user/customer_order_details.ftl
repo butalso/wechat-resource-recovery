@@ -1,6 +1,6 @@
 <@override name="content">
 <div class="container">
-    <a href="/web-consumer/order/info" class="btn">
+    <a href="/web-consumer/order" class="btn">
         <span><<返回</span>
     </a>
 </div>

@@ -19,7 +19,7 @@
         <hr>
         <div class="region-block">
             <div class="state">
-                <a href="/web-consumer/order/info"><h3>查看相关订单<span class="more">>></span></h3></a>
+                <a href="/web-consumer/order"><h3>查看相关订单<span class="more">>></span></h3></a>
             </div>
             <div class="clearfix"></div>
         </div>

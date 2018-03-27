@@ -90,8 +90,8 @@ function getDetails(orderId) {
             });
             order.orderDetails = orderDetails;
             $.ajax({
-                type: 'POST',
-                url: LOCALHOST + "/order/order_details",
+                type: 'PUT',
+                url: LOCALHOST + "/order",
                 // dataType: 'json',
                 data: JSON.stringify(order),
                 headers: {
@@ -115,8 +115,8 @@ function getDetails(orderId) {
         $(".getGrade").click(function () {
             var t = $(".gradeForm").serializeArray();
             $.ajax({
-                type: 'POST',
-                url: LOCALHOST + "/order/" + order.orderItem.id + "/grade",
+                type: 'PUT',
+                url: LOCALHOST + "/order/" + order.orderItem.id + "/grade?grade=" + t[0].value,
                 // dataType: 'json',
                 data: {
                     orderItemId: order.orderItem.id,
@@ -132,7 +132,7 @@ function getDetails(orderId) {
                     console.log(data);
                     if (data == "评分成功") {
                         Toast("评分成功", 1000);
-                        $("#gradeModal").hide();
+                        setTimeout("location.reload()", 1000);
                     }
                 },
                 error: function (err) {

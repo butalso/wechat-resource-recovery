@@ -22,6 +22,7 @@ public class WalletController {
     WalletService walletService;
 
     @RequestMapping(value = "/{walletId}", method = RequestMethod.GET)
+    @ApiOperation("获取用户钱包信息页面")
     public ModelAndView getWalletRecord(@PathVariable("walletId") Integer walletId) {
         ModelAndView mav = new ModelAndView("user/walletDetail");
 
@@ -32,7 +33,7 @@ public class WalletController {
         return mav;
     }
 
-    @RequestMapping(value = "/{walletId}/recharge", method = RequestMethod.POST)
+    @RequestMapping(value = "/{walletId}", method = RequestMethod.POST)
     @ApiOperation(value = "用户充值或者体现，value为正表示充值，负提现")
     public ResponseEntity<String> recharge(@PathVariable("walletId") Integer walletId,
                                            @RequestParam("payPass") String payPass,

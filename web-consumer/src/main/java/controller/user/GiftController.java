@@ -5,6 +5,7 @@ import entity.ECPUser;
 import entity.Gift;
 import entity.User;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ public class GiftController {
     UserService userService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
+    @ApiOperation("获取礼品信息页面")
     public ModelAndView getGifts() {
         ModelAndView mav = new ModelAndView("user/gift");
         List<Gift> gifts = giftService.getGifts();
@@ -36,6 +38,7 @@ public class GiftController {
     }
 
     @RequestMapping(value = "/{giftId}", method = RequestMethod.POST)
+    @ApiOperation("用户兑换礼品")
     public ResponseEntity<String> changeGift(@ApiIgnore @ModelAttribute("user")User user,
                                              @PathVariable("giftId") Integer giftId) {
         Gift gift = giftService.getGift(giftId);

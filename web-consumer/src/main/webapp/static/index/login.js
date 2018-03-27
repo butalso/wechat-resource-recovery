@@ -24,7 +24,7 @@ function login() {
         },
         success: function (data) {
             if (data == "登录成功") {
-                window.location = LOCALHOST + "/user/info";
+                window.location = LOCALHOST + "/user";
             }
         },
         error: function (err) {

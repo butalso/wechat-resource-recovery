@@ -169,7 +169,7 @@ public class ManageUserController {
         return new ResponseEntity<String>("删除成功", HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/0/{userName}", method = RequestMethod.POST)
+    @RequestMapping(value = "/0/{userName}", method = RequestMethod.PUT)
     @ApiOperation(value = "修改业主信息,name不变", notes = "属性包括name,password，gender，phone，credit，" +
             "experience，point，address ")
     public ResponseEntity<String> updateCustomer(@PathVariable("userName") String userName,
@@ -177,7 +177,7 @@ public class ManageUserController {
         return updateUser(customer, userName);
     }
 
-    @RequestMapping(value = "/1/{userName}", method = RequestMethod.POST)
+    @RequestMapping(value = "/1/{userName}", method = RequestMethod.PUT)
     @ApiOperation(value = "修改回收员，name不变", notes = "属性包括name，companyName，password，IDCardNo，" +
             "gender，phone，credit，point，experience，address")
     public ResponseEntity<String> updateCollector(@PathVariable("userName") String userName,
@@ -185,7 +185,7 @@ public class ManageUserController {
         return updateUser(collector, userName);
     }
 
-    @RequestMapping(value = "/2/{userName}", method = RequestMethod.POST)
+    @RequestMapping(value = "/2/{userName}", method = RequestMethod.PUT)
     @ApiOperation(value = "修改企业信息,name不变", notes = "属性包括name, password, phone, address")
     public ResponseEntity<String> updateCompany(@PathVariable("userName") String userName,
                               @RequestBody Company company) {
