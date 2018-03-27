@@ -168,7 +168,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/confirm_finish", method = RequestMethod.POST,
-            consumes = "application/json;charset=UTF-8",
+//            consumes = "application/json;charset=UTF-8",
             produces = "text/plain;charset=utf-8")
     @ResponseBody
     @ApiOperation(value = "企业确认订单完成，并向回收员发放提成")
