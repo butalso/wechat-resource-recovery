@@ -19,13 +19,20 @@
                         订单编号:${order.orderItem.id}
                         <#if (userKind=1)>
                             <#if (order.orderItem.state='已上门回收'||order.orderItem.state='订单完成')>
-                                <button type="button" class="btn btn-default more collector" disabled="true"
-                                        orderId="${order.orderItem.id}">
-                                    已回收
-                                </button>
+                                <#if (order.orderItem.collectorGrade!=0)>
+                                    <button type="button" class="btn btn-default more collector" disabled="true"
+                                            state="已回收" orderId="${order.orderItem.id}">
+                                        已评分
+                                    </button>
+                                <#else>
+                                    <button type="button" class="btn btn-default more collector"
+                                            state="已回收" orderId="${order.orderItem.id}">
+                                        评分
+                                    </button>
+                                </#if>
                             <#else>
                                 <button type="button" class="btn btn-default more collector"
-                                        orderId="${order.orderItem.id}">
+                                        state="未回收" orderId="${order.orderItem.id}">
                                     确认回收
                                 </button>
                             </#if>
@@ -54,7 +61,7 @@
     </#list>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="companyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -75,6 +82,47 @@
             </div>
         </div>
     </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="collectGradeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">请为此次交易评分</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline gradeForm row">
+                    <div class="form-group col-xs-2 col-xs-offset-1">
+                        <label for="exampleInputName2">1分</label>
+                        <input type="radio" class="form-control" name="grade" value="1">
+                    </div>
+                    <div class="form-group col-xs-2">
+                        <label for="exampleInputName2">2分</label>
+                        <input type="radio" class="form-control" name="grade" value="2">
+                    </div>
+                    <div class="form-group col-xs-2">
+                        <label for="exampleInputName2">3分</label>
+                        <input type="radio" class="form-control" name="grade" value="3">
+                    </div>
+                    <div class="form-group col-xs-2">
+                        <label for="exampleInputName2">4分</label>
+                        <input type="radio" class="form-control" name="grade" value="4">
+                    </div>
+                    <div class="form-group col-xs-2">
+                        <label for="exampleInputName2">5分</label>
+                        <input type="radio" class="form-control" name="grade" value="5" checked="true">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default collectGradeBtn" data-dismiss="modal">确认</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 </@override>
 

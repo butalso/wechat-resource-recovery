@@ -51,7 +51,7 @@ function getDetails(orderId) {
                 '    </div>\n' +
                 '    <div class="row">\n' +
                 '        <button class="btn btn-default editBtn col-xs-3 col-xs-offset-2" type="button" data-toggle="modal" data-target="#editModal">修改细则</button>\n' +
-                '        <button class="btn btn-default col-xs-3 col-xs-offset-2" type="button">取消订单</button>\n' +
+                '        <button class="btn btn-default gradeBtn col-xs-3 col-xs-offset-2" type="button" data-toggle="modal" data-target="#gradeModal">订单评分</button>\n' +
                 '    </div>';
 
             $(".content .container").append(node);
@@ -61,8 +61,12 @@ function getDetails(orderId) {
         }
     }).done(function () {
         if (order.orderItem.state != "回收员已接单" && order.orderItem.state != "订单创建成功") {
-            $(".editBtn").attr("disabled", true)
+            $(".editBtn").attr("disabled", true);
         }
+        if (order.orderItem.state == "订单完成" && order.orderItem.customerGrade != 0) {
+            $(".gradeBtn").attr("disabled", true).text("已评分");
+        }
+
         $(".editBtn").click(function () {
             var subNode = '';
             $.each(order.orderDetails, function (index, element) {
@@ -73,10 +77,10 @@ function getDetails(orderId) {
                     '           </div>\n' +
                     '       </div>';
             });
-            $("form").empty().append(subNode);
+            $(".editForm").empty().append(subNode);
         });
         $(".getNewOrder").click(function () {
-            var t = $("form").serializeArray();
+            var t = $(".editForm").serializeArray();
             var orderDetails = [];
             $.each(t, function (index, element) {
                 orderDetails.push({
@@ -85,7 +89,6 @@ function getDetails(orderId) {
                 })
             });
             order.orderDetails = orderDetails;
-            console.log(order);
             $.ajax({
                 type: 'POST',
                 url: LOCALHOST + "/order/order_details",
@@ -103,6 +106,34 @@ function getDetails(orderId) {
                         setTimeout("location.reload()", 1000);
                     }
                     console.log(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        });
+        $(".getGrade").click(function () {
+            var t = $(".gradeForm").serializeArray();
+            $.ajax({
+                type: 'POST',
+                url: LOCALHOST + "/order/" + order.orderItem.id + "/grade",
+                // dataType: 'json',
+                data: {
+                    orderItemId: order.orderItem.id,
+                    grade: parseInt(t[0].value)
+                },
+                headers: {
+                    "Accept": "text/plain; charset=utf-8",
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data == "评分成功") {
+                        Toast("评分成功", 1000);
+                        $("#gradeModal").hide();
+                    }
                 },
                 error: function (err) {
                     console.log(err);
