@@ -24,7 +24,7 @@ public class UserController {
     @Reference
     UserService userService;
 
-    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     @ApiOperation(value = "返回用户个人中心页面")
     public ModelAndView getUserDetail(@ApiIgnore @ModelAttribute("user") User user) {
         ModelAndView mav = null;
@@ -48,7 +48,7 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping(value = "/info", method = RequestMethod.POST,
+    @RequestMapping(value = "", method = RequestMethod.PUT,
             consumes = "application/json;charset=UTF-8",
             produces = "text/plain;charset=UTF-8")
     @ApiOperation(value = "业主修改头像，性别，电话，地址信息")
@@ -66,8 +66,7 @@ public class UserController {
         oldCustomer.setAddress(newCustomer.getAddress());
     }
 
-
-    @RequestMapping(value = "/password", method = RequestMethod.POST,
+    @RequestMapping(value = "/password", method = RequestMethod.PUT,
             consumes = "application/json;charset=UTF-8")
     public ResponseEntity<String> changePassword(@ApiIgnore @ModelAttribute("user") User user,
                                                  @RequestParam("oldPass") String oldPass,

@@ -13,9 +13,7 @@ import service.OrderService;
 import service.UserService;
 import util.OrderUtil;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("manager/order")
@@ -31,29 +29,39 @@ public class ManagerOrderController {
     public ModelAndView getOrders() {
         ModelAndView mav = new ModelAndView("manager/orders");
         List<Order> orders = new ArrayList<>();
+        List<Double> values = new ArrayList<>();
+
         List<? extends User> users = userService.getAllUsers(0);
         for (User user : users) {
             List<Order> orders1 = orderService.getOrders(user.getName(), 0);
-            orders.addAll(orders1);
+            for (Order order : orders1) {
+                orders.add(order);
+                values.add(OrderUtil.calculateOrderValue(order));
+            }
         }
-        mav.addObject("orders", orders);
 
+        mav.addObject("orders", orders);
+        mav.addObject("values", values);
         return mav;
     }
 
     @RequestMapping(value = "/{userKind}/{userName}", method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation("获取某用户所有的订单")
-    public List<Order> getUserOrders(@PathVariable("userKind") Integer userKind,
+    public Map<Order, Double> getUserOrders(@PathVariable("userKind") Integer userKind,
                                      @PathVariable("userName") String userName) {
         List<Order> orders = orderService.getOrders(userName, userKind);
-        return orders;
+        Map<Order, Double> result = new HashMap<>();
+        for (Order order : orders) {
+            result.put(order, OrderUtil.calculateOrderValue(order));
+        }
+        return result;
     }
 
     @RequestMapping(value = "/create_time", method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation(value = "根据用户创建订单时间获取订单信息")
-    public List<Order> getOrdersByCreateTime(@RequestParam("fromTime") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date fromTime,
+    public Map<Order, Double> getOrdersByCreateTime(@RequestParam("fromTime") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date fromTime,
                                            @RequestParam("endTime") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime) {
         List<Order> orders = new ArrayList<>();
         List<? extends User> users = userService.getAllUsers(0);
@@ -63,11 +71,11 @@ public class ManagerOrderController {
             orders.addAll(orders1);
         }
 
-        List<Order> result = new ArrayList<>();
+        Map<Order, Double> result = new HashMap<>();
         for (Order order : orders) {
             Date createTime = order.getOrderItem().getCreateTime();
             if (createTime.after(fromTime) && createTime.before(endTime)) {
-                result.add(order);
+                result.put(order, OrderUtil.calculateOrderValue(order));
             }
         }
         return result;
@@ -76,7 +84,7 @@ public class ManagerOrderController {
     @RequestMapping(value = "/value", method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation(value = "根据订单价值获取订单信息")
-    public List<Order> getOrdersByValue(@RequestParam("from") Double from,
+    public Map<Order, Double> getOrdersByValue(@RequestParam("from") Double from,
                                              @RequestParam("end") Double end) {
         List<Order> orders = new ArrayList<>();
         List<? extends User> users = userService.getAllUsers(0);
@@ -86,11 +94,11 @@ public class ManagerOrderController {
             orders.addAll(orders1);
         }
 
-        List<Order> result = new ArrayList<>();
+        Map<Order, Double> result = new HashMap<>();
         for (Order order : orders) {
             Double value = OrderUtil.calculateOrderValue(order);
             if (value >= from && value <= end) {
-                result.add(order);
+                result.put(order, value);
             }
         }
         return result;
@@ -104,6 +112,7 @@ public class ManagerOrderController {
         ModelAndView mav = new ModelAndView("manager/orderDetail");
         Order order = orderService.getOrder(orderItemId);
         mav.addObject("order", order);
+        mav.addObject("value", OrderUtil.calculateOrderValue(order));
         return mav;
     }
 
