@@ -214,7 +214,7 @@
 
                         <li>
                             <a href="#">
-                                <img src="/web-consumer/static/images/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+                                <img src="/web-consumer/static/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
                                 <span class="msg-body">
 											<span class="msg-title">
 												<span class="blue">Alex:</span>
@@ -231,7 +231,7 @@
 
                         <li>
                             <a href="#">
-                                <img src="/web-consumer/static/images/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+                                <img src="/web-consumer/static/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
                                 <span class="msg-body">
 											<span class="msg-title">
 												<span class="blue">Susan:</span>
@@ -248,7 +248,7 @@
 
                         <li>
                             <a href="#">
-                                <img src="/web-consumer/static/images/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+                                <img src="/web-consumer/static/images/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
                                 <span class="msg-body">
 											<span class="msg-title">
 												<span class="blue">Bob:</span>
@@ -580,10 +580,10 @@
 
                     <ul class="submenu">
                         <li>
-                            <a href="categorues.ftl">
+                            <a href="javascript:void(0)" onclick="categoryInfo()">
                                 <i class="icon-double-angle-right"></i>
                                 分类查询
-                            </a
+                            </a>
                         </li>
 
                         <li>
@@ -605,7 +605,7 @@
 
                     <ul class="submenu">
                         <li>
-                            <a href="#">
+                            <a href="javascript:void(0)" onclick="receive()">
                                 <i class="icon-double-angle-right"></i>
                                 收件箱
                             </a>
@@ -858,6 +858,7 @@
 <script type="text/javascript">
     if("ontouchend" in document) document.write("<script src='/web-consumer/static/manager/jquery.mobile.custom.min.js'>"+"<"+"script>");
 </script>
+<script src="/web-consumer/static/manager/jquery-ui-1.10.3.full.min.js"></script>
 <script src="/web-consumer/static/manager/bootstrap.min.js"></script>
 <!--<script src="assets/js/typeahead-bs2.min.js"></script>-->
 
@@ -867,8 +868,9 @@
   <!--<script src="assets/js/excanvas.min.js"></script>-->
 <![endif]-->
 
-<script src="/web-consumer/static/manager/jquery-ui-1.10.3.custom.min.js"></script>
 <!--<script src="assets/js/jquery.ui.touch-punch.min.js"></script>-->
+<script src="/web-consumer/static/manager/jquery-ui-1.10.3.custom.min.js"></script>
+
 <script src="/web-consumer/static/manager/jquery.slimscroll.min.js"></script>
 <!-- ace scripts -->
 <script src="/web-consumer/static/manager/ace-elements.min.js"></script>
