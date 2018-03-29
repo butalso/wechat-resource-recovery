@@ -24,6 +24,7 @@ DataSourceTree.prototype.data = function(options, callback) {
 	//we have used static data here
 	//but you can retrieve your data dynamically from a server using ajax call
 	//checkout examples/treeview.html and examples/treeview.js for more info
+
 };
 
 var tree_data = {
@@ -36,6 +37,16 @@ var tree_data = {
 	'services' : {name: 'Services', type: 'item'}	,
 	'personals' : {name: 'Personals', type: 'item'}
 }
+
+var tree_datas={
+
+}
+
+$.each(garbageInfo,function (index,element) {
+	tree_datas[element]={name:element,type:'folder'}
+})
+console.log(tree_datas)
+
 tree_data['for-sale']['additionalParameters'] = {
 	'children' : {
 		'appliances' : {name: 'Appliances', type: 'item'},
@@ -90,7 +101,7 @@ tree_data['pets']['additionalParameters'] = {
 	}
 }
 
-var treeDataSource = new DataSourceTree({data: tree_data});
+var treeDataSource = new DataSourceTree({data: tree_datas});
 
 
 

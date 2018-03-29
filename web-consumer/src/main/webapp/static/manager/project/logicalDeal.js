@@ -1,4 +1,8 @@
 var LOCALHOST = "http://localhost:8080/web-consumer/manager";
+String.prototype.replaceAll=function (str1,str2) {
+    return this.replace(new  RegExp(str1,"gm"),str2);
+}
+
 function selectInfo(param) {
     $.ajax({
         type:"GET",
@@ -15,6 +19,43 @@ function selectInfo(param) {
         }
     })
 }
+
+
+function categoryInfo(){
+    $.ajax({
+        type:"GET",
+        url:LOCALHOST+"/garbage",
+        dataType:"html",
+        complete: function(XMLHttpRequest,textStatus){
+
+        } ,
+        success: function(data){
+            $(".main-content").html(data);
+        },
+        error: function(error){
+            console.log(error);
+        }
+    })
+}
+
+
+function receive(){
+    $.ajax({
+        type:"GET",
+        url:LOCALHOST+"/message/receive",
+        dataType:"html",
+        complete: function(XMLHttpRequest,textStatus){
+
+        } ,
+        success: function(data){
+            $(".main-content").html(data);
+        },
+        error: function(error){
+            console.log(error);
+        }
+    })
+}
+
 $(function () {
     (function ($) {
         $.getUrlParam = function (name,hrefString) {

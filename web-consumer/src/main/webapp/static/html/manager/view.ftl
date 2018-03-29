@@ -138,8 +138,8 @@
                                                         <div class="row">
                                                             <form id="valueF">
                                                                 <div class="col-sm-11">
-                                                                    <input type="text" class="input-mini" name="from" id="spinner1" />
-                                                                    <input type="text" class="input-mini" name="end" id="spinner2" />
+                                                                   <input type="text" class="input-mini" name="from" id="spinner1" />
+                                                                   <input type="text" class="input-mini" name="end" id="spinner2" />
                                                                 </div>
                                                                 <div class="col-sm-1 pull-right">
                                                                     <button class="btn btn-app btn-purple btn-xs padding-2" id="cTButton" >搜索</button>
@@ -224,7 +224,6 @@
 <!-- page specific plugin scripts -->
 <script src="/web-consumer/static/manager/jquery.dataTables.min.js"></script>
 <script src="/web-consumer/static/manager/jquery.dataTables.bootstrap.js"></script>
-<script src="/web-consumer/static/manager/jquery-ui-1.10.3.full.min.js"></script>
 <script src="/web-consumer/static/manager/datepicker/bootstrap-datepicker.min.js"></script>
 <script src="/web-consumer/static/manager/datepicker/bootstrap-timepicker.min.js"></script>
 <script src="/web-consumer/static/manager/datepicker/moment.min.js"></script>
@@ -238,7 +237,9 @@
         var usersDetail=[];
         //存放用户基本信息
         var basicInfo=[];
-        //获取用户数据
+        //按创建时间筛选的用户信息
+        var createTimeInfo=[];
+        /////////////获取用户数据
         function loading_data() {
             <#if users??>
                 <#list users as user>
@@ -405,6 +406,10 @@
                                 html: "<i class='icon-trash bigger-110'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;确定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
                                 "class" : "btn btn-danger btn-xs",
                                 click: function() {
+                                    if(window.location.search==null){
+                                        window.location.href=window.location.href+param;
+                                    }
+                                    console.log( window.location.href)
                                     $.ajax({
                                         type:"DELETE",
                                         url:LOCALHOST+"/user/"+userKind+"/"+userName,
@@ -426,7 +431,7 @@
                                                             click: function() {
                                                                 start = $("#userInfo-table").dataTable().fnSettings().iDisplayStart;
                                                                 total = $("#userInfo-table").dataTable().fnSettings().fnRecordsDisplay();
-                                                                window.location.reload();
+                                                                self.location=document.referrer;
                                                                 if((total-start)==1){
                                                                     if (start > 0) {
                                                                         $("#userInfo-table").dataTable().fnPageChange( 'previous', true );
@@ -491,12 +496,12 @@
             $("td a[name='edit']").each(function (index,element) {
                 $(element).on("click",function () {
                     var param=$(this).attr("href").substr(1);
-                    var userKind=$.getUrlParam("userKind",param)
-                    var userName=$.getUrlParam("userName",param)
+//                    var userKind=$.getUrlParam("userKind",param)
+//                    var userName=$.getUrlParam("userName",param)
                     $(element).on("click",function () {
                         $.ajax({
                             type:"GET",
-                            url:LOCALHOST+"/user/"+userKind+"/"+userName,
+                            url:LOCALHOST+"/user/"+param,
                             dataType:"html",
                             complete: function(XMLHttpRequest,textStatus){
 
@@ -526,16 +531,16 @@
                 else title.text($title);
             }
         }));
-//        $('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
-//            $(this).prev().focus();
-//        });
+        $('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+            $(this).prev().focus();
+        });
         $('input[name=date-range-picker]').daterangepicker({
                     "timePicker": true,
                     "timePicker24Hour": false,
                     "showOtherMonths":true,
                     "showDropdowns":true,
-                    "linkedCalendars": true,
-                    "autoUpdateInput": false,
+                    "linkedCalendars": false,
+                    "autoUpdateInput": true,
                     "format":'YYYY-MM-DD HH:mm:ss',
                     "locale": {
                         fromLabel:"起始日期",
@@ -546,7 +551,13 @@
                         daysOfWeek:["日", "一", "二", "三", "四", "五", "六"],
                         monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
                     }
-                }).prev().on(ace.click_event, function(){
+                },function (start,end,label) {
+            console.log(start.format);
+            console.log(end.format);
+            console.log(label);
+           $("input[name='daterangepicker_start'").val(start.format)
+
+        }).prev().on(ace.click_event, function(){
                         $(this).next().focus();
         });
 
@@ -559,6 +570,46 @@
                 .on('change', function(){
 //                    alert(this.value)
                 });
+
+        $("#cTButton").on("click",function (e) {
+            e.preventDefault();
+            var t=$("#createTF").serializeArray();
+            var selectParam={};
+            $.each(t,function () {
+                var params=this.value.split(" - ");
+                selectParam["fromTime"]=params[0];
+                selectParam["endTime"]=params[1];
+            })
+            var hrefParam=$.param(selectParam).replaceAll("\\+","%20");
+
+
+            $.ajax({
+                type: 'GET',
+                url: LOCALHOST+"/user/0/create_time?"+hrefParam,
+                dataType: 'json',
+                complete: function (XMLHttpRequest, textStatus) {
+                },
+                success: function (data) {
+                  $.each(data,function (index,element) {
+                      var User=new Object();
+                      User.first=" ";
+                      User.nickName=element.name;
+                      User.credit=element.credit;
+                      User.point=element.point;
+                      User.createTime=element.createTime;
+                      User.address=element.address;
+                      var params={"userKind":element.userKind,"userName":element.name};
+                      User.hrefParam=$.param(params);
+                      createTimeInfo.push(User);
+                  })
+                    console.log(createTimeInfo)
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+
+        })
     })
 </script>
 <!-- ace scripts -->
