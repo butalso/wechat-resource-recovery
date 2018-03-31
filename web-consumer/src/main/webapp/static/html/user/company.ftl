@@ -23,6 +23,12 @@
             </div>
             <div class="clearfix"></div>
         </div>
+        <div class="region-block">
+            <div class="state">
+                <a href="/web-consumer/wallet/${userDetails.wallet.id}"><h3>查看钱包<span class="more">>></span></h3></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
     </div>
 </@override>
 

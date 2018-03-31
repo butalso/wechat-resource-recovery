@@ -32,7 +32,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <ul class="nav nav-pills">
                 <li role="presentation"><a class="account" href="/web-consumer"><i class="fa fa-home" aria-hidden="true"></i>主页</a></li>
                 <li role="presentation"><a class="account" href="/web-consumer/garbage/shoppingCar"><i class="fa fa-database" aria-hidden="true"></i>废品筐</a></li>
-                <li role="presentation"><a class="account" href="#"><i class="fa fa-gift" aria-hidden="true"></i>积分兑换</a></li>
+                <li role="presentation"><a class="account" href="/web-consumer/gift"><i class="fa fa-gift" aria-hidden="true"></i>积分兑换</a></li>
                 <li role="presentation"><a class="account" href="/web-consumer/user"><i class="fa fa-user" aria-hidden="true"></i>个人中心</a></li>
             </ul>
         </nav>

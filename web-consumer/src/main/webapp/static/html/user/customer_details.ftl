@@ -1,8 +1,7 @@
 <@override name="content">
 <div class="container">
-    <a href="/web-consumer/user/info" class="btn">
-        <
-        <返回
+    <a href="/web-consumer/user" class="btn">
+        <span><<返回</span>
     </a>
     <div class="regions main-grid-border">
         <div class="region-block">
