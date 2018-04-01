@@ -72,6 +72,10 @@
       <mvc:mapping path="/order/**" />
       <mvc:mapping path="/account/**" />
 
+      <!--管理员拦截-->
+      <!--<mvc:mapping path="/manager/**" />-->
+      <!--<mvc:exclude-mapping path="/manager/login" />-->
+
       <bean id="loginInterceptor" class="interceptor.Login"></bean>
     </mvc:interceptor>
   </mvc:interceptors>

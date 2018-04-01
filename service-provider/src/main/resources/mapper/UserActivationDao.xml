@@ -14,6 +14,7 @@
         UPDATE user_activation SET duration = #{userActivation.duration},
         last_login_time = #{userActivation.lastLoginTime}
         WHERE user_id = #{userActivation.userId} AND user_kind = #{userActivation.userKind}
+        AND date = CURRENT_DATE
     </update>
 
     <select id="getUserDateActivation" resultType="entity.UserActivation">

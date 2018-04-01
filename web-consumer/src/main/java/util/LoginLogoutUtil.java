@@ -44,7 +44,7 @@ public class LoginLogoutUtil {
         return result;
     }
 
-    public static void logout(SessionStatus sessionStatus, @ModelAttribute("user") User user) {
+    public static void logout(SessionStatus sessionStatus, User user) {
         /*记录用户活跃状态*/
         userActivationService.addActivation(user, true);
         sessionStatus.setComplete();
