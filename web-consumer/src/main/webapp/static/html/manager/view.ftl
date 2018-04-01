@@ -2,7 +2,7 @@
 <ul class="breadcrumb">
     <li>
         <i class="icon-home home-icon"></i>
-        <a href="#">首页</a>
+        <a href="/web-consumer/manager/index">首页</a>
     </li>
 
     <li>
@@ -274,22 +274,17 @@
                     basicInfo.push(User);
                 </#list>
             </#if>
-
-//            $.each(usersDetail,function (index,element) {
-//                var params={"userKind":element.userKind,"userName":element.nickname};
-//                var str=$.param(params);
-//                var user=new Array()
-//                user=['<label> <input type="checkbox" class="ace" /> <span class="lbl"></span> </label>',
-//                    '<a href="'+element.url+'">'+element.nickname+'</a>',
-//                    element.credit,
-//                    element.point,
-//                    element.createTime,
-//                    '<span class="label label-sm label-warning">'+element.address+'</span>',
-//                    '<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons"> <a class="blue" href="#"> <i class="icon-zoom-in bigger-130"></i> </a> <a class="green" href="#"> <i class="icon-pencil bigger-130"></i> </a> <a href="#?'+str+'" name="id-btn-dialog" class="red"><i class="icon-trash bigger-130"></i></a></div><div class="visible-xs visible-sm hidden-md hidden-lg"> <div class="inline position-relative"> <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown"> <i class="icon-caret-down icon-only bigger-120"></i> </button> <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close"> <li> <a href="#" class="tooltip-info" data-rel="tooltip" title="View"> <span class="blue"> <i class="icon-zoom-in bigger-120"></i> </span> </a> </li> <li> <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit"> <span class="green"> <i class="icon-edit bigger-120"></i> </span> </a> </li> <li> <a href="#?'+str+'" name="id-btn-dialog" class="tooltip-error" data-rel="tooltip" title="Delete"><span class="red"> <i class="icon-trash bigger-120"></i> </span> </a> </li> </ul> </div> </div> </td>'
-//                ]
-//                oTable1.fnAddData(user)
-//            });
         }
+
+        function deleteSelect() {
+                var nTrs = table.fnGetNodes();//fnGetNodes获取表格所有行，nTrs[i]表示第i行tr
+                for(var i = 0; i < nTrs.length; i++){
+                if($(nTrs[i]).hasClass('selected')){//相当于$(tr)
+                    var t = table.fnGetData(nTrs[i]);
+                    console.log("aaaaaa:" + t[2]);//获取一行第3列数据
+                    }
+                }
+            }
 
         $('table th input:checkbox').on('click' , function(){
             var that = this;
@@ -297,9 +292,132 @@
                     .each(function(){
                         this.checked = that.checked;
                         $(this).closest('tr').toggleClass('selected');
-                    });
+            });
 
         });
+
+        var index;
+
+        $("#selectContent").on("click","tr",function (e) {
+            e.preventDefault();
+            index=$(this).context._DT_RowIndex;
+        })
+
+        $("#selectContent").on("click","tr td a[name='id-btn-dialog']",function (e) {
+            e.preventDefault();
+            var param=$(this).attr("href").substr(1);
+            var userKind=$.getUrlParam("userKind",param);
+            var userName=$.getUrlParam("userName",param);
+
+            $( "#dialog-confirm" ).removeClass('hide').dialog({
+                    dialogClass: "no-close",
+                    resizable: false,
+                    modal: true,
+                    title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i>删除用户信息？</h4></div>",
+                    title_html: true,
+                    buttons: [
+                        {
+                            html: "<i class='icon-trash bigger-110'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;确定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+                            "class" : "btn btn-danger btn-xs",
+                            click: function() {
+                                $.ajax({
+                                    type:"DELETE",
+                                    url:LOCALHOST+"/user/"+userKind+"/"+userName,
+                                    complete: function(XMLHttpRequest,textStatus){
+
+                                    } ,
+                                    success: function(data){
+                                        if(data=="删除成功"){
+                                            $( "#dialog-success" ).removeClass('hide').dialog({
+                                                dialogClass: "no-close",
+                                                resizable: false,
+                                                modal: true,
+                                                title: "<div class='widget-header'><h4 class='smaller'><i class='icon-ok-sign red'></i>提示框</h4></div>",
+                                                title_html: true,
+                                                buttons: [
+                                                    {
+                                                        html: "<i class='icon-trash bigger-110'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;确定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+                                                        "class" : "btn btn-danger btn-xs",
+                                                        click: function() {
+                                                            $("#userInfo-table").dataTable().fnDeleteRow(index, null, true);
+//
+                                                            $( this ).dialog( "close" );
+                                                        }
+                                                    },
+                                                    {
+                                                        html: "<i class='icon-remove bigger-110'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;取消&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+                                                        "class" : "btn  btn-info btn-xs",
+                                                        click: function() {
+                                                            $( this ).dialog( "close" );
+                                                        }
+                                                    }
+                                                ]
+                                            });
+                                        }
+                                    },
+                                    error: function(error){
+                                        console.log(error);
+                                    }
+
+                                })
+                                $( this ).dialog( "close" );
+                            }
+                        },
+                        {
+                            html: "<i class='icon-remove bigger-110'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;取消&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+                            "class" : "btn  btn-info btn-xs",
+                            click: function() {
+                                $( this ).dialog( "close" );
+                            }
+                        }
+                    ]
+                });
+
+        })
+
+        //Jump to view detail user information
+        $("#selectContent").on("click","tr td a[name='viewDetail']",2,function () {
+            var param=$(this).attr("href").substr(1);
+            var userKind=$.getUrlParam("userKind",param);
+            var userName=$.getUrlParam("userName",param);
+            $.ajax({
+                type:"GET",
+                url:LOCALHOST+"/user/"+userKind+"/"+userName,
+                dataType:"html",
+                complete: function(XMLHttpRequest,textStatus){
+
+                } ,
+                success: function(data){
+                    $(".main-content").html(data);
+                },
+                error: function(error){
+                    console.log(error);
+                }
+            })
+        })
+
+        $("#selectContent").on("click","tr td a[name='edit']",1,function (even) {
+            alert(even.data)
+            var param=$(this).attr("href").substr(1);
+            var userKind=$.getUrlParam("userKind",param)
+            var userName=$.getUrlParam("userName",param)
+            $.ajax({
+                    type:"GET",
+                    url:LOCALHOST+"/user/"+userKind+"/"+userName,
+                    dataType:"html",
+                    complete: function(XMLHttpRequest,textStatus){
+
+                    } ,
+                    success: function(data){
+                        $(".main-content").html(data);
+                    },
+                    error: function(error){
+                        console.log(error);
+                    }
+                })
+        })
+
+
 
 
         $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
@@ -316,12 +434,12 @@
             return 'left';
         }
 
-        function initTableDatas() {
+        function initTableDatas(info) {
             loading_data();
             var userTable = $("#userInfo-table").dataTable( {
                 "bProcessing": true,
                 "bStateSave": true,
-                "aaData": basicInfo,
+                "aaData": info,
                 "aoColumns": [
                     { "bSortable": false,"mDataProp":"first","sClass":"center"},
                     { "bSortable":true, "mDataProp":"nickName"},
@@ -352,7 +470,18 @@
                         }
                     },
                     {
-                        "aTargets": [2,3,4], // 目标列位置，下标从0开始
+                        "aTargets": [2,3], // 目标列位置，下标从0开始
+                        "data": "name", // 数据列名
+                        "mRender": function(data,type,full){
+                            if(data!=null&&$.type(data)!="undefined") {
+                                return data;
+                            }else {
+                                return "<font color='font-red-mint'>尚未填写</font>";
+                            }
+                        }
+                    },
+                    {
+                        "aTargets": [4], // 目标列位置，下标从0开始
                         "data": "name", // 数据列名
                         "mRender": function(data,type,full){
                             if(data!=null&&data!="") {
@@ -388,138 +517,19 @@
 
             } );
             // //Jump to delete user information
-            $( "td a[name='id-btn-dialog']" ).each(function (index,element) {
-                $(element).on("click",function (e) {
-                    e.preventDefault();
-                    var param=$(this).attr("href").substr(1);
-                    var userKind=$.getUrlParam("userKind",param)
-                    var userName=$.getUrlParam("userName",param)
-
-                    $( "#dialog-confirm" ).removeClass('hide').dialog({
-                        dialogClass: "no-close",
-                        resizable: false,
-                        modal: true,
-                        title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i>删除用户信息？</h4></div>",
-                        title_html: true,
-                        buttons: [
-                            {
-                                html: "<i class='icon-trash bigger-110'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;确定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-                                "class" : "btn btn-danger btn-xs",
-                                click: function() {
-                                    if(window.location.search==null){
-                                        window.location.href=window.location.href+param;
-                                    }
-                                    console.log( window.location.href)
-                                    $.ajax({
-                                        type:"DELETE",
-                                        url:LOCALHOST+"/user/"+userKind+"/"+userName,
-                                        complete: function(XMLHttpRequest,textStatus){
-
-                                        } ,
-                                        success: function(data){
-                                            if(data=="删除成功"){
-                                                $( "#dialog-success" ).removeClass('hide').dialog({
-                                                    dialogClass: "no-close",
-                                                    resizable: false,
-                                                    modal: true,
-                                                    title: "<div class='widget-header'><h4 class='smaller'><i class='icon-ok-sign red'></i>提示框</h4></div>",
-                                                    title_html: true,
-                                                    buttons: [
-                                                        {
-                                                            html: "<i class='icon-trash bigger-110'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;确定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-                                                            "class" : "btn btn-danger btn-xs",
-                                                            click: function() {
-                                                                start = $("#userInfo-table").dataTable().fnSettings().iDisplayStart;
-                                                                total = $("#userInfo-table").dataTable().fnSettings().fnRecordsDisplay();
-                                                                self.location=document.referrer;
-                                                                if((total-start)==1){
-                                                                    if (start > 0) {
-                                                                        $("#userInfo-table").dataTable().fnPageChange( 'previous', true );
-                                                                    }
-                                                                }
-                                                                $( this ).dialog( "close" );
-                                                            }
-                                                        },
-                                                        {
-                                                            html: "<i class='icon-remove bigger-110'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;取消&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-                                                            "class" : "btn  btn-info btn-xs",
-                                                            click: function() {
-                                                                $( this ).dialog( "close" );
-                                                            }
-                                                        }
-                                                    ]
-                                                });
-                                            }
-                                        },
-                                        error: function(error){
-                                            console.log(error);
-                                        }
-
-                                    })
-                                    $( this ).dialog( "close" );
-                                }
-                            },
-                            {
-                                html: "<i class='icon-remove bigger-110'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;取消&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-                                "class" : "btn  btn-info btn-xs",
-                                click: function() {
-                                    $( this ).dialog( "close" );
-                                }
-                            }
-                        ]
-                    });
-                });
-            })
-            //Jump to view detail user information
-            $("td a[name='viewDetail']").each(function (index,element) {
-                $(element).on("click",function () {
-                    var param=$(this).attr("href").substr(1);
-                    var userKind=$.getUrlParam("userKind",param);
-                    var userName=$.getUrlParam("userName",param);
-                    console.log(userName)
-                   $.ajax({
-                       type:"GET",
-                       url:LOCALHOST+"/user/"+userKind+"/"+userName,
-                       dataType:"html",
-                       complete: function(XMLHttpRequest,textStatus){
-
-                       } ,
-                       success: function(data){
-                           $(".main-content").html(data);
-                       },
-                       error: function(error){
-                           console.log(error);
-                       }
-                   })
-                })
-            })
-            $("td a[name='edit']").each(function (index,element) {
-                $(element).on("click",function () {
-                    var param=$(this).attr("href").substr(1);
-//                    var userKind=$.getUrlParam("userKind",param)
-//                    var userName=$.getUrlParam("userName",param)
-                    $(element).on("click",function () {
-                        $.ajax({
-                            type:"GET",
-                            url:LOCALHOST+"/user/"+param,
-                            dataType:"html",
-                            complete: function(XMLHttpRequest,textStatus){
-
-                            } ,
-                            success: function(data){
-                                $(".main-content").html(data);
-                            },
-                            error: function(error){
-                                console.log(error);
-                            }
-                        })
-                    })
-                })
-            })
 
         }
 
-        initTableDatas();
+        function reloadTable(info) {
+            //将数据清除
+            $('#userInfo-table').dataTable().fnClearTable();
+            $.each(info,function (index,element) {
+                $("#userInfo-table").dataTable().fnAddData(element)
+            });
+
+        }
+
+        initTableDatas(basicInfo);
 
 
         //override dialog's title function to allow for HTML titles
@@ -551,13 +561,7 @@
                         daysOfWeek:["日", "一", "二", "三", "四", "五", "六"],
                         monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
                     }
-                },function (start,end,label) {
-            console.log(start.format);
-            console.log(end.format);
-            console.log(label);
-           $("input[name='daterangepicker_start'").val(start.format)
-
-        }).prev().on(ace.click_event, function(){
+                }).prev().on(ace.click_event, function(){
                         $(this).next().focus();
         });
 
@@ -597,12 +601,13 @@
                       User.credit=element.credit;
                       User.point=element.point;
                       User.createTime=element.createTime;
-                      User.address=element.address;
+                      User.address="江苏省南京市江宁区江南骏园";
                       var params={"userKind":element.userKind,"userName":element.name};
                       User.hrefParam=$.param(params);
                       createTimeInfo.push(User);
                   })
-                    console.log(createTimeInfo)
+                    reloadTable(createTimeInfo)
+
                 },
                 error: function (err) {
                     console.log(err);
@@ -610,6 +615,9 @@
             });
 
         })
+
+
+
     })
 </script>
 <!-- ace scripts -->

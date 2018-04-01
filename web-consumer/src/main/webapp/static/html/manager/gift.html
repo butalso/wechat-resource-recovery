@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="keywords" content="资源回收" />
-    <meta name="description" content="资源回收后台管理系统" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- basic styles -->
     <link rel="stylesheet" href="/web-consumer/static/css/bootstrapone.min.css"/>
@@ -16,11 +14,6 @@
     <!-- page specific plugin styles -->
 
     <link rel="stylesheet" href="/web-consumer/static/css/jquery-ui-1.10.3.full.min.css" />
-    <link rel="stylesheet" href="/web-consumer/static/css/datepicker.css" />
-    <link rel="stylesheet" href="/web-consumer/static/css/daterangepicker.css" />
-    <link rel="stylesheet" href="/web-consumer/static/css/bootstrap-editable.css" />
-    <link rel="stylesheet" href="/web-consumer/static/css/jquery.gritter.css" />
-    <link rel="stylesheet" href="/web-consumer/static/css/addressSelect.css" />
 
     <!-- fonts -->
 
@@ -387,7 +380,7 @@
                         <li id="userinfo">
                             <a href="#" class="dropdown-toggle">
                                 <i class="icon-double-angle-right"></i>
-                                    业主信息管理
+                                业主信息管理
                                 <b class="arrow icon-angle-down"></b>
                             </a>
 
@@ -395,7 +388,7 @@
                                 <li>
                                     <a href="javascript:void(0);" onclick="selectInfo(0) ">
                                         <i class="icon-search"></i>
-                                         业主信息筛选
+                                        业主信息筛选
                                     </a>
                                 </li>
 
@@ -424,7 +417,7 @@
                                         <li>
                                             <a href="#">
                                                 <i class="icon-plus"></i>
-                                                 添加业主
+                                                添加业主
                                             </a>
                                         </li>
                                     </ul>
@@ -483,7 +476,7 @@
                         <li id="companyinfo">
                             <a href="#" class="dropdown-toggle">
                                 <i class="icon-double-angle-right"></i>
-                                  企业信息管理
+                                企业信息管理
                                 <b class="arrow icon-angle-down"></b>
                             </a>
 
@@ -621,7 +614,7 @@
                         </li>
 
                         <li>
-                            <a href="/web-consumer/static/html/manager/talk.html">
+                            <a href="#">
                                 <i class="icon-double-angle-right"></i>
                                 对话列表
                             </a>
@@ -641,7 +634,14 @@
                         <li>
                             <a href="/web-consumer/static/html/manager/gift.html">
                                 <i class="icon-double-angle-right"></i>
-                                礼品修改
+                                礼品信息查询
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="icon-double-angle-right"></i>
+                                礼品信息修改
                             </a>
                         </li>
 
@@ -726,102 +726,448 @@
                 <script type="text/javascript">
                     try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
                 </script>
-            <@block name="breadcrumb">
+                <!--<@block name="breadcrumb">-->
                 <ul class="breadcrumb">
                     <li>
                         <i class="icon-home home-icon"></i>
                         <a href="/web-consumer/manager/index">首页</a>
                     </li>
-                    <li class="active">控制台</li>
+                    <li class="active">礼品兑换管理</li>
                 </ul><!-- .breadcrumb -->
-            </@block>
+            <!--</@block>-->
 
-                <div class="nav-search" id="nav-search">
-                    <form class="form-search">
-								<span class="input-icon">
-									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-									<i class="icon-search nav-search-icon"></i>
-								</span>
-                    </form>
-                </div><!-- #nav-search -->
-            </div>
+            <div class="nav-search" id="nav-search">
+                <form class="form-search">
+                    <span class="input-icon">
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <i class="icon-search nav-search-icon"></i>
+                    </span>
+                </form>
+            </div><!-- #nav-search -->
+        </div>
 
-            <div class="page-content">
-            <@block name="page-header">
-                <div class="page-header">
-                    <h1>
-                        控制台
-                        <small>
-                            <i class="icon-double-angle-right"></i>
-                            查看
-                        </small>
-                    </h1>
-                </div><!-- /.page-header -->
-            </@block>
+        <div class="page-content">
+            <!--<@block name="page-header">-->
+            <div class="page-header">
+                <h1>
+                    兑换页面
+                    <small>
+                        <i class="icon-double-angle-right"></i>
+                        礼物详情
+                    </small>
+                </h1>
+            </div><!-- /.page-header -->
+        <!--</@block>-->
+
+        <div class="row" id="giftsList">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <!--<@block name="content">-->
+                <h4 class="pink">
+                    <i class="icon-hand-right green"></i>
+                    <a href="#modal-form" role="button" class="blue" data-toggle="modal">增加礼物</a>
+                </h4>
 
                 <div class="row">
-                    <div class="col-xs-12">
-                        <!-- PAGE CONTENT BEGINS -->
-                    <@block name="content">
-                    </@block>
-                        <!-- PAGE CONTENT ENDS -->
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.page-content -->
-        </div><!-- /.main-content -->
+                    <div class="col-xs-6 col-sm-3 pricing-box">
+                        <div class="widget-box">
+                            <div class="widget-header header-color-green">
+                                <h5 class="bigger lighter">洗碗布</h5>
+                            </div>
 
-        <div class="ace-settings-container" id="ace-settings-container">
-            <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-                <i class="icon-cog bigger-150"></i>
-            </div>
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <img src="/web-consumer/static/images/gift/rag.png" class="img img-responsive"/>
+                                    <div class="space-6"></div>
+                                    <div class="price">
+                                        <i>150积分</i>
+                                        <small>余量：200件</small>
+                                    </div>
+                                </div>
 
-            <div class="ace-settings-box" id="ace-settings-box">
-                <div>
-                    <div class="pull-left">
-                        <select id="skin-colorpicker" class="hide">
-                            <option data-skin="default" value="#438EB9">#438EB9</option>
-                            <option data-skin="skin-1" value="#222A2D">#222A2D</option>
-                            <option data-skin="skin-2" value="#C6487E">#C6487E</option>
-                            <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-                        </select>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-6 center">
+                                        <a href="#" class="btn btn-sm btn-purple" name="modifyButton">
+                                            <i class="icon-pencil bigger-110"></i>
+                                            <span>修改数量</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 center">
+                                        <a href="#" class="btn btn-sm btn-danger" name="deleteButton">
+                                            <i class="icon-remove bigger-110"></i>
+                                            <span>删除礼物</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <span>&nbsp; 选择皮肤</span>
+
+                    <div class="col-xs-6 col-sm-3 pricing-box">
+                        <div class="widget-box">
+                            <div class="widget-header  header-color-green">
+                                <h5 class="bigger lighter">清洁球</h5>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <img src="/web-consumer/static/images/gift/cleaningBall.jpg" class="img img-responsive"/>
+                                    <div class="space-6"></div>
+                                    <div class="price">
+                                        <i>10积分</i>
+                                        <small>余量：200件</small>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-6 center">
+                                        <a href="#" class="btn btn-sm btn-purple">
+                                            <i class="icon-pencil bigger-110"></i>
+                                            <span>增加数量</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 center">
+                                        <a href="#" class="btn btn-sm btn-danger">
+                                            <i class="icon-remove bigger-110"></i>
+                                            <span>删除礼物</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3 pricing-box">
+                        <div class="widget-box">
+                            <div class="widget-header  header-color-green">
+                                <h5 class="bigger lighter">刷子</h5>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <img src="/web-consumer/static/images/gift/brush.jpg" class="img img-responsive"/>
+                                    <div class="space-6"></div>
+                                    <div class="price">
+                                        <i>10积分</i>
+                                        <small>余量：200件</small>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-6 center">
+                                        <a href="#" class="btn btn-sm btn-purple">
+                                            <i class="icon-pencil bigger-110"></i>
+                                            <span>增加数量</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 center">
+                                        <a href="#" class="btn btn-sm btn-danger">
+                                            <i class="icon-remove bigger-110"></i>
+                                            <span>删除礼物</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3 pricing-box">
+                        <div class="widget-box">
+                            <div class="widget-header  header-color-green">
+                                <h5 class="bigger lighter">肥皂</h5>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <img src="/web-consumer/static/images/gift/soap.png" class="img img-responsive"/>
+                                    <div class="space-6"></div>
+                                    <div class="price">
+                                        <i>10积分</i>
+                                        <small>余量：200件</small>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-6 center">
+                                        <a href="#" class="btn btn-sm btn-purple">
+                                            <i class="icon-pencil bigger-110"></i>
+                                            <span>增加数量</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 center">
+                                        <a href="#" class="btn btn-sm btn-danger">
+                                            <i class="icon-remove bigger-110"></i>
+                                            <span>删除礼物</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div>
-                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
-                    <label class="lbl" for="ace-settings-navbar"> 固定导航条</label>
+                <div class="space-24"></div>
+                <h3 class="header smaller red">Small Style</h3>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-3 pricing-box">
+                        <div class="widget-box">
+                            <div class="widget-header header-color-green">
+                                <h5 class="bigger lighter">84消毒液</h5>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <img src="/web-consumer/static/images/gift/thimerosal.jpg" class="img img-responsive"/>
+                                    <div class="space-6"></div>
+                                    <div class="price">
+                                        <i>700积分</i>
+                                        <small>余量：240件</small>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-6 center">
+                                        <a href="#" class="btn btn-sm btn-purple">
+                                            <i class="icon-pencil bigger-110"></i>
+                                            <span>增加数量</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 center">
+                                        <a href="#" class="btn btn-sm btn-danger">
+                                            <i class="icon-remove bigger-110"></i>
+                                            <span>删除礼物</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3 pricing-box">
+                        <div class="widget-box">
+                            <div class="widget-header  header-color-green">
+                                <h5 class="bigger lighter">洗洁精</h5>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <img src="/web-consumer/static/images/gift/detergent.png" class="img img-responsive"/>
+                                    <div class="space-6"></div>
+                                    <div class="price">
+                                        <i>400积分</i>
+                                        <small>余量：250件</small>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-6 center">
+                                        <a href="#" class="btn btn-sm btn-purple">
+                                            <i class="icon-pencil bigger-110"></i>
+                                            <span>增加数量</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 center">
+                                        <a href="#" class="btn btn-sm btn-danger" name="deleteButton">
+                                            <i class="icon-remove bigger-110"></i>
+                                            <span>删除礼物</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3 pricing-box">
+                        <div class="widget-box">
+                            <div class="widget-header  header-color-green">
+                                <h5 class="bigger lighter">洗衣液</h5>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <img src="/web-consumer/static/images/gift/liquidDetergent.png" class="img img-responsive"/>
+                                    <div class="space-6"></div>
+                                    <div class="price">
+                                        <i>2000积分</i>
+                                        <small>余量：160件</small>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-6 center">
+                                        <a href="#" class="btn btn-sm btn-purple">
+                                            <i class="icon-pencil bigger-110"></i>
+                                            <span>增加数量</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 center">
+                                        <a href="#" class="btn btn-sm btn-danger">
+                                            <i class="icon-remove bigger-110"></i>
+                                            <span>删除礼物</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3 pricing-box">
+                        <div class="widget-box">
+                            <div class="widget-header  header-color-green">
+                                <h5 class="bigger lighter">黑人牙膏</h5>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <img src="/web-consumer/static/images/gift/toothpaste.jpg" class="img img-responsive"/>
+                                    <div class="space-6"></div>
+                                    <div class="price">
+                                        <i>1200积分</i>
+                                        <small>余量：200件</small>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-6 center">
+                                        <a href="#" class="btn btn-sm btn-purple">
+                                            <i class="icon-pencil bigger-110"></i>
+                                            <span>增加数量</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 center">
+                                        <a href="#" class="btn btn-sm btn-danger">
+                                            <i class="icon-remove bigger-110"></i>
+                                            <span>删除礼物</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div>
-                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
-                    <label class="lbl" for="ace-settings-sidebar"> 固定滑动条</label>
-                </div>
+                <div id="modal-form" class="modal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="blue bigger">请填写增加的礼品信息</h4>
+                            </div>
 
-                <div>
-                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
-                    <label class="lbl" for="ace-settings-breadcrumbs">固定面包屑</label>
-                </div>
+                            <div class="modal-body overflow-visible">
+                                <form class="form-horizontal" id="giftInfo">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-5">
+                                            <div class="space"></div>
 
-                <div>
-                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
-                    <label class="lbl" for="ace-settings-rtl">切换到左边</label>
-                </div>
+                                            <input type="file"  name="picture"/>
+                                        </div>
 
-                <div>
-                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
-                    <label class="lbl" for="ace-settings-add-container">
-                        切换窄屏
-                        <b></b>
-                    </label>
-                </div>
+                                        <div class="col-xs-12 col-sm-7">
+                                            <div class="space-10"></div>
+                                            <div class="form-group">
+                                                <label for="giftName" class="col-sm-4 text-right blue">名称:</label>
+
+                                                <div class="col-sm-8">
+                                                    <input class="input-large" type="text" id="giftName" placeholder="洗衣粉" name="giftName" />
+                                                </div>
+                                            </div>
+
+                                            <div class="space-10"></div>
+
+                                            <div class="form-group">
+                                                <label for="price" class="col-sm-4 text-right blue">价格:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="input-large" type="text" id="price"  name="price" />
+                                                </div>
+                                            </div>
+
+                                            <div class="space 20"></div>
+
+                                            <div class="form-group">
+                                                <label for="storeNumber" class="col-sm-4 text-right blue">库存量:</label>
+                                                <div class="col-sm-8">
+                                                    <input class="input-large" type="text"  name="storeNumber" id="storeNumber"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-sm" data-dismiss="modal">
+                                    <i class="icon-remove"></i>
+                                    取消
+                                </button>
+
+                                <button class="btn btn-sm btn-primary" id="giftButton">
+                                    <i class="icon-ok"></i>
+                                    确定
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- PAGE CONTENT ENDS -->
+                <!--</@block>-->
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+</div><!-- /.main-content -->
+
+<div class="ace-settings-container" id="ace-settings-container">
+    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+        <i class="icon-cog bigger-150"></i>
+    </div>
+
+    <div class="ace-settings-box" id="ace-settings-box">
+        <div>
+            <div class="pull-left">
+                <select id="skin-colorpicker" class="hide">
+                    <option data-skin="default" value="#438EB9">#438EB9</option>
+                    <option data-skin="skin-1" value="#222A2D">#222A2D</option>
+                    <option data-skin="skin-2" value="#C6487E">#C6487E</option>
+                    <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+                </select>
             </div>
-        </div><!-- /#ace-settings-container -->
-    </div><!-- /.main-container-inner -->
+            <span>&nbsp; 选择皮肤</span>
+        </div>
 
-    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-        <i class="icon-arrow-up icon-only bigger-110"></i>
-    </a>
+        <div>
+            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
+            <label class="lbl" for="ace-settings-navbar"> 固定导航条</label>
+        </div>
+
+        <div>
+            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
+            <label class="lbl" for="ace-settings-sidebar"> 固定滑动条</label>
+        </div>
+
+        <div>
+            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
+            <label class="lbl" for="ace-settings-breadcrumbs">固定面包屑</label>
+        </div>
+
+        <div>
+            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
+            <label class="lbl" for="ace-settings-rtl">切换到左边</label>
+        </div>
+
+        <div>
+            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
+            <label class="lbl" for="ace-settings-add-container">
+                切换窄屏
+                <b></b>
+            </label>
+        </div>
+    </div>
+</div><!-- /#ace-settings-container -->
+</div><!-- /.main-container-inner -->
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+    <i class="icon-arrow-up icon-only bigger-110"></i>
+</a>
 </div><!-- /.main-container -->
 
 <!-- basic scripts -->
@@ -865,22 +1211,141 @@
 
 <!--<script src="assets/js/jquery.ui.touch-punch.min.js"></script>-->
 <script src="/web-consumer/static/manager/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="/web-consumer/static/manager/fuelux/fuelux.spinner.min.js"></script>
 
 <script src="/web-consumer/static/manager/jquery.slimscroll.min.js"></script>
+<script src="/web-consumer/static/manager/bootbox.min.js"></script>
 <!-- ace scripts -->
 <script src="/web-consumer/static/manager/ace-elements.min.js"></script>
 <script src="/web-consumer/static/manager/ace.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#price').ace_spinner({value:400,min:0,max:10000,step:100, btn_up_class:'btn-success' , btn_down_class:'btn-danger'})
+            .on('change', function(){
+                //alert(this.value)
+            });
+
+        $('#storeNumber').ace_spinner({value:200,min:0,max:10000,step:10, btn_up_class:'btn-success' , btn_down_class:'btn-danger'})
+            .on('change', function(){
+                //alert(this.value)
+            });
+
+        /////////
+        $('#modal-form input[type=file]').ace_file_input({
+            style:'well',
+            btn_choose:'Drop files here or click to choose',
+            btn_change:null,
+            no_icon:'icon-cloud-upload',
+            droppable:true,
+            thumbnail:'large'
+        })
+
+        //chosen plugin inside a modal will have a zero width because the select element is originally hidden
+        //and its width cannot be determined.
+        //so we set the width after modal is show
+        $('#modal-form').on('shown.bs.modal', function () {
+            $(this).find('.chosen-container').each(function(){
+                $(this).find('a:first-child').css('width' , '210px');
+                $(this).find('.chosen-drop').css('width' , '210px');
+                $(this).find('.chosen-search input').css('width' , '200px');
+            });
+        })
+
+        /**
+         //or you can activate the chosen plugin after modal is shown
+         //this way select element becomes visible with dimensions and chosen works as expected
+         $('#modal-form').on('shown', function () {
+					$(this).find('.modal-chosen').chosen();
+				})
+         */
+
+        $("#giftButton").on("click",function () {
+            addGift();
+        })
+
+        $("#giftsList").on(ace.click_event,".row a[name='deleteButton'] ",function (e) {
+            e.preventDefault();
+            bootbox.confirm({
+                className:"deleteConfirm",
+                buttons: {
+                    confirm: {
+                        label: '确定',
+                        className: 'btn btn-app btn-danger btn-xs'
+                    },
+                    cancel: {
+                        label: '取消',
+                        className: 'btn btn-app btn-info btn-xs'
+                    }
+                },
+                message: '<h5 class="red">确定删除该商品?</h5>',
+                callback: function(result) {
+                    if(result) {
+                        bootbox.alert({
+                            buttons: {
+                                ok: {
+                                    label: '确定',
+                                    className: 'btn btn-app btn-purple btn-xs'
+                                }
+                            },
+                            message: '点击确定，返回礼品界面',
+                            callback: function() {
+
+                            },
+                            title: "商品删除成功！",
+                        });
+                    } else {
+                    }
+                }
+            });
+
+        })
+
+        $("#giftsList").on(ace.click_event,".row a[name='modifyButton'] ",function (e) {
+            e.preventDefault();
+            bootbox.dialog({
+                title: "Confirm title",
+                message: " <form> <div class='form-group'> <label for='storeNumber' class='col-sm-4 text-right blue'>\
+                         库存量:</label> <div class='col-sm-8'> <input class='input-large' type='text'  name='storeNumber' id='storeNumber'/>\
+                        </div> </div></form><div class='space-20'></div> ",
+                buttons: {
+                    Cancel: {
+                        label: "取消",
+                        className: "btn btn-app btn-info btn-xs",
+                        callback: function () {
+                        }
+                    }
+                    , OK: {
+                        label: "确定",
+                        className: "btn btn-app btn-success btn-xs",
+                        callback: function () {
+                            alert("修改成功");
+                        }
+                    }
+                }
+            })
+
+        })
+
+
+
+    })
+
+    function addGift() {
+        var data={};
+        var giftInfo=$("#giftInfo").serializeArray();
+        $.each(giftInfo,function () {
+            data[this.name]=this.value;
+        })
+        console.log(data);
+        alert("添加成功！")
+        $("#modal-form").modal("hide");
+
+    }
+
+</script>
 <!--end-->
 </body>
-<@block name="js">
-<!--圆饼图-->
-<script src="/web-consumer/static/manager/jquery.easy-pie-chart.min.js"></script>
-<script src="/web-consumer/static/manager/jquery.sparkline.min.js"></script>
-<script src="/web-consumer/static/manager/flot/jquery.flot.min.js"></script>
-<script src="/web-consumer/static/manager/flot/jquery.flot.pie.min.js"></script>
-<script src="/web-consumer/static/manager/flot/jquery.flot.resize.min.js"></script>
+<!--<@block name="js">-->
 <!-- inline scripts related to this page -->
-<script type="text/javascript" src="/web-consumer/static/manager/produceChart.js"></script>
-<script type="text/javascript" src="/web-consumer/static/manager/project/logicalDeal.js"></script>
-</@block>
+<!--</@block>-->
 </html>

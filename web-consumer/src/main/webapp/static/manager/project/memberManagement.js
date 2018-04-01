@@ -36,6 +36,23 @@ $(function () {
             }
         },"json")
     })
+    $("select[name='area']").change(function () {
+        area=$(this).val();
+        $.get(HOST,{"area":area},function (data,status) {
+            if(status=="success"){
+                var result="<option>选择小区</option>";
+                $.each(data,function (n,value) {
+                    result+="<option value='"+value+"'>"+value+"</option>"
+                });
+                $("select[name='community']").html("");
+                $("select[name='community']").append(result);
+            }
+            else {
+                console.log(data)
+            }
+        },"json")
+
+    })
 });
 function init() {
     $.ajax({

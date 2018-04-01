@@ -79,13 +79,13 @@
 
                         <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
                             <div class="inline position-relative">
-                                <a href="#" class="user-title-label dropdown-toggle" data-toggle="dropdown">
+                                <a href="#" class="user-title-label dropdown-toggle" data-toggle="dropdown" id="statuShow">
                                     <i class="icon-circle light-green middle"></i>
                                     &nbsp;
                                     <span class="white">${user.name}</span>
                                 </a>
 
-                                <ul class="align-left dropdown-menu dropdown-caret dropdown-lighter">
+                                <ul class="align-left dropdown-menu dropdown-caret dropdown-lighter" id="statusChang">
                                     <li class="dropdown-header">更改用户状态</li>
 
                                     <li>
@@ -501,13 +501,23 @@
 
                     <div class="space-6"></div>
 
-                    <div class="center">
-                        <a href="#" class="btn btn-sm btn-primary">
-                            <i class="icon-rss bigger-150 middle"></i>
-                            <span class="bigger-110">View more activities</span>
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-6 center">
+                            <button class="btn btn-sm btn-primary" type="submit" id="modifyButton">
 
-                            <i class="icon-on-right icon-arrow-right"></i>
-                        </a>
+                                <span class="bigger-110">确定</span>
+
+                                <i class="icon-on-right icon-refresh"></i>
+                            </button>
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <button class="btn btn-sm btn-default" type="reset" id="cancel">
+
+                                <span class="bigger-110">取消</span>
+
+                                <i class="icon-on-right icon-remove"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2114,7 +2124,7 @@
 <script type="text/javascript">
         <#if userActivations??>
             <#list userActivations as userActivation>
-              ${userActivation}
+               ${userActivation}
             </#list>
         </#if>
 
