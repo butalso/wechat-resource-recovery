@@ -1,9 +1,13 @@
 var LOCALHOST = "http://localhost:8080/web-consumer/manager";
+var baseUrl="http://localhost:8080/web-consumer/manager/index"
 String.prototype.replaceAll=function (str1,str2) {
     return this.replace(new  RegExp(str1,"gm"),str2);
 }
 
 function selectInfo(param) {
+    // var type=encodeURI(param)
+    // window.location.href=(window.location.search==null)?baseUrl+ "?param='+type+'" : baseUrl+"?param='+type+'";
+    // console.log(window.location.href)
     $.ajax({
         type:"GET",
         url:LOCALHOST+"/user/"+param,
@@ -13,7 +17,13 @@ function selectInfo(param) {
         } ,
         success: function(data){
             $(".main-content").html(data);
-        },
+            // var url=window.location.href;
+            // var stateObj = { app: "event" ,mod:"owner",act:"add"};
+            // var hrefs=$.param(stateObj);
+            // history.pushState(stateObj,"", hrefs);
+            window.location.hash="?user=1"
+            }
+        ,
         error: function(error){
             console.log(error);
         }
