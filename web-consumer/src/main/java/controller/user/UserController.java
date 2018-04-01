@@ -2,6 +2,7 @@ package controller.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dto.Order;
 import entity.*;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
@@ -10,10 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import service.OrderService;
 import service.UserService;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -23,6 +27,8 @@ import java.util.Map;
 public class UserController {
     @Reference
     UserService userService;
+    @Reference
+    OrderService orderService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     @ApiOperation(value = "返回用户个人中心页面")
@@ -93,4 +99,35 @@ public class UserController {
         return mav;
     }
 
+    @RequestMapping(value = "/company/collectors", method = RequestMethod.GET)
+    @ApiOperation(value = "返回企业下所有业主页面")
+    public ModelAndView getCollectors(@ApiIgnore @ModelAttribute("user") User user) {
+        ModelAndView mav = new ModelAndView("user/collectors");
+        if (user.getUserKind() != 2) {
+            /*非企业用户*/
+            return null;
+        }
+        List<Collector> allCollectors = (List<Collector>) userService.getAllUsers(1);
+        List<Collector> collectors = new ArrayList<>();
+        for (Collector collector : allCollectors) {
+            collector = (Collector)userService.getUserDetails(collector.getName(), 1);
+            if ((collector.getCompanyName().equals(user.getName()))) {
+                collectors.add(collector);
+            }
+        }
+
+        mav.addObject("collectors", collectors);
+        return mav;
+    }
+
+    @RequestMapping(value = "/collectors/{userName}/orders", method = RequestMethod.GET,
+            produces = "application/json;charset=UTF-8")
+    @ApiOperation(value = "返回企业下某回收员相关订单集合和订单页面")
+    public ModelAndView getCollectorOrders(@PathVariable("userName") String userName) {
+        ModelAndView mav = new ModelAndView("user/order_list");
+        List<Order> orders = orderService.getOrders(userName, 1);
+        mav.addObject("orders", orders);
+        mav.addObject("userKind", 2);
+        return mav;
+    }
 }

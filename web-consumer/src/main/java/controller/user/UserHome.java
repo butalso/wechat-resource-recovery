@@ -78,7 +78,7 @@ public class UserHome {
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     @ApiOperation(value = "登出，重定向到首页")
-    public String logout(SessionStatus sessionStatus, @ApiIgnore @ModelAttribute("user") User user) {
+    public String logout(@ApiIgnore SessionStatus sessionStatus, @ApiIgnore @ModelAttribute("user") User user) {
         LoginLogoutUtil.logout(sessionStatus, user);
         return "redirect:index";
     }

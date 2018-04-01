@@ -12,6 +12,7 @@ import util.LoginLogoutUtil;
 
 import javax.servlet.http.HttpSession;
 
+
 @Controller
 @RequestMapping("/manager")
 @SessionAttributes("user")
@@ -30,11 +31,10 @@ public class ManagerHome {
             @ApiResponse(code = 401, message = "用户不存在或密码错误"),
     })
     public ResponseEntity<String> login(@ApiParam(value = "用户名", required = true)
-                                        @RequestParam("userName") String userName,
+                                            @RequestParam("userName") String userName,
                                         @ApiParam(value = "密码", required = true)
-                                        @RequestParam("password") String password,
-                                        @ApiIgnore HttpSession session,
-                                        @ApiIgnore ModelMap modelMap) {
+                                            @RequestParam("password") String password,
+                                        @ApiIgnore HttpSession session, @ApiIgnore ModelMap modelMap) {
         return LoginLogoutUtil.login(userName, password, 3, session, modelMap);
     }
 
@@ -45,9 +45,11 @@ public class ManagerHome {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    @ApiOperation(value = "登出，重定向到登录页面")
-    public String logout(SessionStatus sessionStatus, @ModelAttribute("user") User user) {
+    @ApiOperation(value = "登出，重定向到登录页")
+    public String logout(@ApiIgnore SessionStatus sessionStatus, @ApiIgnore ModelMap modelMap) {
+        User user = (User) modelMap.get("user");
+        System.out.println(user);
         LoginLogoutUtil.logout(sessionStatus, user);
-        return "redirect:manager/login";
+        return "redirect:/manager/login";
     }
 }

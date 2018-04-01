@@ -36,6 +36,10 @@ public class WalletServiceImpl implements WalletService {
 
         walletRecordDao.addWalletRecord(fromWallet.getId(),
                 getWalletOwner(fromWallet.getUserId(), fromWallet.getUserKind()),
+                getWalletOwner(toWallet.getUserId(), toWallet.getUserKind()), -value);
+
+        walletRecordDao.addWalletRecord(toWallet.getId(),
+                getWalletOwner(fromWallet.getUserId(), fromWallet.getUserKind()),
                 getWalletOwner(toWallet.getUserId(), toWallet.getUserKind()), value);
     }
 
