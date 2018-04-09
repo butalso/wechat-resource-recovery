@@ -121,9 +121,17 @@ public class UserController {
     @ApiOperation(value = "返回企业下某回收员相关订单集合和订单页面")
     public ModelAndView getCollectorOrders(@PathVariable("userName") String userName) {
         ModelAndView mav = new ModelAndView("user/company_staff_orders");
+        Collector collector = (Collector) userService.getUserDetails(userName, 1);
         List<Order> orders = orderService.getOrders(userName, 1);
         mav.addObject("orders", orders);
+        mav.addObject("collector", collector);
         mav.addObject("userKind", 2);
         return mav;
+    }
+
+    @RequestMapping(value = "/customer/message", method = RequestMethod.GET)
+    @ApiOperation(value = "获取留言板页面")
+    public String messageBoard() {
+        return "user/customer_message_board";
     }
 }

@@ -9,16 +9,16 @@
         <div class="panel-heading">员工信息</div>
         <div class="panel-body">
             <ul class="list-group col-xs-6">
-                <li class="list-group-item">员工编号：</li>
-                <li class="list-group-item">员工姓名：</li>
-                <li class="list-group-item">员工地址：</li>
-                <li class="list-group-item">联系电话：</li>
+                <li class="list-group-item">编号：${collector.id}</li>
+                <li class="list-group-item">姓名：${collector.name}</li>
+                <li class="list-group-item">地址：${collector.address.detail}</li>
+                <li class="list-group-item">电话：${collector.phone}</li>
             </ul>
             <ul class="list-group col-xs-6">
-                <li class="list-group-item">员工评分：</li>
-                <li class="list-group-item">积分值：</li>
-                <li class="list-group-item">诚信值：</li>
-                <li class="list-group-item">经验值：</li>
+                <li class="list-group-item">评分：4.5</li>
+                <li class="list-group-item">积分值：${collector.point}</li>
+                <li class="list-group-item">诚信值：${collector.credit}</li>
+                <li class="list-group-item">经验值：${collector.experience}</li>
             </ul>
         </div>
         <div class="panel-heading">订单列表</div>
@@ -40,7 +40,11 @@
                         <td>${order.orderItem.state}</td>
                         <td>${(order.orderItem.finishTime?string("yyyy-MM-dd  hh:mm:ss"))!}</td>
                         <td>${order.orderItem.customerName}</td>
-                        <td>XXX</td>
+                        <#assign totalAmount = 0>
+                        <#list order.orderDetails as detail>
+                            <#assign totalAmount = totalAmount + detail.weight * detail.price>
+                        </#list>
+                        <td>${totalAmount}</td>
                     </tr>
                     </#list>
                 </tbody>

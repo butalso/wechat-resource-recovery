@@ -3391,6 +3391,10 @@ label {
 .content {
     margin-bottom: 100px;
 }
+.addMessage {
+    margin-top: 20px;
+    padding: 20px;
+}
 
 /*-- responsive media queries --*/
 @media (max-width: 1366px){
