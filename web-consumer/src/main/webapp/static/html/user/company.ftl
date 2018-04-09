@@ -29,6 +29,12 @@
             </div>
             <div class="clearfix"></div>
         </div>
+        <div class="region-block">
+            <div class="state">
+                <a href="/web-consumer/user/company/staff"><h3>查看旗下员工<span class="more">>></span></h3></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
     </div>
 </@override>
 

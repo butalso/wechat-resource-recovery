@@ -33,6 +33,12 @@
         </div>
         <div class="region-block">
             <div class="state">
+                <a href="/web-consumer/user/customer/message"><h3>访问社区论坛<span class="more">>></span></h3></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="region-block">
+            <div class="state">
                 <h3>礼品兑换记录<span class="more">>></span></h3>
             </div>
             <div class="clearfix"></div>
