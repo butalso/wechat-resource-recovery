@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import service.OrderService;
 import service.UserService;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -23,6 +24,8 @@ import java.util.List;
 public class UserController {
     @Reference
     UserService userService;
+    @Reference
+    OrderService orderService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     @ApiOperation(value = "返回用户个人中心页面")
