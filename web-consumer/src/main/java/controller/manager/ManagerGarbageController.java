@@ -30,12 +30,10 @@ public class ManagerGarbageController {
     }
 
     @RequestMapping(value = "/{garbageType}", method = RequestMethod.GET)
+    @ResponseBody
     @ApiOperation("获取某类废品信息")
-    public ModelAndView getGarbages(@PathVariable("garbageType") String garbageType) {
-        ModelAndView mav = new ModelAndView("manager/garbage");
-        List<Garbage> garbages = garbageService.getGarbages(garbageType);
-        mav.addObject("garbages", garbages);
-        return mav;
+    public List<Garbage> getGarbages(@PathVariable("garbageType") String garbageType) {
+        return garbageService.getGarbages(garbageType);
     }
 
     @RequestMapping(value = "/{garbageType}", method = RequestMethod.POST)
