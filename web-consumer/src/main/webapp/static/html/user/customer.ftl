@@ -2,10 +2,10 @@
     <div class="regions main-grid-border">
         <div class="container">
             <div class="media">
-                <div class="media-left media-middle">
+                <div class="media-left media-middle" style="width: 20%;">
                     <a href="/web-consumer/user/details">
-                        <i class="fa fa-user" aria-hidden="true" style="font-size: 70px;"></i>
-                    <#--<img class="media-object" src="${userDetails.imageUrl}" alt="...">-->
+                        <img class="media-object" src="/web-consumer/static/images/avatars/avatar.png" alt=""
+                             style="width: 80px;">
                     </a>
                 </div>
                 <div class="media-body">
@@ -40,6 +40,12 @@
         <div class="region-block">
             <div class="state">
                 <h3>礼品兑换记录<span class="more">>></span></h3>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="region-block">
+            <div class="state">
+                <a href="/web-consumer/garbage/valuation?"><h3>智能估价系统<span class="more">>></span></h3></a>
             </div>
             <div class="clearfix"></div>
         </div>

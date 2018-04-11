@@ -54,17 +54,17 @@
 
     <select id="getCustomerOrderItems" resultMap="orderItem">
         <include refid="orderItemsql"></include>
-        WHERE c1.name = #{name}
+        WHERE c1.name = #{name} ORDER BY oi.create_time DESC;
     </select>
 
     <select id="getCollectorOrderItems" resultMap="orderItem">
         <include refid="orderItemsql"></include>
-        WHERE c2.name = #{name}
+        WHERE c2.name = #{name} ORDER BY oi.create_time DESC;
     </select>
 
     <select id="getCompanyOrderItems" resultMap="orderItem">
         <include refid="orderItemsql"></include>
-        WHERE c3.name = #{name}
+        WHERE c3.name = #{name} ORDER BY oi.create_time DESC;
     </select>
 
     <select id="getNewOrderItems" resultMap="orderItem">

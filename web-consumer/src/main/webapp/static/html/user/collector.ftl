@@ -3,10 +3,10 @@
     <div class="regions main-grid-border">
         <div class="container">
             <div class="media">
-                <div class="media-left media-middle">
+                <div class="media-left media-middle" style="width: 20%;">
                     <a href="#">
-                        <i class="fa fa-user" aria-hidden="true" style="font-size: 70px;"></i>
-                    <#--<img class="media-object" src="${userDetails.imageUrl}" alt="...">-->
+                        <img class="media-object" src="/web-consumer/static/images/avatars/avatar.png" alt=""
+                             style="width: 80px;">
                     </a>
                 </div>
                 <div class="media-body">

@@ -135,4 +135,10 @@ public class UserController {
     public String messageBoard() {
         return "user/customer_message_board";
     }
+
+    @RequestMapping(value = "/customer/message/details", method = RequestMethod.GET)
+    @ApiOperation(value = "获取留言板详情页面")
+    public String messageDetails() {
+        return "user/customer_message_details";
+    }
 }
