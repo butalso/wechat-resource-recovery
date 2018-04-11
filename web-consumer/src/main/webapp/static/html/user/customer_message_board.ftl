@@ -1,97 +1,34 @@
 <@override name="content">
 <div class="container">
+    <div class="page-header">
+        <h1>社区论坛
+            <small>快来参加讨论吧</small>
+        </h1>
+    </div>
     <a href="/web-consumer/user" class="btn">
         <span><<返回</span>
     </a>
-    <div>
-        <ul class="media-list">
-            <li class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <i class="fa fa-user" aria-hidden="true" style="font-size: 70px;"></i>
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading">不愿透露姓名的许先生</h4>
-                    <p>我觉得这个页面完成的非常不OK</p>
-                    <p>我觉得这个页面完成的非常不OK</p>
-                    <p>我觉得这个页面完成的非常不OK</p>
-                    <!-- Nested media object -->
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="#">
-                                <i class="fa fa-user" aria-hidden="true" style="font-size: 70px;"></i>
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">不愿透露姓名的欧学长</h4>
-                            我也觉得
-                            我也觉得
-                            我也觉得
-                            <!-- Nested media object -->
-                            <div class="media">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <i class="fa fa-user" aria-hidden="true" style="font-size: 70px;"></i>
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">不愿透露姓名的李女士</h4>
-                                    顶楼上
-                                    顶楼上
-                                    顶楼上
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Nested media object -->
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="#">
-                                <i class="fa fa-user" aria-hidden="true" style="font-size: 70px;"></i>
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">不愿透露姓名的赵同学</h4>
-                            啥时候开饭？
-                            啥时候开饭？
-                            啥时候开饭？
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="row addMessage">
-        <button class="btn btn-default btn-block" type="button" data-toggle="modal"
-                data-target="#messageModal">添加评论
-        </button>
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">添加评论</h4>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <textarea class="form-control"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-default">确认添加</button>
-            </div>
+    <div class="region-block">
+        <div class="state">
+            <a href="#"><h3>如何让旧衣服焕然一新？<span class="more">>></span></h3></a>
         </div>
+        最近活跃：2017.03.18
+        <div class="clearfix"></div>
     </div>
-</div>
+    <div class="region-block">
+        <div class="state">
+            <a href="/web-consumer/user/customer/message/details"><h3>旧手机只能扔了吗？<span class="more">>></span></h3></a>
+        </div>
+        最近活跃：2017.06.20
+        <div class="clearfix"></div>
+    </div>
+    <div class="region-block">
+        <div class="state">
+            <a href="#"><h3>十个废物利用的小技巧<span class="more">>></span></h3></a>
+        </div>
+        最近活跃：2017.09.28
+        <div class="clearfix"></div>
+    </div>
 </@override>
 
 <@override name="js">

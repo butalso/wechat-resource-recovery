@@ -55,5 +55,10 @@ public class GarbageController {
     public String details() {
         return "user/garbage";
     }
-  
+
+    @RequestMapping(value = {"/valuation"}, method = RequestMethod.GET)
+    @ApiOperation(value = "获取废品估价页面")
+    public String valuation() {
+        return "user/garbage_valuation";
+    }
 }

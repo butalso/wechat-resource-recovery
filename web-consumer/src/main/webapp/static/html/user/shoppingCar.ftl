@@ -38,8 +38,16 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal">
-                        <div class="form-group">
-                            <label for="province" class="col-sm-2 control-label">地址</label>
+                        <div class="form-group checkbox">
+                            <label>
+                                <input type="checkbox" value="1" name="useOldAddress" checked>
+                                使用默认地址：
+                                <span class="oldAddress">${address.province+address.city+address.area+address.detail}</span>
+                            </label>
+                        </div>
+                        <hr>
+                        <div class="form-group addressInput" style="display: none">
+                            <label for="province" class="col-sm-2 control-label">新的地址：</label>
                             <div class="col-sm-8">
                                 省<select name="province" class="form-control"> </select>
                                 市<select name="city" class="form-control"> </select>
@@ -67,6 +75,15 @@
 </@override>
 
 <@override name="js">
+<script>
+    // 获取业主地址信息
+    var oldAddress = {
+        province: '${address.province}',
+        city: '${address.city}',
+        area: '${address.area}',
+        detail: '${address.detail}'
+    };
+</script>
 <script src="/web-consumer/static/index/shoppingCar.js"></script>
 </@override>
 <@extends name="layout.ftl"/>

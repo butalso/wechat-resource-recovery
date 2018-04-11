@@ -11,7 +11,7 @@
             <div class="media" orderId="${order.orderItem.id}">
                 <div class="media-left">
                     <a href="#">
-                        <i class="fa fa-user" aria-hidden="true" style="font-size: 50px;"></i>
+                        <i class="fa fa-check-square" aria-hidden="true" style="font-size: 50px;"></i>
                     </a>
                 </div>
                 <div class="media-body">
