@@ -16,17 +16,17 @@
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox">外壳是否完好
+                <input type="checkbox">外壳受损
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox">屏幕是否损坏
+                <input type="checkbox">屏幕损坏
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox">开机是否正常
+                <input type="checkbox">无法开机
             </label>
         </div>
         <div class="form-group">

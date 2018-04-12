@@ -2330,15 +2330,15 @@ h3.rate {
     font-size: 23px;
 }
 .input-lg {
-    height: 29px;
-    padding: 0px 10px;
-    font-size: 15px;
-    line-height: 1.3333333;
-    border-radius: 0;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    -ms-border-radius: 0px;
-    -o-border-radius: 0px;
+    /*height: 29px;*/
+    /*padding: 0px 10px;*/
+    /*font-size: 15px;*/
+    /*line-height: 1.3333333;*/
+    /*border-radius: 0;*/
+    /*-webkit-border-radius: 0px;*/
+    /*-moz-border-radius: 0px;*/
+    /*-ms-border-radius: 0px;*/
+    /*-o-border-radius: 0px;*/
 }
 #custom-search-input .glyphicon-search {
     font-size: 16px;

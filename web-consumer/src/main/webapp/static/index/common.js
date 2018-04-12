@@ -137,3 +137,21 @@ function addressLinkage() {
         });
     });
 }
+
+function getImg() {
+    var imgs = [];
+    imgs.push("/web-consumer/static/images/avatars/avatar.png");
+    imgs.push("/web-consumer/static/images/avatars/avatar1.png");
+    imgs.push("/web-consumer/static/images/avatars/avatar3.png");
+    imgs.push("/web-consumer/static/images/avatars/avatar4.png");
+    imgs.push("/web-consumer/static/images/avatars/avatar5.png");
+    var i = parseInt(Math.random() * 100) % imgs.length;
+    return imgs[i];
+}
+
+(function () {
+    var imgs = document.getElementsByClassName("media-object");
+    for (var i = 0; i < imgs.length; i++) {
+        imgs[i].src = getImg();
+    }
+})();
