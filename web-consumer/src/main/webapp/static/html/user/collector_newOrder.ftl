@@ -7,9 +7,10 @@
     <#list orders as order>
         <div class="region-block">
             <div class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <i class="fa fa-user" aria-hidden="true" style="font-size: 50px;"></i>
+                <div class="media-left media-middle" style="width: 20%;">
+                    <a href="/web-consumer/user/details">
+                        <img class="media-object" src="" alt=""
+                             style="width: 80px;">
                     </a>
                 </div>
                 <div class="media-body">

@@ -11,7 +11,30 @@
             <div class="media" orderId="${order.orderItem.id}">
                 <div class="media-left">
                     <a href="#">
-                        <i class="fa fa-check-square" aria-hidden="true" style="font-size: 50px;"></i>
+                        <#if (userKind=1)>
+                            <#if (order.orderItem.state='回收员已接单')>
+                                <i class="fa fa fa-square-o" aria-hidden="true" style="font-size: 50px;"></i>
+                            <#else >
+                                <i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 50px;"></i>
+                            </#if>
+                        <#elseif (userKind=2)>
+                            <#if (order.orderItem.state='订单完成'||order.orderItem.state='订单完成')>
+                                <i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 50px;"></i>
+                            <#else >
+                                <i class="fa fa fa-square-o" aria-hidden="true" style="font-size: 50px;"></i>
+                            </#if>
+                        <#else>
+                            <#if (order.orderItem.state='订单完成')>
+                                <i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 50px;"></i>
+                            <#else>
+                                <i class="fa fa fa-square-o" aria-hidden="true" style="font-size: 50px;"></i>
+                            </#if>
+                        </#if>
+                    <#--<#if (order.orderItem.state='订单完成')>-->
+                    <#--<i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 50px;"></i>-->
+                    <#--<#else >-->
+                    <#--<i class="fa fa fa-square-o" aria-hidden="true" style="font-size: 50px;"></i>-->
+                    <#--</#if>-->
                     </a>
                 </div>
                 <div class="media-body">
@@ -46,6 +69,11 @@
                                 <button type="button" class="btn btn-default more collector" disabled="true"
                                         orderId="${order.orderItem.id}">
                                     已完成
+                                </button>
+                            <#else >
+                                <button type="button" class="btn btn-default more company" disabled="true"
+                                        orderId="${order.orderItem.id}">
+                                    确认完成
                                 </button>
                             </#if>
                         <#else>

@@ -13,6 +13,24 @@
             </div>
             <div class="clearfix"></div>
         </div>
+        <form class="walletVal" style="display: none">
+            <div class="input-group" style="width: 80%;
+        margin-left: 10%;
+        margin-top: 20px;">
+                <input type="text" class="form-control input-lg" id="sum" placeholder="请输入金额">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default" id="nextBtn" style="height: 46px" disabled="disabled"
+                            data-toggle="modal"
+                            data-target="#myModal">
+                        下一步
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="row" style="margin-top: 20px">
+            <button class="btn btn-default col-xs-3 col-xs-offset-2 withdrawBtn" type="button">提现</button>
+            <button class="btn btn-default col-xs-3 col-xs-offset-2 rechargeBtn" type="button">充值</button>
+        </div>
         <hr>
         <div class="region-block records">
             <div class="state">
@@ -25,7 +43,7 @@
                 <div class="media">
                     <div class="media-left">
                         <a href="#">
-                            <i class="fa fa-user" aria-hidden="true" style="font-size: 50px;"></i>
+                            <i class="fa fa-check-square" aria-hidden="true" style="font-size: 50px;"></i>
                         </a>
                     </div>
                     <div class="media-body">
@@ -59,6 +77,31 @@
         </#list>
     </div>
 </div>
+ <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">请输入密码</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <input class="form-control input-lg" id="payPass" type="password">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" id="walletBtn" class="btn btn-default">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </@override>
 
 <@override name="js">
