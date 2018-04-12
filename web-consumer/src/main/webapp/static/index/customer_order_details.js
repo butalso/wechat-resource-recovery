@@ -63,8 +63,11 @@ function getDetails(orderId) {
         if (order.orderItem.state != "回收员已接单" && order.orderItem.state != "订单创建成功") {
             $(".editBtn").attr("disabled", true);
         }
-        if (order.orderItem.state == "订单完成" && order.orderItem.customerGrade != 0) {
+        if (order.orderItem.customerGrade != 0) {
             $(".gradeBtn").attr("disabled", true).text("已评分");
+        }
+        if (order.orderItem.state == "订单创建成功") {
+            $(".gradeBtn").attr("disabled", true).text("订单尚未完成");
         }
 
         $(".editBtn").click(function () {

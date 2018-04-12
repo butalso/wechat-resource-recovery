@@ -29,6 +29,7 @@ function login() {
         },
         error: function (err) {
             console.log(err);
+            Toast("帐号或密码错误", 2000);
         }
     });
 }

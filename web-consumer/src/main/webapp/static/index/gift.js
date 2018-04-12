@@ -1,6 +1,5 @@
 $(function () {
     $(".getGift").click(function () {
-        $(this).attr("disabled", "disabled").text("已兑换");
         $.ajax({
             type: 'POST',
             url: LOCALHOST + "/gift/" + $(this).attr("giftId"),

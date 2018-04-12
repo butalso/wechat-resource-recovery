@@ -100,7 +100,7 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <input type="number" name="payPassword" class="form-control">
+                        <input type="password" name="payPassword" class="form-control">
                     </div>
                 </form>
             </div>
