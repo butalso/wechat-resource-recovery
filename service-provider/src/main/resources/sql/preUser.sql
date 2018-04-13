@@ -178,6 +178,9 @@ INSERT INTO wallet(user_kind, user_id, balance) VALUES
 (2, 2, 20000),
 (2, 3, 20000);
 
+-- 预置业主甲积分
+UPDATE customer set point= 600;
+
 
 
 
