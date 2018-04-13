@@ -19,7 +19,7 @@ INSERT INTO addr_detail(name, area_id, kind) VALUES
 -- 预置用户
 INSERT INTO customer(name, password, gender, phone, addr_detail_id) VALUES
   -- 江宁区
-('狙击手', '123456', 'M', '15867620882', 3),
+('业主甲', '123456', 'M', '15867620882', 3),
 ('影魔', '123456', 'M', '13425278856', 3),
 ('仁太', '123456', 'M', '15850317962', 4),
 ('陆冰子', '123456', 'F', '15850457953', 4),
@@ -81,7 +81,7 @@ INSERT INTO customer(name, password, gender, phone, addr_detail_id) VALUES
 INSERT INTO collector(name, company_id, password,
 IDCardNo, gender, phone, addr_detail_id) VALUES
 ('null', 1, 'null', 'null', 'M', 'null', 1),
-('恐怖利刃', 2, '123456', '411401198804044175', 'M', '13422345689', 3),
+('回收员乙', 2, '123456', '411401198804044175', 'M', '13422345689', 3),
 ('撼地者', 2, '123456', '130601197910109196', 'M', '15867832259', 5),
 ('彭明', 3, '123456', '421401198804044175', 'M', '13422205689', 7),
 ('李子', 3, '123456', '130601195901119196', 'F', '15869831359', 9);
@@ -90,7 +90,7 @@ IDCardNo, gender, phone, addr_detail_id) VALUES
 INSERT INTO company(name, password, phone, addr_detail_id)
 VALUES
 ('null', 'null', 'null', 1),
-('回收哥', '123456', '13825672120', 1),
+('企业丙', '123456', '13825672120', 1),
 ('废品大叔', '123456', '15825632120', 2);
 
 -- 预置管理员

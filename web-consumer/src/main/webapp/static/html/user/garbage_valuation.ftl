@@ -38,7 +38,7 @@
         </button>
     </form>
     <br>
-    <div class="well" style="display: none">您的本次估价结果为：500元</div>
+    <div class="well" style="display: none">您的本次估价结果为：<span class="random"></span>元</div>
 </div>
 </@override>
 
@@ -49,6 +49,9 @@
         setTimeout(valuation, 2000);
 
         function valuation() {
+            /*400 - 700*/
+            var value = parseInt(Math.random() * 300) + 400;
+            $('.well .random').text(value);
             $(".well").fadeIn()
         }
     });
