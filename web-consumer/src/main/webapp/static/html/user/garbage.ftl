@@ -43,5 +43,6 @@
 
 <@override name="js">
 <script src="/web-consumer/static/index/garbage.js"></script>
+
 </@override>
 <@extends name="layout.ftl"/>

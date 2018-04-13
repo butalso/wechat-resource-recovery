@@ -34,8 +34,18 @@ function getPrice(data) {
         error: function (err) {
             console.log(err);
         }
-    }).done(function () {
+    }).done(function (data) {
         $(".rate").text(price + "元/千克");
+
+        ////////////////////////////////
+        /*骗人加的*/
+        if (data.typeName == '手机') {
+            $(".rate").text("1元/千克");
+            var a = "<a href='/web-consumer/garbage/valuation' style='margin-left: 20px;'>请先前往估价后，填写重量</a>";
+            $(".product-price").append(a);
+        }
+
+        /////////////////////////////////
     });
 }
 

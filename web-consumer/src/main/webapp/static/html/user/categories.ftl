@@ -84,9 +84,9 @@
                             </div>
                             <div class="sub-categories">
                                 <ul>
-                                    <li><a href="cars.html">Commercial Vehicles</a></li>
-                                    <li><a href="cars.html">Other Vehicles</a></li>
-                                    <li><a href="cars.html">Spare Parts</a></li>
+                                    <li><a href="/web-consumer/garbage/details?categories=手机&name=智能手机">智能手机</a></li>
+                                    <li><a href="cars.html">诺基亚老人机</a></li>
+                                    <li><a href="cars.html">大哥大</a></li>
                                     <div class="clearfix"></div>
                                 </ul>
                             </div>
