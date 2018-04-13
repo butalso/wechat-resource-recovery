@@ -15,8 +15,8 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="product-price">
-                            <p class="p-price">价格：</p>
-                            <h3 class="rate">元/KG</h3>
+                            <p><span class="p-price">价格：</span> <span class="rate">元/KG</span></p>
+                            <#--<h3 class="rate">元/KG</h3>-->
                             <div class="clearfix"></div>
                         </div>
                         <div class="condition">
