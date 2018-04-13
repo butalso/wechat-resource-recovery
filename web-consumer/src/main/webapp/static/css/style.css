@@ -2166,9 +2166,9 @@ form.submit {
     top: -3px;
     border-right-width: 80px;
 }*/
-p.p-price {
+.p-price {
     float: left;
-    width: 50%;
+    width: 35%;
     margin: 0;
     font-size: 16px;
     font-weight: 400;
@@ -2177,7 +2177,7 @@ p.p-price {
 	margin-top:8px;
 	margin-left: 20px;
 }
-h3.rate {
+.product-price .rate {
     float: left;
     color: #f3c500;
     font-size: 30px;
@@ -2193,6 +2193,9 @@ h3.rate {
 }
 .condition input {
     width: 100px;
+    height: 100%;
+    /*margin-left: 8px;*/
+    /*margin-top: 2px;*/
 }
 .product-price {
     padding: 20px 0;
